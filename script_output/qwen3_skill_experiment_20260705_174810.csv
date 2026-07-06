@@ -1,0 +1,203 @@
+image,ok,selected_skill,route_confidence,direct_valence,direct_arousal,skill_valence,skill_arousal,valence_delta,arousal_delta,direct_seconds,route_seconds,skill_seconds,error
+/home/u1120250383/zyh/emoskill_infer/pic/030013_Y_000.jpg,False,,,0.8,0.7,,,,,89.519,,,"Expecting ',' delimiter: line 21 column 4 (char 921)"
+/home/u1120250383/zyh/emoskill_infer/pic/030013_Y_093.jpg,False,,,0.85,0.6,,,,,6.785,,,"Model output is not valid JSON: ```
+ROUTING CHECK: Visible expressions are generally neutral to mildly positive, but the group photo context introduces ambiguity: is this a relaxed celebration, a forced pose, or a moment of mild stress? Appraisal reasoning is needed to infer goals, agency, and coping potential to disambiguate the emotion, rather than relying on a direct expression read (PANAS) or aesthetic analysis (Berlyne).
+
+SITUATION SUMMARY: A group of 8 people (7 adults, 1 child) are posing for a photo in front of a modern building entrance at night. The child is holding hands with one adult, and most are smiling or neutral. The setting appears casual and social, possibly after an event or outing. No overt signs of distress, celebration, or conflict are visible.
+
+APPRAISAL DIMENSIONS:
+- Goal relevance: High. The group is actively posing for a photo, indicating the situation matters to their social connection or shared experience.
+- Goal congruence: Positive. The act of posing together suggests alignment with social goals (bonding, memory-making, shared identity).
+- Agency/responsibility: Shared. The group collectively chose to pose; no one appears to be being acted upon. The child’s hand-holding suggests a caretaker role, but overall agency is distributed.
+- Coping potential: High. The group appears comfortable and able to manage the situation; no signs of stress or discomfort.
+- Certainty: High. The photo is likely a completed moment; the outcome is resolved.
+- Normative significance: Low to moderate. The scene is socially normative (group photo), but no violation or exceptional achievement is evident.
+
+COMPETING EMOTION HYPOTHESES:
+1. Contentment / Mild Joy (Likelihood: 0.7) — The group appears relaxed, smiling, and engaged in a shared social activity. The child’s inclusion and hand-holding suggest warmth and connection. The setting is casual, and the act of posing is a positive social ritual.
+2. Mild Social Anxiety / Awkwardness (Likelihood: 0.3) — The neutral expressions and slightly stiff postures (e.g., arms crossed, some faces turned away) could indicate mild discomfort or pressure to perform in the photo. The child’s presence might add a layer of social obligation or awkwardness.
+
+VA TENDENCY: Valence: +0.6, Arousal: 0.3 — The dominant hypothesis (contentment) suggests a moderately positive, low-arousal"
+/home/u1120250383/zyh/emoskill_infer/pic/096817_Y_048.jpg,False,,,0.2,0.3,,,,,6.94,,,"Model output is not valid JSON: ```
+ROUTING CHECK: The image depicts a snow-covered rural landscape with houses, bare trees, and a stone wall, creating a calm, immersive, and restorative environment. The scene is visually coherent and spacious, evoking a sense of quiet and peacefulness consistent with soft fascination. There are no human expressions, active events, or complex visual stimuli that would demand active engagement (hard fascination), making Berlyne's model inappropriate. The affect is not driven by situational appraisal or discrete emotion, so Cognitive Appraisal and PANAS are not applicable. The scene is not face-centered, so Todorov is irrelevant. Kaplan's ART is the best fit for evaluating the restorative potential of this tranquil, naturalistic setting.
+VISIBLE RESTORATIVE CUES: Environment dominated by snow-covered ground, bare trees, distant hills, and a stone wall, creating a quiet, open, and spatially coherent rural scene. No people are present or their expressions are visible, so they are incidental. The scene is low in visual complexity and demands minimal cognitive effort to process.
+ART DIMENSIONS: 
+- Being-away: Strongly supported — the snow-covered rural setting provides psychological distance from urban or routine environments, evoking a sense of escape.
+- Soft fascination: Strongly supported — the gentle, uniform snow, bare trees, and quiet landscape hold attention effortlessly without demanding cognitive effort, fitting Kaplan’s definition of soft fascination.
+- Extent: Moderately supported — the scene has sufficient spatial scope (distant hills, open fields) to feel immersive, though the foreground is somewhat fragmented by the stone wall and small structures.
+- Compatibility: Strongly supported — the setting is inviting for quiet contemplation or rest, with no jarring elements or visual clutter.
+FASCINATION TYPE CHECK: Soft (restful) — the scene is calm, low-stimulus, and visually uncluttered, holding attention gently without demanding engagement.
+RESTORATIVE POTENTIAL: The scene is likely to be experienced as restful, calming, and mentally restorative by viewers, offering a quiet escape from daily demands.
+FINAL VALENCE: 0.7
+FINAL AROUSAL: 0.2
+UNCERTAINTY NOTES: The scene is visually simple and lacks strong emotional cues, but the snow and rural setting are universally associated with calmness. The stone wall and small structures slightly reduce the sense of openness, but this does not detract from the overall restorative quality.
+```"
+/home/u1120250383/zyh/emoskill_infer/pic/096817_Y_057.jpg,False,,,0.85,0.7,,,,,6.52,,,"Model output is not valid JSON: ```
+ROUTING CHECK: Directly-legible, activated positive emotion (celebration) fits PANAS; deferrals ruled out (no ambiguity, not calm/bored, not structural impression, not aesthetic).
+OBSERVED VISUAL CUES: Group gathered around cake with lit candles; people smiling, clapping, looking at cake; joyful expressions; celebratory context.
+MATCHED PANAS AFFECT TERMS: excited, enthusiastic, proud, alert
+COVERAGE CHECK: All terms are strong matches; no coverage gap (scene is clearly activated positive, not calm/bored/disgusted/content).
+NORMALIZED EMOTION WEIGHTS: excited: 0.4, enthusiastic: 0.3, proud: 0.2, alert: 0.1
+MAPPING TRACE: excited (0.82, 0.9) * 0.4 = (0.328, 0.36); enthusiastic (0.84, 0.86) * 0.3 = (0.252, 0.258); proud (0.74, 0.64) * 0.2 = (0.148, 0.128); alert (0.34, 0.78) * 0.1 = (0.034, 0.078); sum = (0.762, 0.824)
+FINAL VALENCE: 0.762
+FINAL AROUSAL: 0.824
+UNCERTAINTY NOTES: High confidence; no competing interpretations; all cues support activated positive affect.
+```
+
+{
+  ""valence"": 0.762,
+  ""arousal"": 0.824,
+  ""quadrant"": ""high positive"",
+  ""summary"": ""The scene depicts a joyful, celebratory gathering around a birthday cake, indicating a high positive valence and high arousal state consistent with excitement and enthusiasm."",
+  ""evidence"": [
+    ""Group gathered around cake with lit candles"",
+    ""People smiling and clapping"",
+    ""Joyful expressions"",
+    ""Celebratory context""
+  ],
+  ""matched_emotions"": [
+    ""excited"",
+    ""enthusiastic"",
+    ""proud"",
+    ""alert""
+  ],
+  ""emotion_weights"": {
+    ""excited"": 0.4,
+    ""ent"
+/home/u1120250383/zyh/emoskill_infer/pic/141517_Y_062.jpg,False,,,0.6,0.3,,,,,5.934,,,"Model output is not valid JSON: ```
+ROUTING CHECK: Face is the dominant subject (two individuals, front-facing, clear facial structure). Expression is neutral-to-mild (no strong discrete emotion like crying, laughing, screaming, or visible fear/anger). Affective read is based on structural social evaluation (trustworthiness/dominance), not expression recognition or situational context. Skill applies.
+FACIAL EVIDENCE: Both individuals have neutral, resting expressions. Forehead is smooth, brows are relaxed and slightly arched, eyes are open and direct, gaze is steady. Mouths are closed with neutral curvature (neither smiling nor downturned). Jaws appear medium-width, not overly broad or narrow. Facial structure appears youthful and mature simultaneously. No visible signs of stress, aggression, or dominance cues (e.g., furrowed brow, tight lips, prominent jawline). Both appear approachable.
+TRUSTWORTHINESS ESTIMATE: High. Structural features resemble warmth (relaxed brows, neutral mouth, open eyes) rather than threat (e.g., narrowed eyes, downturned mouth). Eyes appear friendly and approachable. No cues of deception or hostility.
+DOMINANCE ESTIMATE: Low to mid. Facial width-to-height ratio appears average, not exceptionally broad. Jaw and brow structure do not suggest high physical strength or authority. Appears more approachable than intimidating.
+SOCIAL IMPRESSION: Warm, approachable, and non-threatening. Neither individual appears intimidating or overly authoritative. The impression is one of calm, friendly neutrality.
+FINAL VALENCE: 0.75 (positive, warm, trustworthy)
+FINAL AROUSAL: 0.3 (low to moderate, calm, not highly stimulating)
+UNCERTAINTY: Moderate confidence. Image quality is clear, but lighting casts shadows on one side, slightly obscuring facial structure. Both individuals are similar in appearance, making it hard to distinguish individual structural cues. No visible age-related maturity cues (e.g., wrinkles) to suggest dominance.
+ETHICAL NOTE: This face is likely to be perceived as warm and approachable, not as a definitive measure of the person's actual character or intentions.
+```"
+/home/u1120250383/zyh/emoskill_infer/pic/141517_Y_077.jpg,False,,,0.7,0.3,,,,,5.976,,,"Model output is not valid JSON: ```
+ROUTING CHECK: The image is dominated by a natural spatial environment (pond, trees, sky) with no person's expressed emotion as the focal point. The scene reads as calm, coherent, and immersive, supporting soft fascination rather than hard fascination. This fits Kaplan ART's criteria for restorative potential.
+VISIBLE RESTORATIVE CUES: Environment: calm green water, dense surrounding trees, dappled sunlight, open spatial coherence, no visible people or clutter. Affordances: quietude, natural immersion, visual softness, spatial extent.
+ART DIMENSIONS: 
+- Being-away: Strongly supported — the natural setting provides psychological distance from routine demands; the trees and water create a sense of escape.
+- Soft fascination: Strongly supported — gentle visual stimuli (water surface, tree foliage, light filtering) hold attention effortlessly without cognitive strain.
+- Extent: Strongly supported — the scene feels expansive and coherent, inviting exploration without fragmentation.
+- Compatibility: Strongly supported — the setting is inviting for rest, contemplation, or quiet observation; no jarring elements.
+FASCINATION TYPE CHECK: Soft fascination — the scene is calm, low-effort, and visually soothing, not novel, complex, or stimulating. It affords reflection rather than demanding engagement.
+RESTORATIVE POTENTIAL: The viewer is likely to experience calmness, relaxation, and mental refreshment — a restorative state conducive to recovery from directed attention.
+FINAL VALENCE: 0.85 — high positive valence due to peaceful, restful, and immersive qualities.
+FINAL AROUSAL: 0.25 — low arousal, as the scene is tranquil, non-demanding, and promotes effortless attention.
+UNCERTAINTY NOTES: Minor ambiguity in water color (greenish hue) may slightly reduce perceived purity, but overall restorative cues are strong and consistent.
+```"
+/home/u1120250383/zyh/emoskill_infer/pic/141517_Y_099.jpg,False,,,0.7,0.3,,,,,5.632,,,"Model output is not valid JSON: ```
+ROUTING CHECK: The image is dominated by a natural spatial environment (lake, aquatic vegetation, distant trees, sky) with no human faces or situational emotion as the focus. The scene is calm, coherent, and visually restful, evoking soft fascination without demanding attention — consistent with Kaplan's ART. It does not exhibit high arousal, complexity, or stimulation that would trigger Berlyne. No person’s emotion is the point — so PANAS and Todorov are not applicable.
+VISIBLE RESTORATIVE CUES: A wide expanse of water partially covered by green aquatic plants in the foreground, with a distant treeline and a partly cloudy sky. The scene is open, coherent, and spatially immersive. A few small structures are visible in the distance, but they are incidental and do not dominate the scene. The lighting is bright and even, enhancing the calm, restful quality.
+ART DIMENSIONS: 
+- Being-away: Strongly supported — the scene offers psychological distance from routine, with a natural, expansive setting that invites escape.
+- Soft fascination: Strongly supported — the gentle movement of water, the pattern of leaves, and the soft sky hold attention effortlessly without cognitive strain.
+- Extent: Strongly supported — the scene has sufficient scope (foreground plants, midground water, background trees and sky) to feel immersive and like “another world.”
+- Compatibility: Strongly supported — the environment is inviting and fits the viewer’s desire for calm, quiet contemplation (e.g., sitting by water, walking along the shore).
+FASCINATION TYPE CHECK: Soft fascination — the scene is calm, low-effort, and restful. It does not demand attention or stimulate the viewer; instead, it invites gentle absorption.
+RESTORATIVE POTENTIAL: The scene is likely to be experienced as restful, calming, and mentally restorative by most viewers, offering a break from directed attention and promoting reflection.
+FINAL VALENCE: 0.85 — high positive valence due to the calm, peaceful, and restorative nature of the environment.
+FINAL AROUSAL: 0.25 — low arousal, as the scene is tranquil, unstimulating, and promotes effortless attention.
+UNCERTAINTY NOTES: None — the scene is clearly restorative, with no ambiguity or conflicting cues. The distant structures are incidental and do not detract from the restorative quality.
+```"
+/home/u1120250383/zyh/emoskill_infer/pic/158941_Y_002.jpg,False,,,0.7,0.8,,,,,5.872,,,"Model output is not valid JSON: ```
+ROUTING CHECK: The visible cues (performers singing, audience holding up phones, stage lighting, dynamic action) are ambiguous in terms of exact emotional state — could be excitement, joy, awe, or stress. Facial expressions are not clearly legible, and context (live performance, audience reaction) is critical. This requires inferring goal relevance, agency, and coping potential — fitting Cognitive Appraisal, not PANAS (too ambiguous), Todorov (not face-dominant), or Kaplan (not restorative environment).
+
+SITUATION SUMMARY: A live music concert with performers on stage (one singing into a mic, another playing guitar, a third gesturing) and an audience in the foreground holding up phones to record. Stage lighting is dynamic (orange beams, spotlights). The scene suggests a high-energy, socially engaging event with performers actively engaging the crowd.
+
+APPRAISAL DIMENSIONS:
+- Goal relevance: HIGH — the performance is clearly central to the audience’s experience and the performers’ goals (entertainment, connection, artistic expression). The audience’s phone use indicates active participation and goal alignment (capturing the moment, sharing experience).
+- Goal congruence: POSITIVE — the situation appears to fulfill goals (audience enjoyment, performers’ artistic expression). The performers’ active engagement (singing, gesturing) suggests congruence with their goals.
+- Agency / responsibility: PERFORMERS are acting (agency), audience is reacting (passive agency). The performers are responsible for the performance; the audience’s reaction is a consequence. The scene implies the performers are in control of the event’s flow.
+- Coping potential / control: HIGH — the performers appear confident and in control; the audience is actively engaged, not overwhelmed or helpless. The situation is unfolding in a structured, expected way (concert).
+- Certainty: MODERATE — the performance is ongoing, but the outcome (audience reaction, song progression) is not yet resolved. The audience’s phones suggest they are actively documenting, implying a sense of unfolding experience.
+- Normative significance: LOW — no clear violation or fulfillment of social norms beyond the expected context of a concert (e.g., no signs of disruption, unfairness, or moral conflict).
+
+COMPETING EMOTION HYPOTHESES:
+1. Arousal-Positive (High Valence, High Arousal) — Hypothesis: The audience and performers are experiencing excitement, joy, and awe. This is supported by the dynamic lighting, active performer engagement,"
+/home/u1120250383/zyh/emoskill_infer/pic/158941_Y_015.jpg,False,,,0.9,0.7,,,,,6.309,,,"Expecting ',' delimiter: line 21 column 4 (char 883)"
+/home/u1120250383/zyh/emoskill_infer/pic/158941_Y_071.jpg,False,,,0.8,0.3,,,,,5.582,,,"Model output is not valid JSON: ```
+ROUTING CHECK: Face is dominant subject; expression is mild (slight smile), not strong discrete emotion → Todorov Face Evaluation applies. Deferrals ruled out: not PANAS (no strong emotion), not Cognitive Appraisal (no context dependency), not Kaplan/Berlyne (face is primary, environment secondary).
+FACIAL EVIDENCE: Symmetrical face, soft and slightly upturned mouth curvature at rest (suggesting warmth), eyes with gentle gaze and relaxed brow, moderate facial width, youthful appearance.
+TRUSTWORTHINESS ESTIMATE: High. Structural cues resemble warmth (soft mouth, relaxed eyes) rather than threat (no furrowed brow, no tight jaw). Appears approachable and friendly.
+DOMINANCE ESTIMATE: Low. No cues of masculinity, maturity, or physical strength (e.g., narrow jaw, high brow ridge, wide facial width). Appears gentle and non-threatening.
+SOCIAL IMPRESSION: Warm, approachable, and non-intimidating. The face signals friendliness and safety.
+FINAL VALENCE: 0.85 (high positive valence) — driven by high trustworthiness and low dominance, signaling warmth and approachability.
+FINAL AROUSAL: 0.3 (low arousal) — the expression is calm and neutral, not exciting or stimulating; the impression is relaxed and comfortable.
+UNCERTAINTY: Low. Facial structure is clearly visible and well-lit; no occlusion or stylization limits analysis.
+ETHICAL NOTE: This face is likely to be perceived as warm and approachable — not a definitive statement about the person's actual character.
+```"
+/home/u1120250383/zyh/emoskill_infer/pic/235921_Y_001.jpg,False,,,0.9,0.7,,,,,5.806,,,"Model output is not valid JSON: ```
+ROUTING CHECK: The visible expressions are neutral to slightly smiling, but the context of graduation implies achievement and social evaluation. The emotion is context-dependent (pride, accomplishment, relief), not unambiguous from expression alone. Appraisal is needed to infer goal relevance (degree completion), agency (self-directed success), and coping potential (successfully navigating academics). This triggers cognitive-appraisal.
+SITUATION SUMMARY: Four young adults in academic regalia stand in front of a red backdrop with ""Hebei University of Technology"" written on it. Each holds a diploma. Their postures are upright and proud, expressions are calm and composed, suggesting a formal, celebratory event. The setting is clearly a graduation ceremony.
+APPRAISAL DIMENSIONS:
+- Goal relevance: HIGH. Graduation is a major life milestone with clear personal and social value (academic achievement, future opportunities).
+- Goal congruence: POSITIVE. The event directly fulfills their academic goals and is a source of pride and validation.
+- Agency/responsibility: SELF-AGENCY. The graduates are the agents of their own success; they earned the diplomas through their own effort.
+- Coping potential: HIGH. They have successfully completed their academic journey, indicating they can handle the demands of the situation.
+- Certainty: HIGH. The event is a formal, resolved milestone; the outcome (graduation) is certain.
+- Normative significance: POSITIVE. Graduation fulfills a social norm of academic achievement and is celebrated as a positive societal milestone.
+COMPETING EMOTION HYPOTHESES:
+1. Pride (most likely): Arises from self-agency and goal congruence — they have achieved something significant through their own effort. The formal setting reinforces this as a socially validated accomplishment.
+2. Relief (plausible alternative): Arises from coping potential — they have successfully navigated a long, demanding process. The calm expressions may reflect the release of academic pressure.
+3. Quiet excitement (less likely): Arises from goal congruence and normative significance — the event is celebratory, and the formal setting may evoke anticipation of future opportunities.
+VA TENDENCY: Valence: +0.8 to +0.9 (strongly positive), Arousal: 0.4 to 0.5 (moderate, calm but not high-energy). The leading hypothesis (pride) is moderately arousing — it’s a positive, stable emotion, not an explosive one. Relief would be slightly lower in arousal,"
+/home/u1120250383/zyh/emoskill_infer/pic/235921_Y_021.jpg,False,,,0.6,0.3,,,,,6.231,,,"Model output is not valid JSON: ```
+ROUTING CHECK: The affect is driven by aesthetic/compositional properties — the pagoda’s layered structure, verticality, and cultural architectural novelty demand active visual engagement (hard fascination), not narrative content or restful coherence. This fits Berlyne’s model.
+COLLATIVE VARIABLES: 
+- Novelty: High — the pagoda’s tiered, geometric form is culturally distinctive and visually unusual compared to modern or natural scenes.
+- Complexity: High — the repetitive, symmetrical layers create visual density and require focused attention to appreciate.
+- Ambiguity: Moderate — the structure’s purpose is clear (religious/architectural), but its aesthetic arrangement invites interpretation of scale, proportion, and cultural meaning.
+- Surprise: Low — the form is expected within its cultural context, but its visual impact is striking.
+AROUSAL POTENTIAL: Moderate — the visual complexity and novelty are engaging without being overwhelming; the clear composition and scale allow for calm appreciation, not sensory overload.
+INVERTED-U POSITION: The arousal is at the peak of the inverted-U curve — moderate stimulation yields optimal aesthetic pleasure. The structure is visually rich but coherent, avoiding the boredom of low arousal or the aversion of high arousal.
+LIKELY PLEASURE OR DISPLEASURE: Pleasurable — the image evokes admiration, curiosity, and aesthetic satisfaction through its balanced, intricate design.
+FINAL VALENCE: 0.7
+FINAL AROUSAL: 0.5
+UNCERTAINTY NOTES: Individual aesthetic preferences may vary; some viewers might find the repetition monotonous, but the overall composition is widely appreciated for its harmony and grandeur.
+```"
+/home/u1120250383/zyh/emoskill_infer/pic/235921_Y_027.jpg,False,,,0.7,0.3,,,,,6.628,,,"Model output is not valid JSON: ```
+ROUTING CHECK: The affect is driven by visual-perceptual properties (composition, novelty, complexity) of the interior decor — the arched niches, the ornate tapestry, the wall sconce, and the arrangement of objects — demanding active engagement (hard fascination). There is no narrative or social content driving the arousal, and the scene is not restful (soft fascination). Thus, Berlyne's model is appropriate.
+COLLATIVE VARIABLES: 
+- Novelty: The arched niches and the framed tapestry with intricate floral/tree motif are unusual and decorative, not common in everyday settings.
+- Complexity: The tapestry’s detailed pattern, the ornate sconce, and the layered arrangement of objects (books, vase) create visual complexity.
+- Ambiguity: The tapestry’s symbolic imagery (tree of life?) invites interpretation, and the overall composition is open to aesthetic appreciation without a clear narrative.
+- Surprise: The contrast between the teal wall, dark niches, and golden accents creates a visually striking and slightly unexpected composition.
+AROUSAL POTENTIAL: Moderate. The scene is rich and stimulating but not overwhelming — the composition is balanced, the colors are harmonious, and the elements are arranged to invite admiration without inducing stress or confusion.
+INVERTED-U POSITION: The arousal potential is moderate, placing the image near the peak of the inverted-U curve. This suggests high aesthetic pleasure — the scene is engaging, visually satisfying, and likely to evoke positive affect without being overstimulating.
+LIKELY PLEASURE OR DISPLEASURE: Pleasurable. The visual richness and careful composition invite admiration and appreciation, aligning with moderate arousal and high hedonic value.
+FINAL VALENCE: 0.75
+FINAL AROUSAL: 0.55
+UNCERTAINTY NOTES: Individual preferences for ornate vs. minimalist decor may vary, but the composition is generally balanced and aesthetically pleasing. Image quality is clear, supporting accurate assessment.
+```"
+/home/u1120250383/zyh/emoskill_infer/pic/235921_Y_031.jpg,False,,,0.8,0.4,,,,,5.492,,,"Model output is not valid JSON: ```
+ROUTING CHECK: The image's affect is driven by aesthetic stimulation: the juxtaposition of classical architecture with large, artificial pink flowers and colorful murals creates visual novelty, complexity, and incongruity. This demands active visual engagement (hard fascination) rather than offering restful calm (Kaplan) or clear narrative emotion (Cognitive Appraisal). The scene is compositionally striking and visually rich, fitting Berlyne's model of arousal-aesthetic pleasure.
+COLLATIVE VARIABLES: 
+- Novelty: High — the large, artificial pink flowers and colorful murals are unexpected on a classical building facade.
+- Complexity: Moderate — the facade has multiple architectural details, windows, and decorative elements, layered with the murals and flowers.
+- Ambiguity: Moderate — the purpose of the decorations is unclear (artistic, promotional, seasonal), inviting interpretation.
+- Surprise: Moderate — the bright, playful elements contrast with the formal, historic architecture, creating visual surprise.
+AROUSAL POTENTIAL: Moderate — the visual elements are stimulating and engaging without being overwhelming; the composition invites active viewing but remains coherent.
+INVERTED-U POSITION: The arousal is at a moderate level, likely in the peak or near-peak of the inverted-U curve, suggesting high aesthetic pleasure.
+LIKELY PLEASURE OR DISPLEASURE: Pleasurable — the visual contrast and artistic embellishment are likely to evoke positive aesthetic appreciation.
+FINAL VALENCE: 0.7
+FINAL AROUSAL: 0.6
+UNCERTAINTY NOTES: Individual aesthetic preferences may vary; the image quality and lighting are clear, but viewer familiarity with the location or style may influence perception.
+```"
+/home/u1120250383/zyh/emoskill_infer/pic/235921_Y_051.jpg,False,,,0.3,0.4,,,,,7.108,,,"Model output is not valid JSON: ```
+ROUTING CHECK: The affect is driven by aesthetic stimulation — the mask’s unusual shape, bold patterns, and patina demand active visual engagement (hard fascination). The scene is not calm or restful, and the arousal stems from perceptual novelty/complexity, not narrative or social content.
+COLLATIVE VARIABLES: 
+- Novelty: High — the mask’s stylized, non-human facial features and ancient patina are unfamiliar and culturally distinct.
+- Complexity: High — the geometric patterns, asymmetrical design, and layered textures create visual intricacy.
+- Ambiguity: High — the mask’s expression is ambiguous (is it serene, fierce, or ritualistic?), inviting interpretation.
+- Surprise: Moderate — the mask’s form defies expectations of typical human faces, creating mild visual surprise.
+AROUSAL POTENTIAL: Moderate — the visual density and complexity are engaging without being overwhelming; the museum setting frames it as an object of contemplation, not chaos.
+INVERTED-U POSITION: The arousal is at the peak of the inverted-U curve — moderate stimulation is optimal for aesthetic pleasure. The mask’s striking design invites curiosity and admiration without inducing stress or boredom.
+LIKELY PLEASURE OR DISPLEASURE: Pleasure — viewers are likely to find the mask aesthetically compelling, intriguing, and culturally fascinating.
+FINAL VALENCE: 0.7
+FINAL AROUSAL: 0.6
+UNCERTAINTY NOTES: Individual aesthetic preferences may vary; some viewers might find the mask unsettling due to its ambiguity, but the dominant response is likely positive pleasure.
+```"

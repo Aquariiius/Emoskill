@@ -1,0 +1,1944 @@
+{
+  "time": "2026-07-05T17:17:32",
+  "python": "/home/u1120250383/miniconda3/envs/emoskill/bin/python",
+  "model_path": "/home/u1120250383/dyp/models/qwen",
+  "skills_dir": "/home/u1120250383/dcs/Emoskill_test/emoskill/.trae/skills",
+  "upload_dir": "/home/u1120250383/zyh/emoskill_infer/pic",
+  "args": {
+    "model_path": "/home/u1120250383/dyp/models/qwen",
+    "project_root": "/home/u1120250383/dcs/Emoskill_test",
+    "skills_dir": "/home/u1120250383/dcs/Emoskill_test/emoskill/.trae/skills",
+    "upload_dir": "/home/u1120250383/zyh/emoskill_infer/pic",
+    "output_dir": "/home/u1120250383/dcs/Emoskill_test/script_output",
+    "image": [],
+    "user_context": "Analyze the image's valence-arousal state and choose the most suitable psychology skill.",
+    "max_new_tokens": 512,
+    "max_pixels": 1003520,
+    "min_pixels": null,
+    "device_map": "auto",
+    "include_duplicate_skills": false,
+    "direct_only": false,
+    "routed_only": false
+  },
+  "skill_registry": [
+    {
+      "skill_id": "berlyne-arousal-pleasure",
+      "display_name": "Berlyne Arousal-Aesthetic Pleasure",
+      "short_description": "Analyzes images with Berlyne's arousal-aesthetic pleasure model and maps collative properties into VA. Invoke for artwork, design, novelty, complexity, or aesthetic-response image analysis.",
+      "selection_hints": [
+        "the image's affect depends mainly on aesthetic stimulation rather than a clear human facial emotion",
+        "the scene is visually rich, unusual, complex, ambiguous, or compositionally striking",
+        "the task concerns aesthetic pleasure, preference, stimulation, or visual interest",
+        "the final VA estimate should reflect the balance between stimulation and pleasure"
+      ],
+      "source_path": "/home/u1120250383/dcs/Emoskill_test/emoskill/.trae/skills/berlyne-arousal-pleasure/SKILL.md"
+    },
+    {
+      "skill_id": "cognitive-appraisal",
+      "display_name": "Cognitive Appraisal",
+      "short_description": "Explains emotions through appraisal dimensions such as goal relevance, control, novelty, and social meaning. Invoke when the task needs scenario-based interpretation beyond surface affect.",
+      "selection_hints": [
+        "the scene contains social interaction or context-heavy meaning",
+        "the image may reflect stress, embarrassment, threat, achievement, or frustration",
+        "the task needs explanation of why an emotion may arise",
+        "a plain VA coordinate is not sufficient"
+      ],
+      "source_path": "/home/u1120250383/dcs/Emoskill_test/emoskill/.trae/skills/cognitive-appraisal/SKILL.md"
+    },
+    {
+      "skill_id": "kaplan-art-restoration",
+      "display_name": "Kaplan Attention Restoration Theory",
+      "short_description": "Analyzes images with Kaplan's Attention Restoration Theory and maps restorative potential into VA. Invoke for nature, landscape, environmental preference, or attention-recovery image analysis.",
+      "selection_hints": [
+        "the image mainly depicts environment rather than a strongly expressed human emotion",
+        "the task concerns restoration, mental recovery, calmness, or attentional relief",
+        "the scene includes nature, greenery, water, sky, depth, refuge, openness, or coherent spatial structure",
+        "the final VA estimate should reflect restorative affect instead of discrete emotion labels"
+      ],
+      "source_path": "/home/u1120250383/dcs/Emoskill_test/emoskill/.trae/skills/kaplan-art-restoration/SKILL.md"
+    },
+    {
+      "skill_id": "panas-discrete-va",
+      "display_name": "PANAS Discrete Emotion VA",
+      "short_description": "Matches images to PANAS discrete affect terms and estimates final VA through a PANAS emotion-to-VA mapping table. Invoke for PANAS/PNAS-based image VA analysis.",
+      "selection_hints": [
+        "the user asks for PANAS or PNAS based image emotion analysis",
+        "the task needs a psychologically grounded bridge from discrete affect terms to final VA",
+        "the image contains enough visible cues to support a ranked set of likely PANAS affect terms",
+        "the output should include matched discrete emotions before the final valence-arousal estimate"
+      ],
+      "source_path": "/home/u1120250383/dcs/Emoskill_test/emoskill/.trae/skills/panas-discrete-va/SKILL.md"
+    },
+    {
+      "skill_id": "todorov-face-evaluation",
+      "display_name": "Todorov Face Evaluation",
+      "short_description": "Analyzes faces with Todorov's two-dimensional social evaluation model and maps trustworthiness-dominance impressions into VA. Invoke for portraits, faces, or social first-impression image analysis.",
+      "selection_hints": [
+        "a human face is the central target of the image",
+        "the task depends on first impressions such as warmth, threat, trustworthiness, intimidation, or authority",
+        "facial configuration and expression matter more than landscape restoration or aesthetic collative variables",
+        "the final VA estimate should be derived from a face-based social evaluation process"
+      ],
+      "source_path": "/home/u1120250383/dcs/Emoskill_test/emoskill/.trae/skills/todorov-face-evaluation/SKILL.md"
+    }
+  ],
+  "images": [
+    "/home/u1120250383/zyh/emoskill_infer/pic/030013_Y_000.jpg",
+    "/home/u1120250383/zyh/emoskill_infer/pic/030013_Y_093.jpg",
+    "/home/u1120250383/zyh/emoskill_infer/pic/096817_Y_048.jpg",
+    "/home/u1120250383/zyh/emoskill_infer/pic/096817_Y_057.jpg",
+    "/home/u1120250383/zyh/emoskill_infer/pic/141517_Y_062.jpg",
+    "/home/u1120250383/zyh/emoskill_infer/pic/141517_Y_077.jpg",
+    "/home/u1120250383/zyh/emoskill_infer/pic/141517_Y_099.jpg",
+    "/home/u1120250383/zyh/emoskill_infer/pic/158941_Y_002.jpg",
+    "/home/u1120250383/zyh/emoskill_infer/pic/158941_Y_015.jpg",
+    "/home/u1120250383/zyh/emoskill_infer/pic/158941_Y_071.jpg",
+    "/home/u1120250383/zyh/emoskill_infer/pic/235921_Y_001.jpg",
+    "/home/u1120250383/zyh/emoskill_infer/pic/235921_Y_021.jpg",
+    "/home/u1120250383/zyh/emoskill_infer/pic/235921_Y_027.jpg",
+    "/home/u1120250383/zyh/emoskill_infer/pic/235921_Y_031.jpg",
+    "/home/u1120250383/zyh/emoskill_infer/pic/235921_Y_051.jpg"
+  ],
+  "results": [
+    {
+      "image": "/home/u1120250383/zyh/emoskill_infer/pic/030013_Y_000.jpg",
+      "ok": true,
+      "direct_seconds": 154.323,
+      "direct_va": {
+        "skill_id": "direct-va-baseline",
+        "skill_name": "Direct VA Baseline",
+        "valence": 0.8,
+        "arousal": 0.7,
+        "quadrant": "positive-activated",
+        "summary": "The image conveys a cheerful, energetic mood with participants engaging in a playful gesture.",
+        "evidence": [
+          "Three young men smiling or with playful expressions",
+          "All pointing fingers toward the camera in a coordinated, fun pose",
+          "Bright indoor lighting and casual attire suggesting a relaxed, social setting",
+          "Visible camaraderie and shared activity"
+        ],
+        "matched_emotions": [
+          "joy",
+          "playfulness",
+          "excitement",
+          "friendship"
+        ],
+        "emotion_weights": {},
+        "mapping_trace": [],
+        "appraisal_notes": [],
+        "positive_affect": [],
+        "negative_affect": [],
+        "uncertainty": "Low; clear positive affect and active engagement",
+        "raw_model_output": {
+          "valence": 0.8,
+          "arousal": 0.7,
+          "quadrant": "positive-activated",
+          "summary": "The image conveys a cheerful, energetic mood with participants engaging in a playful gesture.",
+          "evidence": [
+            "Three young men smiling or with playful expressions",
+            "All pointing fingers toward the camera in a coordinated, fun pose",
+            "Bright indoor lighting and casual attire suggesting a relaxed, social setting",
+            "Visible camaraderie and shared activity"
+          ],
+          "matched_emotions": [
+            "joy",
+            "playfulness",
+            "excitement",
+            "friendship"
+          ],
+          "uncertainty": "Low; clear positive affect and active engagement"
+        }
+      },
+      "route_seconds": 8.114,
+      "skill_seconds": 12.632,
+      "route": {
+        "skill_id": "todorov-face-evaluation",
+        "reason": "The image prominently features multiple human faces, with expressions and gestures that suggest social interaction and first impressions. The central focus is on the faces and their social evaluation (e.g., playful or confident gestures, direct gazes). This aligns with Todorov's model, which evaluates trustworthiness and dominance from facial cues. The scene is not primarily aesthetic, restorative, or context-heavy beyond social dynamics, making this the most appropriate skill.",
+        "confidence": 0.95,
+        "observed_cues": [
+          "Multiple human faces in close proximity",
+          "Direct gazes and playful gestures (e.g., pointing fingers)",
+          "Social interaction context (group selfie)",
+          "Facial expressions suggesting confidence or amusement"
+        ],
+        "alternative_skill_ids": [
+          "panas-discrete-va",
+          "berlyne-arousal-pleasure"
+        ]
+      },
+      "skill_va": {
+        "skill_id": "todorov-face-evaluation",
+        "skill_name": "Todorov Face Evaluation",
+        "valence": 0.7,
+        "arousal": 0.6,
+        "quadrant": "positive-aroused",
+        "summary": "The image conveys a positive and energized social atmosphere, driven by the confident, playful gestures and direct, engaging expressions of the young men. Their synchronized 'V' hand signs and direct gazes suggest camaraderie and self-assuredness, aligning with high trustworthiness and dominance in Todorov's model.",
+        "evidence": [
+          "Three young men with direct, confident gazes toward the camera",
+          "Playful 'V' hand gestures (peace sign) indicating friendliness and confidence",
+          "Smiling or neutral-to-pleasant facial expressions",
+          "Close proximity and coordinated posing suggesting group solidarity",
+          "Lack of threatening or negative facial cues"
+        ],
+        "matched_emotions": [],
+        "emotion_weights": {},
+        "mapping_trace": [],
+        "appraisal_notes": [
+          "The subjects appear to be posing for a fun, group photo, indicating positive social bonding.",
+          "Their confident gestures and direct eye contact signal self-assurance and approachability.",
+          "The overall mood is lighthearted and social, not tense or confrontational."
+        ],
+        "positive_affect": [
+          "Playfulness",
+          "Camaraderie",
+          "Self-assurance",
+          "Friendliness"
+        ],
+        "negative_affect": [],
+        "uncertainty": "No significant facial ambiguity or conflicting cues; analysis based on clear social signals.",
+        "raw_model_output": {
+          "valence": 0.7,
+          "arousal": 0.6,
+          "quadrant": "positive-aroused",
+          "summary": "The image conveys a positive and energized social atmosphere, driven by the confident, playful gestures and direct, engaging expressions of the young men. Their synchronized 'V' hand signs and direct gazes suggest camaraderie and self-assuredness, aligning with high trustworthiness and dominance in Todorov's model.",
+          "evidence": [
+            "Three young men with direct, confident gazes toward the camera",
+            "Playful 'V' hand gestures (peace sign) indicating friendliness and confidence",
+            "Smiling or neutral-to-pleasant facial expressions",
+            "Close proximity and coordinated posing suggesting group solidarity",
+            "Lack of threatening or negative facial cues"
+          ],
+          "matched_emotions": [],
+          "emotion_weights": {},
+          "mapping_trace": [],
+          "appraisal_notes": [
+            "The subjects appear to be posing for a fun, group photo, indicating positive social bonding.",
+            "Their confident gestures and direct eye contact signal self-assurance and approachability.",
+            "The overall mood is lighthearted and social, not tense or confrontational."
+          ],
+          "positive_affect": [
+            "Playfulness",
+            "Camaraderie",
+            "Self-assurance",
+            "Friendliness"
+          ],
+          "negative_affect": [],
+          "uncertainty": "No significant facial ambiguity or conflicting cues; analysis based on clear social signals."
+        }
+      },
+      "delta": {
+        "valence_delta": -0.1,
+        "arousal_delta": -0.1
+      }
+    },
+    {
+      "image": "/home/u1120250383/zyh/emoskill_infer/pic/030013_Y_093.jpg",
+      "ok": true,
+      "direct_seconds": 6.705,
+      "direct_va": {
+        "skill_id": "direct-va-baseline",
+        "skill_name": "Direct VA Baseline",
+        "valence": 0.85,
+        "arousal": 0.6,
+        "quadrant": "positive-activated",
+        "summary": "The group appears happy and engaged, with relaxed but lively expressions and body language suggesting a positive social gathering.",
+        "evidence": [
+          "Most individuals are smiling or have neutral-to-positive facial expressions",
+          "The child is holding hands with an adult and smiling",
+          "Posture is generally open and relaxed, not tense",
+          "Group is standing close together, indicating social cohesion",
+          "Warm ambient lighting and casual attire suggest a comfortable setting"
+        ],
+        "matched_emotions": [
+          "joy",
+          "contentment",
+          "friendship",
+          "relaxed happiness"
+        ],
+        "emotion_weights": {},
+        "mapping_trace": [],
+        "appraisal_notes": [],
+        "positive_affect": [],
+        "negative_affect": [],
+        "uncertainty": "Low; clear positive affect from multiple subjects",
+        "raw_model_output": {
+          "valence": 0.85,
+          "arousal": 0.6,
+          "quadrant": "positive-activated",
+          "summary": "The group appears happy and engaged, with relaxed but lively expressions and body language suggesting a positive social gathering.",
+          "evidence": [
+            "Most individuals are smiling or have neutral-to-positive facial expressions",
+            "The child is holding hands with an adult and smiling",
+            "Posture is generally open and relaxed, not tense",
+            "Group is standing close together, indicating social cohesion",
+            "Warm ambient lighting and casual attire suggest a comfortable setting"
+          ],
+          "matched_emotions": [
+            "joy",
+            "contentment",
+            "friendship",
+            "relaxed happiness"
+          ],
+          "uncertainty": "Low; clear positive affect from multiple subjects"
+        }
+      },
+      "route_seconds": 11.079,
+      "skill_seconds": 14.213,
+      "route": {
+        "skill_id": "cognitive-appraisal",
+        "reason": "The image depicts a group of people, including a child, in a social setting, likely a casual gathering or event. The visible cues include varied facial expressions (some smiling, some neutral), body postures (e.g., arms crossed, hand-holding), and social context (group posing, interaction with a child). These cues suggest social interaction and context-heavy meaning, which aligns with cognitive appraisal theory. The task requires interpreting the emotional state based on social dynamics rather than isolated facial expressions or aesthetic properties. While PANAS could be considered, the scene involves multiple individuals with mixed affect, making discrete emotion matching less precise. Cognitive appraisal is best suited for interpreting the social context and inferred emotions (e.g., camaraderie, mild amusement, or contentment) rather than relying on a single face or aesthetic judgment.",
+        "confidence": 0.95,
+        "observed_cues": [
+          "Group of people posing together",
+          "Child holding an adult’s hand",
+          "Varied facial expressions (smiling, neutral)",
+          "Casual attire and relaxed body postures",
+          "Social context (likely a gathering or event)"
+        ],
+        "alternative_skill_ids": [
+          "panas-discrete-va",
+          "todorov-face-evaluation"
+        ]
+      },
+      "skill_va": {
+        "skill_id": "cognitive-appraisal",
+        "skill_name": "Cognitive Appraisal",
+        "valence": 0.7,
+        "arousal": 0.3,
+        "quadrant": "positive",
+        "summary": "The group appears to be in a relaxed, socially cohesive moment, likely after a shared activity or gathering. The presence of a child and varied but generally neutral-to-positive expressions suggest contentment and mild amusement rather than high excitement or stress.",
+        "evidence": [
+          "Group posing together in a casual setting",
+          "Child holding adult’s hand, indicating affection or inclusion",
+          "Most individuals have neutral to slightly smiling expressions",
+          "No signs of stress, threat, or frustration",
+          "Casual attire and relaxed body postures (e.g., arms crossed in a non-aggressive way)"
+        ],
+        "matched_emotions": [],
+        "emotion_weights": {},
+        "mapping_trace": [],
+        "appraisal_notes": [
+          "Goal relevance: The group is likely gathered for social bonding or celebration, which is positively appraised.",
+          "Perceived control: Individuals appear comfortable and at ease, suggesting high perceived control over the situation.",
+          "Social evaluation: The group dynamic is positive; the child’s inclusion suggests warmth and approval from the adults.",
+          "Agency and responsibility: No signs of stress or pressure; individuals seem to be enjoying the moment without obligation.",
+          "Novelty: The setting appears casual and familiar, not novel or threatening."
+        ],
+        "positive_affect": [
+          "Contentment",
+          "Camaraderie",
+          "Mild amusement",
+          "Social satisfaction"
+        ],
+        "negative_affect": [],
+        "uncertainty": "Limited facial expression detail and lack of contextual cues (e.g., event type) prevent precise emotion identification, but overall affect is clearly positive.",
+        "raw_model_output": {
+          "valence": 0.7,
+          "arousal": 0.3,
+          "quadrant": "positive",
+          "summary": "The group appears to be in a relaxed, socially cohesive moment, likely after a shared activity or gathering. The presence of a child and varied but generally neutral-to-positive expressions suggest contentment and mild amusement rather than high excitement or stress.",
+          "evidence": [
+            "Group posing together in a casual setting",
+            "Child holding adult’s hand, indicating affection or inclusion",
+            "Most individuals have neutral to slightly smiling expressions",
+            "No signs of stress, threat, or frustration",
+            "Casual attire and relaxed body postures (e.g., arms crossed in a non-aggressive way)"
+          ],
+          "matched_emotions": [],
+          "emotion_weights": {},
+          "mapping_trace": [],
+          "appraisal_notes": [
+            "Goal relevance: The group is likely gathered for social bonding or celebration, which is positively appraised.",
+            "Perceived control: Individuals appear comfortable and at ease, suggesting high perceived control over the situation.",
+            "Social evaluation: The group dynamic is positive; the child’s inclusion suggests warmth and approval from the adults.",
+            "Agency and responsibility: No signs of stress or pressure; individuals seem to be enjoying the moment without obligation.",
+            "Novelty: The setting appears casual and familiar, not novel or threatening."
+          ],
+          "positive_affect": [
+            "Contentment",
+            "Camaraderie",
+            "Mild amusement",
+            "Social satisfaction"
+          ],
+          "negative_affect": [],
+          "uncertainty": "Limited facial expression detail and lack of contextual cues (e.g., event type) prevent precise emotion identification, but overall affect is clearly positive."
+        }
+      },
+      "delta": {
+        "valence_delta": -0.15,
+        "arousal_delta": -0.3
+      }
+    },
+    {
+      "image": "/home/u1120250383/zyh/emoskill_infer/pic/096817_Y_048.jpg",
+      "ok": true,
+      "direct_seconds": 6.785,
+      "direct_va": {
+        "skill_id": "direct-va-baseline",
+        "skill_name": "Direct VA Baseline",
+        "valence": 0.2,
+        "arousal": 0.3,
+        "quadrant": "calm positive",
+        "summary": "The scene conveys a quiet, subdued peacefulness with a hint of coldness, lacking strong emotional intensity.",
+        "evidence": [
+          "Widespread snow cover creating a muted, still environment",
+          "Overcast sky contributing to low contrast and subdued lighting",
+          "Sparse vegetation and bare trees indicating winter's quietness",
+          "Absence of human activity or motion",
+          "Distant hills and rural buildings adding to the tranquil, isolated feel"
+        ],
+        "matched_emotions": [
+          "serene",
+          "quiet",
+          "cold",
+          "still",
+          "isolated"
+        ],
+        "emotion_weights": {},
+        "mapping_trace": [],
+        "appraisal_notes": [],
+        "positive_affect": [],
+        "negative_affect": [],
+        "uncertainty": "Ambiguous emotional tone due to lack of human presence or dynamic elements",
+        "raw_model_output": {
+          "valence": 0.2,
+          "arousal": 0.3,
+          "quadrant": "calm positive",
+          "summary": "The scene conveys a quiet, subdued peacefulness with a hint of coldness, lacking strong emotional intensity.",
+          "evidence": [
+            "Widespread snow cover creating a muted, still environment",
+            "Overcast sky contributing to low contrast and subdued lighting",
+            "Sparse vegetation and bare trees indicating winter's quietness",
+            "Absence of human activity or motion",
+            "Distant hills and rural buildings adding to the tranquil, isolated feel"
+          ],
+          "matched_emotions": [
+            "serene",
+            "quiet",
+            "cold",
+            "still",
+            "isolated"
+          ],
+          "uncertainty": "Ambiguous emotional tone due to lack of human presence or dynamic elements"
+        }
+      },
+      "route_seconds": 9.668,
+      "skill_seconds": 10.587,
+      "route": {
+        "skill_id": "kaplan-art-restoration",
+        "reason": "The image depicts a snowy rural landscape with houses, bare trees, and a snow-covered ground, which aligns with Kaplan's Attention Restoration Theory. The scene evokes a sense of calm, quiet, and natural refuge, supporting restorative affect. There are no human faces or social interactions, making cognitive appraisal or face evaluation irrelevant. The scene is not aesthetically complex or novel in a way that would trigger Berlyne's model, nor is it asking for discrete PANAS emotion matching. The visible cues (snow, open space, natural elements) strongly support being-away, fascination, extent, and compatibility — core components of Kaplan's theory.",
+        "confidence": 0.95,
+        "observed_cues": [
+          "snow-covered landscape",
+          "bare trees",
+          "rural houses",
+          "open space",
+          "natural environment",
+          "quiet and calm atmosphere",
+          "lack of human activity or social interaction"
+        ],
+        "alternative_skill_ids": [
+          "berlyne-arousal-pleasure",
+          "panas-discrete-va"
+        ]
+      },
+      "skill_va": {
+        "skill_id": "kaplan-art-restoration",
+        "skill_name": "Kaplan Attention Restoration Theory",
+        "valence": 0.3,
+        "arousal": 0.2,
+        "quadrant": "calm-positive",
+        "summary": "The snowy rural landscape evokes a quiet, restorative calm with low arousal and moderate positive valence, supporting attentional recovery through being-away and compatibility with nature.",
+        "evidence": [
+          "Snow-covered ground and trees creating a serene, undisturbed environment",
+          "Open, expansive snowfield providing visual extent",
+          "Distant hills and sky offering depth and refuge",
+          "Minimal human structures (houses) supporting being-away from daily stress",
+          "Natural elements (trees, snow, sky) enhancing compatibility and fascination"
+        ],
+        "matched_emotions": [],
+        "emotion_weights": {},
+        "mapping_trace": [],
+        "appraisal_notes": [
+          "Scene supports restoration via ART dimensions: being-away, extent, compatibility",
+          "Fascination is low due to lack of dynamic elements, but present via natural patterns",
+          "No strong emotional cues to trigger discrete emotion mapping"
+        ],
+        "positive_affect": [
+          "Calmness",
+          "Peacefulness",
+          "Restoration"
+        ],
+        "negative_affect": [],
+        "uncertainty": "No discrete emotions detected; analysis grounded in ART dimensions only.",
+        "raw_model_output": {
+          "valence": 0.3,
+          "arousal": 0.2,
+          "quadrant": "calm-positive",
+          "summary": "The snowy rural landscape evokes a quiet, restorative calm with low arousal and moderate positive valence, supporting attentional recovery through being-away and compatibility with nature.",
+          "evidence": [
+            "Snow-covered ground and trees creating a serene, undisturbed environment",
+            "Open, expansive snowfield providing visual extent",
+            "Distant hills and sky offering depth and refuge",
+            "Minimal human structures (houses) supporting being-away from daily stress",
+            "Natural elements (trees, snow, sky) enhancing compatibility and fascination"
+          ],
+          "matched_emotions": [],
+          "emotion_weights": {},
+          "mapping_trace": [],
+          "appraisal_notes": [
+            "Scene supports restoration via ART dimensions: being-away, extent, compatibility",
+            "Fascination is low due to lack of dynamic elements, but present via natural patterns",
+            "No strong emotional cues to trigger discrete emotion mapping"
+          ],
+          "positive_affect": [
+            "Calmness",
+            "Peacefulness",
+            "Restoration"
+          ],
+          "negative_affect": [],
+          "uncertainty": "No discrete emotions detected; analysis grounded in ART dimensions only."
+        }
+      },
+      "delta": {
+        "valence_delta": 0.1,
+        "arousal_delta": -0.1
+      }
+    },
+    {
+      "image": "/home/u1120250383/zyh/emoskill_infer/pic/096817_Y_057.jpg",
+      "ok": false,
+      "direct_seconds": 6.491,
+      "direct_va": {
+        "skill_id": "direct-va-baseline",
+        "skill_name": "Direct VA Baseline",
+        "valence": 0.85,
+        "arousal": 0.7,
+        "quadrant": "positive-high",
+        "summary": "The scene conveys a joyful and celebratory atmosphere, with people smiling and clapping around a birthday cake with lit candles.",
+        "evidence": [
+          "Multiple individuals are smiling broadly",
+          "People are clapping their hands",
+          "A birthday cake with lit candles is prominently displayed",
+          "The overall body language is engaged and happy",
+          "The setting appears to be a social gathering or celebration"
+        ],
+        "matched_emotions": [
+          "joy",
+          "celebration",
+          "excitement",
+          "warmth"
+        ],
+        "emotion_weights": {},
+        "mapping_trace": [],
+        "appraisal_notes": [],
+        "positive_affect": [],
+        "negative_affect": [],
+        "uncertainty": "Low; clear visual cues of celebration and positive affect",
+        "raw_model_output": {
+          "valence": 0.85,
+          "arousal": 0.7,
+          "quadrant": "positive-high",
+          "summary": "The scene conveys a joyful and celebratory atmosphere, with people smiling and clapping around a birthday cake with lit candles.",
+          "evidence": [
+            "Multiple individuals are smiling broadly",
+            "People are clapping their hands",
+            "A birthday cake with lit candles is prominently displayed",
+            "The overall body language is engaged and happy",
+            "The setting appears to be a social gathering or celebration"
+          ],
+          "matched_emotions": [
+            "joy",
+            "celebration",
+            "excitement",
+            "warmth"
+          ],
+          "uncertainty": "Low; clear visual cues of celebration and positive affect"
+        }
+      },
+      "error_type": "JSONDecodeError",
+      "error": "Expecting ',' delimiter: line 24 column 4 (char 870)",
+      "traceback": "Traceback (most recent call last):\n  File \"/home/u1120250383/dcs/Emoskill_test/emoskill/examples/qwen3_skill_experiment.py\", line 194, in main\n    skill_result, skill_seconds = timed_call(\n                                  ^^^^^^^^^^^\n  File \"/home/u1120250383/dcs/Emoskill_test/emoskill/examples/qwen3_skill_experiment.py\", line 63, in timed_call\n    result = func(*args, **kwargs)\n             ^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/u1120250383/dcs/Emoskill_test/emoskill/src/psychology_va/pipeline.py\", line 48, in analyze_with_route\n    response = self.llm_client.complete_json(\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/u1120250383/dcs/Emoskill_test/emoskill/src/psychology_va/llm_client.py\", line 233, in complete_json\n    return _extract_json_object(output_text)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/u1120250383/dcs/Emoskill_test/emoskill/src/psychology_va/llm_client.py\", line 318, in _extract_json_object\n    return json.loads(candidate[start : end + 1])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/u1120250383/miniconda3/envs/emoskill/lib/python3.11/json/__init__.py\", line 346, in loads\n    return _default_decoder.decode(s)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/u1120250383/miniconda3/envs/emoskill/lib/python3.11/json/decoder.py\", line 337, in decode\n    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/u1120250383/miniconda3/envs/emoskill/lib/python3.11/json/decoder.py\", line 353, in raw_decode\n    obj, end = self.scan_once(s, idx)\n               ^^^^^^^^^^^^^^^^^^^^^^\njson.decoder.JSONDecodeError: Expecting ',' delimiter: line 24 column 4 (char 870)\n"
+    },
+    {
+      "image": "/home/u1120250383/zyh/emoskill_infer/pic/141517_Y_062.jpg",
+      "ok": true,
+      "direct_seconds": 6.15,
+      "direct_va": {
+        "skill_id": "direct-va-baseline",
+        "skill_name": "Direct VA Baseline",
+        "valence": 0.6,
+        "arousal": 0.3,
+        "quadrant": "positive calm",
+        "summary": "The image conveys a generally positive and relaxed affect, with neutral to slightly positive emotional tone and low to moderate activation.",
+        "evidence": [
+          "Both individuals have neutral to slightly smiling expressions",
+          "Soft, natural lighting with no harsh shadows or dramatic contrasts",
+          "Casual attire and relaxed posture",
+          "No signs of stress, excitement, or negative emotion"
+        ],
+        "matched_emotions": [
+          "contentment",
+          "relaxed",
+          "neutral",
+          "calm"
+        ],
+        "emotion_weights": {},
+        "mapping_trace": [],
+        "appraisal_notes": [],
+        "positive_affect": [],
+        "negative_affect": [],
+        "uncertainty": "Low; facial expressions and context are clear and consistent.",
+        "raw_model_output": {
+          "valence": 0.6,
+          "arousal": 0.3,
+          "quadrant": "positive calm",
+          "summary": "The image conveys a generally positive and relaxed affect, with neutral to slightly positive emotional tone and low to moderate activation.",
+          "evidence": [
+            "Both individuals have neutral to slightly smiling expressions",
+            "Soft, natural lighting with no harsh shadows or dramatic contrasts",
+            "Casual attire and relaxed posture",
+            "No signs of stress, excitement, or negative emotion"
+          ],
+          "matched_emotions": [
+            "contentment",
+            "relaxed",
+            "neutral",
+            "calm"
+          ],
+          "uncertainty": "Low; facial expressions and context are clear and consistent."
+        }
+      },
+      "route_seconds": 10.053,
+      "skill_seconds": 12.242,
+      "route": {
+        "skill_id": "todorov-face-evaluation",
+        "reason": "The image prominently features two human faces, with the foreground person's face being the central focus. The analysis task involves interpreting their affective state based on facial expression and social evaluation, which aligns with Todorov's face evaluation model. The visible cues include neutral-to-slightly-smiling expressions, glasses, and direct gaze, which are relevant for assessing trustworthiness and dominance. Other skills are less appropriate: the scene is not an environment (not Kaplan), not primarily aesthetic (not Berlyne), not focused on discrete PANAS emotions (not PANAS), and not ambiguous enough to require cognitive appraisal.",
+        "confidence": 0.95,
+        "observed_cues": [
+          "Two human faces in close proximity",
+          "Foreground person has neutral expression with slight smile, wearing glasses",
+          "Background person has neutral expression, wearing glasses",
+          "Direct gaze toward camera",
+          "Casual indoor setting, not nature or design-focused"
+        ],
+        "alternative_skill_ids": [
+          "panas-discrete-va",
+          "cognitive-appraisal"
+        ]
+      },
+      "skill_va": {
+        "skill_id": "todorov-face-evaluation",
+        "skill_name": "Todorov Face Evaluation",
+        "valence": 0.3,
+        "arousal": 0.2,
+        "quadrant": "low-arousal positive",
+        "summary": "The primary face appears neutral to slightly positive, conveying a calm, approachable, and trustworthy impression with low emotional intensity. The secondary face is more neutral and reserved, contributing to an overall subdued, non-threatening social atmosphere.",
+        "evidence": [
+          "Primary face has a neutral to slightly smiling mouth, soft gaze, and relaxed facial muscles, suggesting warmth and trustworthiness.",
+          "Both individuals wear glasses, which may subtly enhance perceived intelligence or approachability.",
+          "Direct eye contact with the camera suggests openness and engagement, supporting trustworthiness.",
+          "Lack of strong emotional expression or tension in facial muscles indicates low dominance and low arousal.",
+          "The background is neutral and uncluttered, reinforcing the focus on the faces and their calm demeanor."
+        ],
+        "matched_emotions": [],
+        "emotion_weights": {},
+        "mapping_trace": [],
+        "appraisal_notes": [
+          "The faces convey a sense of calm social presence, likely interpreted as trustworthy and non-threatening.",
+          "The lack of strong emotional cues suggests the subjects are not in a high-arousal state, possibly indicating a relaxed or routine social context."
+        ],
+        "positive_affect": [],
+        "negative_affect": [],
+        "uncertainty": "Limited facial expression cues make precise emotion estimation challenging; the impression is more social and evaluative than emotionally charged.",
+        "raw_model_output": {
+          "valence": 0.3,
+          "arousal": 0.2,
+          "quadrant": "low-arousal positive",
+          "summary": "The primary face appears neutral to slightly positive, conveying a calm, approachable, and trustworthy impression with low emotional intensity. The secondary face is more neutral and reserved, contributing to an overall subdued, non-threatening social atmosphere.",
+          "evidence": [
+            "Primary face has a neutral to slightly smiling mouth, soft gaze, and relaxed facial muscles, suggesting warmth and trustworthiness.",
+            "Both individuals wear glasses, which may subtly enhance perceived intelligence or approachability.",
+            "Direct eye contact with the camera suggests openness and engagement, supporting trustworthiness.",
+            "Lack of strong emotional expression or tension in facial muscles indicates low dominance and low arousal.",
+            "The background is neutral and uncluttered, reinforcing the focus on the faces and their calm demeanor."
+          ],
+          "matched_emotions": [],
+          "emotion_weights": {},
+          "mapping_trace": [],
+          "appraisal_notes": [
+            "The faces convey a sense of calm social presence, likely interpreted as trustworthy and non-threatening.",
+            "The lack of strong emotional cues suggests the subjects are not in a high-arousal state, possibly indicating a relaxed or routine social context."
+          ],
+          "positive_affect": [],
+          "negative_affect": [],
+          "uncertainty": "Limited facial expression cues make precise emotion estimation challenging; the impression is more social and evaluative than emotionally charged."
+        }
+      },
+      "delta": {
+        "valence_delta": -0.3,
+        "arousal_delta": -0.1
+      }
+    },
+    {
+      "image": "/home/u1120250383/zyh/emoskill_infer/pic/141517_Y_077.jpg",
+      "ok": true,
+      "direct_seconds": 6.096,
+      "direct_va": {
+        "skill_id": "direct-va-baseline",
+        "skill_name": "Direct VA Baseline",
+        "valence": 0.7,
+        "arousal": 0.3,
+        "quadrant": "positive calm",
+        "summary": "The scene evokes a tranquil, moderately pleasant mood with natural beauty and stillness.",
+        "evidence": [
+          "Green water reflecting sunlight",
+          "Dense trees surrounding the pond",
+          "Clear blue sky visible above",
+          "Wooden dock on the left",
+          "Still water surface with minimal ripples",
+          "Soft lighting and natural setting"
+        ],
+        "matched_emotions": [
+          "serene",
+          "peaceful",
+          "relaxed",
+          "content"
+        ],
+        "emotion_weights": {},
+        "mapping_trace": [],
+        "appraisal_notes": [],
+        "positive_affect": [],
+        "negative_affect": [],
+        "uncertainty": "Low; scene is clearly natural and calm with no conflicting elements.",
+        "raw_model_output": {
+          "valence": 0.7,
+          "arousal": 0.3,
+          "quadrant": "positive calm",
+          "summary": "The scene evokes a tranquil, moderately pleasant mood with natural beauty and stillness.",
+          "evidence": [
+            "Green water reflecting sunlight",
+            "Dense trees surrounding the pond",
+            "Clear blue sky visible above",
+            "Wooden dock on the left",
+            "Still water surface with minimal ripples",
+            "Soft lighting and natural setting"
+          ],
+          "matched_emotions": [
+            "serene",
+            "peaceful",
+            "relaxed",
+            "content"
+          ],
+          "uncertainty": "Low; scene is clearly natural and calm with no conflicting elements."
+        }
+      },
+      "route_seconds": 8.545,
+      "skill_seconds": 11.003,
+      "route": {
+        "skill_id": "kaplan-art-restoration",
+        "reason": "The image depicts a natural landscape with water, greenery, and trees, which aligns with Kaplan's Attention Restoration Theory. The scene suggests a restorative environment with potential for calmness and mental recovery, fitting the theory's focus on being-away, fascination, extent, and compatibility. There are no human faces or social interactions to trigger Todorov or cognitive appraisal, and the scene is not complex or novel enough to require Berlyne's model. PANAS discrete affect matching is not applicable as no discrete emotional expressions are visible.",
+        "confidence": 0.95,
+        "observed_cues": [
+          "nature",
+          "water",
+          "greenery",
+          "trees",
+          "depth",
+          "coherent spatial structure",
+          "refuge",
+          "openness"
+        ],
+        "alternative_skill_ids": [
+          "berlyne-arousal-pleasure",
+          "panas-discrete-va"
+        ]
+      },
+      "skill_va": {
+        "skill_id": "kaplan-art-restoration",
+        "skill_name": "Kaplan Attention Restoration Theory",
+        "valence": 0.7,
+        "arousal": 0.2,
+        "quadrant": "calm positive",
+        "summary": "The image depicts a tranquil natural scene with water and greenery, offering strong restorative potential according to Kaplan's ART. It supports being-away, fascination, extent, and compatibility, likely inducing calmness and mental recovery with low arousal.",
+        "evidence": [
+          "Water body (lake or pond) providing visual focus and calmness",
+          "Dense green trees and foliage creating a sense of refuge and being-away",
+          "Open sky and depth of field enhancing extent",
+          "Natural, coherent spatial structure with no visual clutter",
+          "Soft lighting and lack of human elements increasing compatibility"
+        ],
+        "matched_emotions": [],
+        "emotion_weights": {},
+        "mapping_trace": [],
+        "appraisal_notes": [
+          "Scene supports restoration of directed attention via natural elements",
+          "Lack of human presence reduces cognitive load",
+          "Visual complexity is moderate, promoting fascination without overstimulation"
+        ],
+        "positive_affect": [
+          "Calmness",
+          "Relaxation",
+          "Peacefulness",
+          "Restoration"
+        ],
+        "negative_affect": [],
+        "uncertainty": "No human subjects or discrete emotional expressions present; VA inferred from environmental cues and ART constructs.",
+        "raw_model_output": {
+          "valence": 0.7,
+          "arousal": 0.2,
+          "quadrant": "calm positive",
+          "summary": "The image depicts a tranquil natural scene with water and greenery, offering strong restorative potential according to Kaplan's ART. It supports being-away, fascination, extent, and compatibility, likely inducing calmness and mental recovery with low arousal.",
+          "evidence": [
+            "Water body (lake or pond) providing visual focus and calmness",
+            "Dense green trees and foliage creating a sense of refuge and being-away",
+            "Open sky and depth of field enhancing extent",
+            "Natural, coherent spatial structure with no visual clutter",
+            "Soft lighting and lack of human elements increasing compatibility"
+          ],
+          "matched_emotions": [],
+          "emotion_weights": {},
+          "mapping_trace": [],
+          "appraisal_notes": [
+            "Scene supports restoration of directed attention via natural elements",
+            "Lack of human presence reduces cognitive load",
+            "Visual complexity is moderate, promoting fascination without overstimulation"
+          ],
+          "positive_affect": [
+            "Calmness",
+            "Relaxation",
+            "Peacefulness",
+            "Restoration"
+          ],
+          "negative_affect": [],
+          "uncertainty": "No human subjects or discrete emotional expressions present; VA inferred from environmental cues and ART constructs."
+        }
+      },
+      "delta": {
+        "valence_delta": 0.0,
+        "arousal_delta": -0.1
+      }
+    },
+    {
+      "image": "/home/u1120250383/zyh/emoskill_infer/pic/141517_Y_099.jpg",
+      "ok": true,
+      "direct_seconds": 5.752,
+      "direct_va": {
+        "skill_id": "direct-va-baseline",
+        "skill_name": "Direct VA Baseline",
+        "valence": 0.7,
+        "arousal": 0.3,
+        "quadrant": "positive calm",
+        "summary": "The image evokes a tranquil, pleasant natural scene with abundant greenery and open sky, suggesting a peaceful and moderately uplifting mood.",
+        "evidence": [
+          "Vast green foliage in foreground",
+          "Clear blue sky with scattered clouds",
+          "Still water surface",
+          "Distant trees and structures under bright daylight"
+        ],
+        "matched_emotions": [
+          "serene",
+          "content",
+          "calm",
+          "peaceful"
+        ],
+        "emotion_weights": {},
+        "mapping_trace": [],
+        "appraisal_notes": [],
+        "positive_affect": [],
+        "negative_affect": [],
+        "uncertainty": "Low; scene is clearly natural and tranquil with no conflicting elements.",
+        "raw_model_output": {
+          "valence": 0.7,
+          "arousal": 0.3,
+          "quadrant": "positive calm",
+          "summary": "The image evokes a tranquil, pleasant natural scene with abundant greenery and open sky, suggesting a peaceful and moderately uplifting mood.",
+          "evidence": [
+            "Vast green foliage in foreground",
+            "Clear blue sky with scattered clouds",
+            "Still water surface",
+            "Distant trees and structures under bright daylight"
+          ],
+          "matched_emotions": [
+            "serene",
+            "content",
+            "calm",
+            "peaceful"
+          ],
+          "uncertainty": "Low; scene is clearly natural and tranquil with no conflicting elements."
+        }
+      },
+      "route_seconds": 8.951,
+      "skill_seconds": 11.395,
+      "route": {
+        "skill_id": "kaplan-art-restoration",
+        "reason": "The image depicts a natural landscape with water, greenery, and distant trees under a partly cloudy sky, which strongly aligns with Kaplan's Attention Restoration Theory. The scene evokes calmness, openness, and restorative potential, with visible cues like 'being-away' (distance from urban environments), 'fascination' (visual interest in the natural elements), 'extent' (spatial depth), and 'compatibility' (harmonious natural composition). These cues suggest the image is designed to promote mental recovery and attentional restoration, making Kaplan the most appropriate model.",
+        "confidence": 0.95,
+        "observed_cues": [
+          "natural environment",
+          "water body",
+          "green vegetation",
+          "open sky",
+          "spatial depth",
+          "calm atmosphere",
+          "lack of human activity or stress cues"
+        ],
+        "alternative_skill_ids": [
+          "berlyne-arousal-pleasure",
+          "panas-discrete-va"
+        ]
+      },
+      "skill_va": {
+        "skill_id": "kaplan-art-restoration",
+        "skill_name": "Kaplan Attention Restoration Theory",
+        "valence": 0.75,
+        "arousal": 0.25,
+        "quadrant": "calm positive",
+        "summary": "The image presents a restorative natural landscape with water, greenery, and distant trees under a partly cloudy sky, promoting calmness and mental recovery. It supports being-away, fascination, extent, and compatibility, leading to a moderately positive and low-arousal affective state.",
+        "evidence": [
+          "Extensive green vegetation in foreground and midground",
+          "Body of water extending into the distance",
+          "Distant treeline and sky with clouds",
+          "Open spatial structure and depth",
+          "Natural, harmonious composition",
+          "Absence of human structures or urban elements"
+        ],
+        "matched_emotions": [],
+        "emotion_weights": {},
+        "mapping_trace": [],
+        "appraisal_notes": [
+          "The scene is perceived as a refuge from daily stressors",
+          "Visual elements invite passive observation and mental disengagement",
+          "The composition supports sustained attention without cognitive overload"
+        ],
+        "positive_affect": [
+          "Calmness",
+          "Relaxation",
+          "Peacefulness",
+          "Restoration"
+        ],
+        "negative_affect": [],
+        "uncertainty": "No discrete emotions were selected as the skill does not require them; analysis is grounded in restorative potential.",
+        "raw_model_output": {
+          "valence": 0.75,
+          "arousal": 0.25,
+          "quadrant": "calm positive",
+          "summary": "The image presents a restorative natural landscape with water, greenery, and distant trees under a partly cloudy sky, promoting calmness and mental recovery. It supports being-away, fascination, extent, and compatibility, leading to a moderately positive and low-arousal affective state.",
+          "evidence": [
+            "Extensive green vegetation in foreground and midground",
+            "Body of water extending into the distance",
+            "Distant treeline and sky with clouds",
+            "Open spatial structure and depth",
+            "Natural, harmonious composition",
+            "Absence of human structures or urban elements"
+          ],
+          "matched_emotions": [],
+          "emotion_weights": {},
+          "mapping_trace": [],
+          "appraisal_notes": [
+            "The scene is perceived as a refuge from daily stressors",
+            "Visual elements invite passive observation and mental disengagement",
+            "The composition supports sustained attention without cognitive overload"
+          ],
+          "positive_affect": [
+            "Calmness",
+            "Relaxation",
+            "Peacefulness",
+            "Restoration"
+          ],
+          "negative_affect": [],
+          "uncertainty": "No discrete emotions were selected as the skill does not require them; analysis is grounded in restorative potential."
+        }
+      },
+      "delta": {
+        "valence_delta": 0.05,
+        "arousal_delta": -0.05
+      }
+    },
+    {
+      "image": "/home/u1120250383/zyh/emoskill_infer/pic/158941_Y_002.jpg",
+      "ok": true,
+      "direct_seconds": 5.985,
+      "direct_va": {
+        "skill_id": "direct-va-baseline",
+        "skill_name": "Direct VA Baseline",
+        "valence": 0.7,
+        "arousal": 0.8,
+        "quadrant": "positive-aroused",
+        "summary": "The scene conveys excitement and positive energy, typical of a live music performance with engaged audience and dynamic stage lighting.",
+        "evidence": [
+          "Performers actively engaged on stage",
+          "Audience holding up phones to record",
+          "Bright, colorful stage lighting",
+          "Dynamic pose of central performer",
+          "Overall energetic atmosphere"
+        ],
+        "matched_emotions": [
+          "excitement",
+          "joy",
+          "enthusiasm",
+          "engagement"
+        ],
+        "emotion_weights": {},
+        "mapping_trace": [],
+        "appraisal_notes": [],
+        "positive_affect": [],
+        "negative_affect": [],
+        "uncertainty": "Low; clear visual cues indicate positive-aroused state.",
+        "raw_model_output": {
+          "valence": 0.7,
+          "arousal": 0.8,
+          "quadrant": "positive-aroused",
+          "summary": "The scene conveys excitement and positive energy, typical of a live music performance with engaged audience and dynamic stage lighting.",
+          "evidence": [
+            "Performers actively engaged on stage",
+            "Audience holding up phones to record",
+            "Bright, colorful stage lighting",
+            "Dynamic pose of central performer",
+            "Overall energetic atmosphere"
+          ],
+          "matched_emotions": [
+            "excitement",
+            "joy",
+            "enthusiasm",
+            "engagement"
+          ],
+          "uncertainty": "Low; clear visual cues indicate positive-aroused state."
+        }
+      },
+      "route_seconds": 9.905,
+      "skill_seconds": 12.288,
+      "route": {
+        "skill_id": "berlyne-arousal-pleasure",
+        "reason": "The image depicts a live concert scene with dynamic stage lighting, performers in action, and an audience capturing the moment. The visual composition is rich with motion, color contrast, and sensory density, which aligns with Berlyne's model of aesthetic stimulation. The affect is not primarily driven by a single facial expression or social evaluation, but by the overall visual excitement and complexity of the performance environment. The scene is ambiguous in terms of discrete emotion, but clearly stimulates arousal and pleasure through its aesthetic and energetic qualities.",
+        "confidence": 0.95,
+        "observed_cues": [
+          "Dynamic stage lighting with red and orange beams",
+          "Performers actively engaged in music performance",
+          "Audience holding up phones to record, indicating high engagement",
+          "Complex visual composition with multiple elements (stage, instruments, lights, crowd)",
+          "No single face is central or dominant",
+          "Scene conveys energy, excitement, and aesthetic stimulation"
+        ],
+        "alternative_skill_ids": [
+          "panas-discrete-va",
+          "cognitive-appraisal"
+        ]
+      },
+      "skill_va": {
+        "skill_id": "berlyne-arousal-pleasure",
+        "skill_name": "Berlyne Arousal-Aesthetic Pleasure",
+        "valence": 0.7,
+        "arousal": 0.8,
+        "quadrant": "high-arousal positive",
+        "summary": "The concert scene is visually stimulating and energetic, evoking excitement and pleasure through dynamic lighting, performer action, and audience engagement. The aesthetic complexity and sensory density create a high-arousal, positive valence experience.",
+        "evidence": [
+          "Dynamic stage lighting with red and orange beams creating visual contrast",
+          "Performers in active poses (singing, gesturing, playing guitar)",
+          "Audience with phones and cameras capturing the moment, indicating engagement",
+          "Sensory density from multiple light sources and motion",
+          "Compositionally striking with layered elements (stage, performers, audience)"
+        ],
+        "matched_emotions": [],
+        "emotion_weights": {},
+        "mapping_trace": [],
+        "appraisal_notes": [
+          "High novelty from live performance and lighting effects",
+          "Moderate ambiguity in emotional tone (could be excitement or overwhelm)",
+          "High arousal potential from motion and sensory input",
+          "Positive hedonic value from shared experience and entertainment"
+        ],
+        "positive_affect": [
+          "Excitement",
+          "Aesthetic pleasure",
+          "Engagement",
+          "Energetic joy"
+        ],
+        "negative_affect": [],
+        "uncertainty": "No discrete emotions were selected as the scene's affect is primarily aesthetic and stimulation-based, not driven by clear facial expressions or social cues.",
+        "raw_model_output": {
+          "valence": 0.7,
+          "arousal": 0.8,
+          "quadrant": "high-arousal positive",
+          "summary": "The concert scene is visually stimulating and energetic, evoking excitement and pleasure through dynamic lighting, performer action, and audience engagement. The aesthetic complexity and sensory density create a high-arousal, positive valence experience.",
+          "evidence": [
+            "Dynamic stage lighting with red and orange beams creating visual contrast",
+            "Performers in active poses (singing, gesturing, playing guitar)",
+            "Audience with phones and cameras capturing the moment, indicating engagement",
+            "Sensory density from multiple light sources and motion",
+            "Compositionally striking with layered elements (stage, performers, audience)"
+          ],
+          "matched_emotions": [],
+          "emotion_weights": {},
+          "mapping_trace": [],
+          "appraisal_notes": [
+            "High novelty from live performance and lighting effects",
+            "Moderate ambiguity in emotional tone (could be excitement or overwhelm)",
+            "High arousal potential from motion and sensory input",
+            "Positive hedonic value from shared experience and entertainment"
+          ],
+          "positive_affect": [
+            "Excitement",
+            "Aesthetic pleasure",
+            "Engagement",
+            "Energetic joy"
+          ],
+          "negative_affect": [],
+          "uncertainty": "No discrete emotions were selected as the scene's affect is primarily aesthetic and stimulation-based, not driven by clear facial expressions or social cues."
+        }
+      },
+      "delta": {
+        "valence_delta": 0.0,
+        "arousal_delta": 0.0
+      }
+    },
+    {
+      "image": "/home/u1120250383/zyh/emoskill_infer/pic/158941_Y_015.jpg",
+      "ok": false,
+      "direct_seconds": 6.391,
+      "direct_va": {
+        "skill_id": "direct-va-baseline",
+        "skill_name": "Direct VA Baseline",
+        "valence": 0.9,
+        "arousal": 0.7,
+        "quadrant": "high valence, high arousal",
+        "summary": "The image conveys strong positive affect with noticeable energy and engagement.",
+        "evidence": [
+          "Both individuals are smiling broadly and winking",
+          "They are making peace signs with hands, indicating playful or celebratory behavior",
+          "Bright, warm lighting and casual attire suggest a relaxed, joyful context",
+          "Direct eye contact and close proximity imply intimacy and shared positive experience"
+        ],
+        "matched_emotions": [
+          "joy",
+          "playfulness",
+          "contentment",
+          "excitement"
+        ],
+        "emotion_weights": {},
+        "mapping_trace": [],
+        "appraisal_notes": [],
+        "positive_affect": [],
+        "negative_affect": [],
+        "uncertainty": "Low; clear positive affect indicators are consistent across subjects and context.",
+        "raw_model_output": {
+          "valence": 0.9,
+          "arousal": 0.7,
+          "quadrant": "high valence, high arousal",
+          "summary": "The image conveys strong positive affect with noticeable energy and engagement.",
+          "evidence": [
+            "Both individuals are smiling broadly and winking",
+            "They are making peace signs with hands, indicating playful or celebratory behavior",
+            "Bright, warm lighting and casual attire suggest a relaxed, joyful context",
+            "Direct eye contact and close proximity imply intimacy and shared positive experience"
+          ],
+          "matched_emotions": [
+            "joy",
+            "playfulness",
+            "contentment",
+            "excitement"
+          ],
+          "uncertainty": "Low; clear positive affect indicators are consistent across subjects and context."
+        }
+      },
+      "error_type": "JSONDecodeError",
+      "error": "Expecting ',' delimiter: line 23 column 4 (char 1025)",
+      "traceback": "Traceback (most recent call last):\n  File \"/home/u1120250383/dcs/Emoskill_test/emoskill/examples/qwen3_skill_experiment.py\", line 194, in main\n    skill_result, skill_seconds = timed_call(\n                                  ^^^^^^^^^^^\n  File \"/home/u1120250383/dcs/Emoskill_test/emoskill/examples/qwen3_skill_experiment.py\", line 63, in timed_call\n    result = func(*args, **kwargs)\n             ^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/u1120250383/dcs/Emoskill_test/emoskill/src/psychology_va/pipeline.py\", line 48, in analyze_with_route\n    response = self.llm_client.complete_json(\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/u1120250383/dcs/Emoskill_test/emoskill/src/psychology_va/llm_client.py\", line 233, in complete_json\n    return _extract_json_object(output_text)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/u1120250383/dcs/Emoskill_test/emoskill/src/psychology_va/llm_client.py\", line 318, in _extract_json_object\n    return json.loads(candidate[start : end + 1])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/u1120250383/miniconda3/envs/emoskill/lib/python3.11/json/__init__.py\", line 346, in loads\n    return _default_decoder.decode(s)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/u1120250383/miniconda3/envs/emoskill/lib/python3.11/json/decoder.py\", line 337, in decode\n    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/u1120250383/miniconda3/envs/emoskill/lib/python3.11/json/decoder.py\", line 353, in raw_decode\n    obj, end = self.scan_once(s, idx)\n               ^^^^^^^^^^^^^^^^^^^^^^\njson.decoder.JSONDecodeError: Expecting ',' delimiter: line 23 column 4 (char 1025)\n"
+    },
+    {
+      "image": "/home/u1120250383/zyh/emoskill_infer/pic/158941_Y_071.jpg",
+      "ok": true,
+      "direct_seconds": 6.019,
+      "direct_va": {
+        "skill_id": "direct-va-baseline",
+        "skill_name": "Direct VA Baseline",
+        "valence": 0.8,
+        "arousal": 0.3,
+        "quadrant": "positive calm",
+        "summary": "The image conveys a warm, pleasant, and relaxed emotional state.",
+        "evidence": [
+          "Smiling expression with slightly upturned lips",
+          "Soft, direct eye contact with viewer",
+          "Neutral to relaxed facial muscle tone",
+          "Casual attire and scarf suggesting comfort",
+          "Outdoor setting with natural lighting"
+        ],
+        "matched_emotions": [
+          "contentment",
+          "pleasantness",
+          "calm confidence",
+          "approachability"
+        ],
+        "emotion_weights": {},
+        "mapping_trace": [],
+        "appraisal_notes": [],
+        "positive_affect": [],
+        "negative_affect": [],
+        "uncertainty": "Low; clear positive affect indicators",
+        "raw_model_output": {
+          "valence": 0.8,
+          "arousal": 0.3,
+          "quadrant": "positive calm",
+          "summary": "The image conveys a warm, pleasant, and relaxed emotional state.",
+          "evidence": [
+            "Smiling expression with slightly upturned lips",
+            "Soft, direct eye contact with viewer",
+            "Neutral to relaxed facial muscle tone",
+            "Casual attire and scarf suggesting comfort",
+            "Outdoor setting with natural lighting"
+          ],
+          "matched_emotions": [
+            "contentment",
+            "pleasantness",
+            "calm confidence",
+            "approachability"
+          ],
+          "uncertainty": "Low; clear positive affect indicators"
+        }
+      },
+      "route_seconds": 7.988,
+      "skill_seconds": 9.862,
+      "route": {
+        "skill_id": "todorov-face-evaluation",
+        "reason": "The image prominently features a human face as the central subject, with clear facial expression cues (smile, eye contact) that suggest a social first impression. The task of analyzing valence-arousal state based on facial evaluation aligns with Todorov's model, which maps trustworthiness and dominance to VA. The background context (outdoor setting) is secondary to the face-based social evaluation.",
+        "confidence": 0.95,
+        "observed_cues": [
+          "Human face is central and in focus",
+          "Smiling expression",
+          "Direct eye contact",
+          "Soft facial features suggesting warmth",
+          "No visible signs of threat or dominance cues"
+        ],
+        "alternative_skill_ids": [
+          "panas-discrete-va",
+          "berlyne-arousal-pleasure"
+        ]
+      },
+      "skill_va": {
+        "skill_id": "todorov-face-evaluation",
+        "skill_name": "Todorov Face Evaluation",
+        "valence": 0.75,
+        "arousal": 0.3,
+        "quadrant": "positive-low",
+        "summary": "The face conveys a warm, approachable, and trustworthy impression with a gentle smile and soft gaze, suggesting a low-arousal, positive social evaluation.",
+        "evidence": [
+          "Smiling mouth with relaxed lips",
+          "Soft, direct eye contact",
+          "Gentle facial contours",
+          "No signs of threat or intimidation",
+          "Neutral to slightly upward gaze"
+        ],
+        "matched_emotions": [],
+        "emotion_weights": {},
+        "mapping_trace": [],
+        "appraisal_notes": [
+          "The subject appears friendly and non-threatening, likely aiming to build rapport.",
+          "The expression is calm and composed, indicating low dominance or authority.",
+          "The overall impression is socially inviting and approachable."
+        ],
+        "positive_affect": [
+          "Warmth",
+          "Trustworthiness",
+          "Approachability"
+        ],
+        "negative_affect": [],
+        "uncertainty": "Low uncertainty; facial cues are clear and consistent with a positive, low-arousal social impression.",
+        "raw_model_output": {
+          "valence": 0.75,
+          "arousal": 0.3,
+          "quadrant": "positive-low",
+          "summary": "The face conveys a warm, approachable, and trustworthy impression with a gentle smile and soft gaze, suggesting a low-arousal, positive social evaluation.",
+          "evidence": [
+            "Smiling mouth with relaxed lips",
+            "Soft, direct eye contact",
+            "Gentle facial contours",
+            "No signs of threat or intimidation",
+            "Neutral to slightly upward gaze"
+          ],
+          "trustworthiness": 0.8,
+          "dominance": 0.3,
+          "appraisal_notes": [
+            "The subject appears friendly and non-threatening, likely aiming to build rapport.",
+            "The expression is calm and composed, indicating low dominance or authority.",
+            "The overall impression is socially inviting and approachable."
+          ],
+          "positive_affect": [
+            "Warmth",
+            "Trustworthiness",
+            "Approachability"
+          ],
+          "negative_affect": [],
+          "uncertainty": "Low uncertainty; facial cues are clear and consistent with a positive, low-arousal social impression."
+        }
+      },
+      "delta": {
+        "valence_delta": -0.05,
+        "arousal_delta": 0.0
+      }
+    },
+    {
+      "image": "/home/u1120250383/zyh/emoskill_infer/pic/235921_Y_001.jpg",
+      "ok": true,
+      "direct_seconds": 5.859,
+      "direct_va": {
+        "skill_id": "direct-va-baseline",
+        "skill_name": "Direct VA Baseline",
+        "valence": 0.9,
+        "arousal": 0.7,
+        "quadrant": "high valence, high arousal",
+        "summary": "The image conveys strong positive affect and moderate to high activation, reflecting celebratory achievement.",
+        "evidence": [
+          "Four individuals in graduation gowns holding diplomas",
+          "Smiling faces and confident postures",
+          "Bright red background with institutional branding",
+          "Formal yet joyful graduation context"
+        ],
+        "matched_emotions": [
+          "pride",
+          "joy",
+          "accomplishment",
+          "excitement"
+        ],
+        "emotion_weights": {},
+        "mapping_trace": [],
+        "appraisal_notes": [],
+        "positive_affect": [],
+        "negative_affect": [],
+        "uncertainty": "Low; clear visual cues of celebration and achievement",
+        "raw_model_output": {
+          "valence": 0.9,
+          "arousal": 0.7,
+          "quadrant": "high valence, high arousal",
+          "summary": "The image conveys strong positive affect and moderate to high activation, reflecting celebratory achievement.",
+          "evidence": [
+            "Four individuals in graduation gowns holding diplomas",
+            "Smiling faces and confident postures",
+            "Bright red background with institutional branding",
+            "Formal yet joyful graduation context"
+          ],
+          "matched_emotions": [
+            "pride",
+            "joy",
+            "accomplishment",
+            "excitement"
+          ],
+          "uncertainty": "Low; clear visual cues of celebration and achievement"
+        }
+      },
+      "route_seconds": 9.904,
+      "skill_seconds": 12.58,
+      "route": {
+        "skill_id": "cognitive-appraisal",
+        "reason": "The image depicts four graduates holding diplomas in front of a university backdrop, which is a context-heavy social scene. The visible cues suggest achievement, pride, and social validation, which are best interpreted through cognitive appraisal dimensions such as goal relevance (academic achievement), social meaning (graduation ceremony), and perceived control (successful completion of education). A plain VA coordinate is insufficient; the emotion arises from the interpretation of the situation, not just facial expressions. Other skills like PANAS or Todorov are less suitable because the faces are not the central focus for social evaluation, and the scene is not primarily aesthetic or restorative.",
+        "confidence": 0.95,
+        "observed_cues": [
+          "Four individuals in graduation attire holding diplomas",
+          "University backdrop with institutional branding",
+          "Formal, celebratory context of graduation",
+          "Social interaction implied by group posing",
+          "Achievement-oriented scenario"
+        ],
+        "alternative_skill_ids": [
+          "panas-discrete-va",
+          "berlyne-arousal-pleasure"
+        ]
+      },
+      "skill_va": {
+        "skill_id": "cognitive-appraisal",
+        "skill_name": "Cognitive Appraisal",
+        "valence": 0.85,
+        "arousal": 0.6,
+        "quadrant": "positive-aroused",
+        "summary": "The graduates are likely experiencing pride and accomplishment, reflected in their confident posture and the celebratory context of graduation. The scene is socially meaningful and goal-relevant, evoking positive affect with moderate arousal from the achievement and public recognition.",
+        "evidence": [
+          "Four individuals in graduation gowns holding diplomas",
+          "Background clearly identifies 'Hebei University of Technology'",
+          "All individuals are smiling and looking directly at the camera",
+          "Formal graduation setting implies achievement and social validation"
+        ],
+        "matched_emotions": [],
+        "emotion_weights": {},
+        "mapping_trace": [],
+        "appraisal_notes": [
+          "Goal relevance: High — academic achievement is the central goal.",
+          "Perceived control: High — they have successfully completed their education.",
+          "Social evaluation: Positive — they are being publicly recognized as graduates.",
+          "Novelty: Moderate — graduation is a milestone event, but not entirely novel in context.",
+          "Agency and responsibility: High — they are the agents of their own academic success."
+        ],
+        "positive_affect": [
+          "Pride",
+          "Achievement",
+          "Joy",
+          "Confidence"
+        ],
+        "negative_affect": [],
+        "uncertainty": "No visible facial expressions are fully expressive, so emotion is inferred from context and posture. The exact intensity of arousal may vary based on individual personality or cultural norms.",
+        "raw_model_output": {
+          "valence": 0.85,
+          "arousal": 0.6,
+          "quadrant": "positive-aroused",
+          "summary": "The graduates are likely experiencing pride and accomplishment, reflected in their confident posture and the celebratory context of graduation. The scene is socially meaningful and goal-relevant, evoking positive affect with moderate arousal from the achievement and public recognition.",
+          "evidence": [
+            "Four individuals in graduation gowns holding diplomas",
+            "Background clearly identifies 'Hebei University of Technology'",
+            "All individuals are smiling and looking directly at the camera",
+            "Formal graduation setting implies achievement and social validation"
+          ],
+          "matched_emotions": [],
+          "emotion_weights": {},
+          "mapping_trace": [],
+          "appraisal_notes": [
+            "Goal relevance: High — academic achievement is the central goal.",
+            "Perceived control: High — they have successfully completed their education.",
+            "Social evaluation: Positive — they are being publicly recognized as graduates.",
+            "Novelty: Moderate — graduation is a milestone event, but not entirely novel in context.",
+            "Agency and responsibility: High — they are the agents of their own academic success."
+          ],
+          "positive_affect": [
+            "Pride",
+            "Achievement",
+            "Joy",
+            "Confidence"
+          ],
+          "negative_affect": [],
+          "uncertainty": "No visible facial expressions are fully expressive, so emotion is inferred from context and posture. The exact intensity of arousal may vary based on individual personality or cultural norms."
+        }
+      },
+      "delta": {
+        "valence_delta": -0.05,
+        "arousal_delta": -0.1
+      }
+    },
+    {
+      "image": "/home/u1120250383/zyh/emoskill_infer/pic/235921_Y_021.jpg",
+      "ok": true,
+      "direct_seconds": 6.356,
+      "direct_va": {
+        "skill_id": "direct-va-baseline",
+        "skill_name": "Direct VA Baseline",
+        "valence": 0.6,
+        "arousal": 0.3,
+        "quadrant": "positive calm",
+        "summary": "The image evokes a serene and culturally appreciative mood, with a sense of historical reverence and quiet beauty.",
+        "evidence": [
+          "Clear blue sky suggesting calm weather",
+          "Ancient pagoda with weathered but intact structure",
+          "Presence of traditional architecture and trees",
+          "Lack of human activity or motion",
+          "Soft lighting and muted color palette"
+        ],
+        "matched_emotions": [
+          "serene",
+          "reverent",
+          "peaceful",
+          "appreciative"
+        ],
+        "emotion_weights": {},
+        "mapping_trace": [],
+        "appraisal_notes": [],
+        "positive_affect": [],
+        "negative_affect": [],
+        "uncertainty": "Low; visual cues are consistent with calm positive affect.",
+        "raw_model_output": {
+          "valence": 0.6,
+          "arousal": 0.3,
+          "quadrant": "positive calm",
+          "summary": "The image evokes a serene and culturally appreciative mood, with a sense of historical reverence and quiet beauty.",
+          "evidence": [
+            "Clear blue sky suggesting calm weather",
+            "Ancient pagoda with weathered but intact structure",
+            "Presence of traditional architecture and trees",
+            "Lack of human activity or motion",
+            "Soft lighting and muted color palette"
+          ],
+          "matched_emotions": [
+            "serene",
+            "reverent",
+            "peaceful",
+            "appreciative"
+          ],
+          "uncertainty": "Low; visual cues are consistent with calm positive affect."
+        }
+      },
+      "route_seconds": 9.169,
+      "skill_seconds": 12.745,
+      "route": {
+        "skill_id": "berlyne-arousal-pleasure",
+        "reason": "The image features a tall, tiered pagoda with architectural complexity and visual symmetry, set against a clear sky with surrounding trees and traditional rooftops. This composition is aesthetically striking, rich in form, and evokes a sense of historical grandeur and visual interest. The scene lacks human facial expressions or social context, making it unsuitable for face-based or cognitive appraisal models. The focus is on aesthetic stimulation, novelty, and architectural beauty, aligning perfectly with Berlyne’s arousal-pleasure model for evaluating visual appeal and complexity.",
+        "confidence": 0.95,
+        "observed_cues": [
+          "architectural complexity of the pagoda",
+          "visual symmetry and verticality",
+          "clear sky and natural framing",
+          "traditional cultural design elements",
+          "absence of human faces or social interaction"
+        ],
+        "alternative_skill_ids": [
+          "kaplan-art-restoration",
+          "panas-discrete-va"
+        ]
+      },
+      "skill_va": {
+        "skill_id": "berlyne-arousal-pleasure",
+        "skill_name": "Berlyne Arousal-Aesthetic Pleasure",
+        "valence": 0.7,
+        "arousal": 0.4,
+        "quadrant": "positive-arousal",
+        "summary": "The image evokes moderate aesthetic pleasure and moderate arousal through its visually rich, symmetrical, and architecturally complex pagoda. The scene’s historical grandeur and compositional balance create a calming yet stimulating visual experience.",
+        "evidence": [
+          "Tall, tiered pagoda with repeating geometric patterns and diminishing scale, creating visual rhythm and complexity.",
+          "Clear blue sky providing high contrast and simplicity, reducing visual clutter.",
+          "Surrounding trees and traditional rooftops adding natural and cultural context without overwhelming the composition.",
+          "Symmetrical framing and vertical emphasis of the pagoda enhancing order and aesthetic appeal.",
+          "Lack of human figures or social cues, focusing purely on architectural and environmental stimuli."
+        ],
+        "matched_emotions": [],
+        "emotion_weights": {},
+        "mapping_trace": [],
+        "appraisal_notes": [
+          "The pagoda’s architectural novelty and symmetry provide moderate stimulation without inducing discomfort.",
+          "The clear sky and balanced composition contribute to a calm, aesthetically pleasing experience.",
+          "The scene’s historical and cultural context adds depth, enhancing hedonic value without excessive complexity."
+        ],
+        "positive_affect": [
+          "Aesthetic appreciation",
+          "Calm admiration",
+          "Cultural awe"
+        ],
+        "negative_affect": [],
+        "uncertainty": "No discrete emotions were selected as the model does not require them for this analysis.",
+        "raw_model_output": {
+          "valence": 0.7,
+          "arousal": 0.4,
+          "quadrant": "positive-arousal",
+          "summary": "The image evokes moderate aesthetic pleasure and moderate arousal through its visually rich, symmetrical, and architecturally complex pagoda. The scene’s historical grandeur and compositional balance create a calming yet stimulating visual experience.",
+          "evidence": [
+            "Tall, tiered pagoda with repeating geometric patterns and diminishing scale, creating visual rhythm and complexity.",
+            "Clear blue sky providing high contrast and simplicity, reducing visual clutter.",
+            "Surrounding trees and traditional rooftops adding natural and cultural context without overwhelming the composition.",
+            "Symmetrical framing and vertical emphasis of the pagoda enhancing order and aesthetic appeal.",
+            "Lack of human figures or social cues, focusing purely on architectural and environmental stimuli."
+          ],
+          "matched_emotions": [],
+          "emotion_weights": {},
+          "mapping_trace": [],
+          "appraisal_notes": [
+            "The pagoda’s architectural novelty and symmetry provide moderate stimulation without inducing discomfort.",
+            "The clear sky and balanced composition contribute to a calm, aesthetically pleasing experience.",
+            "The scene’s historical and cultural context adds depth, enhancing hedonic value without excessive complexity."
+          ],
+          "positive_affect": [
+            "Aesthetic appreciation",
+            "Calm admiration",
+            "Cultural awe"
+          ],
+          "negative_affect": [],
+          "uncertainty": "No discrete emotions were selected as the model does not require them for this analysis."
+        }
+      },
+      "delta": {
+        "valence_delta": 0.1,
+        "arousal_delta": 0.1
+      }
+    },
+    {
+      "image": "/home/u1120250383/zyh/emoskill_infer/pic/235921_Y_027.jpg",
+      "ok": true,
+      "direct_seconds": 6.935,
+      "direct_va": {
+        "skill_id": "direct-va-baseline",
+        "skill_name": "Direct VA Baseline",
+        "valence": 0.7,
+        "arousal": 0.3,
+        "quadrant": "positive calm",
+        "summary": "The scene evokes a serene, aesthetically pleasing ambiance with warm lighting and decorative elements, suggesting comfort and quiet appreciation.",
+        "evidence": [
+          "Teal wall color with soft, muted tone",
+          "Gilded wall sconce emitting warm light",
+          "Ornate tapestry with intricate design",
+          "Wooden shelf with neatly arranged books",
+          "Overall clean, orderly, and curated appearance"
+        ],
+        "matched_emotions": [
+          "serene",
+          "calm",
+          "appreciative",
+          "comfortable"
+        ],
+        "emotion_weights": {},
+        "mapping_trace": [],
+        "appraisal_notes": [],
+        "positive_affect": [],
+        "negative_affect": [],
+        "uncertainty": "Low; visual cues are consistent with a tranquil, aesthetically curated space.",
+        "raw_model_output": {
+          "valence": 0.7,
+          "arousal": 0.3,
+          "quadrant": "positive calm",
+          "summary": "The scene evokes a serene, aesthetically pleasing ambiance with warm lighting and decorative elements, suggesting comfort and quiet appreciation.",
+          "evidence": [
+            "Teal wall color with soft, muted tone",
+            "Gilded wall sconce emitting warm light",
+            "Ornate tapestry with intricate design",
+            "Wooden shelf with neatly arranged books",
+            "Overall clean, orderly, and curated appearance"
+          ],
+          "matched_emotions": [
+            "serene",
+            "calm",
+            "appreciative",
+            "comfortable"
+          ],
+          "uncertainty": "Low; visual cues are consistent with a tranquil, aesthetically curated space."
+        }
+      },
+      "route_seconds": 10.133,
+      "skill_seconds": 13.366,
+      "route": {
+        "skill_id": "berlyne-arousal-pleasure",
+        "reason": "The image features a visually rich, compositionally striking interior with decorative elements like a framed tapestry, a wall sconce, and curated objects on shelves. The scene is aesthetically stimulating due to its symmetry, color harmony, and artistic display, which aligns with Berlyne's model of arousal-pleasure based on novelty, complexity, and aesthetic response. There are no human faces or social interactions to trigger cognitive appraisal or face-based evaluation, and the environment is not restorative or nature-focused. The primary affective dimension is aesthetic pleasure and stimulation, making Berlyne the most appropriate model.",
+        "confidence": 0.95,
+        "observed_cues": [
+          "artwork (tapestry) displayed in an arched niche",
+          "decorative wall sconce",
+          "curated objects on wooden shelves",
+          "symmetrical composition",
+          "rich color palette (teal wall, gold accents)",
+          "visual complexity and aesthetic arrangement"
+        ],
+        "alternative_skill_ids": [
+          "kaplan-art-restoration",
+          "panas-discrete-va"
+        ]
+      },
+      "skill_va": {
+        "skill_id": "berlyne-arousal-pleasure",
+        "skill_name": "Berlyne Arousal-Aesthetic Pleasure",
+        "valence": 0.75,
+        "arousal": 0.4,
+        "quadrant": "positive-arousal",
+        "summary": "The image evokes moderate aesthetic pleasure and low-to-moderate arousal, resulting in a positive-arousal valence-arousal state. The composition is harmonious and rich in visual detail, creating a pleasing, cultured atmosphere without being overwhelming.",
+        "evidence": [
+          "Symmetrical arrangement of arched niches and decorative elements",
+          "Rich color palette (teal wall, gold accents, dark tapestry)",
+          "Artistic tapestry with intricate patterns and symbolic imagery",
+          "Curated objects (books, decorative vase, sconce) suggesting intentional design",
+          "Warm lighting from the wall sconce enhancing ambiance",
+          "Moderate sensory density without visual clutter"
+        ],
+        "matched_emotions": [],
+        "emotion_weights": {},
+        "mapping_trace": [],
+        "appraisal_notes": [
+          "The scene is aesthetically balanced, suggesting pleasure from order and beauty",
+          "Moderate complexity and novelty (tapestry, sconce) stimulate interest without inducing stress",
+          "No ambiguity or surprise elements that would increase arousal or reduce pleasure"
+        ],
+        "positive_affect": [
+          "Aesthetic appreciation",
+          "Cultural appreciation",
+          "Calm satisfaction",
+          "Intellectual curiosity"
+        ],
+        "negative_affect": [],
+        "uncertainty": "No discrete emotions were selected as the skill does not require them. The analysis is grounded in Berlyne's collative variables and aesthetic pleasure model.",
+        "raw_model_output": {
+          "valence": 0.75,
+          "arousal": 0.4,
+          "quadrant": "positive-arousal",
+          "summary": "The image evokes moderate aesthetic pleasure and low-to-moderate arousal, resulting in a positive-arousal valence-arousal state. The composition is harmonious and rich in visual detail, creating a pleasing, cultured atmosphere without being overwhelming.",
+          "evidence": [
+            "Symmetrical arrangement of arched niches and decorative elements",
+            "Rich color palette (teal wall, gold accents, dark tapestry)",
+            "Artistic tapestry with intricate patterns and symbolic imagery",
+            "Curated objects (books, decorative vase, sconce) suggesting intentional design",
+            "Warm lighting from the wall sconce enhancing ambiance",
+            "Moderate sensory density without visual clutter"
+          ],
+          "matched_emotions": [],
+          "emotion_weights": {},
+          "mapping_trace": [],
+          "appraisal_notes": [
+            "The scene is aesthetically balanced, suggesting pleasure from order and beauty",
+            "Moderate complexity and novelty (tapestry, sconce) stimulate interest without inducing stress",
+            "No ambiguity or surprise elements that would increase arousal or reduce pleasure"
+          ],
+          "positive_affect": [
+            "Aesthetic appreciation",
+            "Cultural appreciation",
+            "Calm satisfaction",
+            "Intellectual curiosity"
+          ],
+          "negative_affect": [],
+          "uncertainty": "No discrete emotions were selected as the skill does not require them. The analysis is grounded in Berlyne's collative variables and aesthetic pleasure model."
+        }
+      },
+      "delta": {
+        "valence_delta": 0.05,
+        "arousal_delta": 0.1
+      }
+    },
+    {
+      "image": "/home/u1120250383/zyh/emoskill_infer/pic/235921_Y_031.jpg",
+      "ok": true,
+      "direct_seconds": 5.413,
+      "direct_va": {
+        "skill_id": "direct-va-baseline",
+        "skill_name": "Direct VA Baseline",
+        "valence": 0.8,
+        "arousal": 0.4,
+        "quadrant": "positive-moderate",
+        "summary": "The image conveys a cheerful and uplifting mood with decorative elements, while remaining calm and non-stimulating.",
+        "evidence": [
+          "Pink floral decorations on the building",
+          "Colorful murals on the facade",
+          "Clear blue sky",
+          "People walking calmly in the foreground"
+        ],
+        "matched_emotions": [
+          "joy",
+          "contentment",
+          "serenity"
+        ],
+        "emotion_weights": {},
+        "mapping_trace": [],
+        "appraisal_notes": [],
+        "positive_affect": [],
+        "negative_affect": [],
+        "uncertainty": "Low; visual cues are clear and consistent with positive affect.",
+        "raw_model_output": {
+          "valence": 0.8,
+          "arousal": 0.4,
+          "quadrant": "positive-moderate",
+          "summary": "The image conveys a cheerful and uplifting mood with decorative elements, while remaining calm and non-stimulating.",
+          "evidence": [
+            "Pink floral decorations on the building",
+            "Colorful murals on the facade",
+            "Clear blue sky",
+            "People walking calmly in the foreground"
+          ],
+          "matched_emotions": [
+            "joy",
+            "contentment",
+            "serenity"
+          ],
+          "uncertainty": "Low; visual cues are clear and consistent with positive affect."
+        }
+      },
+      "route_seconds": 8.919,
+      "skill_seconds": 11.716,
+      "route": {
+        "skill_id": "berlyne-arousal-pleasure",
+        "reason": "The image features a building with decorative, colorful murals and large pink floral installations, creating a visually rich, aesthetically stimulating, and somewhat novel scene. The focus is on the architectural design and artistic embellishments rather than human facial expressions or social context. This aligns with Berlyne's arousal-aesthetic pleasure model, which evaluates scenes based on aesthetic stimulation, novelty, complexity, and hedonic value. The scene is compositionally striking and designed to evoke visual interest, making it ideal for this skill.",
+        "confidence": 0.95,
+        "observed_cues": [
+          "visual richness from murals and floral decorations",
+          "novelty of artistic installations",
+          "complexity in architectural design and mural composition",
+          "aesthetic stimulation from color and pattern",
+          "lack of human facial expressions or social context"
+        ],
+        "alternative_skill_ids": [
+          "kaplan-art-restoration",
+          "panas-discrete-va"
+        ]
+      },
+      "skill_va": {
+        "skill_id": "berlyne-arousal-pleasure",
+        "skill_name": "Berlyne Arousal-Aesthetic Pleasure",
+        "valence": 0.7,
+        "arousal": 0.6,
+        "quadrant": "positive-arousal",
+        "summary": "The image evokes moderate to high aesthetic pleasure due to its visually rich, colorful, and novel decorative elements, balanced with a sense of order and architectural grandeur. The overall affect is positive and stimulating, fitting the 'positive-arousal' quadrant.",
+        "evidence": [
+          "Large, stylized pink floral installations adding novelty and surprise",
+          "Colorful murals with cartoonish, whimsical designs increasing visual complexity and pleasure",
+          "Contrast between classical architectural structure and modern decorative elements",
+          "Sensory density from varied textures, colors, and shapes",
+          "Compositionally striking with upward-looking perspective enhancing visual interest"
+        ],
+        "matched_emotions": [],
+        "emotion_weights": {},
+        "mapping_trace": [],
+        "appraisal_notes": [
+          "The scene is designed to be aesthetically pleasing and stimulating, likely intended to attract attention and evoke positive affect through novelty and color contrast.",
+          "The balance between classical architecture and playful decorations creates a harmonious yet surprising visual experience."
+        ],
+        "positive_affect": [
+          "Aesthetic pleasure",
+          "Visual interest",
+          "Surprise",
+          "Novelty appreciation"
+        ],
+        "negative_affect": [],
+        "uncertainty": "No negative affect or ambiguity detected; aesthetic judgment is clear and positive.",
+        "raw_model_output": {
+          "valence": 0.7,
+          "arousal": 0.6,
+          "quadrant": "positive-arousal",
+          "summary": "The image evokes moderate to high aesthetic pleasure due to its visually rich, colorful, and novel decorative elements, balanced with a sense of order and architectural grandeur. The overall affect is positive and stimulating, fitting the 'positive-arousal' quadrant.",
+          "evidence": [
+            "Large, stylized pink floral installations adding novelty and surprise",
+            "Colorful murals with cartoonish, whimsical designs increasing visual complexity and pleasure",
+            "Contrast between classical architectural structure and modern decorative elements",
+            "Sensory density from varied textures, colors, and shapes",
+            "Compositionally striking with upward-looking perspective enhancing visual interest"
+          ],
+          "matched_emotions": [],
+          "emotion_weights": {},
+          "mapping_trace": [],
+          "appraisal_notes": [
+            "The scene is designed to be aesthetically pleasing and stimulating, likely intended to attract attention and evoke positive affect through novelty and color contrast.",
+            "The balance between classical architecture and playful decorations creates a harmonious yet surprising visual experience."
+          ],
+          "positive_affect": [
+            "Aesthetic pleasure",
+            "Visual interest",
+            "Surprise",
+            "Novelty appreciation"
+          ],
+          "negative_affect": [],
+          "uncertainty": "No negative affect or ambiguity detected; aesthetic judgment is clear and positive."
+        }
+      },
+      "delta": {
+        "valence_delta": -0.1,
+        "arousal_delta": 0.2
+      }
+    },
+    {
+      "image": "/home/u1120250383/zyh/emoskill_infer/pic/235921_Y_051.jpg",
+      "ok": true,
+      "direct_seconds": 7.0,
+      "direct_va": {
+        "skill_id": "direct-va-baseline",
+        "skill_name": "Direct VA Baseline",
+        "valence": 0.3,
+        "arousal": 0.4,
+        "quadrant": "positive-activated",
+        "summary": "The image evokes mild positive affect due to the cultural significance and aesthetic appeal of the artifact, with moderate arousal from the museum setting and viewer presence.",
+        "evidence": [
+          "The artifact is visually striking with bold facial features and patina, suggesting cultural importance.",
+          "The museum environment with visitors implies engagement and curiosity.",
+          "The lighting highlights the artifact, creating a focused, attentive atmosphere.",
+          "The label and display suggest educational value, contributing to positive valence."
+        ],
+        "matched_emotions": [
+          "curiosity",
+          "awe",
+          "respect",
+          "interest"
+        ],
+        "emotion_weights": {},
+        "mapping_trace": [],
+        "appraisal_notes": [],
+        "positive_affect": [],
+        "negative_affect": [],
+        "uncertainty": "Valence is moderately positive due to cultural appreciation, but could be neutral for viewers unfamiliar with the artifact.",
+        "raw_model_output": {
+          "valence": 0.3,
+          "arousal": 0.4,
+          "quadrant": "positive-activated",
+          "summary": "The image evokes mild positive affect due to the cultural significance and aesthetic appeal of the artifact, with moderate arousal from the museum setting and viewer presence.",
+          "evidence": [
+            "The artifact is visually striking with bold facial features and patina, suggesting cultural importance.",
+            "The museum environment with visitors implies engagement and curiosity.",
+            "The lighting highlights the artifact, creating a focused, attentive atmosphere.",
+            "The label and display suggest educational value, contributing to positive valence."
+          ],
+          "matched_emotions": [
+            "curiosity",
+            "awe",
+            "respect",
+            "interest"
+          ],
+          "uncertainty": "Valence is moderately positive due to cultural appreciation, but could be neutral for viewers unfamiliar with the artifact."
+        }
+      },
+      "route_seconds": 9.067,
+      "skill_seconds": 12.195,
+      "route": {
+        "skill_id": "berlyne-arousal-pleasure",
+        "reason": "The image features an ancient, stylized artifact (a mask) displayed in a museum setting, which is visually striking due to its unusual form, symmetry, and cultural novelty. The scene is compositionally rich with ambient lighting and background visitors, contributing to aesthetic stimulation. The affect is not driven by a human facial expression or social context, but by the artifact’s design, ambiguity, and cultural significance — fitting Berlyne’s arousal-aesthetic pleasure model. The mask’s bold, abstract features and the museum’s curated presentation enhance its novelty and complexity, making it ideal for this skill.",
+        "confidence": 0.95,
+        "observed_cues": [
+          "novelty of artifact",
+          "complexity of facial design",
+          "ambiguity of expression",
+          "aesthetic stimulation from museum display",
+          "compositionally striking presentation"
+        ],
+        "alternative_skill_ids": [
+          "todorov-face-evaluation",
+          "panas-discrete-va"
+        ]
+      },
+      "skill_va": {
+        "skill_id": "berlyne-arousal-pleasure",
+        "skill_name": "Berlyne Arousal-Aesthetic Pleasure",
+        "valence": 0.6,
+        "arousal": 0.7,
+        "quadrant": "positive-arousal",
+        "summary": "The image evokes moderate to high aesthetic pleasure and arousal due to the artifact's striking, novel, and culturally ambiguous design. The museum setting enhances its visual impact, creating a stimulating yet appreciative experience.",
+        "evidence": [
+          "Stylized, abstract mask with bold geometric features (eyes, nose, mouth) creating visual complexity and novelty.",
+          "High contrast between artifact and dark background, enhancing focus and sensory density.",
+          "Ambiguous cultural meaning and symbolic design, inviting interpretation and curiosity.",
+          "Museum display context with ambient lighting and visitors, adding compositional richness and social context without emotional expression.",
+          "Artifact's vertical symmetry and sharp angles create a visually arresting composition."
+        ],
+        "matched_emotions": [],
+        "emotion_weights": {},
+        "mapping_trace": [],
+        "appraisal_notes": [
+          "The artifact's novelty and ambiguity trigger cognitive curiosity and aesthetic appreciation.",
+          "The museum setting frames the artifact as culturally significant, enhancing its perceived value and pleasure.",
+          "The lighting and composition create a focused, immersive experience that increases arousal without inducing discomfort."
+        ],
+        "positive_affect": [
+          "Aesthetic appreciation",
+          "Cognitive curiosity",
+          "Cultural fascination"
+        ],
+        "negative_affect": [],
+        "uncertainty": "No discrete emotions were selected as the model does not include discrete emotion mapping for this skill.",
+        "raw_model_output": {
+          "valence": 0.6,
+          "arousal": 0.7,
+          "quadrant": "positive-arousal",
+          "summary": "The image evokes moderate to high aesthetic pleasure and arousal due to the artifact's striking, novel, and culturally ambiguous design. The museum setting enhances its visual impact, creating a stimulating yet appreciative experience.",
+          "evidence": [
+            "Stylized, abstract mask with bold geometric features (eyes, nose, mouth) creating visual complexity and novelty.",
+            "High contrast between artifact and dark background, enhancing focus and sensory density.",
+            "Ambiguous cultural meaning and symbolic design, inviting interpretation and curiosity.",
+            "Museum display context with ambient lighting and visitors, adding compositional richness and social context without emotional expression.",
+            "Artifact's vertical symmetry and sharp angles create a visually arresting composition."
+          ],
+          "matched_emotions": [],
+          "emotion_weights": {},
+          "mapping_trace": [],
+          "appraisal_notes": [
+            "The artifact's novelty and ambiguity trigger cognitive curiosity and aesthetic appreciation.",
+            "The museum setting frames the artifact as culturally significant, enhancing its perceived value and pleasure.",
+            "The lighting and composition create a focused, immersive experience that increases arousal without inducing discomfort."
+          ],
+          "positive_affect": [
+            "Aesthetic appreciation",
+            "Cognitive curiosity",
+            "Cultural fascination"
+          ],
+          "negative_affect": [],
+          "uncertainty": "No discrete emotions were selected as the model does not include discrete emotion mapping for this skill."
+        }
+      },
+      "delta": {
+        "valence_delta": 0.3,
+        "arousal_delta": 0.3
+      }
+    }
+  ],
+  "elapsed_seconds": 575.697,
+  "ok_count": 13,
+  "summary": "OK images=13/15; elapsed=575.697s; skills=5"
+}
