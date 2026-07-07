@@ -50,6 +50,7 @@ class Qwen25VLClient:
         self.trust_remote_code = trust_remote_code
         self._model = None
         self._processor = None
+        self.last_raw_output_text = ""
 
     def complete_json(
         self,
@@ -95,6 +96,7 @@ class Qwen25VLClient:
             skip_special_tokens=True,
             clean_up_tokenization_spaces=True,
         )[0]
+        self.last_raw_output_text = output_text
         return _extract_json_object(output_text)
 
     def _ensure_loaded(self) -> None:
@@ -183,6 +185,7 @@ class Qwen3VLClient:
         self.trust_remote_code = trust_remote_code
         self._model = None
         self._processor = None
+        self.last_raw_output_text = ""
 
     def complete_json(
         self,
@@ -244,6 +247,7 @@ class Qwen3VLClient:
             skip_special_tokens=True,
             clean_up_tokenization_spaces=False,
         )[0]
+        self.last_raw_output_text = output_text
         return _extract_json_object(output_text)
 
     def _ensure_loaded(self) -> None:
@@ -313,11 +317,14 @@ class StubMultimodalLLMClient:
 
 def _extract_json_object(text: str) -> dict[str, Any]:
     candidate = text.strip()
+    first_error: json.JSONDecodeError | None = None
 
     try:
-        return json.loads(candidate)
+        loaded = json.loads(candidate)
+        if isinstance(loaded, dict):
+            return loaded
     except json.JSONDecodeError as exc:
-        first_error: json.JSONDecodeError | None = exc
+        first_error = exc
 
     for fenced in _iter_fenced_blocks(candidate):
         stripped = fenced.strip()
@@ -340,8 +347,12 @@ def _extract_json_object(text: str) -> dict[str, Any]:
         except json.JSONDecodeError as exc:
             first_error = exc
             continue
-        if isinstance(loaded, dict):
+        if isinstance(loaded, dict) and (index == 0 or _looks_like_top_level_object(loaded)):
             return loaded
+
+    recovered = _recover_partial_json_va_object(candidate)
+    if recovered is not None:
+        return recovered
 
     recovered = _recover_loose_va_object(candidate)
     if recovered is not None:
@@ -358,6 +369,75 @@ def _iter_fenced_blocks(text: str) -> list[str]:
         match.group(1)
         for match in re.finditer(r"```(?:json|JSON)?\s*\n?(.*?)```", text, flags=re.DOTALL)
     ]
+
+
+def _looks_like_top_level_object(value: dict[str, Any]) -> bool:
+    top_level_keys = {
+        "valence_score",
+        "arousal_score",
+        "skill_id",
+        "reason",
+        "confidence",
+        "quadrant",
+        "summary",
+        "evidence",
+        "observed_cues",
+        "alternative_skill_ids",
+    }
+    return bool(top_level_keys.intersection(value.keys()))
+
+
+def _recover_partial_json_va_object(text: str) -> dict[str, Any] | None:
+    valence_score = _json_number_for_key(text, "valence_score")
+    arousal_score = _json_number_for_key(text, "arousal_score")
+    if valence_score is None or arousal_score is None:
+        return None
+
+    return {
+        "valence_score": valence_score,
+        "arousal_score": arousal_score,
+        "skill_id": _json_string_for_key(text, "skill_id") or "",
+        "quadrant": _json_string_for_key(text, "quadrant") or _infer_recovered_quadrant(valence_score, arousal_score),
+        "summary": _json_string_for_key(text, "summary") or _first_nonempty_line(text),
+        "evidence": [],
+        "matched_emotions": [],
+        "emotion_weights": {},
+        "mapping_trace": [],
+        "appraisal_notes": [],
+        "positive_affect": [],
+        "negative_affect": [],
+        "uncertainty": "Recovered from truncated JSON model output; inspect raw_model_output for details.",
+        "_parse_recovery": "partial_json_scores",
+        "_raw_text": text,
+    }
+
+
+def _json_number_for_key(text: str, key: str) -> float | None:
+    match = re.search(
+        rf'"{re.escape(key)}"\s*:\s*([+-]?\d+(?:\.\d+)?)',
+        text,
+        flags=re.IGNORECASE,
+    )
+    if not match:
+        return None
+    try:
+        return float(match.group(1))
+    except ValueError:
+        return None
+
+
+def _json_string_for_key(text: str, key: str) -> str:
+    match = re.search(
+        rf'"{re.escape(key)}"\s*:\s*"((?:\\.|[^"\\])*)"',
+        text,
+        flags=re.DOTALL | re.IGNORECASE,
+    )
+    if not match:
+        return ""
+    try:
+        return json.loads(f'"{match.group(1)}"')
+    except json.JSONDecodeError:
+        return match.group(1)
 
 
 def _recover_loose_va_object(text: str) -> dict[str, Any] | None:
