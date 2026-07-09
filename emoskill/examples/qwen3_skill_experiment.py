@@ -5,6 +5,7 @@ import csv
 import json
 import math
 import os
+import shutil
 import subprocess
 import sys
 import time
@@ -22,11 +23,26 @@ if str(SRC_DIR) not in sys.path:
 from psychology_va import (
     ImageInput,
     ModelOutputParseError,
+    PsychologySkillSpec,
     PsychologyVAPipeline,
     Qwen3VLClient,
+    RouteDecision,
     load_skill_specs_from_directory,
 )
-from psychology_va.prompts import build_analysis_system_prompt, build_analysis_user_prompt
+from psychology_va.prompts import (
+    build_analysis_system_prompt,
+    build_analysis_user_prompt,
+    build_direct_va_system_prompt,
+    build_direct_va_user_prompt,
+    build_full_direct_va_system_prompt,
+    build_full_routing_system_prompt,
+    build_full_skill_analysis_system_prompt,
+    build_routing_system_prompt,
+    build_routing_user_prompt,
+    build_skill_selection_system_prompt,
+    build_skill_selection_user_prompt,
+)
+from psychology_va.schemas import NO_SPECIALIZED_SKILL_ID
 
 
 DEFAULT_MODEL_PATH = "/home/u1120250383/dyp/models/qwen"
@@ -36,7 +52,93 @@ DEFAULT_IAPS_ALBUM_DIR = "/home/u1120250383/dcs/datasets/IAPS/Dataset"
 IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}
 REQUIRED_SKILL_SECTIONS = ("Purpose", "Output Format")
 USE_WHEN_SECTION_NAMES = ("Use When", "Use-When Rules")
-DEFAULT_DIAGNOSTIC_SKILLS = ("berlyne-arousal-pleasure", "panas-discrete-va")
+DEFAULT_DIAGNOSTIC_SKILLS = ("berlyne-arousal-pleasure", "cognitive-appraisal")
+DEFAULT_IAPS_TRACE_CASE_IDS = (
+    "7080",
+    "9000",
+    "4670",
+    "2597",
+    "5870",
+    "5825",
+    "6251",
+    "2220",
+    "4645",
+    "9190",
+    "4574",
+    "5836",
+    "2357",
+    "7004",
+    "2751",
+    "6260",
+)
+
+
+def sanitize_slug(value: str, *, default: str = "dataset") -> str:
+    cleaned = []
+    for char in value.lower():
+        if char.isalnum():
+            cleaned.append(char)
+        elif char in {"-", "_"}:
+            cleaned.append(char)
+        else:
+            cleaned.append("_")
+    slug = "_".join(part for part in "".join(cleaned).split("_") if part)
+    return slug or default
+
+
+def dataset_slug(upload_dir: Path) -> str:
+    normalized = str(upload_dir).replace("\\", "/").lower()
+    if "iaps" in normalized:
+        return "iaps"
+    return sanitize_slug(upload_dir.name or upload_dir.parent.name)
+
+
+def run_mode_slug(args: argparse.Namespace) -> str:
+    if args.diagnose_skill_output:
+        return "skill_diagnostic"
+    if args.full_skill_analysis:
+        return "iaps_full_skill"
+    if args.trace_inference:
+        return "iaps_trace"
+    return "skill_experiment"
+
+
+def run_output_dir(
+    base_output_dir: Path,
+    *,
+    args: argparse.Namespace,
+    upload_dir: Path,
+    images: list[Path],
+    worker_count: int,
+    stamp: str | None = None,
+) -> Path:
+    stamp = stamp or datetime.now().strftime("%Y%m%d_%H%M%S")
+    mode = run_mode_slug(args)
+    slug = f"{stamp}_{mode}_{dataset_slug(upload_dir)}_n{len(images)}_g{worker_count}"
+    return base_output_dir / "runs" / slug
+
+
+def update_latest_outputs(base_output_dir: Path, run_dir: Path, *, mode: str) -> Path:
+    latest_dir = base_output_dir / "latest" / mode
+    latest_dir.mkdir(parents=True, exist_ok=True)
+    for artifact in latest_dir.iterdir():
+        if artifact.is_file():
+            artifact.unlink()
+    for artifact in run_dir.iterdir():
+        if artifact.is_file() and "latest" in artifact.name:
+            shutil.copy2(artifact, latest_dir / artifact.name)
+    (latest_dir / "RUN_DIR.txt").write_text(str(run_dir) + "\n", encoding="utf-8")
+    return latest_dir
+
+
+def attach_output_paths(payload: dict[str, Any], base_output_dir: Path, run_dir: Path, *, mode: str) -> None:
+    payload["output"] = {
+        "layout": "runs/latest",
+        "mode": mode,
+        "base_dir": str(base_output_dir),
+        "run_dir": str(run_dir),
+        "latest_dir": str(base_output_dir / "latest" / mode),
+    }
 
 
 def parse_args() -> argparse.Namespace:
@@ -70,16 +172,51 @@ def parse_args() -> argparse.Namespace:
         help="Text file with one image path per line. Can be repeated.",
     )
     parser.add_argument(
+        "--iaps-case-id",
+        action="append",
+        default=[],
+        help=(
+            "IAPS image id or filename under --album-path/--upload-dir, e.g. 7080 or 7080.jpg. "
+            "Can be repeated; comma/space separated values are also accepted."
+        ),
+    )
+    parser.add_argument(
+        "--iaps-trace-cases",
+        action="store_true",
+        help="Use the default 16 IAPS case ids for detailed inference tracing.",
+    )
+    parser.add_argument(
         "--user-context",
         default="Analyze the image's valence-arousal state and choose the most suitable psychology skill.",
     )
-    parser.add_argument("--max-new-tokens", type=int, default=512)
+    parser.add_argument("--max-new-tokens", type=int, default=None)
+    parser.add_argument(
+        "--full-skill-token-budget",
+        type=int,
+        default=8192,
+        choices=(8192, 16384),
+        help="Default max_new_tokens for full-skill inference when --max-new-tokens is not set.",
+    )
     parser.add_argument("--max-pixels", type=int, default=1003520)
     parser.add_argument("--min-pixels", type=int, default=None)
     parser.add_argument("--device-map", default=os.environ.get("QWEN_DEVICE_MAP", "auto"))
     parser.add_argument("--include-duplicate-skills", action="store_true")
     parser.add_argument("--direct-only", action="store_true")
     parser.add_argument("--routed-only", action="store_true")
+    parser.add_argument(
+        "--multi-skill-candidates",
+        action="store_true",
+        help=(
+            "When routing returns multiple plausible skills, run analysis for up to "
+            "--max-candidate-skills candidates and let the model select the final score."
+        ),
+    )
+    parser.add_argument(
+        "--max-candidate-skills",
+        type=int,
+        default=2,
+        help="Maximum routed candidate skills to analyze when --multi-skill-candidates is enabled.",
+    )
     parser.add_argument(
         "--parallel-gpus",
         default=None,
@@ -110,8 +247,37 @@ def parse_args() -> argparse.Namespace:
         default=[],
         help=(
             "Skill id to force during --diagnose-skill-output. "
-            "Can be repeated. Defaults to berlyne-arousal-pleasure and panas-discrete-va."
+            "Can be repeated. Defaults to berlyne-arousal-pleasure and cognitive-appraisal."
         ),
+    )
+    parser.add_argument(
+        "--trace-inference",
+        action="store_true",
+        help=(
+            "Record detailed direct/routing/skill call traces, including prompts, parsed payloads, "
+            "raw model text, and normalized results."
+        ),
+    )
+    parser.add_argument(
+        "--full-skill-analysis",
+        action="store_true",
+        help=(
+            "Use complete SKILL.md content and long-form structured inference prompts for traced calls. "
+            "This implies --trace-inference."
+        ),
+    )
+    parser.add_argument(
+        "--full-skill-inference",
+        action="store_true",
+        help=(
+            "One-shot mode for the 16 selected IAPS cases: implies --iaps-trace-cases, "
+            "--trace-inference, --full-skill-analysis, and Markdown inference output."
+        ),
+    )
+    parser.add_argument(
+        "--write-inference-markdown",
+        action="store_true",
+        help="Write a readable Markdown file with direct/routing/skill inference and VA scores.",
     )
     parser.add_argument(
         "--dry-run",
@@ -126,6 +292,17 @@ def parse_args() -> argparse.Namespace:
     args = parser.parse_args()
     if args.four_gpu and not args.parallel_gpus:
         args.parallel_gpus = "0,1,2,3"
+    if args.max_candidate_skills <= 0:
+        raise ValueError("--max-candidate-skills must be a positive integer.")
+    if args.full_skill_inference:
+        args.iaps_trace_cases = True
+        args.trace_inference = True
+        args.full_skill_analysis = True
+        args.write_inference_markdown = True
+    if args.full_skill_analysis:
+        args.trace_inference = True
+    if args.max_new_tokens is None:
+        args.max_new_tokens = args.full_skill_token_budget if args.full_skill_analysis else 512
     return args
 
 
@@ -161,6 +338,69 @@ def find_images(upload_dir: Path, explicit_images: list[str], image_lists: list[
         for path in upload_dir.iterdir()
         if path.is_file() and path.suffix.lower() in IMAGE_EXTENSIONS
     )
+
+
+def resolve_experiment_images(args: argparse.Namespace, upload_dir: Path) -> list[Path]:
+    case_ids = collect_iaps_case_ids(args, upload_dir)
+    if case_ids:
+        return resolve_iaps_case_images(upload_dir, case_ids)
+    return find_images(upload_dir, args.image, args.image_list)
+
+
+def collect_iaps_case_ids(args: argparse.Namespace, upload_dir: Path) -> list[str]:
+    case_ids: list[str] = []
+    if args.iaps_trace_cases:
+        case_ids.extend(DEFAULT_IAPS_TRACE_CASE_IDS)
+    for raw_value in args.iaps_case_id:
+        for token in raw_value.replace(",", " ").split():
+            stripped = token.strip()
+            if stripped:
+                case_ids.extend(split_iaps_case_token(upload_dir, stripped))
+
+    seen: set[str] = set()
+    unique_ids: list[str] = []
+    for case_id in case_ids:
+        if case_id not in seen:
+            unique_ids.append(case_id)
+            seen.add(case_id)
+    return unique_ids
+
+
+def split_iaps_case_token(upload_dir: Path, token: str) -> list[str]:
+    clean = token[:-4] if token.lower().endswith(".jpg") else token
+    exact_path = upload_dir / f"{clean}.jpg"
+    if exact_path.exists() or not clean.isdigit() or len(clean) <= 4:
+        return [clean]
+    if len(clean) % 4 == 0:
+        return [clean[index : index + 4] for index in range(0, len(clean), 4)]
+    return [clean]
+
+
+def resolve_iaps_case_images(upload_dir: Path, case_ids: list[str]) -> list[Path]:
+    if not upload_dir.exists():
+        raise FileNotFoundError(f"Upload directory does not exist: {upload_dir}")
+
+    images: list[Path] = []
+    missing: list[str] = []
+    for case_id in case_ids:
+        candidates = [
+            upload_dir / case_id,
+            upload_dir / f"{case_id}.jpg",
+            upload_dir / f"{case_id}.jpeg",
+            upload_dir / f"{case_id}.png",
+        ]
+        found = next((path for path in candidates if path.exists()), None)
+        if found is None:
+            missing.append(case_id)
+        else:
+            images.append(found.resolve())
+
+    if missing:
+        raise FileNotFoundError(
+            "IAPS case image(s) not found under "
+            f"{upload_dir}: {', '.join(missing)}"
+        )
+    return images
 
 
 def load_image_list_entries(image_lists: list[str]) -> list[str]:
@@ -307,6 +547,7 @@ def write_outputs(output_dir: Path, payload: dict[str, Any]) -> tuple[Path, Path
         direct = item.get("direct_va") or {}
         routed = item.get("skill_va") or {}
         route = item.get("route") or {}
+        selection = item.get("skill_selection") or {}
         item_delta = item.get("delta") or {}
         true_va = item.get("true_va") or {}
         direct_error = item.get("direct_error") or {}
@@ -317,7 +558,17 @@ def write_outputs(output_dir: Path, payload: dict[str, Any]) -> tuple[Path, Path
                 "worker_id": item.get("worker_id"),
                 "gpu_id": item.get("gpu_id"),
                 "ok": item.get("ok"),
-                "selected_skill": route.get("skill_id"),
+                "route_primary_skill": route.get("skill_id"),
+                "selected_skill": selection.get("selected_skill_id") or route.get("skill_id"),
+                "candidate_skill_ids": json.dumps(
+                    item.get("candidate_skill_ids")
+                    or route.get("candidate_skill_ids")
+                    or [],
+                    ensure_ascii=False,
+                ),
+                "candidate_skill_count": len(item.get("candidate_skill_analyses") or []),
+                "selection_reason": selection.get("reason", ""),
+                "selection_fallback": selection.get("fallback", ""),
                 "route_confidence": route.get("confidence"),
                 "true_valence": true_va.get("valence"),
                 "true_arousal": true_va.get("arousal"),
@@ -405,6 +656,244 @@ def write_diagnostic_outputs(output_dir: Path, payload: dict[str, Any]) -> tuple
     return json_path, latest_json
 
 
+def write_trace_latest(output_dir: Path, payload: dict[str, Any]) -> Path:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    trace_latest = output_dir / "qwen3_iaps_case_trace_latest.json"
+    body = json.dumps(payload, ensure_ascii=False, indent=2)
+    trace_latest.write_text(body + "\n", encoding="utf-8")
+    return trace_latest
+
+
+def write_full_skill_latest(output_dir: Path, payload: dict[str, Any]) -> Path:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    latest = output_dir / "qwen3_iaps_full_skill_inference_latest.json"
+    body = json.dumps(payload, ensure_ascii=False, indent=2)
+    latest.write_text(body + "\n", encoding="utf-8")
+    return latest
+
+
+def write_inference_markdown(output_dir: Path, payload: dict[str, Any]) -> tuple[Path, Path]:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    prefix = "qwen3_iaps_full_skill_inference" if payload.get("full_skill_analysis") else "qwen3_iaps_case_inference"
+    md_path = output_dir / f"{prefix}_{stamp}.md"
+    latest_md = output_dir / f"{prefix}_latest.md"
+
+    lines = [
+        f"# {prefix}",
+        "",
+        f"- time: {payload.get('time')}",
+        f"- model_path: {payload.get('model_path')}",
+        f"- images: {len(payload.get('results') or [])}",
+        f"- max_new_tokens: {(payload.get('args') or {}).get('max_new_tokens')}",
+        f"- full_skill_analysis: {payload.get('full_skill_analysis')}",
+        "",
+    ]
+
+    for item in payload.get("results", []):
+        image_path = Path(str(item.get("image") or ""))
+        case_label = image_path.name or str(item.get("image") or "<unknown image>")
+        route = item.get("route") or {}
+        lines.extend(
+            [
+                f"## {case_label}",
+                "",
+                f"- image: `{item.get('image')}`",
+                f"- ok: {item.get('ok')}",
+                f"- selected_skill: `{route.get('skill_id', '')}`",
+                f"- route_confidence: {route.get('confidence', '')}",
+                f"- DirectVA: {format_va_for_markdown(item.get('direct_va'))}",
+                f"- SkillVA: {format_va_for_markdown(item.get('skill_va'))}",
+                "",
+            ]
+        )
+        selection = item.get("skill_selection") or {}
+        if selection:
+            lines.extend(
+                [
+                    "### Final skill selection",
+                    "",
+                    f"- selected_skill_id: `{selection.get('selected_skill_id', '')}`",
+                    f"- confidence: {selection.get('confidence', '')}",
+                    f"- fallback: {selection.get('fallback', '')}",
+                    f"- reason: {selection.get('reason', '')}",
+                    "",
+                ]
+            )
+        candidates = item.get("candidate_skill_analyses") or []
+        if candidates:
+            lines.extend(["### Candidate skill analyses", ""])
+            for candidate in candidates:
+                candidate_va = candidate.get("skill_va") or {}
+                raw_output = candidate_va.get("raw_model_output") or {}
+                lines.extend(
+                    [
+                        f"#### {candidate.get('candidate_index', '')}. {candidate.get('skill_id', '')}",
+                        "",
+                        f"- ok: {candidate.get('ok')}",
+                        f"- VA: {format_va_for_markdown(candidate_va)}",
+                        f"- seconds: {candidate.get('seconds', '')}",
+                        "",
+                    ]
+                )
+                if candidate.get("ok"):
+                    lines.extend([render_trace_payload_for_markdown("skill_analysis", {"raw_model_payload": raw_output}), ""])
+                else:
+                    lines.extend([f"{candidate.get('error_type', '')}: {candidate.get('error', '')}", ""])
+        if not item.get("ok"):
+            lines.extend(
+                [
+                    "### Error",
+                    "",
+                    f"{item.get('error_type', '')}: {item.get('error', '')}",
+                    "",
+                ]
+            )
+
+        for step, title in (
+            ("direct_va_baseline", "Direct inference"),
+            ("route_skill", "Routing inference"),
+            ("skill_analysis", "Skill inference"),
+        ):
+            entry = trace_entry(item, step)
+            if not entry:
+                continue
+            lines.extend([f"### {title}", "", trace_stats_for_markdown(entry), ""])
+            payload_text = render_trace_payload_for_markdown(step, entry)
+            lines.extend([payload_text, ""])
+
+    body = "\n".join(lines).rstrip() + "\n"
+    md_path.write_text(body, encoding="utf-8")
+    latest_md.write_text(body, encoding="utf-8")
+    return md_path, latest_md
+
+
+def format_va_for_markdown(result: Any) -> str:
+    if not isinstance(result, dict):
+        return ""
+    valence_score = result.get("valence_score")
+    arousal_score = result.get("arousal_score")
+    valence = result.get("valence")
+    arousal = result.get("arousal")
+    return (
+        f"Vscore={format_number(valence_score)}; "
+        f"Ascore={format_number(arousal_score)}; "
+        f"normV={format_number(valence)}; "
+        f"normA={format_number(arousal)}"
+    )
+
+
+def format_number(value: Any) -> str:
+    if value is None or value == "":
+        return ""
+    try:
+        return f"{float(value):.3f}"
+    except (TypeError, ValueError):
+        return str(value)
+
+
+def trace_entry(item: dict[str, Any], step: str) -> dict[str, Any] | None:
+    for entry in item.get("inference_trace") or []:
+        if entry.get("step") == step:
+            return entry
+    return None
+
+
+def trace_stats_for_markdown(entry: dict[str, Any]) -> str:
+    return (
+        f"`seconds={entry.get('seconds', '')}`, "
+        f"`input_tokens={entry.get('input_tokens', '')}`, "
+        f"`generated_tokens={entry.get('generated_tokens', '')}`, "
+        f"`hit_limit={entry.get('generation_hit_limit', '')}`"
+    )
+
+
+def render_trace_payload_for_markdown(step: str, entry: dict[str, Any]) -> str:
+    payload = entry.get("raw_model_payload")
+    if not isinstance(payload, dict):
+        raw_text = str(entry.get("raw_model_text") or "").strip()
+        return raw_text or "<no model payload>"
+
+    if step == "route_skill":
+        fields = [
+            ("reason", "Final decision"),
+            ("observed_cues", "Observed cues"),
+            ("candidate_skill_ids", "Candidate skills"),
+            ("visual_skill_match", "Visual skill match"),
+            ("selection_reasoning", "Selection reasoning"),
+            ("alternative_skill_ids", "Alternative skills"),
+            ("rejected_alternatives", "Rejected alternatives"),
+            ("uncertainty", "Uncertainty"),
+        ]
+    elif step == "skill_analysis":
+        fields = [
+            ("summary", "Summary"),
+            ("visual_observations", "Visual observations"),
+            ("evidence", "Evidence"),
+            ("skill_constructs_applied", "Skill constructs applied"),
+            ("skill_procedure_trace", "Skill procedure trace"),
+            ("matched_emotions", "Matched emotions"),
+            ("emotion_weights", "Emotion weights"),
+            ("mapping_trace", "Mapping trace"),
+            ("va_mapping_reasoning", "VA mapping reasoning"),
+            ("appraisal_notes", "Appraisal notes"),
+            ("positive_affect", "Positive affect"),
+            ("negative_affect", "Negative affect"),
+            ("uncertainty", "Uncertainty"),
+            ("reasoning_trace", "Reasoning trace"),
+        ]
+    else:
+        fields = [
+            ("summary", "Summary"),
+            ("visual_observations", "Visual observations"),
+            ("evidence", "Evidence"),
+            ("matched_emotions", "Matched emotions"),
+            ("affect_interpretation", "Affect interpretation"),
+            ("va_mapping_reasoning", "VA mapping reasoning"),
+            ("uncertainty", "Uncertainty"),
+            ("reasoning_trace", "Reasoning trace"),
+        ]
+
+    chunks: list[str] = []
+    for key, label in fields:
+        value = payload.get(key)
+        if empty_markdown_value(value):
+            continue
+        chunks.append(f"**{label}:**\n{markdown_value(value)}")
+
+    if chunks:
+        return "\n\n".join(chunks)
+    return "```json\n" + json.dumps(payload, ensure_ascii=False, indent=2) + "\n```"
+
+
+def empty_markdown_value(value: Any) -> bool:
+    return value is None or value == "" or value == [] or value == {}
+
+
+def markdown_value(value: Any) -> str:
+    if isinstance(value, str):
+        return value.strip()
+    if isinstance(value, list):
+        if not value:
+            return ""
+        return "\n".join(f"- {markdown_inline(item)}" for item in value)
+    if isinstance(value, dict):
+        if not value:
+            return ""
+        return "\n".join(f"- {key}: {markdown_inline(nested)}" for key, nested in value.items())
+    return str(value)
+
+
+def markdown_inline(value: Any) -> str:
+    if isinstance(value, str):
+        return value.strip()
+    if isinstance(value, dict):
+        return "; ".join(f"{key}: {markdown_inline(nested)}" for key, nested in value.items())
+    if isinstance(value, list):
+        return ", ".join(markdown_inline(item) for item in value)
+    return str(value)
+
+
 def preview_text(text: str, limit: int = 500) -> str:
     compact = " ".join(text.split())
     if len(compact) <= limit:
@@ -443,8 +932,8 @@ def run_parallel(args: argparse.Namespace) -> int:
     gpu_ids = parse_gpu_ids(args.parallel_gpus)
     project_root = Path(args.project_root).expanduser()
     upload_dir = resolve_upload_dir(args)
-    output_dir = Path(args.output_dir).expanduser()
-    images = find_images(upload_dir, args.image, args.image_list)
+    base_output_dir = Path(args.output_dir).expanduser()
+    images = resolve_experiment_images(args, upload_dir)
     if not images:
         raise FileNotFoundError(f"No images found in {upload_dir}")
     if args.images_per_gpu is not None:
@@ -459,7 +948,15 @@ def run_parallel(args: argparse.Namespace) -> int:
         if shard
     ]
     stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    parallel_dir = output_dir / f"qwen3_skill_experiment_parallel_{stamp}"
+    run_dir = run_output_dir(
+        base_output_dir,
+        args=args,
+        upload_dir=upload_dir,
+        images=images,
+        worker_count=len(active_shards),
+        stamp=stamp,
+    )
+    parallel_dir = run_dir / "workers"
     parallel_dir.mkdir(parents=True, exist_ok=True)
 
     print(
@@ -467,7 +964,8 @@ def run_parallel(args: argparse.Namespace) -> int:
         f"gpus={','.join(gpu_id for _, gpu_id, _ in active_shards)}"
     )
     print(f"Album: {upload_dir}")
-    print(f"Parallel artifacts: {parallel_dir}")
+    print(f"Output run: {run_dir}")
+    print(f"Worker artifacts: {parallel_dir}")
 
     processes: list[dict[str, Any]] = []
     for worker_id, gpu_id, shard in active_shards:
@@ -564,13 +1062,27 @@ def run_parallel(args: argparse.Namespace) -> int:
     if missing_outputs:
         merged_payload["missing_worker_outputs"] = missing_outputs
 
+    mode = run_mode_slug(args)
+    attach_output_paths(merged_payload, base_output_dir, run_dir, mode=mode)
     if args.diagnose_skill_output:
-        json_path, latest_json = write_diagnostic_outputs(output_dir, merged_payload)
+        json_path, latest_json = write_diagnostic_outputs(run_dir, merged_payload)
     else:
-        json_path, latest_json = write_outputs(output_dir, merged_payload)
+        json_path, latest_json = write_outputs(run_dir, merged_payload)
+        if args.trace_inference:
+            trace_latest = write_trace_latest(run_dir, merged_payload)
+            print(f"Trace latest: {trace_latest}")
+            if args.full_skill_analysis:
+                full_skill_latest = write_full_skill_latest(run_dir, merged_payload)
+                print(f"Full-skill latest: {full_skill_latest}")
+            if args.write_inference_markdown:
+                md_path, latest_md = write_inference_markdown(run_dir, merged_payload)
+                print(f"Inference Markdown: {md_path}")
+                print(f"Inference Markdown latest: {latest_md}")
+    latest_dir = update_latest_outputs(base_output_dir, run_dir, mode=mode)
     print(merged_payload["summary"])
     print(f"Merged: {json_path}")
     print(f"Latest: {latest_json}")
+    print(f"Latest dir: {latest_dir}")
     if missing_outputs:
         return 1
     if args.diagnose_skill_output:
@@ -611,6 +1123,8 @@ def build_worker_command(
         str(args.max_pixels),
         "--device-map",
         str(args.device_map),
+        "--max-candidate-skills",
+        str(args.max_candidate_skills),
         "--parallel-worker",
         "--worker-id",
         str(worker_id),
@@ -627,10 +1141,18 @@ def build_worker_command(
         command.append("--direct-only")
     if args.routed_only:
         command.append("--routed-only")
+    if args.multi_skill_candidates:
+        command.append("--multi-skill-candidates")
     if args.diagnose_skill_output:
         command.append("--diagnose-skill-output")
         for skill_id in args.diagnostic_skill:
             command.extend(["--diagnostic-skill", str(skill_id)])
+    if args.trace_inference:
+        command.append("--trace-inference")
+    if args.full_skill_analysis:
+        command.append("--full-skill-analysis")
+    if args.write_inference_markdown:
+        command.append("--write-inference-markdown")
     return command
 
 
@@ -819,11 +1341,22 @@ def run_skill_diagnostic(args: argparse.Namespace) -> int:
     started = time.perf_counter()
     project_root = Path(args.project_root).expanduser()
     upload_dir = resolve_upload_dir(args)
-    output_dir = Path(args.output_dir).expanduser()
+    base_output_dir = Path(args.output_dir).expanduser()
     skills_dir = Path(args.skills_dir).expanduser()
-    images = find_images(upload_dir, args.image, args.image_list)
+    images = resolve_experiment_images(args, upload_dir)
     if not images:
         raise FileNotFoundError(f"No images found in {upload_dir}")
+    output_dir = (
+        base_output_dir
+        if args.parallel_worker
+        else run_output_dir(
+            base_output_dir,
+            args=args,
+            upload_dir=upload_dir,
+            images=images,
+            worker_count=args.worker_count or 1,
+        )
+    )
 
     skill_specs = load_skill_specs_from_directory(
         skills_dir,
@@ -861,6 +1394,7 @@ def run_skill_diagnostic(args: argparse.Namespace) -> int:
     print(f"Diagnostic skills: {', '.join(diagnostic_skill_ids)}")
     print(f"Project root: {project_root}")
     print(f"Upload dir:   {upload_dir}")
+    print(f"Output dir:   {output_dir}")
 
     for image_index, image_path in enumerate(images, start=1):
         image_input = ImageInput(image_path=str(image_path))
@@ -940,7 +1474,13 @@ def run_skill_diagnostic(args: argparse.Namespace) -> int:
         f"Diagnostic OK calls={payload['ok_count']}/{len(payload['results'])}; "
         f"images={len(images)}; elapsed={payload['elapsed_seconds']}s"
     )
+    mode = run_mode_slug(args)
+    if not args.parallel_worker:
+        attach_output_paths(payload, base_output_dir, output_dir, mode=mode)
     json_path, latest_json = write_diagnostic_outputs(output_dir, payload)
+    if not args.parallel_worker:
+        latest_dir = update_latest_outputs(base_output_dir, output_dir, mode=mode)
+        print(f"Latest dir: {latest_dir}")
     print(payload["summary"])
     print(f"Saved: {json_path}")
     print(f"Latest: {latest_json}")
@@ -1045,15 +1585,554 @@ def summarize_diagnostic_results(results: list[dict[str, Any]]) -> dict[str, Any
     return summary
 
 
+def direct_baseline_spec() -> PsychologySkillSpec:
+    return PsychologySkillSpec(
+        skill_id="direct-va-baseline",
+        display_name="Direct VA Baseline",
+        short_description="Direct valence-arousal baseline without named psychology skill routing.",
+        theory_family="direct-va",
+        selection_hints=[],
+        use_when="Use as a baseline for comparison against skill-routed VA analysis.",
+        image_signals=[],
+        va_focus="Directly estimate valence and arousal from visible image cues.",
+        analysis_steps=[],
+    )
+
+
+def traced_complete_json(
+    *,
+    client: Qwen3VLClient,
+    trace: list[dict[str, Any]],
+    step: str,
+    system_prompt: str,
+    user_prompt: str,
+    image_input: ImageInput,
+    extra: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    entry: dict[str, Any] = {
+        "step": step,
+        "system_prompt": system_prompt,
+        "user_prompt": user_prompt,
+        "image_payload": image_input.to_llm_payload(),
+        "system_prompt_chars": len(system_prompt),
+        "user_prompt_chars": len(user_prompt),
+        "max_new_tokens": getattr(client, "max_new_tokens", None),
+    }
+    if extra:
+        entry.update(extra)
+
+    started = time.perf_counter()
+    try:
+        payload = client.complete_json(
+            system_prompt=system_prompt,
+            user_prompt=user_prompt,
+            image_payload=image_input.to_llm_payload(),
+        )
+        entry["seconds"] = round(time.perf_counter() - started, 3)
+        entry["ok"] = True
+        entry["raw_model_text"] = getattr(client, "last_raw_output_text", "")
+        entry["raw_model_payload"] = payload
+        entry["payload_keys"] = list(payload.keys()) if isinstance(payload, dict) else []
+        entry["prompt_chars"] = len(getattr(client, "last_prompt_text", "") or "")
+        entry["input_tokens"] = getattr(client, "last_input_token_count", None)
+        entry["generated_tokens"] = getattr(client, "last_generated_token_count", None)
+        entry["generation_hit_limit"] = getattr(client, "last_generation_hit_limit", False)
+        trace.append(entry)
+        return payload
+    except ModelOutputParseError as exc:
+        entry["seconds"] = round(time.perf_counter() - started, 3)
+        entry["ok"] = False
+        entry["error_type"] = type(exc).__name__
+        entry["error"] = str(exc)
+        entry["raw_model_text"] = exc.raw_text
+        entry["prompt_chars"] = len(getattr(client, "last_prompt_text", "") or "")
+        entry["input_tokens"] = getattr(client, "last_input_token_count", None)
+        entry["generated_tokens"] = getattr(client, "last_generated_token_count", None)
+        entry["generation_hit_limit"] = getattr(client, "last_generation_hit_limit", False)
+        trace.append(entry)
+        raise
+    except Exception as exc:
+        entry["seconds"] = round(time.perf_counter() - started, 3)
+        entry["ok"] = False
+        entry["error_type"] = type(exc).__name__
+        entry["error"] = str(exc)
+        entry["raw_model_text"] = getattr(client, "last_raw_output_text", "")
+        entry["prompt_chars"] = len(getattr(client, "last_prompt_text", "") or "")
+        entry["input_tokens"] = getattr(client, "last_input_token_count", None)
+        entry["generated_tokens"] = getattr(client, "last_generated_token_count", None)
+        entry["generation_hit_limit"] = getattr(client, "last_generation_hit_limit", False)
+        trace.append(entry)
+        raise
+
+
+def candidate_skill_ids_for_route(route: RouteDecision, args: argparse.Namespace) -> list[str]:
+    if route.skill_id == NO_SPECIALIZED_SKILL_ID:
+        return []
+
+    limit = args.max_candidate_skills if args.multi_skill_candidates else 1
+    raw_skill_ids = list(getattr(route, "candidate_skill_ids", []) or [])
+    if not raw_skill_ids:
+        raw_skill_ids = [route.skill_id, *route.alternative_skill_ids]
+
+    deduped: list[str] = []
+    seen: set[str] = set()
+    for skill_id in raw_skill_ids:
+        if not skill_id or skill_id in seen:
+            continue
+        deduped.append(skill_id)
+        seen.add(skill_id)
+    if route.skill_id not in seen:
+        deduped.insert(0, route.skill_id)
+    return deduped[:limit]
+
+
+def no_specialized_skill_selection(
+    route: RouteDecision,
+    direct_result: Any,
+) -> dict[str, Any]:
+    return {
+        "selected_skill_id": NO_SPECIALIZED_SKILL_ID,
+        "reason": route.reason or "No specialized skill strongly matched; using direct VA baseline.",
+        "confidence": route.confidence,
+        "selected_valence_score": getattr(direct_result, "valence_score", None),
+        "selected_arousal_score": getattr(direct_result, "arousal_score", None),
+        "rejected_candidates": [],
+        "fallback": False,
+        "used_direct_va": True,
+    }
+
+
+def analysis_prompts_for_skill(
+    *,
+    args: argparse.Namespace,
+    selected_skill: PsychologySkillSpec,
+    route: RouteDecision,
+) -> tuple[str, str]:
+    analysis_system_prompt = (
+        build_full_skill_analysis_system_prompt(selected_skill)
+        if args.full_skill_analysis
+        else build_analysis_system_prompt(selected_skill)
+    )
+    analysis_user_prompt = build_analysis_user_prompt(
+        skill_id=selected_skill.skill_id,
+        route_reason=route.reason,
+        user_context=args.user_context,
+    )
+    return analysis_system_prompt, analysis_user_prompt
+
+
+def compact_candidate_for_selection(candidate: dict[str, Any]) -> dict[str, Any]:
+    skill_va = candidate.get("skill_va") or {}
+    raw_output = skill_va.get("raw_model_output") or {}
+    return {
+        "skill_id": candidate.get("skill_id"),
+        "ok": candidate.get("ok"),
+        "valence_score": skill_va.get("valence_score"),
+        "arousal_score": skill_va.get("arousal_score"),
+        "valence": skill_va.get("valence"),
+        "arousal": skill_va.get("arousal"),
+        "quadrant": skill_va.get("quadrant"),
+        "summary": raw_output.get("summary") or skill_va.get("summary"),
+        "visual_observations": raw_output.get("visual_observations"),
+        "evidence": raw_output.get("evidence") or skill_va.get("evidence"),
+        "skill_constructs_applied": raw_output.get("skill_constructs_applied"),
+        "skill_procedure_trace": raw_output.get("skill_procedure_trace"),
+        "mapping_trace": raw_output.get("mapping_trace") or skill_va.get("mapping_trace"),
+        "va_mapping_reasoning": raw_output.get("va_mapping_reasoning"),
+        "reasoning_trace": raw_output.get("reasoning_trace"),
+        "uncertainty": raw_output.get("uncertainty") or skill_va.get("uncertainty"),
+    }
+
+
+def successful_candidate_analyses(candidate_analyses: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return [candidate for candidate in candidate_analyses if candidate.get("ok") and candidate.get("skill_va")]
+
+
+def selected_candidate_for_selection(
+    candidate_analyses: list[dict[str, Any]],
+    selection: dict[str, Any],
+) -> dict[str, Any]:
+    selected_skill_id = selection.get("selected_skill_id")
+    for candidate in candidate_analyses:
+        if candidate.get("ok") and candidate.get("skill_id") == selected_skill_id:
+            return candidate
+    for candidate in candidate_analyses:
+        if candidate.get("ok"):
+            return candidate
+    raise ValueError("No successful candidate skill analysis is available.")
+
+
+def normalize_skill_selection_payload(
+    payload: dict[str, Any],
+    successful_candidates: list[dict[str, Any]],
+) -> dict[str, Any]:
+    allowed = {str(candidate["skill_id"]): candidate for candidate in successful_candidates}
+    selected_skill_id = str(
+        payload.get("selected_skill_id")
+        or payload.get("skill_id")
+        or payload.get("selected_skill")
+        or ""
+    ).strip()
+    fallback = False
+    if selected_skill_id not in allowed:
+        selected_skill_id = str(successful_candidates[0]["skill_id"])
+        fallback = True
+
+    selected_candidate = allowed[selected_skill_id]
+    selected_va = selected_candidate.get("skill_va") or {}
+    confidence = payload.get("confidence", 0.5)
+    try:
+        confidence = float(confidence)
+    except (TypeError, ValueError):
+        confidence = 0.5
+    confidence = max(0.0, min(1.0, confidence))
+
+    return {
+        "selected_skill_id": selected_skill_id,
+        "reason": str(payload.get("reason") or "Selected the first valid candidate analysis."),
+        "confidence": confidence,
+        "selected_valence_score": selected_va.get("valence_score"),
+        "selected_arousal_score": selected_va.get("arousal_score"),
+        "selector_valence_score": payload.get("selected_valence_score"),
+        "selector_arousal_score": payload.get("selected_arousal_score"),
+        "rejected_candidates": payload.get("rejected_candidates") or [],
+        "fallback": fallback,
+        "raw_model_payload": payload,
+    }
+
+
+def fallback_skill_selection(
+    successful_candidates: list[dict[str, Any]],
+    *,
+    reason: str,
+    error: Exception | None = None,
+) -> dict[str, Any]:
+    selected = successful_candidates[0]
+    selected_va = selected.get("skill_va") or {}
+    selection = {
+        "selected_skill_id": selected.get("skill_id"),
+        "reason": reason,
+        "confidence": 0.0,
+        "selected_valence_score": selected_va.get("valence_score"),
+        "selected_arousal_score": selected_va.get("arousal_score"),
+        "rejected_candidates": [],
+        "fallback": True,
+    }
+    if error is not None:
+        selection["error_type"] = type(error).__name__
+        selection["error"] = str(error)
+    return selection
+
+
+def select_final_skill_analysis(
+    *,
+    args: argparse.Namespace,
+    client: Qwen3VLClient,
+    image_input: ImageInput,
+    route: RouteDecision,
+    candidate_analyses: list[dict[str, Any]],
+    trace: list[dict[str, Any]] | None = None,
+) -> dict[str, Any]:
+    successful = successful_candidate_analyses(candidate_analyses)
+    if not successful:
+        raise ValueError("No candidate skill analysis succeeded.")
+    if len(successful) == 1:
+        return fallback_skill_selection(
+            successful,
+            reason="Only one candidate skill analysis succeeded; using it as the final score.",
+        )
+
+    candidate_skill_ids = [str(candidate["skill_id"]) for candidate in successful]
+    system_prompt = build_skill_selection_system_prompt(candidate_skill_ids)
+    user_prompt = build_skill_selection_user_prompt(
+        route=route.to_dict(),
+        candidate_analyses=[compact_candidate_for_selection(candidate) for candidate in successful],
+        user_context=args.user_context,
+    )
+    try:
+        if trace is not None:
+            payload = traced_complete_json(
+                client=client,
+                trace=trace,
+                step="skill_final_selection",
+                system_prompt=system_prompt,
+                user_prompt=user_prompt,
+                image_input=image_input,
+                extra={"candidate_skill_ids": candidate_skill_ids},
+            )
+            selection = normalize_skill_selection_payload(payload, successful)
+            trace[-1]["normalized_result"] = selection
+            return selection
+
+        payload, _seconds = timed_call(
+            client.complete_json,
+            system_prompt=system_prompt,
+            user_prompt=user_prompt,
+            image_payload=image_input.to_llm_payload(),
+        )
+        return normalize_skill_selection_payload(payload, successful)
+    except Exception as exc:
+        return fallback_skill_selection(
+            successful,
+            reason="Final skill selector failed; using the first successful routed candidate.",
+            error=exc,
+        )
+
+
+def process_image_with_trace(
+    *,
+    args: argparse.Namespace,
+    client: Qwen3VLClient,
+    pipeline: PsychologyVAPipeline,
+    skill_specs: list[Any],
+    image_path: Path,
+    index: int,
+    total: int,
+    annotations: dict[str, dict[str, float]],
+) -> dict[str, Any]:
+    print(f"[{index}/{total}] {image_path}")
+    item: dict[str, Any] = {
+        "image": str(image_path),
+        "ok": False,
+        "trace_inference": True,
+        "inference_trace": [],
+    }
+    if args.worker_id is not None:
+        item["worker_id"] = args.worker_id
+    true_va = annotations.get(image_path.name)
+    if true_va:
+        item["true_va"] = true_va
+    image_input = ImageInput(image_path=str(image_path))
+
+    try:
+        direct_result = None
+        if not args.routed_only:
+            direct_system_prompt = (
+                build_full_direct_va_system_prompt()
+                if args.full_skill_analysis
+                else build_direct_va_system_prompt()
+            )
+            direct_user_prompt = build_direct_va_user_prompt(args.user_context)
+            direct_payload = traced_complete_json(
+                client=client,
+                trace=item["inference_trace"],
+                step="direct_va_baseline",
+                system_prompt=direct_system_prompt,
+                user_prompt=direct_user_prompt,
+                image_input=image_input,
+            )
+            direct_result = pipeline._normalize_analysis_result(direct_baseline_spec(), direct_payload)
+            direct_trace = item["inference_trace"][-1]
+            direct_trace["normalized_result"] = direct_result.to_dict()
+            item["direct_seconds"] = direct_trace["seconds"]
+            item["direct_va"] = direct_result.to_dict()
+            if true_va:
+                item["direct_error"] = va_error(direct_result.to_dict(), true_va)
+            print(
+                f"  direct: Vscore={direct_result.valence_score:.2f} "
+                f"Ascore={direct_result.arousal_score:.2f} "
+                f"(norm V={direct_result.valence:.3f} A={direct_result.arousal:.3f}) "
+                f"in {direct_trace['seconds']:.3f}s"
+            )
+
+        if not args.direct_only:
+            routing_system_prompt = (
+                build_full_routing_system_prompt(skill_specs)
+                if args.full_skill_analysis
+                else build_routing_system_prompt(skill_specs)
+            )
+            routing_user_prompt = build_routing_user_prompt(args.user_context)
+            route_payload = traced_complete_json(
+                client=client,
+                trace=item["inference_trace"],
+                step="route_skill",
+                system_prompt=routing_system_prompt,
+                user_prompt=routing_user_prompt,
+                image_input=image_input,
+            )
+            route = pipeline._normalize_route_decision(route_payload, user_context=args.user_context)
+            route_trace = item["inference_trace"][-1]
+            route_trace["normalized_result"] = route.to_dict()
+            item["route_seconds"] = route_trace["seconds"]
+            item["route"] = route.to_dict()
+            print(f"  route: {route.skill_id} conf={route.confidence:.2f} in {route_trace['seconds']:.3f}s")
+
+            if route.skill_id == NO_SPECIALIZED_SKILL_ID:
+                if direct_result is None:
+                    direct_system_prompt = (
+                        build_full_direct_va_system_prompt()
+                        if args.full_skill_analysis
+                        else build_direct_va_system_prompt()
+                    )
+                    direct_user_prompt = build_direct_va_user_prompt(args.user_context)
+                    direct_payload = traced_complete_json(
+                        client=client,
+                        trace=item["inference_trace"],
+                        step="direct_va_baseline_for_no_specialized_skill",
+                        system_prompt=direct_system_prompt,
+                        user_prompt=direct_user_prompt,
+                        image_input=image_input,
+                    )
+                    direct_result = pipeline._normalize_analysis_result(direct_baseline_spec(), direct_payload)
+                    direct_trace = item["inference_trace"][-1]
+                    direct_trace["normalized_result"] = direct_result.to_dict()
+                    item["direct_seconds"] = direct_trace["seconds"]
+                    item["direct_va"] = direct_result.to_dict()
+                    if true_va:
+                        item["direct_error"] = va_error(direct_result.to_dict(), true_va)
+
+                item["candidate_skill_ids"] = []
+                item["candidate_skill_analyses"] = []
+                selection = no_specialized_skill_selection(route, direct_result)
+                item["skill_selection"] = selection
+                item["skill_seconds"] = 0.0
+                item["total_candidate_skill_seconds"] = 0.0
+                item["skill_va"] = direct_result.to_dict()
+                if true_va:
+                    item["skill_error"] = va_error(item["skill_va"], true_va)
+                item["delta"] = delta(item["skill_va"], direct_result.to_dict())
+                print(
+                    f"  selected: {NO_SPECIALIZED_SKILL_ID} "
+                    f"Vscore={item['skill_va'].get('valence_score'):.2f} "
+                    f"Ascore={item['skill_va'].get('arousal_score'):.2f} "
+                    "using direct VA baseline"
+                )
+                item["ok"] = True
+                return item
+
+            candidate_skill_ids = candidate_skill_ids_for_route(route, args)
+            item["candidate_skill_ids"] = candidate_skill_ids
+            item["candidate_skill_analyses"] = []
+            print(f"  candidates: {', '.join(candidate_skill_ids)}")
+
+            for candidate_index, candidate_skill_id in enumerate(candidate_skill_ids, start=1):
+                selected_skill = pipeline.skill_map[candidate_skill_id]
+                analysis_system_prompt, analysis_user_prompt = analysis_prompts_for_skill(
+                    args=args,
+                    selected_skill=selected_skill,
+                    route=route,
+                )
+                candidate_item: dict[str, Any] = {
+                    "skill_id": candidate_skill_id,
+                    "candidate_index": candidate_index,
+                    "ok": False,
+                }
+                step_name = "skill_analysis" if len(candidate_skill_ids) == 1 else "candidate_skill_analysis"
+                try:
+                    skill_payload = traced_complete_json(
+                        client=client,
+                        trace=item["inference_trace"],
+                        step=step_name,
+                        system_prompt=analysis_system_prompt,
+                        user_prompt=analysis_user_prompt,
+                        image_input=image_input,
+                        extra={
+                            "skill_id": candidate_skill_id,
+                            "candidate_index": candidate_index,
+                            "route_reason": route.reason,
+                        },
+                    )
+                    skill_result = pipeline._normalize_analysis_result(selected_skill, skill_payload)
+                    skill_trace = item["inference_trace"][-1]
+                    skill_trace["normalized_result"] = skill_result.to_dict()
+                    candidate_item.update(
+                        {
+                            "ok": True,
+                            "seconds": skill_trace["seconds"],
+                            "skill_va": skill_result.to_dict(),
+                            "trace_step": step_name,
+                        }
+                    )
+                    raw_output = candidate_item["skill_va"].get("raw_model_output") or {}
+                    if raw_output.get("_parse_recovery"):
+                        candidate_item["parse_recovered"] = raw_output["_parse_recovery"]
+                    print(
+                        f"  candidate {candidate_index}/{len(candidate_skill_ids)} "
+                        f"{candidate_skill_id}: Vscore={skill_result.valence_score:.2f} "
+                        f"Ascore={skill_result.arousal_score:.2f} "
+                        f"(norm V={skill_result.valence:.3f} A={skill_result.arousal:.3f}) "
+                        f"in {skill_trace['seconds']:.3f}s"
+                    )
+                except Exception as exc:
+                    candidate_item.update(
+                        {
+                            "ok": False,
+                            "error_type": type(exc).__name__,
+                            "error": str(exc),
+                            "traceback": traceback.format_exc(),
+                            "raw_error_output": getattr(client, "last_raw_output_text", ""),
+                        }
+                    )
+                    print(f"  candidate {candidate_skill_id}: ERROR {type(exc).__name__}: {exc}")
+                item["candidate_skill_analyses"].append(candidate_item)
+
+            selection = select_final_skill_analysis(
+                args=args,
+                client=client,
+                image_input=image_input,
+                route=route,
+                candidate_analyses=item["candidate_skill_analyses"],
+                trace=item["inference_trace"],
+            )
+            item["skill_selection"] = selection
+            selected_candidate = selected_candidate_for_selection(item["candidate_skill_analyses"], selection)
+            item["skill_seconds"] = selected_candidate.get("seconds")
+            item["total_candidate_skill_seconds"] = round(
+                sum(float(candidate.get("seconds") or 0) for candidate in item["candidate_skill_analyses"]),
+                3,
+            )
+            item["skill_va"] = selected_candidate["skill_va"]
+            if true_va:
+                item["skill_error"] = va_error(item["skill_va"], true_va)
+            raw_output = item["skill_va"].get("raw_model_output") or {}
+            if raw_output.get("_parse_recovery"):
+                item["parse_recovered"] = raw_output["_parse_recovery"]
+                print(f"  parse: recovered from {raw_output['_parse_recovery']}")
+            print(
+                f"  selected: {selection.get('selected_skill_id')} "
+                f"Vscore={item['skill_va'].get('valence_score'):.2f} "
+                f"Ascore={item['skill_va'].get('arousal_score'):.2f} "
+                f"reason={preview_text(str(selection.get('reason') or ''), limit=180)}"
+            )
+            if direct_result is not None:
+                item["delta"] = delta(item["skill_va"], direct_result.to_dict())
+
+        item["ok"] = True
+    except Exception as exc:
+        item["error_type"] = type(exc).__name__
+        item["error"] = str(exc)
+        if isinstance(exc, ModelOutputParseError):
+            item["raw_error_output"] = exc.raw_text
+        else:
+            last_raw_output = getattr(client, "last_raw_output_text", "")
+            if last_raw_output:
+                item["raw_error_output"] = last_raw_output
+        item["traceback"] = traceback.format_exc()
+        print(f"  ERROR: {type(exc).__name__}: {exc}")
+
+    return item
+
+
 def run_single(args: argparse.Namespace) -> int:
     started = time.perf_counter()
     project_root = Path(args.project_root).expanduser()
     upload_dir = resolve_upload_dir(args)
-    output_dir = Path(args.output_dir).expanduser()
+    base_output_dir = Path(args.output_dir).expanduser()
     skills_dir = Path(args.skills_dir).expanduser()
-    images = find_images(upload_dir, args.image, args.image_list)
+    images = resolve_experiment_images(args, upload_dir)
     if not images:
         raise FileNotFoundError(f"No images found in {upload_dir}")
+    output_dir = (
+        base_output_dir
+        if args.parallel_worker
+        else run_output_dir(
+            base_output_dir,
+            args=args,
+            upload_dir=upload_dir,
+            images=images,
+            worker_count=args.worker_count or 1,
+        )
+    )
     annotations_path = resolve_annotations_path(args, upload_dir)
     annotations = load_annotations(annotations_path)
 
@@ -1066,7 +2145,8 @@ def run_single(args: argparse.Namespace) -> int:
         print(f"Project root: {project_root}")
         print(f"Skills dir:   {skills_dir}")
         print(f"Upload dir:   {upload_dir}")
-        print(f"Output dir:   {output_dir}")
+        print(f"Output base:  {base_output_dir}")
+        print(f"Output run:   {output_dir}")
         print(f"Annotations:  {annotations_path if annotations_path else '<none>'} ({len(annotations)})")
         print(f"Images:       {len(images)}")
         for image_path in images:
@@ -1122,6 +2202,10 @@ def run_single(args: argparse.Namespace) -> int:
             for spec in skill_specs
         ],
         "skill_format_check": validate_skill_markdown(skill_specs),
+        "trace_inference": args.trace_inference,
+        "full_skill_analysis": args.full_skill_analysis,
+        "write_inference_markdown": args.write_inference_markdown,
+        "iaps_trace_case_ids": collect_iaps_case_ids(args, upload_dir),
         "images": [str(path) for path in images],
         "results": [],
     }
@@ -1132,6 +2216,21 @@ def run_single(args: argparse.Namespace) -> int:
         print(f"Annotations: {annotations_path} ({len(annotations)})")
 
     for index, image_path in enumerate(images, start=1):
+        if args.trace_inference:
+            payload["results"].append(
+                process_image_with_trace(
+                    args=args,
+                    client=client,
+                    pipeline=pipeline,
+                    skill_specs=skill_specs,
+                    image_path=image_path,
+                    index=index,
+                    total=len(images),
+                    annotations=annotations,
+                )
+            )
+            continue
+
         print(f"[{index}/{len(images)}] {image_path}")
         item: dict[str, Any] = {"image": str(image_path), "ok": False}
         true_va = annotations.get(image_path.name)
@@ -1169,28 +2268,120 @@ def run_single(args: argparse.Namespace) -> int:
                     f"  route: {route.skill_id} conf={route.confidence:.2f} in {route_seconds:.3f}s"
                 )
 
-                skill_result, skill_seconds = timed_call(
-                    pipeline.analyze_with_route,
+                if route.skill_id == NO_SPECIALIZED_SKILL_ID:
+                    if direct_result is None:
+                        direct_result, direct_seconds = timed_call(
+                            pipeline.analyze_direct,
+                            image_input=image_input,
+                            user_context=args.user_context,
+                        )
+                        item["direct_seconds"] = round(direct_seconds, 3)
+                        item["direct_va"] = direct_result.to_dict()
+                        if true_va:
+                            item["direct_error"] = va_error(direct_result.to_dict(), true_va)
+
+                    item["candidate_skill_ids"] = []
+                    item["candidate_skill_analyses"] = []
+                    selection = no_specialized_skill_selection(route, direct_result)
+                    item["skill_selection"] = selection
+                    item["skill_seconds"] = 0.0
+                    item["total_candidate_skill_seconds"] = 0.0
+                    item["skill_va"] = direct_result.to_dict()
+                    if true_va:
+                        item["skill_error"] = va_error(item["skill_va"], true_va)
+                    item["delta"] = delta(item["skill_va"], direct_result.to_dict())
+                    print(
+                        f"  selected: {NO_SPECIALIZED_SKILL_ID} "
+                        f"Vscore={item['skill_va'].get('valence_score'):.2f} "
+                        f"Ascore={item['skill_va'].get('arousal_score'):.2f} "
+                        "using direct VA baseline"
+                    )
+                    item["ok"] = True
+                    payload["results"].append(item)
+                    continue
+
+                candidate_skill_ids = candidate_skill_ids_for_route(route, args)
+                item["candidate_skill_ids"] = candidate_skill_ids
+                item["candidate_skill_analyses"] = []
+                print(f"  candidates: {', '.join(candidate_skill_ids)}")
+
+                for candidate_index, candidate_skill_id in enumerate(candidate_skill_ids, start=1):
+                    candidate_route = RouteDecision(
+                        skill_id=candidate_skill_id,
+                        reason=route.reason,
+                        confidence=route.confidence,
+                        observed_cues=route.observed_cues,
+                        alternative_skill_ids=route.alternative_skill_ids,
+                        candidate_skill_ids=route.candidate_skill_ids,
+                    )
+                    candidate_item: dict[str, Any] = {
+                        "skill_id": candidate_skill_id,
+                        "candidate_index": candidate_index,
+                        "ok": False,
+                    }
+                    try:
+                        skill_result, skill_seconds = timed_call(
+                            pipeline.analyze_with_route,
+                            image_input=image_input,
+                            route=candidate_route,
+                            user_context=args.user_context,
+                        )
+                        candidate_item.update(
+                            {
+                                "ok": True,
+                                "seconds": round(skill_seconds, 3),
+                                "skill_va": skill_result.to_dict(),
+                            }
+                        )
+                        print(
+                            f"  candidate {candidate_index}/{len(candidate_skill_ids)} "
+                            f"{candidate_skill_id}: Vscore={skill_result.valence_score:.2f} "
+                            f"Ascore={skill_result.arousal_score:.2f} "
+                            f"(norm V={skill_result.valence:.3f} A={skill_result.arousal:.3f}) "
+                            f"in {skill_seconds:.3f}s"
+                        )
+                    except Exception as exc:
+                        candidate_item.update(
+                            {
+                                "ok": False,
+                                "error_type": type(exc).__name__,
+                                "error": str(exc),
+                                "traceback": traceback.format_exc(),
+                                "raw_error_output": getattr(client, "last_raw_output_text", ""),
+                            }
+                        )
+                        print(f"  candidate {candidate_skill_id}: ERROR {type(exc).__name__}: {exc}")
+                    item["candidate_skill_analyses"].append(candidate_item)
+
+                selection = select_final_skill_analysis(
+                    args=args,
+                    client=client,
                     image_input=image_input,
                     route=route,
-                    user_context=args.user_context,
+                    candidate_analyses=item["candidate_skill_analyses"],
                 )
-                item["skill_seconds"] = round(skill_seconds, 3)
-                item["skill_va"] = skill_result.to_dict()
+                item["skill_selection"] = selection
+                selected_candidate = selected_candidate_for_selection(item["candidate_skill_analyses"], selection)
+                item["skill_seconds"] = selected_candidate.get("seconds")
+                item["total_candidate_skill_seconds"] = round(
+                    sum(float(candidate.get("seconds") or 0) for candidate in item["candidate_skill_analyses"]),
+                    3,
+                )
+                item["skill_va"] = selected_candidate["skill_va"]
                 if true_va:
-                    item["skill_error"] = va_error(skill_result.to_dict(), true_va)
+                    item["skill_error"] = va_error(item["skill_va"], true_va)
                 raw_output = item["skill_va"].get("raw_model_output") or {}
                 if raw_output.get("_parse_recovery"):
                     item["parse_recovered"] = raw_output["_parse_recovery"]
                     print(f"  parse: recovered from {raw_output['_parse_recovery']}")
                 print(
-                    f"  skill:  Vscore={skill_result.valence_score:.2f} "
-                    f"Ascore={skill_result.arousal_score:.2f} "
-                    f"(norm V={skill_result.valence:.3f} A={skill_result.arousal:.3f}) "
-                    f"in {skill_seconds:.3f}s"
+                    f"  selected: {selection.get('selected_skill_id')} "
+                    f"Vscore={item['skill_va'].get('valence_score'):.2f} "
+                    f"Ascore={item['skill_va'].get('arousal_score'):.2f} "
+                    f"reason={preview_text(str(selection.get('reason') or ''), limit=180)}"
                 )
                 if direct_result is not None:
-                    item["delta"] = delta(skill_result.to_dict(), direct_result.to_dict())
+                    item["delta"] = delta(item["skill_va"], direct_result.to_dict())
 
             item["ok"] = True
         except Exception as exc:
@@ -1214,7 +2405,23 @@ def run_single(args: argparse.Namespace) -> int:
         f"OK images={payload['ok_count']}/{len(images)}; "
         f"elapsed={payload['elapsed_seconds']}s; skills={len(skill_specs)}"
     )
+    mode = run_mode_slug(args)
+    if not args.parallel_worker:
+        attach_output_paths(payload, base_output_dir, output_dir, mode=mode)
     json_path, latest_json = write_outputs(output_dir, payload)
+    if args.trace_inference:
+        trace_latest = write_trace_latest(output_dir, payload)
+        print(f"Trace latest: {trace_latest}")
+        if args.full_skill_analysis:
+            full_skill_latest = write_full_skill_latest(output_dir, payload)
+            print(f"Full-skill latest: {full_skill_latest}")
+        if args.write_inference_markdown:
+            md_path, latest_md = write_inference_markdown(output_dir, payload)
+            print(f"Inference Markdown: {md_path}")
+            print(f"Inference Markdown latest: {latest_md}")
+    if not args.parallel_worker:
+        latest_dir = update_latest_outputs(base_output_dir, output_dir, mode=mode)
+        print(f"Latest dir: {latest_dir}")
     print(payload["summary"])
     print(f"Saved: {json_path}")
     print(f"Latest: {latest_json}")

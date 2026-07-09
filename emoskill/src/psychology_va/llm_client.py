@@ -51,6 +51,10 @@ class Qwen25VLClient:
         self._model = None
         self._processor = None
         self.last_raw_output_text = ""
+        self.last_prompt_text = ""
+        self.last_input_token_count: int | None = None
+        self.last_generated_token_count: int | None = None
+        self.last_generation_hit_limit = False
 
     def complete_json(
         self,
@@ -78,12 +82,14 @@ class Qwen25VLClient:
             tokenize=False,
             add_generation_prompt=True,
         )
+        self.last_prompt_text = prompt_text
         inputs = self._processor(
             text=[prompt_text],
             images=[image],
             padding=True,
             return_tensors="pt",
         )
+        self.last_input_token_count = int(inputs.input_ids.shape[1])
         inputs = inputs.to(self._model.device)
 
         output_ids = self._model.generate(
@@ -91,6 +97,8 @@ class Qwen25VLClient:
             max_new_tokens=self.max_new_tokens,
         )
         generated_ids = output_ids[:, inputs.input_ids.shape[1] :]
+        self.last_generated_token_count = int(generated_ids.shape[1])
+        self.last_generation_hit_limit = self.last_generated_token_count >= self.max_new_tokens
         output_text = self._processor.batch_decode(
             generated_ids,
             skip_special_tokens=True,
@@ -186,6 +194,10 @@ class Qwen3VLClient:
         self._model = None
         self._processor = None
         self.last_raw_output_text = ""
+        self.last_prompt_text = ""
+        self.last_input_token_count: int | None = None
+        self.last_generated_token_count: int | None = None
+        self.last_generation_hit_limit = False
 
     def complete_json(
         self,
@@ -219,6 +231,7 @@ class Qwen3VLClient:
             tokenize=False,
             add_generation_prompt=True,
         )
+        self.last_prompt_text = prompt_text
         image_inputs, video_inputs = process_vision_info(messages)
         inputs = self._processor(
             text=[prompt_text],
@@ -227,6 +240,7 @@ class Qwen3VLClient:
             padding=True,
             return_tensors="pt",
         )
+        self.last_input_token_count = int(inputs.input_ids.shape[1])
         inputs = inputs.to(_get_input_device(self._model))
 
         generate_kwargs: dict[str, Any] = {
@@ -242,6 +256,8 @@ class Qwen3VLClient:
             output_ids_item[len(input_ids_item) :]
             for input_ids_item, output_ids_item in zip(inputs.input_ids, output_ids)
         ]
+        self.last_generated_token_count = int(generated_ids[0].shape[0]) if generated_ids else 0
+        self.last_generation_hit_limit = self.last_generated_token_count >= self.max_new_tokens
         output_text = self._processor.batch_decode(
             generated_ids,
             skip_special_tokens=True,

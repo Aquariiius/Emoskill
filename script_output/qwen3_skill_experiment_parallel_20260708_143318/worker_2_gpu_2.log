@@ -1,0 +1,52 @@
+Loaded 9 skill(s) from SKILL.md:
+  - awe: Awe (hints=4, steps=6, ok)
+  - baby-schema: Baby Schema / Kindchenschema (hints=4, steps=6, ok)
+  - berlyne-arousal-pleasure: Berlyne Arousal-Aesthetic Pleasure (hints=4, steps=6, ok)
+  - cognitive-appraisal: Cognitive Appraisal (hints=4, steps=6, ok)
+  - emotional-body-language: Emotional Body Language (hints=4, steps=7, ok)
+  - evolved-fear-module: Evolved Fear Module (hints=4, steps=6, ok)
+  - kaplan-art-restoration: Kaplan Attention Restoration Theory (hints=4, steps=6, ok)
+  - pathogen-disgust: Pathogen Disgust (hints=4, steps=6, ok)
+  - todorov-face-evaluation: Todorov Face Evaluation (hints=2, steps=7, ok)
+Images: 4
+[1/4] /home/u1120250383/dcs/datasets/IAPS/Dataset/4670.jpg
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:02,  1.03it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:01<00:01,  1.00it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:03<00:01,  1.02s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.15it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.09it/s]
+`generation_config` default values have been modified to match model-specific defaults: {'do_sample': True}. If this is not desired, please set these values explicitly.
+  direct: Vscore=5.50 Ascore=5.50 (norm V=0.500 A=0.500) in 115.061s
+  route: cognitive-appraisal conf=0.95 in 31.769s
+  candidates: cognitive-appraisal, emotional-body-language, todorov-face-evaluation
+  candidate 1/3 cognitive-appraisal: Vscore=8.00 Ascore=7.50 (norm V=0.778 A=0.722) in 55.744s
+  candidate 2/3 emotional-body-language: Vscore=7.00 Ascore=7.00 (norm V=0.667 A=0.667) in 50.048s
+  candidate 3/3 todorov-face-evaluation: Vscore=5.50 Ascore=5.50 (norm V=0.500 A=0.500) in 27.357s
+  selected: cognitive-appraisal Vscore=8.00 Ascore=7.50 reason=The image depicts an intimate, ambiguous human interaction where affect is inferred from context and implied emotional states rather than direct expression or posture. The cognitiv... [truncated]
+[2/4] /home/u1120250383/dcs/datasets/IAPS/Dataset/6251.jpg
+  direct: Vscore=3.50 Ascore=8.50 (norm V=0.278 A=0.833) in 17.214s
+  route: cognitive-appraisal conf=0.95 in 30.920s
+  candidates: cognitive-appraisal, emotional-body-language, todorov-face-evaluation
+  candidate 1/3 cognitive-appraisal: Vscore=3.50 Ascore=8.50 (norm V=0.278 A=0.833) in 53.441s
+  candidate 2/3 emotional-body-language: Vscore=3.50 Ascore=8.50 (norm V=0.278 A=0.833) in 52.058s
+  candidate 3/3 todorov-face-evaluation: Vscore=3.00 Ascore=8.50 (norm V=0.222 A=0.833) in 35.598s
+  selected: cognitive-appraisal Vscore=3.50 Ascore=8.50 reason=The image's ambiguous facial expression and threatening gesture require situational appraisal to determine the emotion, which is the core function of cognitive-appraisal. The other... [truncated]
+[3/4] /home/u1120250383/dcs/datasets/IAPS/Dataset/4574.jpg
+  direct: Vscore=9.00 Ascore=6.50 (norm V=0.889 A=0.611) in 15.308s
+  route: todorov-face-evaluation conf=0.98 in 33.301s
+  candidates: todorov-face-evaluation, cognitive-appraisal, berlyne-arousal-pleasure
+  candidate 1/3 todorov-face-evaluation: Vscore=9.00 Ascore=7.00 (norm V=0.889 A=0.667) in 37.999s
+  candidate 2/3 cognitive-appraisal: Vscore=9.00 Ascore=5.50 (norm V=0.889 A=0.500) in 58.173s
+  candidate 3/3 berlyne-arousal-pleasure: Vscore=8.50 Ascore=6.50 (norm V=0.833 A=0.611) in 47.141s
+  selected: cognitive-appraisal Vscore=9.00 Ascore=5.50 reason=The image clearly depicts a positive emotional state (genuine smile, relaxed posture) that is best interpreted through a cognitive-appraisal lens, which evaluates the context and m... [truncated]
+[4/4] /home/u1120250383/dcs/datasets/IAPS/Dataset/2751.jpg
+  direct: Vscore=3.00 Ascore=6.50 (norm V=0.222 A=0.611) in 17.632s
+  route: cognitive-appraisal conf=0.95 in 30.223s
+  candidates: cognitive-appraisal, emotional-body-language, todorov-face-evaluation
+  candidate 1/3 cognitive-appraisal: Vscore=3.00 Ascore=6.50 (norm V=0.222 A=0.611) in 64.093s
+  candidate 2/3 emotional-body-language: Vscore=3.50 Ascore=4.50 (norm V=0.278 A=0.389) in 47.964s
+  candidate 3/3 todorov-face-evaluation: Vscore=3.00 Ascore=4.50 (norm V=0.222 A=0.389) in 32.864s
+  selected: cognitive-appraisal Vscore=3.00 Ascore=6.50 reason=The image depicts a high-stakes, ambiguous situational context involving impaired driving, which requires inference about intent, responsibility, and potential consequences. Cognit... [truncated]
+Trace latest: /home/u1120250383/dcs/Emoskill/script_output/qwen3_skill_experiment_parallel_20260708_143318/worker_2_gpu_2/qwen3_iaps_case_trace_latest.json
+Full-skill latest: /home/u1120250383/dcs/Emoskill/script_output/qwen3_skill_experiment_parallel_20260708_143318/worker_2_gpu_2/qwen3_iaps_full_skill_inference_latest.json
+Inference Markdown: /home/u1120250383/dcs/Emoskill/script_output/qwen3_skill_experiment_parallel_20260708_143318/worker_2_gpu_2/qwen3_iaps_full_skill_inference_20260708_144822.md
+Inference Markdown latest: /home/u1120250383/dcs/Emoskill/script_output/qwen3_skill_experiment_parallel_20260708_143318/worker_2_gpu_2/qwen3_iaps_full_skill_inference_latest.md
+OK images=4/4; elapsed=903.107s; skills=9
+Saved: /home/u1120250383/dcs/Emoskill/script_output/qwen3_skill_experiment_parallel_20260708_143318/worker_2_gpu_2/qwen3_skill_experiment_20260708_144822.json
+Latest: /home/u1120250383/dcs/Emoskill/script_output/qwen3_skill_experiment_parallel_20260708_143318/worker_2_gpu_2/qwen3_skill_experiment_latest.json

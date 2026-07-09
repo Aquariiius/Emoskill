@@ -3,7 +3,6 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
-from .mapping_tables import PANAS_DISCRETE_VA_MAP
 from .schemas import PsychologySkillSpec
 
 
@@ -73,6 +72,7 @@ def _build_spec_from_markdown(
     output_guidance = _section_any(body, ["Output Guidance", "Output Format"])
     reasoning_steps = _section(body, "Reasoning Steps")
     purpose = _section(body, "Purpose")
+    routing_card_section = _section(body, "Routing Card")
 
     selection_hints = _bullets(use_when_section) or _ordered_items(use_when_section)
     if not selection_hints and description:
@@ -88,17 +88,9 @@ def _build_spec_from_markdown(
 
     va_focus = _squash(reasoning_principle) or _squash(purpose) or description
     use_when = _squash(use_when_section) or description
-
-    discrete_emotions: list[str] = []
-    emotion_va_map: dict[str, dict[str, float]] = {}
-    aggregation_rule = ""
-    if "panas" in skill_id.lower():
-        discrete_emotions = list(PANAS_DISCRETE_VA_MAP.keys())
-        emotion_va_map = PANAS_DISCRETE_VA_MAP
-        aggregation_rule = (
-            "Use a weighted average over the configured PANAS emotion->VA map. "
-            "Prefer 2 to 5 matched emotions and normalize weights to sum to 1."
-        )
+    routing_card = _parse_routing_card(routing_card_section)
+    if not routing_card:
+        routing_card = _fallback_routing_card(selection_hints, image_signals, use_when, analysis_steps)
 
     return PsychologySkillSpec(
         skill_id=skill_id,
@@ -110,9 +102,7 @@ def _build_spec_from_markdown(
         image_signals=image_signals,
         va_focus=va_focus,
         analysis_steps=analysis_steps,
-        discrete_emotions=discrete_emotions,
-        emotion_va_map=emotion_va_map,
-        aggregation_rule=aggregation_rule,
+        routing_card=routing_card,
         source_path=str(skill_file),
         raw_skill_markdown=markdown,
     )
@@ -179,6 +169,56 @@ def _ordered_items(text: str) -> list[str]:
     return items
 
 
+def _parse_routing_card(text: str) -> dict[str, list[str]]:
+    label_map = {
+        "USE WHEN": "use_when",
+        "DO NOT USE WHEN": "do_not_use_when",
+        "DO-NOT-USE-WHEN": "do_not_use_when",
+        "VISUAL TRIGGERS": "visual_triggers",
+        "NEAR-MISS BOUNDARIES": "near_miss_boundaries",
+        "ROUTING PRIORITY": "routing_priority",
+    }
+    card: dict[str, list[str]] = {}
+    current_key = ""
+    for line in text.splitlines():
+        stripped = line.strip()
+        if not stripped:
+            continue
+
+        label = stripped.rstrip(":").upper()
+        if label in label_map:
+            current_key = label_map[label]
+            card.setdefault(current_key, [])
+            continue
+
+        if not current_key:
+            continue
+
+        if stripped.startswith(("- ", "* ")):
+            item = stripped[2:].strip()
+        else:
+            item = stripped
+        if item:
+            card.setdefault(current_key, []).append(item)
+
+    return {key: values for key, values in card.items() if values}
+
+
+def _fallback_routing_card(
+    selection_hints: list[str],
+    image_signals: list[str],
+    use_when: str,
+    analysis_steps: list[str],
+) -> dict[str, list[str]]:
+    use_when_items = selection_hints[:3] or ([use_when] if use_when else [])
+    card = {
+        "use_when": use_when_items[:3],
+        "visual_triggers": image_signals[:6],
+        "routing_priority": analysis_steps[:2],
+    }
+    return {key: values for key, values in card.items() if values}
+
+
 def _keywords_from_text(text: str) -> list[str]:
     candidates = [
         "face",
@@ -192,7 +232,6 @@ def _keywords_from_text(text: str) -> list[str]:
         "novelty",
         "social",
         "context",
-        "PANAS",
         "emotion",
         "VA",
     ]

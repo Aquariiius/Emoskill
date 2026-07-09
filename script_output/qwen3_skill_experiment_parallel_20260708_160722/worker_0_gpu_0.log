@@ -1,0 +1,42 @@
+Loaded 9 skill(s) from SKILL.md:
+  - awe: Awe (hints=1, steps=6, ok)
+  - baby-schema: Baby Schema / Kindchenschema (hints=1, steps=6, ok)
+  - berlyne-arousal-pleasure: Berlyne Arousal-Aesthetic Pleasure (hints=1, steps=6, ok)
+  - cognitive-appraisal: Cognitive Appraisal (hints=1, steps=6, ok)
+  - emotional-body-language: Emotional Body Language (hints=1, steps=6, ok)
+  - evolved-fear-module: Evolved Fear Module (hints=1, steps=6, ok)
+  - kaplan-art-restoration: Kaplan Attention Restoration Theory (hints=1, steps=6, ok)
+  - pathogen-disgust: Pathogen Disgust (hints=1, steps=6, ok)
+  - todorov-face-evaluation: Todorov Face Evaluation (hints=1, steps=6, ok)
+Images: 4
+[1/4] /home/u1120250383/dcs/datasets/IAPS/Dataset/7080.jpg
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:02,  1.10it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:02<00:02,  1.14s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:03<00:01,  1.17s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:04<00:00,  1.06it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:04<00:00,  1.00s/it]
+`generation_config` default values have been modified to match model-specific defaults: {'do_sample': True}. If this is not desired, please set these values explicitly.
+  direct: Vscore=5.50 Ascore=5.50 (norm V=0.500 A=0.500) in 84.465s
+  route: no_specialized_skill conf=0.98 in 9.763s
+  selected: no_specialized_skill Vscore=5.50 Ascore=5.50 using direct VA baseline
+[2/4] /home/u1120250383/dcs/datasets/IAPS/Dataset/5870.jpg
+  direct: Vscore=6.50 Ascore=6.50 (norm V=0.611 A=0.611) in 13.534s
+  route: kaplan-art-restoration conf=0.95 in 14.734s
+  candidates: kaplan-art-restoration
+  candidate 1/1 kaplan-art-restoration: Vscore=7.00 Ascore=3.50 (norm V=0.667 A=0.278) in 33.692s
+  selected: kaplan-art-restoration Vscore=7.00 Ascore=3.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[3/4] /home/u1120250383/dcs/datasets/IAPS/Dataset/4645.jpg
+  direct: Vscore=8.50 Ascore=4.50 (norm V=0.833 A=0.389) in 14.978s
+  route: todorov-face-evaluation conf=0.95 in 18.697s
+  candidates: todorov-face-evaluation
+  candidate 1/1 todorov-face-evaluation: Vscore=7.00 Ascore=5.00 (norm V=0.667 A=0.444) in 32.096s
+  selected: todorov-face-evaluation Vscore=7.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[4/4] /home/u1120250383/dcs/datasets/IAPS/Dataset/2357.jpg
+  direct: Vscore=6.50 Ascore=3.50 (norm V=0.611 A=0.278) in 18.800s
+  route: kaplan-art-restoration conf=0.95 in 15.917s
+  candidates: kaplan-art-restoration
+  candidate 1/1 kaplan-art-restoration: Vscore=7.00 Ascore=3.00 (norm V=0.667 A=0.222) in 36.131s
+  selected: kaplan-art-restoration Vscore=7.00 Ascore=3.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+Trace latest: /home/u1120250383/dcs/Emoskill/script_output/qwen3_skill_experiment_parallel_20260708_160722/worker_0_gpu_0/qwen3_iaps_case_trace_latest.json
+Full-skill latest: /home/u1120250383/dcs/Emoskill/script_output/qwen3_skill_experiment_parallel_20260708_160722/worker_0_gpu_0/qwen3_iaps_full_skill_inference_latest.json
+Inference Markdown: /home/u1120250383/dcs/Emoskill/script_output/qwen3_skill_experiment_parallel_20260708_160722/worker_0_gpu_0/qwen3_iaps_full_skill_inference_20260708_161216.md
+Inference Markdown latest: /home/u1120250383/dcs/Emoskill/script_output/qwen3_skill_experiment_parallel_20260708_160722/worker_0_gpu_0/qwen3_iaps_full_skill_inference_latest.md
+OK images=4/4; elapsed=293.092s; skills=9
+Saved: /home/u1120250383/dcs/Emoskill/script_output/qwen3_skill_experiment_parallel_20260708_160722/worker_0_gpu_0/qwen3_skill_experiment_20260708_161215.json
+Latest: /home/u1120250383/dcs/Emoskill/script_output/qwen3_skill_experiment_parallel_20260708_160722/worker_0_gpu_0/qwen3_skill_experiment_latest.json

@@ -8,7 +8,7 @@ from .llm_client import (
     StubMultimodalLLMClient,
 )
 from .pipeline import PsychologyVAPipeline
-from .schemas import ImageInput, RouteDecision, VAAnalysisResult
+from .schemas import ImageInput, PsychologySkillSpec, RouteDecision, VAAnalysisResult
 from .skill_loader import load_skill_specs_from_directory
 
 __all__ = [
@@ -16,6 +16,7 @@ __all__ = [
     "ModelOutputParseError",
     "MultimodalLLMClient",
     "PsychologyVAPipeline",
+    "PsychologySkillSpec",
     "Qwen25VLClient",
     "Qwen3VLClient",
     "RouteDecision",

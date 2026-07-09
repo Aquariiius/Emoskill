@@ -4,6 +4,9 @@ from dataclasses import asdict, dataclass, field
 from typing import Any
 
 
+NO_SPECIALIZED_SKILL_ID = "no_specialized_skill"
+
+
 @dataclass(frozen=True)
 class PsychologySkillSpec:
     skill_id: str
@@ -15,6 +18,7 @@ class PsychologySkillSpec:
     image_signals: list[str]
     va_focus: str
     analysis_steps: list[str]
+    routing_card: dict[str, list[str]] = field(default_factory=dict)
     discrete_emotions: list[str] = field(default_factory=list)
     emotion_va_map: dict[str, dict[str, float]] = field(default_factory=dict)
     aggregation_rule: str = ""
@@ -49,6 +53,7 @@ class RouteDecision:
     confidence: float
     observed_cues: list[str] = field(default_factory=list)
     alternative_skill_ids: list[str] = field(default_factory=list)
+    candidate_skill_ids: list[str] = field(default_factory=list)
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)

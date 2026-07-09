@@ -1,0 +1,52 @@
+Loaded 9 skill(s) from SKILL.md:
+  - awe: Awe (hints=4, steps=6, ok)
+  - baby-schema: Baby Schema / Kindchenschema (hints=4, steps=6, ok)
+  - berlyne-arousal-pleasure: Berlyne Arousal-Aesthetic Pleasure (hints=4, steps=6, ok)
+  - cognitive-appraisal: Cognitive Appraisal (hints=4, steps=6, ok)
+  - emotional-body-language: Emotional Body Language (hints=4, steps=7, ok)
+  - evolved-fear-module: Evolved Fear Module (hints=4, steps=6, ok)
+  - kaplan-art-restoration: Kaplan Attention Restoration Theory (hints=4, steps=6, ok)
+  - pathogen-disgust: Pathogen Disgust (hints=4, steps=6, ok)
+  - todorov-face-evaluation: Todorov Face Evaluation (hints=2, steps=7, ok)
+Images: 4
+[1/4] /home/u1120250383/dcs/datasets/IAPS/Dataset/9000.jpg
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:01<00:03,  1.02s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:02<00:02,  1.04s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:03<00:01,  1.04s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.14it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.07it/s]
+`generation_config` default values have been modified to match model-specific defaults: {'do_sample': True}. If this is not desired, please set these values explicitly.
+  direct: Vscore=3.00 Ascore=4.00 (norm V=0.222 A=0.333) in 116.075s
+  route: awe conf=0.95 in 29.916s
+  candidates: awe, cognitive-appraisal, berlyne-arousal-pleasure
+  candidate 1/3 awe: Vscore=4.50 Ascore=8.50 (norm V=0.389 A=0.833) in 53.756s
+  candidate 2/3 cognitive-appraisal: Vscore=3.00 Ascore=6.50 (norm V=0.222 A=0.611) in 61.679s
+  candidate 3/3 berlyne-arousal-pleasure: Vscore=3.50 Ascore=6.50 (norm V=0.278 A=0.611) in 44.686s
+  selected: awe Vscore=4.50 Ascore=8.50 reason=The image's dominant affective content is a perception of immense scale and grandeur (the vast cemetery), which triggers awe. The visual cues of vastness, self-diminishment, and th... [truncated]
+[2/4] /home/u1120250383/dcs/datasets/IAPS/Dataset/5825.jpg
+  direct: Vscore=8.50 Ascore=6.00 (norm V=0.833 A=0.556) in 15.537s
+  route: kaplan-art-restoration conf=0.95 in 30.933s
+  candidates: kaplan-art-restoration, awe, berlyne-arousal-pleasure
+  candidate 1/3 kaplan-art-restoration: Vscore=8.50 Ascore=3.50 (norm V=0.833 A=0.278) in 39.075s
+  candidate 2/3 awe: Vscore=7.50 Ascore=6.50 (norm V=0.722 A=0.611) in 59.420s
+  candidate 3/3 berlyne-arousal-pleasure: Vscore=8.50 Ascore=3.00 (norm V=0.833 A=0.222) in 50.653s
+  selected: kaplan-art-restoration Vscore=8.50 Ascore=3.50 reason=The image depicts a calm, expansive natural coastal scene that evokes restorative tranquility, fitting Kaplan's Attention Restoration Theory. The visual cues strongly support 'bein... [truncated]
+[3/4] /home/u1120250383/dcs/datasets/IAPS/Dataset/9190.jpg
+  direct: Vscore=5.50 Ascore=5.50 (norm V=0.500 A=0.500) in 15.797s
+  route: todorov-face-evaluation conf=0.95 in 31.511s
+  candidates: todorov-face-evaluation, cognitive-appraisal, emotional-body-language
+  candidate 1/3 todorov-face-evaluation: Vscore=6.50 Ascore=5.50 (norm V=0.611 A=0.500) in 47.408s
+  candidate 2/3 cognitive-appraisal: Vscore=5.50 Ascore=5.50 (norm V=0.500 A=0.500) in 46.723s
+  candidate 3/3 emotional-body-language: Vscore=5.50 Ascore=5.50 (norm V=0.500 A=0.500) in 24.897s
+  selected: todorov-face-evaluation Vscore=6.50 Ascore=5.50 reason=The image's dominant affective content is a human face with a neutral expression, where the emotional read comes from facial structure rather than a clear expression. The candidate... [truncated]
+[4/4] /home/u1120250383/dcs/datasets/IAPS/Dataset/7004.jpg
+  direct: Vscore=5.50 Ascore=5.50 (norm V=0.500 A=0.500) in 14.017s
+  route: kaplan-art-restoration conf=0.95 in 27.916s
+  candidates: kaplan-art-restoration, berlyne-arousal-pleasure, cognitive-appraisal
+  candidate 1/3 kaplan-art-restoration: Vscore=6.50 Ascore=3.50 (norm V=0.611 A=0.278) in 33.037s
+  candidate 2/3 berlyne-arousal-pleasure: Vscore=5.50 Ascore=3.00 (norm V=0.500 A=0.222) in 29.656s
+  candidate 3/3 cognitive-appraisal: Vscore=6.50 Ascore=3.00 (norm V=0.611 A=0.222) in 49.032s
+  selected: kaplan-art-restoration Vscore=6.50 Ascore=3.50 reason=The image depicts a calm, natural wooden surface with a simple spoon, evoking a restorative, low-arousal environment consistent with Kaplan's Attention Restoration Theory. The wood... [truncated]
+Trace latest: /home/u1120250383/dcs/Emoskill/script_output/qwen3_skill_experiment_parallel_20260708_143318/worker_1_gpu_1/qwen3_iaps_case_trace_latest.json
+Full-skill latest: /home/u1120250383/dcs/Emoskill/script_output/qwen3_skill_experiment_parallel_20260708_143318/worker_1_gpu_1/qwen3_iaps_full_skill_inference_latest.json
+Inference Markdown: /home/u1120250383/dcs/Emoskill/script_output/qwen3_skill_experiment_parallel_20260708_143318/worker_1_gpu_1/qwen3_iaps_full_skill_inference_20260708_144750.md
+Inference Markdown latest: /home/u1120250383/dcs/Emoskill/script_output/qwen3_skill_experiment_parallel_20260708_143318/worker_1_gpu_1/qwen3_iaps_full_skill_inference_latest.md
+OK images=4/4; elapsed=870.5s; skills=9
+Saved: /home/u1120250383/dcs/Emoskill/script_output/qwen3_skill_experiment_parallel_20260708_143318/worker_1_gpu_1/qwen3_skill_experiment_20260708_144749.json
+Latest: /home/u1120250383/dcs/Emoskill/script_output/qwen3_skill_experiment_parallel_20260708_143318/worker_1_gpu_1/qwen3_skill_experiment_latest.json

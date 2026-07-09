@@ -13,7 +13,20 @@ from .prompts import (
     build_routing_system_prompt,
     build_routing_user_prompt,
 )
-from .schemas import ImageInput, PsychologySkillSpec, RouteDecision, VAAnalysisResult
+from .schemas import NO_SPECIALIZED_SKILL_ID, ImageInput, PsychologySkillSpec, RouteDecision, VAAnalysisResult
+
+
+DEFAULT_FALLBACK_SKILL_PRIORITY = (
+    "cognitive-appraisal",
+    "emotional-body-language",
+    "todorov-face-evaluation",
+    "kaplan-art-restoration",
+    "berlyne-arousal-pleasure",
+    "evolved-fear-module",
+    "pathogen-disgust",
+    "baby-schema",
+    "awe",
+)
 
 
 class PsychologyVAPipeline:
@@ -44,6 +57,9 @@ class PsychologyVAPipeline:
         route: RouteDecision,
         user_context: str = "",
     ) -> VAAnalysisResult:
+        if route.skill_id == NO_SPECIALIZED_SKILL_ID:
+            return self.analyze_direct(image_input=image_input, user_context=user_context)
+
         selected_skill = self.skill_map[route.skill_id]
 
         response = self.llm_client.complete_json(
@@ -83,8 +99,34 @@ class PsychologyVAPipeline:
         user_context: str,
     ) -> RouteDecision:
         skill_id = str(payload.get("skill_id") or "").strip()
+        candidate_skill_ids = _candidate_skill_ids_from_payload(payload, self.skill_map)
+        no_specialized_skill = _is_no_specialized_skill(payload, skill_id)
         if skill_id not in self.skill_map:
-            skill_id = self._fallback_skill_id(user_context)
+            skill_id = (
+                candidate_skill_ids[0]
+                if candidate_skill_ids and not no_specialized_skill
+                else NO_SPECIALIZED_SKILL_ID
+            )
+
+        if skill_id == NO_SPECIALIZED_SKILL_ID:
+            candidate_skill_ids = []
+            alternative_skill_ids: list[str] = []
+        else:
+            candidate_skill_ids = _dedupe_skill_ids(
+                [
+                    skill_id,
+                    *candidate_skill_ids,
+                    *[
+                        item
+                        for item in _as_string_list(payload.get("alternative_skill_ids"))
+                        if item in self.skill_map
+                    ],
+                ],
+                self.skill_map,
+            )
+            if not candidate_skill_ids:
+                candidate_skill_ids = [skill_id]
+            alternative_skill_ids = [item for item in candidate_skill_ids if item != skill_id]
 
         confidence_value = payload.get("confidence", 0.5)
         try:
@@ -95,12 +137,11 @@ class PsychologyVAPipeline:
 
         return RouteDecision(
             skill_id=skill_id,
-            reason=str(payload.get("reason") or "Fallback route based on default policy."),
+            reason=str(payload.get("reason") or "No specialized skill strongly matched the visible cue structure."),
             confidence=confidence,
             observed_cues=_as_string_list(payload.get("observed_cues")),
-            alternative_skill_ids=[
-                item for item in _as_string_list(payload.get("alternative_skill_ids")) if item in self.skill_map
-            ],
+            alternative_skill_ids=alternative_skill_ids,
+            candidate_skill_ids=candidate_skill_ids,
         )
 
     def _normalize_analysis_result(
@@ -136,8 +177,6 @@ class PsychologyVAPipeline:
 
     def _fallback_skill_id(self, user_context: str) -> str:
         hint = user_context.lower()
-        if "panas" in hint or "pnas" in hint or "positive affect" in hint or "negative affect" in hint:
-            return self._first_available(["panas-discrete-va", "panas-affect-profile", "core-affect-va"])
         if (
             "appraisal" in hint
             or "social context" in hint
@@ -146,7 +185,7 @@ class PsychologyVAPipeline:
             or "stress" in hint
             or "frustration" in hint
         ):
-            return self._first_available(["cognitive-appraisal", "core-affect-va", "panas-discrete-va"])
+            return self._first_available(["cognitive-appraisal"])
         if (
             "attention restoration" in hint
             or "restoration" in hint
@@ -154,7 +193,7 @@ class PsychologyVAPipeline:
             or "nature" in hint
             or "landscape" in hint
         ):
-            return self._first_available(["kaplan-art-restoration", "core-affect-va"])
+            return self._first_available(["kaplan-art-restoration", "awe", "berlyne-arousal-pleasure"])
         if (
             "berlyne" in hint
             or "aesthetic" in hint
@@ -164,7 +203,7 @@ class PsychologyVAPipeline:
             or "artwork" in hint
             or "design" in hint
         ):
-            return self._first_available(["berlyne-arousal-pleasure", "core-affect-va"])
+            return self._first_available(["berlyne-arousal-pleasure", "awe"])
         if (
             "todorov" in hint
             or "face" in hint
@@ -173,14 +212,116 @@ class PsychologyVAPipeline:
             or "trustworthiness" in hint
             or "dominance" in hint
         ):
-            return self._first_available(["todorov-face-evaluation", "core-affect-va"])
-        return self._first_available(["core-affect-va", "panas-discrete-va"])
+            return self._first_available(["todorov-face-evaluation", "cognitive-appraisal"])
+        if (
+            "snake" in hint
+            or "spider" in hint
+            or "predator" in hint
+            or "fear module" in hint
+            or "phobia" in hint
+            or "evolved fear" in hint
+        ):
+            return self._first_available(["evolved-fear-module", "cognitive-appraisal"])
+        if (
+            "disgust" in hint
+            or "pathogen" in hint
+            or "contamination" in hint
+            or "rot" in hint
+            or "decay" in hint
+            or "wound" in hint
+            or "infestation" in hint
+        ):
+            return self._first_available(["pathogen-disgust", "cognitive-appraisal"])
+        if (
+            "baby" in hint
+            or "infant" in hint
+            or "cute" in hint
+            or "cuteness" in hint
+            or "kindchenschema" in hint
+            or "neotenic" in hint
+            or "kawaii" in hint
+        ):
+            return self._first_available(["baby-schema", "cognitive-appraisal"])
+        if (
+            "body language" in hint
+            or "body posture" in hint
+            or "posture" in hint
+            or "silhouette" in hint
+            or "gesture" in hint
+            or "de gelder" in hint
+        ):
+            return self._first_available(["emotional-body-language", "cognitive-appraisal"])
+        if (
+            "awe" in hint
+            or "vastness" in hint
+            or "sublime" in hint
+            or "grandeur" in hint
+            or "overwhelming scale" in hint
+            or "majestic" in hint
+        ):
+            return self._first_available(["awe", "kaplan-art-restoration"])
+        return self._first_available(list(DEFAULT_FALLBACK_SKILL_PRIORITY))
 
     def _first_available(self, skill_ids: list[str]) -> str:
         for skill_id in skill_ids:
             if skill_id in self.skill_map:
                 return skill_id
         return next(iter(self.skill_map))
+
+
+def _candidate_skill_ids_from_payload(
+    payload: dict[str, Any],
+    skill_map: dict[str, PsychologySkillSpec],
+) -> list[str]:
+    raw_items: list[Any] = []
+    for key in ("candidate_skill_ids", "candidate_skills", "skill_ids", "alternative_skill_ids"):
+        value = payload.get(key)
+        if isinstance(value, list):
+            raw_items.extend(value)
+        elif isinstance(value, str):
+            raw_items.extend(value.replace(",", " ").split())
+
+    for value in payload.get("rejected_alternatives") or []:
+        if isinstance(value, dict):
+            raw_items.append(value.get("skill_id"))
+        else:
+            raw_items.append(value)
+
+    return _dedupe_skill_ids([str(item).strip() for item in raw_items if item], skill_map)
+
+
+def _is_no_specialized_skill(payload: dict[str, Any], skill_id: str) -> bool:
+    normalized_skill_id = _normalize_key(skill_id)
+    if normalized_skill_id in {
+        _normalize_key(NO_SPECIALIZED_SKILL_ID),
+        "noskill",
+        "none",
+        "directva",
+        "directvabaseline",
+    }:
+        return True
+
+    for key in ("no_specialized_skill", "no_skill", "use_direct_va"):
+        value = payload.get(key)
+        if isinstance(value, bool) and value:
+            return True
+        if isinstance(value, str) and value.strip().lower() in {"true", "yes", "1"}:
+            return True
+    return False
+
+
+def _dedupe_skill_ids(
+    skill_ids: list[str],
+    skill_map: dict[str, PsychologySkillSpec],
+) -> list[str]:
+    seen: set[str] = set()
+    deduped: list[str] = []
+    for skill_id in skill_ids:
+        if skill_id not in skill_map or skill_id in seen:
+            continue
+        deduped.append(skill_id)
+        seen.add(skill_id)
+    return deduped
 
 
 def _safe_float(value: Any, default: float) -> float:

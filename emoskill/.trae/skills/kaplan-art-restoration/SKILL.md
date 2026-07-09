@@ -1,90 +1,91 @@
 ---
 name: "kaplan-art-restoration"
-description: "Analyzes images with Kaplan's Attention Restoration Theory (being-away, soft fascination, extent, compatibility) and maps restorative potential into valence-arousal. Use for natural or spatial environments where the affect is calm, restful, coherent, and low-demand — scenes that hold attention effortlessly (soft fascination) rather than stimulate it. Do NOT use for scenes that are visually novel, complex, chaotic, or intensely stimulating (hard fascination / high arousal potential) — use Berlyne instead. Do NOT use when a person's situational emotion, not the environment, is the point of the image — use Cognitive Appraisal or PANAS. Do NOT use for face-centered structural impressions (Todorov)."
+description: "Analyzes restorative potential in natural or spatial environments using Kaplan's Attention Restoration Theory: being-away, soft fascination, extent, and compatibility. Use for enterable, low-demand settings that invite calm attention recovery. Do not use for isolated objects, tabletop/product compositions, high-stimulation aesthetics, person-centered emotion, or overwhelming awe."
 ---
 
 # Kaplan Attention Restoration Theory
 
 ## Purpose
 
-Use this skill when an image's affect is best explained by its restorative potential — its capacity to give a viewer a mental break from effortful, directed attention. Kaplan's theory distinguishes **soft fascination** (gentle, low-effort stimuli like flowing water, drifting clouds, rustling leaves, which hold attention without draining it and leave room for reflection) from **hard fascination** (highly stimulating, attention-demanding content like sports, spectacle, or dramatic complexity, which fully captures attention and affords little reflective capacity). ART's restorative effect depends specifically on soft fascination — this skill is about that calm, low-arousal register, not stimulation in general.
+Estimate how likely an image is to feel mentally restorative: a low-demand environment that lets directed attention recover through being-away, soft fascination, extent, and compatibility. This is an environment skill, not a generic calmness detector.
+
+## Routing Card
+
+USE WHEN:
+- The image is dominated by an enterable or inhabitable environment.
+- The affect is calm, peaceful, low-demand, and compatible with attention recovery.
+- Visible cues support being-away, soft fascination, spatial coherence, and gentle exploration.
+
+DO NOT USE WHEN:
+- The image is an isolated object, texture, product shot, tabletop scene, or decorative still life.
+- The scene is visually intense, novel, complex, chaotic, threatening, or overwhelming.
+- A person, face, body posture, social event, contamination cue, baby schema, or threat animal is the affective focus.
+
+VISUAL TRIGGERS:
+- Forests, gardens, coastlines, water, sky, trails, quiet rooms, benches, paths, open space, coherent layout.
+- Gentle light, low clutter, refuge, walkability, foreground/background depth.
+- A calm invitation to rest, recover, or explore without effort.
+
+NEAR-MISS BOUNDARIES:
+- Huge scale or self-diminishment -> awe.
+- Visual novelty, pattern, design, or hard fascination -> berlyne-arousal-pleasure.
+- Ordinary calm object without an inhabitable setting -> no_specialized_skill or weak Berlyne.
 
 ## Core Constructs
 
-- **Being-away** — psychological or physical distance from routine demands and everyday concerns; a sense of escape.
-- **Fascination (soft)** — attention held effortlessly and pleasantly, without cognitive strain, leaving room for reflection (as opposed to hard fascination, which is stimulating and demands engagement).
-- **Extent** — sufficient scope and coherence that the environment feels like "another world," inviting exploration rather than fragments.
-- **Compatibility** — a good fit between what the setting affords and what a viewer would want to do there.
+- **Being-away**: visible escape from routine demands or mental load.
+- **Soft fascination**: attention is held gently, without pressure or high stimulation.
+- **Extent**: the setting feels coherent and spacious enough to enter mentally.
+- **Compatibility**: the setting affords likely rest, strolling, looking, sitting, or gentle exploration.
+- **Low demand**: low clutter, low threat, low ambiguity, and low sensory intensity.
 
 ## Use When
 
-Invoke this skill when:
-
-- The image is dominated by a natural or spatial environment (landscape, garden, water, sky, forest, coastline, restorative interior) rather than a person's expressed emotion.
-- The plausible affect is calm, restful, peaceful, or quietly absorbing — consistent with soft fascination — rather than exciting, dramatic, or visually overwhelming.
-- The scene reads as coherent and spacious enough to feel immersive (extent), and inviting rather than jarring (compatibility).
-- The task concerns restoration, mental recovery, calmness, or environmental preference specifically.
+Use this skill when the environment itself is the affective source. The viewer should plausibly feel calmer, more restored, or gently absorbed because of the setting.
 
 ## Do-Not-Use-When Rules
 
-Do not use this skill when:
+- Do not use for isolated objects or material textures; natural material is not enough.
+- Do not use for dramatic spectacle, danger, or overwhelming scale.
+- Do not use when a person's emotion or action is central.
+- Do not use when visual stimulation is active, puzzling, or design-driven.
 
-- The scene is novel, visually complex, ambiguous, chaotic, or intensely stimulating — high collative arousal potential rather than soft, restful fascination → defer to **Berlyne**.
-- A person's expressed or situational emotion is the actual focus of the image, with the environment merely as backdrop → defer to **PANAS** (if legible from expression) or **Cognitive Appraisal** (if situational inference is needed).
-- A face is the dominant subject → defer to **Todorov**.
-- The setting is demanding, cluttered, urban-frantic, or otherwise effortful to take in — this is the opposite of what ART predicts as restorative.
+## Applicability
 
-## Routing / Self-Check
+Strong:
+- Enterable environment plus clear low-demand restorative cues.
 
-Before proceeding:
+Partial:
+- Environment is present, but visual drama, people, or aesthetic stimulation competes.
 
-1. **Is the environment (not a person) the dominant affective content?** If a person's expression/situation is the real subject, defer to PANAS/Appraisal/Todorov as appropriate.
-2. **Does the scene read as calm and effortlessly engaging (soft fascination), or as novel/complex/stimulating (hard fascination)?** If the latter, defer to Berlyne — this is the key discriminator between the two environment-focused skills.
-3. If the scene is environment-dominant and plausibly restful/coherent, proceed.
-
-State which check applied in the output.
+Weak:
+- Calmness comes from object simplicity, blankness, or lack of content rather than environment restoration.
 
 ## Reasoning Steps
 
-1. **Self-check routing** — confirm this is genuinely a restorative-environment case, not a stimulation-driven or person-focused one; if not, name the better-fitting skill.
-2. Describe the environment and its visible affordances (openness, greenery, water, light, spatial coherence, presence/absence of people).
-3. Estimate being-away, soft fascination, extent, and compatibility from visible evidence, noting which are strongly vs. weakly supported.
-4. Explain whether the scene likely supports restoration of directed attention or instead demands effortful engagement (a sign it may actually belong to Berlyne).
-5. Infer the likely affective consequence for a viewer (calm, refreshed, at ease) versus alternatives.
-6. Convert the restorative judgment into final VA, favoring low-to-moderate arousal and positive valence when ART's conditions are well met.
+1. Confirm an enterable environment is the dominant affective source.
+2. Identify being-away, soft fascination, extent, and compatibility cues.
+3. Check whether hard fascination, awe, threat, or person-centered affect is stronger.
+4. Estimate restorative potential from visible evidence only.
+5. Map high restoration to positive valence and low-to-moderate arousal.
+6. Mark applicability weak if the image is merely calm but not environmental.
+
+## VA Mapping
+
+| Case | Valence | Arousal |
+|---|---:|---:|
+| Strong restorative environment | 7.0-8.8 | 2.8-4.8 |
+| Mild restorative environment | 6.0-7.2 | 3.5-5.5 |
+| Beautiful but somewhat stimulating | 6.0-8.0 | 5.0-6.5 |
+| Weak environment fit | keep near direct VA | keep conservative |
+
+## Boundary Notes
+
+- Kaplan is about restorative environments, not all low-arousal images.
+- Soft fascination differs from Berlyne's hard fascination: the former rests attention; the latter stimulates it.
+- A calm horizon can be Kaplan when it feels restful; it becomes Awe only when scale overwhelms.
+- If no specialized cue strongly fits, route to `no_specialized_skill`.
 
 ## Output Format
 
-```
-ROUTING CHECK: [why this is a restorative-environment case, not stimulation-driven or person-focused]
-VISIBLE RESTORATIVE CUES: [environment description: greenery, water, light, openness, coherence, incidental people if any]
-ART DIMENSIONS: [being-away / soft fascination / extent / compatibility, each with supporting evidence]
-FASCINATION TYPE CHECK: [soft (restful) vs. hard (stimulating) — explicit judgment, since this is the Berlyne boundary]
-RESTORATIVE POTENTIAL: [likely affective consequence for a viewer]
-FINAL VALENCE: [value + justification]
-FINAL AROUSAL: [value + justification, typically low-to-moderate for restorative scenes]
-UNCERTAINTY NOTES: [ambiguity, mixed cues, incidental people, image quality]
-```
-
-## Uncertainty and Ethical Constraints
-
-Restorative potential is a *likely perceptual effect on a typical viewer*, not a guaranteed or universal response — individual preferences, cultural background, and personal associations with a setting vary (compatibility is inherently person-relative). Avoid absolute claims like "this scene is restorative"; prefer "this scene is likely to be experienced as restorative by many viewers, because...". If people are present, do not speculate about their specific emotions or personalities — treat them as incidental to the environment unless the task specifically shifts focus to them (in which case, defer per the routing rules).
-
-## Examples That Should Trigger
-
-- A quiet forest trail with dappled light and no clutter.
-- A wide, calm lake at dawn with mist and still water.
-- A minimalist garden courtyard with a bench and greenery.
-
-## Examples That Should NOT Trigger
-
-- A dense, chaotic urban street market bursting with color and movement → Berlyne (hard fascination/high collative arousal).
-- A dramatic thunderstorm over a churning ocean → Berlyne (high arousal potential, not restful).
-- A hiker who looks visibly distressed on an otherwise calm trail → Cognitive Appraisal/PANAS (person's emotion is the point).
-- A close-up neutral portrait with a blurred natural background → Todorov (face is dominant).
-
-## Ambiguous Cases
-
-- **Beautiful but dramatic landscape (e.g., dramatic canyon, crashing waterfall):** if the scene is visually striking/novel/complex enough that it demands attention rather than resting it, lean Berlyne; if it reads as expansive but calm and coherent, lean Kaplan. State which fascination type dominates and note the alternative reading.
-- **Landscape with incidental people:** if people are small/background, proceed with Kaplan, noting their presence briefly; if their activity or expression becomes the focal point, defer to PANAS/Appraisal.
-- **Restorative interior with aesthetic flourishes:** if the calming, low-effort quality dominates, use Kaplan; if the aesthetic composition itself is the striking element, consider whether Berlyne is a better fit and note the ambiguity.
+The experiment prompt converts this analysis into JSON. Include top-level `valence_score`, `arousal_score`, and `applicability`. In the rationale, report restorative cues, ART dimensions, boundary checks, and VA mapping.
