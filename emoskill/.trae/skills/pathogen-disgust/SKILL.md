@@ -1,92 +1,55 @@
 ---
 name: "pathogen-disgust"
-description: "Analyzes revulsion and avoidance from visible contamination, decay, bodily waste, wounds, spoiled organic matter, infestation, or disease cues using pathogen disgust and behavioral immune system concepts. Use when pathogen/contamination risk is the dominant affective mechanism. Do not use for predator fear, moral disgust without visible contamination, fresh appetitive food, face/body emotion, restoration, aesthetics, or general threat."
+description: "Analyze pathogen avoidance from visible contamination, decay, waste, spoiled organic matter, wounds, fluids, parasites, or infestation. Infer extent, contact potential, realism, and medical/culinary/scientific/fictional attenuation before VA. Do not use for moral disgust, predator attack, abstract ugliness, or clean clinical content without pathogen cues."
 ---
 
 # Pathogen Disgust
 
-## Purpose
+## Applicability Gate
 
-Estimate disgust-like affect from visible cues of contamination, disease, decay, bodily fluids, wounds, infestation, or spoiled organic matter. This skill models pathogen-avoidance perception, not moral judgment or objective medical risk.
+REQUIRED:
+- Visible organic contamination, decay, disease, waste, bodily fluid, wound, spoiled food, parasite, or infestation is affectively central.
+- Avoidance/rejection is better explained by pathogen cues than by attack threat, sadness, or composition.
+- Cue identity is visually supported rather than inferred from a label or backstory.
 
-## Routing Card
+REJECT:
+- Moral or social violation without visible pathogen cues.
+- Snake, predator, or attack morphology dominates.
+- Fresh appetitive food, clean medical equipment, abstract ugliness, or harmless insects without contamination evidence.
 
-USE WHEN:
-- Dominant cues signal contamination, disease, decay, bodily waste, wounds, spoiled food, corpse decay, or infestation.
-- Viewer response is revulsion, rejection, withdrawal, or avoidance rather than fear, sadness, or aesthetic interest.
-- Visible pathogen risk is the main affective mechanism.
+NEAR MISS:
+- Predation or attack -> evolved-fear-module.
+- Injury or accident where human stakes dominate -> cognitive-appraisal; use disgust only if contamination remains visually central.
+- Chaotic/aversive abstraction without organic contamination -> berlyne-arousal-pleasure or no specialized skill.
 
-DO NOT USE WHEN:
-- Predator or attack threat dominates.
-- Moral/social violation appears without visible contamination or disease cues.
-- Food is fresh/appetitive, or professional/clinical/fictional context strongly reframes the cue.
+## Visual Variables
 
-VISUAL TRIGGERS:
-- Rot, mold, slime, pus, vomit, feces, blood pooling, open wounds, corpse decay.
-- Spoiled food, diseased tissue, parasites, infestation, pests associated with filth.
-- Wetness, oozing, discoloration, bodily fluids, decomposing organic matter.
+- **Cue type**: rot, mold, decomposition, pus, vomit, feces, pooled blood, exposed tissue, spoiled food, parasite, or infestation.
+- **Extent/density**: localized trace versus widespread contamination, dense infestation, or extensive tissue involvement.
+- **Contact potential**: apparent touch, ingestion, proximity, exposed surface, leakage, or containment.
+- **Material state**: wetness, slime, oozing, discoloration, texture breakdown, or organic degradation.
+- **Realism/freshness**: realistic versus stylized/fictional; fresh injury versus decomposition or infection cues.
+- **Context attenuation**: medical care, specimen, fermentation, packaging, cleaning, fiction, or barriers.
+- **Ethical sensitivity**: human illness, disability, injury, or vulnerable subjects must be described without demeaning the person.
 
-NEAR-MISS BOUNDARIES:
-- Snake, spider, predator, or attack threat -> evolved-fear-module.
-- Weapon, accident, social violation, or human stakes -> cognitive-appraisal.
-- Abstract ugly/chaotic visuals without contamination -> berlyne-arousal-pleasure or no_specialized_skill.
+## Inference Procedure
 
-## Core Constructs
+1. Identify the visible pathogen cue and distinguish observation from uncertain material identification.
+2. Estimate extent, contact potential, and organic degradation from visible surface and spatial evidence.
+3. Estimate realism and whether the cue signals contamination, attack, fresh injury, or merely unfamiliar appearance.
+4. Apply medical, scientific, culinary, fictional, and containment modifiers without erasing clearly visible visceral cues.
+5. Integrate severity and attenuation into pathogen-avoidance strength and VA. Avoidance lowers valence; arousal depends on contact, vividness, and urgency and must not automatically equal fear.
 
-- **Pathogen disgust**: avoidance response to visible infection or contamination cues.
-- **Behavioral immune system**: perceptual system biased toward avoiding possible disease sources.
-- **Contamination intensity**: mild stain/discoloration to severe decay, fluids, exposed tissue, or dense infestation.
-- **Context attenuation**: medical, culinary fermentation, scientific specimen, or fictional/horror contexts can reduce or reframe disgust.
-- **Fear vs. disgust**: attack threat implies fear; contamination threat implies disgust.
+## VA Judgment
 
-## Use When
+Use the shared 1-9 scale without fixed ranges. Visible contamination usually lowers valence more reliably than it raises arousal. Raise arousal for imminent contact, vivid fluids, dense infestation, or uncontrolled spread; keep it lower for contained, distant, routine, or professionally framed cues. Do not force extreme negativity from a mild stain, clean wound care, or ambiguous texture.
 
-Use this skill when visible contamination cues explain affect better than story, danger, composition, or person-centered emotion.
+## Worked Example
 
-## Do-Not-Use-When Rules
+- **Image**: A close-up shows bread covered by irregular green-black mold and moist discoloration inside an open bag; no people are present.
+- **Analysis**: recognizable food, widespread fungal growth, moisture, ingestion relevance, realism, and no culinary framing imply strong spoilage/avoidance without attack or immediate bodily exposure.
+- **VA**: valence 2.5, arousal 5.2 on 1-9; strong applicability, with arousal kept moderate rather than fear-like.
 
-- Do not use for moral disgust unless visible pathogen cues are present.
-- Do not use for predatory animals unless decay/contamination is dominant.
-- Do not use for fresh, desirable food or clean clinical presentation without aversive contamination cues.
-- Do not label people as disgusting; describe viewer perception of cues with ethical caution.
+## Output Contract
 
-## Applicability
-
-Strong:
-- Contamination/decay cues are central, visible, and affectively dominant.
-
-Partial:
-- Contamination cues exist but context attenuates or another mechanism competes.
-
-Weak:
-- Cues are symbolic, mild, ambiguous, or better explained by another skill.
-
-## Reasoning Steps
-
-1. Identify visible contamination cue type: decay, fluid, wound, waste, infestation, disease, spoiled organic matter.
-2. Estimate contamination intensity: mild, moderate, or severe.
-3. Check context attenuation: medical, culinary, scientific, fictional, or cleaned/controlled setting.
-4. Distinguish disgust from fear, appraisal, or aesthetic aversion.
-5. Map intensity and attenuation to VA.
-6. Note ethical sensitivity for illness, injury, disability, or human subjects.
-
-## VA Mapping
-
-| Case | Valence | Arousal |
-|---|---:|---:|
-| Severe contamination, no attenuation | 1.5-2.8 | 5.5-7.8 |
-| Moderate contamination | 2.5-3.8 | 4.5-6.8 |
-| Mild contamination | 3.5-4.8 | 3.5-5.2 |
-| Strong context attenuation | shift valence +1 to +2 | keep or slightly reduce |
-| Weak pathogen-disgust fit | keep near direct VA | keep conservative |
-
-## Boundary Notes
-
-- Disgust arousal is often lower than fear arousal at comparable severity.
-- Medical or scientific framing can attenuate disgust but does not always erase visceral response.
-- Moral or social disgust belongs to appraisal unless contamination is visible.
-- If no specialized cue strongly fits, route to `no_specialized_skill`.
-
-## Output Format
-
-The experiment prompt converts this analysis into JSON. Include top-level `valence_score`, `arousal_score`, and `applicability`. In the rationale, report contamination cues, intensity, context attenuation, fear/disgust boundary, ethical note if relevant, and VA mapping.
+In the shared JSON, separate cue type, extent/contact, realism, and attenuation. Describe material rather than labeling a person or body disgusting; state identification uncertainty.

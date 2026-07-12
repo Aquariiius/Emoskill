@@ -527,8 +527,8 @@ def _first_nonempty_line(text: str) -> str:
 
 
 def _infer_recovered_quadrant(valence: float, arousal: float) -> str:
-    valence_label = "positive" if valence > 5.5 else "negative" if valence < 5.5 else "neutral"
-    arousal_label = "high-arousal" if arousal > 5.5 else "low-arousal" if arousal < 5.5 else "moderate-arousal"
+    valence_label = "positive" if valence > 5.0 else "negative" if valence < 5.0 else "neutral"
+    arousal_label = "high-arousal" if arousal > 5.0 else "low-arousal" if arousal < 5.0 else "moderate-arousal"
     return f"{arousal_label} {valence_label}"
 
 

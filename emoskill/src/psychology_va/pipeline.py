@@ -13,7 +13,14 @@ from .prompts import (
     build_routing_system_prompt,
     build_routing_user_prompt,
 )
-from .schemas import NO_SPECIALIZED_SKILL_ID, ImageInput, PsychologySkillSpec, RouteDecision, VAAnalysisResult
+from .schemas import (
+    MAIN_ROUTING_EXCLUDED_SKILL_IDS,
+    NO_SPECIALIZED_SKILL_ID,
+    ImageInput,
+    PsychologySkillSpec,
+    RouteDecision,
+    VAAnalysisResult,
+)
 
 
 DEFAULT_FALLBACK_SKILL_PRIORITY = (
@@ -38,10 +45,16 @@ class PsychologyVAPipeline:
         self.llm_client = llm_client
         self.skill_specs = skill_specs or build_default_skill_specs()
         self.skill_map = {spec.skill_id: spec for spec in self.skill_specs}
+        self.routing_skill_specs = [
+            spec
+            for spec in self.skill_specs
+            if spec.routing_enabled and spec.skill_id not in MAIN_ROUTING_EXCLUDED_SKILL_IDS
+        ]
+        self.routing_skill_map = {spec.skill_id: spec for spec in self.routing_skill_specs}
 
     def route_skill(self, image_input: ImageInput, user_context: str = "") -> RouteDecision:
         response = self.llm_client.complete_json(
-            system_prompt=build_routing_system_prompt(self.skill_specs),
+            system_prompt=build_routing_system_prompt(self.routing_skill_specs),
             user_prompt=build_routing_user_prompt(user_context),
             image_payload=image_input.to_llm_payload(),
         )
@@ -99,9 +112,9 @@ class PsychologyVAPipeline:
         user_context: str,
     ) -> RouteDecision:
         skill_id = str(payload.get("skill_id") or "").strip()
-        candidate_skill_ids = _candidate_skill_ids_from_payload(payload, self.skill_map)
+        candidate_skill_ids = _candidate_skill_ids_from_payload(payload, self.routing_skill_map)
         no_specialized_skill = _is_no_specialized_skill(payload, skill_id)
-        if skill_id not in self.skill_map:
+        if skill_id not in self.routing_skill_map:
             skill_id = (
                 candidate_skill_ids[0]
                 if candidate_skill_ids and not no_specialized_skill
@@ -119,10 +132,10 @@ class PsychologyVAPipeline:
                     *[
                         item
                         for item in _as_string_list(payload.get("alternative_skill_ids"))
-                        if item in self.skill_map
+                        if item in self.routing_skill_map
                     ],
                 ],
-                self.skill_map,
+                self.routing_skill_map,
             )
             if not candidate_skill_ids:
                 candidate_skill_ids = [skill_id]
@@ -150,8 +163,10 @@ class PsychologyVAPipeline:
         payload: dict[str, Any],
     ) -> VAAnalysisResult:
         payload = _normalize_analysis_payload(payload)
-        valence_score = _required_float_in_range(payload, "valence_score", low=1.0, high=10.0)
-        arousal_score = _required_float_in_range(payload, "arousal_score", low=1.0, high=10.0)
+        if skill_spec.skill_id != "direct-va-baseline":
+            _validate_skill_inference_payload(payload)
+        valence_score = _required_float_in_range(payload, "valence_score", low=1.0, high=9.0)
+        arousal_score = _required_float_in_range(payload, "arousal_score", low=1.0, high=9.0)
         valence = _score_to_unit_interval(valence_score)
         arousal = _score_to_unit_interval(arousal_score)
 
@@ -170,6 +185,11 @@ class PsychologyVAPipeline:
             positive_affect=_as_string_list(payload.get("positive_affect")),
             negative_affect=_as_string_list(payload.get("negative_affect")),
             uncertainty=str(payload.get("uncertainty") or ""),
+            applicability=str(payload.get("applicability") or ""),
+            visual_evidence=_as_dict_list(payload.get("visual_evidence")),
+            construct_estimates=_as_dict_list(payload.get("construct_estimates")),
+            context_modifiers=_as_string_list(payload.get("context_modifiers")),
+            inference_summary=str(payload.get("inference_summary") or ""),
             raw_model_output=payload,
             valence_score=valence_score,
             arousal_score=arousal_score,
@@ -361,6 +381,24 @@ def _normalize_analysis_payload(payload: dict[str, Any]) -> dict[str, Any]:
     return normalized
 
 
+def _validate_skill_inference_payload(payload: dict[str, Any]) -> None:
+    applicability = str(payload.get("applicability") or "").strip().lower()
+    if applicability not in {"strong", "partial", "weak"}:
+        raise ValueError("Skill output must include applicability: strong, partial, or weak")
+
+    visual_evidence = payload.get("visual_evidence")
+    if not isinstance(visual_evidence, list) or not visual_evidence:
+        raise ValueError("Skill output must include non-empty visual_evidence")
+
+    construct_estimates = payload.get("construct_estimates")
+    if not isinstance(construct_estimates, list) or not construct_estimates:
+        raise ValueError("Skill output must include non-empty construct_estimates")
+
+    inference_summary = payload.get("inference_summary")
+    if not isinstance(inference_summary, str) or not inference_summary.strip():
+        raise ValueError("Skill output must include a non-empty inference_summary")
+
+
 def _find_score_value(payload: dict[str, Any], score_key: str) -> float | None:
     target = "valence" if score_key == "valence_score" else "arousal"
     direct_aliases = {
@@ -438,10 +476,10 @@ def _score_from_value(value: Any, *, allow_unit_interval: bool = False) -> float
         if not numbers:
             return None
         parsed = float(numbers[0])
-    if 1.0 <= parsed <= 10.0:
+    if 1.0 <= parsed <= 9.0:
         return parsed
     if allow_unit_interval and 0.0 <= parsed <= 1.0:
-        return round((parsed * 9.0) + 1.0, 6)
+        return round((parsed * 8.0) + 1.0, 6)
     return None
 
 
@@ -500,7 +538,7 @@ def _required_float_in_range(payload: dict[str, Any], key: str, *, low: float, h
 
 
 def _score_to_unit_interval(score: float) -> float:
-    return round((score - 1.0) / 9.0, 6)
+    return round((score - 1.0) / 8.0, 6)
 
 
 def _clamp(value: float, low: float, high: float) -> float:
@@ -528,7 +566,13 @@ def _as_float_dict(value: Any) -> dict[str, float]:
     return result
 
 
+def _as_dict_list(value: Any) -> list[dict[str, Any]]:
+    if not isinstance(value, list):
+        return []
+    return [dict(item) for item in value if isinstance(item, dict)]
+
+
 def _infer_quadrant(valence: float, arousal: float) -> str:
-    valence_label = "positive" if valence > 5.5 else "negative" if valence < 5.5 else "neutral"
-    arousal_label = "high-arousal" if arousal > 5.5 else "low-arousal" if arousal < 5.5 else "moderate-arousal"
+    valence_label = "positive" if valence > 5.0 else "negative" if valence < 5.0 else "neutral"
+    arousal_label = "high-arousal" if arousal > 5.0 else "low-arousal" if arousal < 5.0 else "moderate-arousal"
     return f"{arousal_label} {valence_label}"

@@ -1,32 +1,0 @@
-Loaded 5 skill(s) from SKILL.md:
-  - berlyne-arousal-pleasure: Berlyne Arousal-Aesthetic Pleasure (hints=4, steps=6, ok)
-  - cognitive-appraisal: Cognitive Appraisal (hints=4, steps=6, ok)
-  - kaplan-art-restoration: Kaplan Attention Restoration Theory (hints=4, steps=6, ok)
-  - panas-discrete-va: PANAS Discrete Emotion VA (hints=4, steps=7, ok)
-  - todorov-face-evaluation: Todorov Face Evaluation (hints=2, steps=7, ok)
-Images: 4
-[1/4] /home/u1120250383/dcs/datasets/IAPS/Dataset/4670.jpg
-Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:01<00:03,  1.06s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:02<00:02,  1.07s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:03<00:01,  1.14s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:04<00:00,  1.04it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:04<00:00,  1.01s/it]
-`generation_config` default values have been modified to match model-specific defaults: {'do_sample': True}. If this is not desired, please set these values explicitly.
-  direct: Vscore=5.50 Ascore=5.50 (norm V=0.500 A=0.500) in 42.343s
-  route: cognitive-appraisal conf=0.95 in 29.714s
-  skill:  Vscore=7.50 Ascore=7.50 (norm V=0.722 A=0.722) in 57.461s
-[2/4] /home/u1120250383/dcs/datasets/IAPS/Dataset/6251.jpg
-  direct: Vscore=3.50 Ascore=8.50 (norm V=0.278 A=0.833) in 17.240s
-  route: cognitive-appraisal conf=0.95 in 24.661s
-  skill:  Vscore=3.00 Ascore=9.00 (norm V=0.222 A=0.889) in 57.336s
-[3/4] /home/u1120250383/dcs/datasets/IAPS/Dataset/4574.jpg
-  direct: Vscore=9.00 Ascore=6.50 (norm V=0.889 A=0.611) in 15.419s
-  route: panas-discrete-va conf=0.98 in 29.588s
-  skill:  Vscore=9.00 Ascore=7.50 (norm V=0.889 A=0.722) in 45.921s
-[4/4] /home/u1120250383/dcs/datasets/IAPS/Dataset/2751.jpg
-  direct: Vscore=3.00 Ascore=6.50 (norm V=0.222 A=0.611) in 17.665s
-  route: cognitive-appraisal conf=0.95 in 23.793s
-  skill:  Vscore=3.50 Ascore=6.50 (norm V=0.278 A=0.611) in 72.529s
-Trace latest: /home/u1120250383/dcs/Emoskill/script_output/qwen3_skill_experiment_parallel_20260708_014454/worker_2_gpu_2/qwen3_iaps_case_trace_latest.json
-Full-skill latest: /home/u1120250383/dcs/Emoskill/script_output/qwen3_skill_experiment_parallel_20260708_014454/worker_2_gpu_2/qwen3_iaps_full_skill_inference_latest.json
-Inference Markdown: /home/u1120250383/dcs/Emoskill/script_output/qwen3_skill_experiment_parallel_20260708_014454/worker_2_gpu_2/qwen3_iaps_full_skill_inference_20260708_015208.md
-Inference Markdown latest: /home/u1120250383/dcs/Emoskill/script_output/qwen3_skill_experiment_parallel_20260708_014454/worker_2_gpu_2/qwen3_iaps_full_skill_inference_latest.md
-OK images=4/4; elapsed=433.691s; skills=5
-Saved: /home/u1120250383/dcs/Emoskill/script_output/qwen3_skill_experiment_parallel_20260708_014454/worker_2_gpu_2/qwen3_skill_experiment_20260708_015207.json
-Latest: /home/u1120250383/dcs/Emoskill/script_output/qwen3_skill_experiment_parallel_20260708_014454/worker_2_gpu_2/qwen3_skill_experiment_latest.json

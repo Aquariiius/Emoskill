@@ -1,92 +1,55 @@
 ---
 name: "evolved-fear-module"
-description: "Analyzes automatic fear responses to evolutionarily fear-relevant animals using Öhman & Mineka's evolved fear module account. Use for snakes, spiders, scorpions, large predators, and threat-like animal morphology when predation, venom, ambush, or attack cues dominate. Do not use for human weapons, general danger, contamination/disgust, cute baby animals, pets, toys, or symbolic animal imagery when threat morphology is weak."
+description: "Analyze prepared fear responses to realistic fear-relevant animals when threat morphology and imminence drive affect. Infer realism, proximity, orientation, attack readiness, concealment, control, and safety attenuation before VA. Do not use for generic danger, contamination-dominant pests, cute animals, pets, toys, or symbolic imagery without credible threat."
 ---
 
 # Evolved Fear Module
 
-## Purpose
+## Applicability Gate
 
-Estimate fear-like affect from visually prepared animal threats: snakes, spiders, scorpions, large predators, and similar forms that can trigger rapid threat detection. This skill models perceived automatic fear, not objective danger or zoological accuracy.
+REQUIRED:
+- A snake, spider, scorpion, large predator, or closely related threat morphology is visually central.
+- The animal form itself, not a story or contamination association, plausibly drives rapid threat perception.
+- At least one imminence cue beyond category membership is visible.
 
-## Routing Card
+REJECT:
+- Human, mechanical, environmental, or social danger without a fear-relevant animal.
+- Infestation, decay, disease-vector context, or bodily contamination dominates the response.
+- Toy, cartoon, decoration, distant documentary subject, cared-for pet, or neotenic animal lacks credible threat morphology.
 
-USE WHEN:
-- Dominant affective content is a snake, spider, scorpion, large predator, or fear-relevant animal form.
-- Fear comes from ancestral threat morphology: coils, legs, fangs, claws, venom, predatory crouch, ambush, strike-readiness.
-- The animal's body form is the primary affective source.
+NEAR MISS:
+- Pest associated with filth or disease -> pathogen-disgust.
+- Young/cute animal morphology -> baby-schema.
+- Human stakes, handling, accident, or conflict determines affect -> cognitive-appraisal.
 
-DO NOT USE WHEN:
-- Threat is human, mechanical, environmental, or situational without a fear-relevant animal.
-- Rot, infestation, wounds, bodily waste, disease, or contamination is the main cue.
-- Cute baby animal, pet, cartoon, toy, decorative motif, or safe-distance context dominates.
+## Visual Variables
 
-VISUAL TRIGGERS:
-- Serpentine body, arachnid leg spread, scorpion tail, fangs, claws, predatory eyes, crouch, lunge, concealment.
-- Close proximity, direct orientation, strike-ready posture, escape difficulty.
-- Realistic animal rendering rather than symbolic pattern alone.
+- **Threat morphology**: coils, arachnid leg spread, venom apparatus, fangs, claws, predatory crouch, focused eyes, or strike posture.
+- **Realism**: photographic/biological form versus illustration, toy, costume, sculpture, or ambiguous pattern.
+- **Frame occupancy/proximity**: apparent closeness, cropping, scale in frame, and distance cues; no physical meters.
+- **Orientation/readiness**: facing the viewer, raised head, lunge, stalking, tension, open jaws, or relaxed/withdrawn posture.
+- **Concealment/surprise**: camouflage, partial visibility, ambush position, or sudden foreground emergence.
+- **Escape/control**: barriers, glass, leash, handler, distance, escape route, or apparent entrapment.
+- **Competing response**: cuteness, curiosity, disgust, documentary interest, or human situational meaning.
 
-NEAR-MISS BOUNDARIES:
-- Human weapon, accident, or interpersonal danger -> cognitive-appraisal.
-- Disease-vector pests, decay, or infestation -> pathogen-disgust.
-- Neotenic/cute animal morphology -> baby-schema.
+## Inference Procedure
 
-## Core Constructs
+1. Qualify the animal and identify visible threat morphology without claiming objective species danger.
+2. Estimate realism and perceptual credibility; symbolic or toy-like forms sharply reduce applicability.
+3. Estimate imminence from proximity, orientation, posture, concealment, and escape/control cues.
+4. Check safety attenuation and competing baby-schema, disgust, or appraisal mechanisms.
+5. Integrate morphology, realism, imminence, and attenuation into perceived threat and VA. Category alone cannot produce high threat; safety cues pull judgments away from extremes.
 
-- **Fear-relevant category**: snake, spider, scorpion, large predator, or morphologically similar threat.
-- **Threat imminence**: proximity, orientation, posture, concealment, readiness to strike or attack.
-- **Preparedness**: typical viewers may rapidly detect these forms as threat-relevant.
-- **Context attenuation**: glass, leash, handler, pet context, cartoon, toy, distance, or documentary framing lowers response.
-- **Fear vs. disgust**: predation/attack implies fear; contamination/disease implies pathogen disgust.
+## VA Judgment
 
-## Use When
+Use the shared 1-9 scale without fixed ranges. Category and threat morphology alone do NOT raise arousal; arousal rises only with visible imminence: close proximity, direct orientation, strike readiness, concealment, or blocked escape. Barriers, distance, enclosure, handling, or toy/stylized form pull both valence and arousal back toward neutral. Reserve strongly negative, high-arousal judgments for convergence of realistic morphology and multiple imminence cues. Individual phobia varies widely, so widen uncertainty when the image supplies category but weak imminence.
 
-Use this skill when the animal form itself explains affect better than narrative context. The model responds to perceived morphology, not exact species identity.
+## Worked Example
 
-## Do-Not-Use-When Rules
+- **Image**: A realistic snake sits coiled behind terrarium glass at moderate distance; head raised but mouth closed, no strike.
+- **Analysis**: fear morphology, but glass barrier, distance, and no attack readiness mean imminence is low; threat is attenuated and near-neutral in arousal.
+- **VA**: valence 4.6, arousal 4.6 on 1-9; partial applicability, high individual-difference uncertainty.
 
-- Do not use for generic danger without a threat animal.
-- Do not use for insects or pests when contamination is the main reaction.
-- Do not use for cute or cared-for animals when baby schema or social context dominates.
-- Do not claim real-world danger; estimate perceptual fear only.
+## Output Contract
 
-## Applicability
-
-Strong:
-- Fear-relevant animal is central, realistic, and threat morphology/imminence is clear.
-
-Partial:
-- Threat animal is visible but attenuated by safety context, distance, pet framing, or ambiguity.
-
-Weak:
-- Animal is symbolic, decorative, toy-like, cute, distant, or not fear-relevant.
-
-## Reasoning Steps
-
-1. Identify animal type and fear-relevant morphology.
-2. Assess threat imminence from posture, proximity, orientation, and concealment.
-3. Check context attenuation and safety cues.
-4. Distinguish fear from disgust, baby schema, or appraisal.
-5. Map stronger imminence to lower valence and higher arousal.
-6. State uncertainty from individual phobia variation and species ambiguity.
-
-## VA Mapping
-
-| Case | Valence | Arousal |
-|---|---:|---:|
-| High imminence, no attenuation | 1.8-3.0 | 7.5-9.5 |
-| Moderate threat | 2.8-4.0 | 5.5-7.5 |
-| Low threat or strong safety attenuation | 4.2-5.5 | 3.5-5.8 |
-| Toy/cartoon/decorative | 5.0-6.0 | 2.0-4.0 |
-| Weak fear-module fit | keep near direct VA | keep conservative |
-
-## Boundary Notes
-
-- This skill is not for all fear, only fear-relevant animal morphology.
-- Context can attenuate but may not fully erase automatic threat response.
-- Phobia sensitivity varies widely; report typical-viewer estimates.
-- If no specialized cue strongly fits, route to `no_specialized_skill`.
-
-## Output Format
-
-The experiment prompt converts this analysis into JSON. Include top-level `valence_score`, `arousal_score`, and `applicability`. In the rationale, report animal identification, threat morphology, imminence, attenuation, fear/disgust boundary, and VA mapping.
+In the shared JSON, separate category, realism, imminence, attenuation, and visible barriers. Never infer objective danger, venom, intent, or attack probability.

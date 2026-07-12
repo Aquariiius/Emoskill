@@ -1,93 +1,55 @@
 ---
 name: "emotional-body-language"
-description: "Analyzes affect from human body posture, gesture, and action readiness when the face is absent, unreadable, or secondary. It maps expansion/contraction, tension, orientation, energy, and action tendency into valence-arousal. Do not use when facial expression, situational stakes, or object threat is the main affective source."
+description: "Analyze perceived affect from human whole/upper-body configuration when posture, tension, orientation, and action readiness are primary and the face is unreadable or secondary. Progress from body visibility through configuration, energy, and action tendency before VA. Do not use when object meaning, facial expression, or situational stakes carry affect."
 ---
 
 # Emotional Body Language
 
-## Purpose
+## Applicability Gate
 
-Estimate affect from visible human body configuration: posture, gesture, tension, orientation, expansion, contraction, and implied action readiness. This skill is for body-carried emotion, not facial expression or object-based threat.
+REQUIRED:
+- A human whole body or sufficiently visible upper body carries the main emotional signal.
+- Face information is absent, obscured, too small, masked, or secondary.
+- Posture supports a recognizable action tendency such as approach, recoil, freeze, attack, collapse, celebration, assertion, or submission.
 
-## Routing Card
+REJECT:
+- A readable face or facial expression dominates.
+- A weapon, risky object, interaction, or consequence determines affect more than body configuration.
+- Only an isolated hand, ambiguous resting pose, or small body fragment is visible.
 
-USE WHEN:
-- Body posture, gesture, or whole-body/upper-body configuration is the primary emotional signal.
-- Face is absent, obscured, too small, masked, or secondary.
-- Affect comes from action readiness: freeze, flee, approach, attack, collapse, expand, contract, assert, submit.
+NEAR MISS:
+- Visible agency, stakes, conflict, or object use -> cognitive-appraisal.
+- Neutral face-centered portrait -> no specialized skill or optional face module.
+- Predatory animal posture -> evolved-fear-module.
 
-DO NOT USE WHEN:
-- A readable face is dominant.
-- The main affective cue is an object or weapon being used rather than body configuration.
-- Situational agency/context, baby schema, animal threat, contamination, restoration, aesthetics, or vastness is stronger.
+## Visual Variables
 
-VISUAL TRIGGERS:
-- Contracted/shielding body, recoil, forward lean, clenched limbs, slumped collapse, expanded triumph, dominant stance.
-- Silhouettes, crowds, dance, protest, sport/action freeze-frames with unreadable faces.
-- Whole-body or upper-body action readiness, not isolated hands alone.
+- **Body visibility**: whole/upper-body coverage, occlusion, angle, and reliability of joint configuration.
+- **Expansion/contraction**: open versus closed torso, occupied space, raised versus tucked limbs, protective covering.
+- **Tension/energy**: rigid joints, clenched limbs, muscular loading, slackness, collapse, blur, or implied force.
+- **Orientation**: forward lean, recoil, turning away, upward extension, crouch, retreat, or grounded stance.
+- **Limb configuration**: shielding, reaching, striking, embracing, bracing, celebrating, or hanging loosely.
+- **Action readiness**: approach, fight, flee, freeze, withdraw, submit, assert, celebrate, or seek support.
+- **Modifiers**: gaze direction, crowd synchrony, sport/dance context, transitional motion, and interaction objects.
 
-NEAR-MISS BOUNDARIES:
-- Weapon aimed or risky object use -> cognitive-appraisal unless whole-body posture is primary.
-- Neutral or mild face-dominant image -> todorov-face-evaluation.
-- Animal predatory posture -> evolved-fear-module.
+## Inference Procedure
 
-## Core Constructs
+1. Verify body visibility and apply the removal test; lower applicability when face or object meaning is necessary.
+2. Describe expansion, contraction, tension, orientation, and limb configuration without naming an emotion.
+3. Infer one primary and, if needed, one competing action tendency from the configuration.
+4. Estimate postural energy from tension, motion, loading, and collapse; do not use emotional category alone to set arousal.
+5. Apply gaze, crowd, sport/dance, and transition modifiers, then judge VA from action tendency and energy; report ambiguity between similar poses.
 
-- **Expansion vs. contraction**: open/large postures often imply dominance, joy, approach; closed/small postures imply fear, submission, withdrawal.
-- **Postural energy**: tension, rigidity, motion, and force drive arousal.
-- **Orientation**: forward approach, turning away, recoil, collapse, or upward extension changes affect.
-- **Action readiness**: the posture prepares for fight, flee, freeze, approach, celebrate, withdraw, assert, or appease.
-- **Gaze modifier**: direct gaze may raise arousal only when posture remains the main signal.
+## VA Judgment
 
-## Use When
+Use the shared 1-9 scale without fixed ranges. Valence follows perceived approach/avoidance, not raw expansion/contraction; do NOT read conflict, pain, or aggression without a visible target, contact, or consequence. Arousal follows visible postural energy: rigid loading, explosive motion, recoil, or celebration raise it; slack, standing, or resting posture keeps it near neutral. Motion blur and single static frames from sport or dance are NOT evidence of high energy or threat; interpret conservatively and widen uncertainty.
 
-Use this skill when the body itself communicates the emotional payload. It should still work if the face is removed from the image.
+## Worked Example
 
-## Do-Not-Use-When Rules
+- **Image**: A distant person leans backward with shoulders raised, elbows bent, and both hands shielding the upper body; the face is too small to read and no weapon is visible.
+- **Analysis**: contraction, recoil, upper-body tension, and little object context imply avoidance/protection with moderate-high energy; fear-like readiness is more plausible than sadness or rest.
+- **VA**: valence 3.2, arousal 6.5 on 1-9; strong body-language applicability with uncertainty about the unseen trigger.
 
-- Do not use for isolated hand/object threats where the object carries meaning.
-- Do not use for clear face expression or structural face impression.
-- Do not use if posture is ambiguous and context is needed to decide; use Cognitive Appraisal.
-- Do not infer actual inner state; report perceived body expression.
+## Output Contract
 
-## Applicability
-
-Strong:
-- Whole-body or upper-body posture clearly conveys action readiness.
-
-Partial:
-- Body cues are present but compete with face, object, or context.
-
-Weak:
-- Only small body fragments or ambiguous static pose are visible; keep VA conservative.
-
-## Reasoning Steps
-
-1. Confirm body configuration is the primary emotional signal.
-2. Describe expansion/contraction, tension, orientation, limb position, and motion cues.
-3. Map posture to action readiness.
-4. Estimate postural energy for arousal.
-5. Apply gaze modifier only if visible and secondary.
-6. Map perceived body expression to VA with uncertainty.
-
-## VA Mapping
-
-| Body Pattern | Valence | Arousal |
-|---|---:|---:|
-| Fear/recoil/shielding/freezing | 2.0-4.0 | 6.0-8.5 |
-| Anger/aggressive forward action | 2.5-4.5 | 6.5-9.0 |
-| Sadness/collapse/withdrawal | 2.5-4.0 | 2.5-5.0 |
-| Joy/triumph/open celebration | 7.5-9.2 | 6.0-8.5 |
-| Dominance/assertive stance | 5.0-7.0 | 5.5-7.5 |
-| Weak body evidence | keep near direct VA | keep conservative |
-
-## Boundary Notes
-
-- Body Language is not a general "human present" skill.
-- Object meaning can dominate posture; if stakes/agency matter, use Cognitive Appraisal.
-- Static images can misread motion; widen uncertainty for dance, sport, or transitional poses.
-- If no specialized cue strongly fits, route to `no_specialized_skill`.
-
-## Output Format
-
-The experiment prompt converts this analysis into JSON. Include top-level `valence_score`, `arousal_score`, and `applicability`. In the rationale, report body configuration, action readiness, postural energy, boundary checks, and VA mapping.
+In the shared JSON, report body configuration before interpretation, include competing action tendencies, and derive arousal from energy. Describe perceived expression, not actual inner state.

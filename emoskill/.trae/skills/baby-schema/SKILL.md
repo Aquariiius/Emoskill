@@ -1,93 +1,55 @@
 ---
 name: "baby-schema"
-description: "Analyzes cuteness and caregiving affect from infantile morphology using Lorenz's baby schema / Kindchenschema: large head, high forehead, large low-set eyes, round face, chubby cheeks, small nose/mouth, short limbs, and soft proportions. Use when neotenic form is the dominant affective mechanism. Do not use when danger, distress, uncanny qualities, adult face structure, body emotion, or situation meaning dominates."
+description: "Analyze caregiving affect from infantile morphology: large head ratio, high forehead, round face, large low-set eyes, small nose/mouth, short limbs, and soft proportions. Infer schema load, then check realism, safety, distress, danger, and uncanny overrides. Do not equate young age or the word baby with positive affect."
 ---
 
 # Baby Schema / Kindchenschema
 
-## Purpose
+## Applicability Gate
 
-Estimate affect from visible infantile or neotenic morphology. Baby schema features tend to elicit cuteness, tenderness, approach, and caregiving motivation. This skill applies to human infants, baby animals, and deliberately neotenic designed characters or products when form, not story, drives affect.
+REQUIRED:
+- The dominant subject is a human infant, young animal, or deliberately neotenic character/object.
+- Multiple infantile proportions are visible and plausibly drive tenderness, approach, or caregiving attention.
+- Morphology remains affectively important after considering the surrounding situation.
 
-## Routing Card
+REJECT:
+- Adult face, ordinary small object, or culturally labeled "cute" subject without visible neotenic structure.
+- Predatory morphology, contamination, body action, or social event is the primary mechanism.
+- Severe distress, danger, exploitation, illness, or uncanny wrongness fully determines affect; use appraisal/direct analysis while retaining baby schema only as a modifier.
 
-USE WHEN:
-- The dominant subject is a human infant, baby animal, or deliberately neotenic character/object.
-- Affect is cuteness, tenderness, protectiveness, warmth, or caregiving motivation.
-- Infantile morphology is more important than surrounding situation or expression.
+NEAR MISS:
+- Adult neutral portrait -> no specialized skill or optional face module.
+- Young animal with credible attack threat -> evolved-fear-module.
+- Infant visibly endangered or suffering -> cognitive-appraisal may become primary because context overrides morphology.
 
-DO NOT USE WHEN:
-- The subject is an adult neutral/mild face; use todorov-face-evaluation.
-- The infantile subject is visibly in danger, distress, pain, illness, or exploitation; use cognitive-appraisal.
-- The affect comes from uncanny wrongness, body posture, contamination, predatory threat, or aesthetic style rather than baby schema.
+## Visual Variables
 
-VISUAL TRIGGERS:
-- Large head-to-body ratio, high forehead, round face, large low-set eyes.
-- Chubby cheeks, small nose/mouth, short limbs, rounded body, soft plush-like proportions.
-- Infant, cub, puppy/kitten-like morphology, kawaii/chibi/neotenic design.
+- **Head/body proportion**: relatively large rounded head and short compact body.
+- **Facial configuration**: high forehead, round face, large low-set eyes, chubby cheeks, small nose, and small mouth.
+- **Limb/body form**: short limbs, rounded torso, soft contours, and low angularity.
+- **Schema convergence**: number and consistency of visible infantile features; ignore hidden features.
+- **Realism/design**: real infant/young animal versus plush toy, chibi design, doll, robot, or stylized character.
+- **Safety/comfort**: relaxed posture, supportive contact, shelter, play, sleep, or benign surroundings.
+- **Override cues**: crying, injury, restraint, isolation, threat, illness, exploitation, or uncanny human-likeness.
 
-NEAR-MISS BOUNDARIES:
-- Adult baby-faced portrait -> todorov-face-evaluation unless infantile design is explicit.
-- Cute subject in danger or distress -> cognitive-appraisal.
-- Cute animal with predator/threat morphology dominant -> evolved-fear-module.
+## Inference Procedure
 
-## Core Constructs
+1. Qualify the subject and list only visible infantile proportions.
+2. Integrate the visible features into low, medium, or high baby-schema load; category membership alone is insufficient.
+3. Estimate whether the morphology plausibly supports approach/caregiving rather than threat or avoidance.
+4. Check realism and context for safety, distress, danger, exploitation, and uncanny overrides.
+5. Decide whether schema remains primary or becomes an appraisal modifier, then judge VA: safe schema supports positive valence and low-to-moderate arousal; distress or uncanny context can reverse the pattern.
 
-- **Baby schema load**: number and strength of infantile features.
-- **Cuteness perception**: likely viewer response of "cute", "adorable", or tender.
-- **Caregiving motivation**: approach, protect, nurture, hold, or help.
-- **Context safety**: cute response is strongest when the subject appears safe and benign.
-- **Uncanny or distress override**: eerie, injured, exploited, or endangered subjects can flip valence.
+## VA Judgment
 
-## Use When
+Use the shared 1-9 scale without fixed ranges. Baby-schema load is a positive caregiving prior, not a guaranteed emotion. Strong positive valence requires both converging morphology and a benign context. Do not infer very low arousal automatically: active play, intense approach motivation, crying, or danger can raise activation. When context conflicts with morphology, widen uncertainty and avoid averaging away visible suffering.
 
-Use this skill when morphology is the affective source. The key question is whether visible proportions, not narrative context, create a caregiving/cuteness response.
+## Worked Example
 
-## Do-Not-Use-When Rules
+- **Image**: A small puppy with a large rounded head, large eyes, short muzzle, compact body, and short legs lies on a blanket in soft light; no distress or threat is visible.
+- **Analysis**: converging infantile proportions, relaxed posture, shelter, and benign context imply high schema load and a caregiving/approach prior with no override.
+- **VA**: valence 7.8, arousal 4.1 on 1-9; strong applicability, with uncertainty for individual animal preference.
 
-- Do not use for adult face evaluation except weak/partial neoteny notes.
-- Do not rate vulnerable subjects as "cute" when danger, suffering, or exploitation dominates.
-- Do not use for animal threat, contamination, or posture-driven emotion.
-- Do not infer real health, development, personality, or worth from appearance.
+## Output Contract
 
-## Applicability
-
-Strong:
-- Multiple baby schema features are clear and the context is safe/benign.
-
-Partial:
-- Some neotenic cues are present, but age/species/design or context weakens the effect.
-
-Weak:
-- Cuteness is culturally learned, stylistic, or secondary to another affective mechanism.
-
-## Reasoning Steps
-
-1. Identify subject type: infant, baby animal, neotenic design, or weak adult neoteny.
-2. List visible baby schema features and estimate load.
-3. Check safety, distress, danger, exploitation, or uncanny override.
-4. Estimate likely cuteness/caregiving response.
-5. Map safe baby schema to positive valence and low-to-moderate arousal.
-6. Mark partial/weak when morphology is not the main affective driver.
-
-## VA Mapping
-
-| Case | Valence | Arousal |
-|---|---:|---:|
-| High baby schema, safe/benign | 8.0-9.2 | 3.5-5.8 |
-| Moderate baby schema, safe/benign | 7.0-8.2 | 3.0-5.0 |
-| Mild/partial baby schema | 6.0-7.2 | 3.0-5.0 |
-| Extreme cuteness / cute aggression | 8.5-9.5 | 5.0-6.8 |
-| Distress, danger, or uncanny override | 2.0-5.0 | 4.5-7.5 |
-| Weak baby-schema fit | keep near direct VA | keep conservative |
-
-## Boundary Notes
-
-- Baby schema is about morphology, not simply young age or positive content.
-- Safety strongly conditions the cuteness response.
-- Designed characters can qualify if neotenic proportions are visible.
-- If no specialized cue strongly fits, route to `no_specialized_skill`.
-
-## Output Format
-
-The experiment prompt converts this analysis into JSON. Include top-level `valence_score`, `arousal_score`, and `applicability`. In the rationale, report subject type, baby schema features, load, context override check, caregiving/cuteness response, and VA mapping.
+In the shared JSON, separate visible proportions, schema load, caregiving tendency, and safety/override cues. Never infer health, worth, personality, or actual vulnerability.

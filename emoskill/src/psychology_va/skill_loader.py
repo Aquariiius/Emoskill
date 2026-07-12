@@ -3,7 +3,7 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
-from .schemas import PsychologySkillSpec
+from .schemas import MAIN_ROUTING_EXCLUDED_SKILL_IDS, PsychologySkillSpec
 
 
 FRONTMATTER_RE = re.compile(r"\A---\s*\n(?P<body>.*?)\n---\s*\n", re.DOTALL)
@@ -62,19 +62,28 @@ def _build_spec_from_markdown(
     display_name = _extract_h1(body) or _title_from_id(skill_id)
     description = frontmatter.get("description") or _first_nonempty_line(_section(body, "Purpose"))
 
+    applicability_gate = _section(body, "Applicability Gate")
     use_when_section = _section_any(body, ["Use When", "Use-When Rules", "Use When Rules"])
     core_section = (
-        _section(body, "Core Concepts")
+        _section(body, "Visual Variables")
+        or _section(body, "Core Concepts")
         or _section(body, "Core Constructs")
         or _section(body, "Core Concept")
     )
-    reasoning_principle = _section(body, "Reasoning Principle") or _section(body, "Mapping Principle")
-    output_guidance = _section_any(body, ["Output Guidance", "Output Format"])
-    reasoning_steps = _section(body, "Reasoning Steps")
+    reasoning_principle = (
+        _section(body, "VA Judgment")
+        or _section(body, "Reasoning Principle")
+        or _section(body, "Mapping Principle")
+    )
+    output_guidance = _section_any(body, ["Output Contract", "Output Guidance", "Output Format"])
+    reasoning_steps = _section(body, "Inference Procedure") or _section(body, "Reasoning Steps")
     purpose = _section(body, "Purpose")
-    routing_card_section = _section(body, "Routing Card")
+    routing_card_section = applicability_gate or _section(body, "Routing Card")
+    worked_example = _section(body, "Worked Example")
 
-    selection_hints = _bullets(use_when_section) or _ordered_items(use_when_section)
+    routing_card = _parse_routing_card(routing_card_section)
+
+    selection_hints = routing_card.get("use_when", []) or _bullets(use_when_section) or _ordered_items(use_when_section)
     if not selection_hints and description:
         selection_hints = [description]
 
@@ -87,8 +96,7 @@ def _build_spec_from_markdown(
         analysis_steps = _bullets(output_guidance)
 
     va_focus = _squash(reasoning_principle) or _squash(purpose) or description
-    use_when = _squash(use_when_section) or description
-    routing_card = _parse_routing_card(routing_card_section)
+    use_when = _squash(applicability_gate or use_when_section) or description
     if not routing_card:
         routing_card = _fallback_routing_card(selection_hints, image_signals, use_when, analysis_steps)
 
@@ -105,6 +113,8 @@ def _build_spec_from_markdown(
         routing_card=routing_card,
         source_path=str(skill_file),
         raw_skill_markdown=markdown,
+        worked_example=_squash(worked_example),
+        routing_enabled=skill_id not in MAIN_ROUTING_EXCLUDED_SKILL_IDS,
     )
 
 
@@ -171,6 +181,9 @@ def _ordered_items(text: str) -> list[str]:
 
 def _parse_routing_card(text: str) -> dict[str, list[str]]:
     label_map = {
+        "REQUIRED": "use_when",
+        "REJECT": "do_not_use_when",
+        "NEAR MISS": "near_miss_boundaries",
         "USE WHEN": "use_when",
         "DO NOT USE WHEN": "do_not_use_when",
         "DO-NOT-USE-WHEN": "do_not_use_when",

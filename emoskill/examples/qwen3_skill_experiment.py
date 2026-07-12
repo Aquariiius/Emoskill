@@ -50,8 +50,14 @@ DEFAULT_PROJECT_ROOT = "/home/u1120250383/dcs/Emoskill_test"
 DEFAULT_OUTPUT_DIR = "/home/u1120250383/dcs/Emoskill/script_output"
 DEFAULT_IAPS_ALBUM_DIR = "/home/u1120250383/dcs/datasets/IAPS/Dataset"
 IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}
-REQUIRED_SKILL_SECTIONS = ("Purpose", "Output Format")
-USE_WHEN_SECTION_NAMES = ("Use When", "Use-When Rules")
+REQUIRED_SKILL_SECTIONS = (
+    "Applicability Gate",
+    "Visual Variables",
+    "Inference Procedure",
+    "VA Judgment",
+    "Worked Example",
+    "Output Contract",
+)
 DEFAULT_DIAGNOSTIC_SKILLS = ("berlyne-arousal-pleasure", "cognitive-appraisal")
 DEFAULT_IAPS_TRACE_CASE_IDS = (
     "7080",
@@ -497,14 +503,19 @@ def validate_skill_markdown(skill_specs: list[Any]) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     for spec in skill_specs:
         markdown = spec.raw_skill_markdown or ""
-        missing_sections = [
-            section
-            for section in REQUIRED_SKILL_SECTIONS
-            if f"## {section}" not in markdown
+        missing_sections = [] if not spec.routing_enabled else [
+            section for section in REQUIRED_SKILL_SECTIONS if f"## {section}" not in markdown
         ]
-        has_use_when = any(f"## {section}" in markdown for section in USE_WHEN_SECTION_NAMES)
-        if not has_use_when:
-            missing_sections.append("Use When or Use-When Rules")
+        if spec.routing_enabled:
+            size_bytes = len(markdown.encode("utf-8"))
+            if size_bytes > 4096:
+                missing_sections.append(f"size {size_bytes}B exceeds 4096B")
+            if len(spec.analysis_steps) < 4:
+                missing_sections.append("Inference Procedure needs at least 4 numbered steps")
+            if not spec.routing_card.get("use_when"):
+                missing_sections.append("Applicability Gate REQUIRED")
+            if not spec.routing_card.get("do_not_use_when"):
+                missing_sections.append("Applicability Gate REJECT")
         rows.append(
             {
                 "skill_id": spec.skill_id,
@@ -513,6 +524,8 @@ def validate_skill_markdown(skill_specs: list[Any]) -> list[dict[str, Any]]:
                 "has_description": bool(spec.short_description),
                 "selection_hint_count": len(spec.selection_hints),
                 "analysis_step_count": len(spec.analysis_steps),
+                "size_bytes": len(markdown.encode("utf-8")),
+                "routing_enabled": spec.routing_enabled,
                 "missing_sections": missing_sections,
                 "source_path": spec.source_path,
             }
@@ -523,7 +536,11 @@ def validate_skill_markdown(skill_specs: list[Any]) -> list[dict[str, Any]]:
 def print_skill_registry(skill_specs: list[Any]) -> None:
     print(f"Loaded {len(skill_specs)} skill(s) from SKILL.md:")
     for row in validate_skill_markdown(skill_specs):
-        status = "ok" if not row["missing_sections"] else "missing " + ", ".join(row["missing_sections"])
+        status = (
+            "excluded from main routing"
+            if not row["routing_enabled"]
+            else "ok" if not row["missing_sections"] else "missing " + ", ".join(row["missing_sections"])
+        )
         print(
             f"  - {row['skill_id']}: {row['display_name']} "
             f"(hints={row['selection_hint_count']}, steps={row['analysis_step_count']}, {status})"
@@ -580,6 +597,7 @@ def write_outputs(output_dir: Path, payload: dict[str, Any]) -> tuple[Path, Path
                 "skill_arousal_score": routed.get("arousal_score"),
                 "skill_valence": routed.get("valence"),
                 "skill_arousal": routed.get("arousal"),
+                "skill_applicability": routed.get("applicability"),
                 "skill_minus_direct_valence_delta": item_delta.get("valence_delta"),
                 "skill_minus_direct_arousal_delta": item_delta.get("arousal_delta"),
                 "direct_valence_delta": direct_error.get("valence_delta"),
@@ -825,22 +843,18 @@ def render_trace_payload_for_markdown(step: str, entry: dict[str, Any]) -> str:
             ("rejected_alternatives", "Rejected alternatives"),
             ("uncertainty", "Uncertainty"),
         ]
-    elif step == "skill_analysis":
+    elif step in {"skill_analysis", "candidate_skill_analysis"}:
         fields = [
             ("summary", "Summary"),
-            ("visual_observations", "Visual observations"),
+            ("applicability", "Applicability"),
+            ("visual_evidence", "Visual evidence"),
             ("evidence", "Evidence"),
-            ("skill_constructs_applied", "Skill constructs applied"),
+            ("construct_estimates", "Construct estimates"),
             ("skill_procedure_trace", "Skill procedure trace"),
-            ("matched_emotions", "Matched emotions"),
-            ("emotion_weights", "Emotion weights"),
-            ("mapping_trace", "Mapping trace"),
-            ("va_mapping_reasoning", "VA mapping reasoning"),
-            ("appraisal_notes", "Appraisal notes"),
-            ("positive_affect", "Positive affect"),
-            ("negative_affect", "Negative affect"),
+            ("context_modifiers", "Context modifiers"),
+            ("va_judgment", "VA judgment"),
             ("uncertainty", "Uncertainty"),
-            ("reasoning_trace", "Reasoning trace"),
+            ("inference_summary", "Inference summary"),
         ]
     else:
         fields = [
@@ -1733,13 +1747,14 @@ def compact_candidate_for_selection(candidate: dict[str, Any]) -> dict[str, Any]
         "arousal": skill_va.get("arousal"),
         "quadrant": skill_va.get("quadrant"),
         "summary": raw_output.get("summary") or skill_va.get("summary"),
-        "visual_observations": raw_output.get("visual_observations"),
+        "applicability": raw_output.get("applicability"),
+        "visual_evidence": raw_output.get("visual_evidence"),
         "evidence": raw_output.get("evidence") or skill_va.get("evidence"),
-        "skill_constructs_applied": raw_output.get("skill_constructs_applied"),
+        "construct_estimates": raw_output.get("construct_estimates"),
         "skill_procedure_trace": raw_output.get("skill_procedure_trace"),
-        "mapping_trace": raw_output.get("mapping_trace") or skill_va.get("mapping_trace"),
-        "va_mapping_reasoning": raw_output.get("va_mapping_reasoning"),
-        "reasoning_trace": raw_output.get("reasoning_trace"),
+        "context_modifiers": raw_output.get("context_modifiers"),
+        "va_judgment": raw_output.get("va_judgment"),
+        "inference_summary": raw_output.get("inference_summary"),
         "uncertainty": raw_output.get("uncertainty") or skill_va.get("uncertainty"),
     }
 
@@ -2183,11 +2198,11 @@ def run_single(args: argparse.Namespace) -> int:
         "annotations_count": len(annotations),
         "score_scale": {
             "raw_score_min": 1,
-            "raw_score_neutral": 5.5,
-            "raw_score_max": 10,
-            "normalization": "normalized = (score - 1) / 9",
-            "valence_score": "1=very negative, 5.5=neutral, 10=very positive",
-            "arousal_score": "1=very calm/deactivated, 5.5=moderate activation, 10=highly activated",
+            "raw_score_neutral": 5,
+            "raw_score_max": 9,
+            "normalization": "normalized = (score - 1) / 8",
+            "valence_score": "1=very negative, 5=neutral, 9=very positive",
+            "arousal_score": "1=very calm/deactivated, 5=moderate activation, 9=highly activated",
         },
         "args": vars(args),
         "skill_registry": [

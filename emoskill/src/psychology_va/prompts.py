@@ -16,37 +16,41 @@ VA_AFFECT_DEFINITION = (
 
 
 VA_SCORE_INSTRUCTIONS = (
-    "Use this 1-10 scoring scale for numeric VA outputs:\n"
-    "Score valence on a 1-10 scale: 1 = very negative/unpleasant, 5.5 = neutral, 10 = very positive/pleasant.\n"
-    "Score arousal on a 1-10 scale: 1 = very calm/deactivated, 5.5 = moderate activation, 10 = highly activated. "
-    "Note that 5.5 on arousal means 'moderate activation', not 'neutral' — arousal has no true neutral point the way valence does.\n"
+    "Use one shared 1-9 scoring scale for every skill and direct baseline:\n"
+    "Score valence on 1-9: 1 = very negative/unpleasant, 5 = neutral, 9 = very positive/pleasant.\n"
+    "Score arousal on 1-9: 1 = very calm/deactivated, 5 = moderate activation, 9 = highly activated. "
+    "Arousal 5 means moderate activation, not neutral affect.\n"
+    "Judge VA only after completing the skill's observable inference procedure. Do not convert a semantic label directly into a score.\n"
+    "Reserve scores near 1 or 9 for multiple converging, unambiguous visible cues; keep weak or conflicting evidence closer to the center.\n"
     "The top-level JSON keys valence_score and arousal_score are mandatory in every analysis response. "
     "Never omit them; if evidence is weak or ambiguous, still provide your best estimate and explain uncertainty.\n"
     "Return only valence_score and arousal_score for the numeric VA values. Do not return normalized 0-1 valence/arousal; the script will normalize later.\n"
     "Do not put VA scores only inside nested objects such as scores, va, final_va, or analysis. "
     "Do not use alternate names such as final_valence, final_arousal, valence, arousal, or VA TENDENCY as the only score fields.\n"
-    "Keep the full JSON compact enough to finish within the token budget: use at most 3 evidence items, "
-    "at most 3 mapping_trace items, at most 3 observed_cues, and make reasoning_trace a single short string under 35 words.\n"
+    "Keep the JSON compact: at most 5 visual_evidence items, 4 construct_estimates, and 3 context_modifiers.\n"
 )
 
 
 FULL_INFERENCE_VA_SCORE_INSTRUCTIONS = (
-    "Use this 1-10 scoring scale for numeric VA outputs:\n"
-    "Score valence on a 1-10 scale: 1 = very negative/unpleasant, 5.5 = neutral, 10 = very positive/pleasant.\n"
-    "Score arousal on a 1-10 scale: 1 = very calm/deactivated, 5.5 = moderate activation, 10 = highly activated.\n"
+    "Use one shared 1-9 scoring scale for every skill and direct baseline:\n"
+    "Score valence on 1-9: 1 = very negative/unpleasant, 5 = neutral, 9 = very positive/pleasant.\n"
+    "Score arousal on 1-9: 1 = very calm/deactivated, 5 = moderate activation, 9 = highly activated.\n"
+    "Judge VA only after the observable inference procedure and reserve extreme scores for converging evidence.\n"
     "The top-level JSON keys valence_score and arousal_score are mandatory in every analysis response. "
     "Never omit them; if evidence is weak or ambiguous, still provide your best estimate and explain uncertainty.\n"
     "Return only valence_score and arousal_score for the numeric VA values. Do not return normalized 0-1 valence/arousal; the script will normalize later.\n"
     "Do not put VA scores only inside nested objects such as scores, va, final_va, or analysis. "
     "Do not use alternate names such as final_valence, final_arousal, valence, arousal, or VA TENDENCY as the only score fields.\n"
-    "For explanatory fields, provide a detailed but bounded structured rationale based on visible evidence and the selected model. "
-    "Do not expose private hidden chain-of-thought; instead provide an auditable inference summary with observations, applied constructs, and VA mapping.\n"
+    "For explanatory fields, provide a bounded structured rationale based on visible evidence and the selected model. "
+    "Do not expose private hidden chain-of-thought; provide an auditable summary of observations, construct estimates, modifiers, and the final VA judgment.\n"
 )
 
 
 def _catalog_as_text(skill_specs: list[PsychologySkillSpec]) -> str:
     rows = []
     for spec in skill_specs:
+        if not spec.routing_enabled:
+            continue
         routing_card = spec.routing_card or {
             "use_when": spec.selection_hints[:3] or ([spec.use_when] if spec.use_when else []),
             "visual_triggers": spec.image_signals[:6],
@@ -56,31 +60,24 @@ def _catalog_as_text(skill_specs: list[PsychologySkillSpec]) -> str:
             {
                 "skill_id": spec.skill_id,
                 "display_name": spec.display_name,
-                "short_description": _compact_text(spec.short_description, max_chars=160),
-                "routing_card": {key: value for key, value in routing_card.items() if value},
+                "applicability_gate": {key: value for key, value in routing_card.items() if value},
             }
         )
     return json.dumps(rows, ensure_ascii=True, indent=2)
 
 
-def _compact_text(text: str, *, max_chars: int) -> str:
-    compact = " ".join(text.split())
-    if len(compact) <= max_chars:
-        return compact
-    return compact[: max_chars - 3].rstrip() + "..."
-
-
 def _routing_preference_rules() -> str:
     return (
-        "- Prefer kaplan-art-restoration for restorative environments, especially nature and recovery-oriented scenes.\n"
-        "- Prefer berlyne-arousal-pleasure for artworks, design, novelty, complexity, and aesthetic stimulation.\n"
-        "- Prefer todorov-face-evaluation when a human face is central and the judgment depends on trustworthiness or dominance impressions.\n"
-        "- Prefer cognitive-appraisal when the affect depends on inferred goals, agency, responsibility, coping potential, or situational meaning.\n"
+        "- Test directly visible specialized mechanisms before using the cognitive-appraisal fallback.\n"
+        "- Prefer kaplan-art-restoration for enterable, low-demand restorative environments.\n"
+        "- Prefer berlyne-arousal-pleasure only when measurable perceptual novelty, complexity, ambiguity, or incongruity drives affect.\n"
         "- Prefer evolved-fear-module when evolutionarily threatening animals (snakes, spiders, predators) are the dominant content.\n"
         "- Prefer pathogen-disgust for visible contamination, rot, bodily waste, wounds, or pest infestation.\n"
         "- Prefer baby-schema when an infant, baby animal, or neotenic character is the dominant subject.\n"
         "- Prefer emotional-body-language when human body posture or gesture carries the primary emotional signal and the face is obscured or secondary.\n"
-        "- Prefer awe when the scene depicts grand, majestic, or vast scale (towering mountains, star skies, storm systems).\n"
+        "- Prefer awe only when physically overwhelming scale and self-diminishment cues dominate.\n"
+        "- Use cognitive-appraisal as a disciplined hub/fallback only when visible actors, actions, stakes, agency, consequences, or context determine affect and no more direct specialized mechanism explains it.\n"
+        "- Cognitive appraisal is not the fallback for ordinary objects, neutral portraits, or scenes without visible stakes; use no_specialized_skill for those.\n"
     )
 
 
@@ -88,10 +85,10 @@ def build_routing_system_prompt(skill_specs: list[PsychologySkillSpec]) -> str:
     return (
         "You are a psychology-model router for visual affect analysis.\n"
         f"{VA_AFFECT_DEFINITION}\n"
-        "Choose one specialized psychology skill only when a routing card strongly matches the image.\n"
+        "Choose one specialized psychology skill only when its applicability gate strongly matches the image.\n"
         f"If no specialized skill strongly matches, return skill_id={NO_SPECIALIZED_SKILL_ID} and candidate_skill_ids=[].\n"
         "Return exactly one valid JSON object and no Markdown, no code fences, no headings, no prose before or after the JSON.\n"
-        "Each skill includes a compact routing card. Use it as the first-pass selector and match only visible cue structure.\n"
+        "Each skill includes one compact applicability gate. Match visible mechanisms, not emotion words or scene labels.\n"
         "Available skills:\n"
         f"{_catalog_as_text(skill_specs)}\n\n"
         "Rules:\n"
@@ -115,7 +112,7 @@ def build_full_routing_system_prompt(skill_specs: list[PsychologySkillSpec]) -> 
     return (
         "You are a psychology-model router for visual affect analysis.\n"
         f"{VA_AFFECT_DEFINITION}\n"
-        "Choose one specialized psychology skill only when a routing card strongly matches the image.\n"
+        "Choose one specialized psychology skill only when its applicability gate strongly matches the image.\n"
         f"If no specialized skill strongly matches, return skill_id={NO_SPECIALIZED_SKILL_ID} and candidate_skill_ids=[].\n"
         "This is a long-form inference trace run: explain the routing decision with enough detail to audit why this skill was selected.\n"
         "Return exactly one valid JSON object and no Markdown, no code fences, no headings, no prose before or after the JSON.\n"
@@ -169,8 +166,8 @@ def build_skill_selection_system_prompt(candidate_skill_ids: list[str]) -> str:
         "{\n"
         '  "selected_skill_id": "skill-id",\n'
         '  "reason": "why this candidate is the best final score source",\n'
-        '  "selected_valence_score": 5.5,\n'
-        '  "selected_arousal_score": 5.5,\n'
+        '  "selected_valence_score": 5.0,\n'
+        '  "selected_arousal_score": 5.0,\n'
         '  "rejected_candidates": [{"skill_id": "other-skill-id", "why_not": "brief reason"}],\n'
         '  "confidence": 0.0\n'
         "}\n"
@@ -201,48 +198,37 @@ def build_analysis_system_prompt(skill_spec: PsychologySkillSpec) -> str:
         "display_name": skill_spec.display_name,
         "short_description": skill_spec.short_description,
         "theory_family": skill_spec.theory_family,
-        "selection_hints": skill_spec.selection_hints,
-        "use_when": skill_spec.use_when,
+        "applicability_gate": skill_spec.routing_card,
         "image_signals": skill_spec.image_signals,
         "va_focus": skill_spec.va_focus,
         "analysis_steps": skill_spec.analysis_steps,
-        "discrete_emotions": skill_spec.discrete_emotions,
-        "emotion_va_map": skill_spec.emotion_va_map,
-        "aggregation_rule": skill_spec.aggregation_rule,
+        "worked_example": skill_spec.worked_example,
     }
     return (
         "You are a psychology-guided visual affect analyst.\n"
         f"{VA_AFFECT_DEFINITION}"
         "Use the provided skill definition to analyze the image.\n"
-        "Always include an applicability field: strong, partial, or weak. If applicability is weak, still output top-level VA scores, but make them conservative and explain the scope mismatch instead of pretending the skill fits.\n"
+        "Follow every numbered inference step in order. Each construct estimate must cite visible evidence.\n"
+        "Always include applicability: strong, partial, or weak. If weak, keep scores conservative and explain the mismatch.\n"
         "Return exactly one valid JSON object and no Markdown, no code fences, no headings, no prose before or after the JSON.\n"
         "Do not copy the skill's narrative output template. Convert the analysis into the JSON schema below.\n"
         "The first two top-level keys of the object must be valence_score and arousal_score.\n"
         f"{VA_SCORE_INSTRUCTIONS}"
         f"Skill definition:\n{json.dumps(compact_skill_definition, ensure_ascii=True, indent=2)}\n\n"
-        "If the selected skill includes discrete_emotions and emotion_va_map, you must:\n"
-        "- first identify 2 to 5 most plausible discrete emotions from that list\n"
-        "- assign normalized weights summing to 1\n"
-        "- estimate final valence_score and arousal_score from the weighted mapping table, which also uses 1-10 scores\n"
-        "- include the mapping process in the output\n\n"
         "Required JSON schema:\n"
         "{\n"
-        '  "valence_score": 5.5,\n'
-        '  "arousal_score": 5.5,\n'
+        '  "valence_score": 5.0,\n'
+        '  "arousal_score": 5.0,\n'
         '  "skill_id": "skill-id",\n'
         '  "quadrant": "short label",\n'
         '  "applicability": "strong|partial|weak",\n'
         '  "summary": "concise explanation",\n'
-        '  "evidence": ["visible cue"],\n'
-        '  "matched_emotions": ["emotion term"],\n'
-        '  "emotion_weights": {"emotion term": 1.0},\n'
-        '  "mapping_trace": ["mapping step"],\n'
-        '  "appraisal_notes": ["inferred appraisal note"],\n'
-        '  "positive_affect": ["likely positive affect state"],\n'
-        '  "negative_affect": ["likely negative affect state"],\n'
+        '  "visual_evidence": [{"variable":"skill variable","observation":"visible fact","level":"low|medium|high"}],\n'
+        '  "construct_estimates": [{"construct":"theory construct","level":"low|medium|high","basis":"visible evidence"}],\n'
+        '  "context_modifiers": ["visible modifier or competing mechanism"],\n'
+        '  "evidence": ["most score-relevant visible cue"],\n'
         '  "uncertainty": "brief uncertainty note",\n'
-        '  "observed_cues": ["cue"],\n'
-        '  "reasoning_trace": "one concise sentence, not a list"\n'
+        '  "inference_summary": "concise progression from evidence to constructs to VA"\n'
         "}\n"
     )
 
@@ -253,21 +239,18 @@ def build_full_skill_analysis_system_prompt(skill_spec: PsychologySkillSpec) -> 
         "display_name": skill_spec.display_name,
         "short_description": skill_spec.short_description,
         "theory_family": skill_spec.theory_family,
-        "selection_hints": skill_spec.selection_hints,
-        "use_when": skill_spec.use_when,
+        "applicability_gate": skill_spec.routing_card,
         "image_signals": skill_spec.image_signals,
         "va_focus": skill_spec.va_focus,
         "analysis_steps": skill_spec.analysis_steps,
-        "discrete_emotions": skill_spec.discrete_emotions,
-        "emotion_va_map": skill_spec.emotion_va_map,
-        "aggregation_rule": skill_spec.aggregation_rule,
+        "worked_example": skill_spec.worked_example,
     }
     raw_skill_markdown = skill_spec.raw_skill_markdown or ""
     return (
         "You are a psychology-guided visual affect analyst.\n"
         f"{VA_AFFECT_DEFINITION}"
         "This is a full-skill utilization trace run. Use the selected skill's complete SKILL.md, not only its compact summary.\n"
-        "Apply the skill's named constructs, use-when rules, reasoning steps, mapping principles, and output guidance to the visible image evidence. "
+        "Apply the skill's applicability gate, visual variables, inference procedure, VA judgment, and worked example to the visible image evidence. "
         "When a skill construct is weak or not applicable, state that briefly instead of forcing the image to fit the theory.\n"
         "Always include an applicability field: strong, partial, or weak. If applicability is weak, still output top-level VA scores, but make them conservative and explain the scope mismatch instead of pretending the skill fits.\n"
         "Return exactly one valid JSON object and no Markdown, no code fences, no headings, no prose before or after the JSON.\n"
@@ -276,33 +259,22 @@ def build_full_skill_analysis_system_prompt(skill_spec: PsychologySkillSpec) -> 
         f"{FULL_INFERENCE_VA_SCORE_INSTRUCTIONS}"
         f"Compact skill metadata:\n{json.dumps(compact_skill_definition, ensure_ascii=True, indent=2)}\n\n"
         f"Full SKILL.md:\n{raw_skill_markdown}\n\n"
-        "If the selected skill includes discrete_emotions and emotion_va_map, you must:\n"
-        "- identify 2 to 5 most plausible discrete emotions from that list\n"
-        "- assign normalized weights summing to 1\n"
-        "- estimate final valence_score and arousal_score from the weighted mapping table, which also uses 1-10 scores\n"
-        "- include the mapping process in the output\n\n"
         "Required JSON schema:\n"
         "{\n"
-        '  "valence_score": 5.5,\n'
-        '  "arousal_score": 5.5,\n'
+        '  "valence_score": 5.0,\n'
+        '  "arousal_score": 5.0,\n'
         '  "skill_id": "skill-id",\n'
         '  "quadrant": "short label",\n'
         '  "applicability": "strong|partial|weak",\n'
         '  "summary": "concise final affect summary",\n'
-        '  "visual_observations": ["specific visible cue"],\n'
+        '  "visual_evidence": [{"variable":"skill variable","observation":"visible fact","level":"low|medium|high"}],\n'
         '  "evidence": ["visible cue used for scoring"],\n'
-        '  "skill_constructs_applied": [{"construct": "skill construct", "image_evidence": "visible cue", "effect_on_va": "VA implication"}],\n'
+        '  "construct_estimates": [{"construct":"skill construct","level":"low|medium|high","basis":"visible evidence"}],\n'
         '  "skill_procedure_trace": ["step-by-step application of the selected skill to the image"],\n'
-        '  "matched_emotions": ["emotion term"],\n'
-        '  "emotion_weights": {"emotion term": 1.0},\n'
-        '  "mapping_trace": ["mapping step"],\n'
-        '  "va_mapping_reasoning": "detailed explanation of how the skill evidence maps to final valence_score and arousal_score",\n'
-        '  "appraisal_notes": ["inferred appraisal note"],\n'
-        '  "positive_affect": ["likely positive affect state"],\n'
-        '  "negative_affect": ["likely negative affect state"],\n'
+        '  "context_modifiers": ["visible modifier or competing mechanism"],\n'
+        '  "va_judgment": "how evidence and constructs support final V and A without a hard lookup table",\n'
         '  "uncertainty": "uncertainty and limitations",\n'
-        '  "observed_cues": ["cue"],\n'
-        '  "reasoning_trace": "auditable rationale, 4-8 sentences, grounded in the selected skill and visible image evidence"\n'
+        '  "inference_summary": "auditable evidence-to-construct-to-VA summary"\n'
         "}\n"
     )
 
@@ -330,8 +302,8 @@ def build_direct_va_system_prompt() -> str:
         f"{VA_SCORE_INSTRUCTIONS}"
         "Required JSON schema:\n"
         "{\n"
-        '  "valence_score": 5.5,\n'
-        '  "arousal_score": 5.5,\n'
+        '  "valence_score": 5.0,\n'
+        '  "arousal_score": 5.0,\n'
         '  "quadrant": "short label",\n'
         '  "summary": "concise explanation",\n'
         '  "evidence": ["visible cue"],\n'
@@ -352,8 +324,8 @@ def build_full_direct_va_system_prompt() -> str:
         f"{FULL_INFERENCE_VA_SCORE_INSTRUCTIONS}"
         "Required JSON schema:\n"
         "{\n"
-        '  "valence_score": 5.5,\n'
-        '  "arousal_score": 5.5,\n'
+        '  "valence_score": 5.0,\n'
+        '  "arousal_score": 5.0,\n'
         '  "quadrant": "short label",\n'
         '  "summary": "concise final affect summary",\n'
         '  "visual_observations": ["specific visible cue"],\n'

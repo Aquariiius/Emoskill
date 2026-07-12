@@ -1,91 +1,56 @@
 ---
 name: "berlyne-arousal-pleasure"
-description: "Analyzes aesthetic stimulation with Berlyne's collative variables: novelty, complexity, ambiguity, incongruity, and surprise. Use when perceptual or compositional stimulation is the affective driver. Do not use for ordinary low-stimulation objects, restorative environments, narrative threat, face/body emotion, or specialized cues better handled by another skill."
+description: "Analyze perceptual affect using Berlyne's collative variables: complexity, novelty, ambiguity, incongruity, order, and processing fluency. Progress from visible composition to arousal potential and hedonic judgment. Do not route ordinary objects, narrative emotion, restorative space, vastness, or biological cues merely because an image is artistic or detailed."
 ---
 
-# Berlyne Arousal-Aesthetic Pleasure
+# Berlyne Arousal-Pleasure
 
-## Purpose
+## Applicability Gate
 
-Estimate affect from visual stimulation itself: how novelty, complexity, ambiguity, incongruity, surprise, pattern, or design creates arousal potential and hedonic value. This skill is for perceptual/aesthetic mechanisms, not narrative emotion or generic object analysis.
+REQUIRED:
+- Perceptual or compositional stimulation, rather than depicted story or object category, is the primary affective mechanism.
+- At least two collative variables have visible support, or one is exceptionally dominant.
+- The image demands active visual organization, comparison, or resolution.
 
-## Routing Card
+REJECT:
+- Ordinary product, object, still life, or familiar scene with trivial visual organization.
+- Arousal is better explained by danger, bodily action, contamination, infantile morphology, or social stakes.
+- Calm enterable space or physically overwhelming scale better fits Kaplan or Awe.
 
-USE WHEN:
-- Affect is driven by visible novelty, complexity, ambiguity, incongruity, surprise, pattern density, or design.
-- The image invites active visual engagement or hard fascination.
-- Object, artwork, architecture, design, abstract form, or arrangement is the affective focus.
+NEAR MISS:
+- Low-demand coherent environment -> kaplan-art-restoration.
+- Vastness and self-diminishment -> awe.
+- Narrative ambiguity about actors and consequences -> cognitive-appraisal; perceptual ambiguity remains Berlyne.
 
-DO NOT USE WHEN:
-- The image is a mundane object or still life with no meaningful collative variable.
-- The scene is a calm restorative environment.
-- Affect is driven by situation, threat, face, body posture, contamination, baby schema, threat animal, or overwhelming scale.
+## Visual Variables
 
-VISUAL TRIGGERS:
-- Unusual composition, abstract form, visual density, puzzling arrangement, high contrast, rich pattern, incongruity.
-- Stylized artwork, striking design, surreal elements, perceptual ambiguity.
-- Stimulation that can be pleasant, boring, or overwhelming depending on intensity.
+- **Element/region density**: concentration of distinct forms, boundaries, objects, and regions, judged ordinally.
+- **Feature variety**: diversity of color, orientation, texture, shape, scale, and local contrast.
+- **Order/regularity**: symmetry, repetition, alignment, hierarchy, rhythm, predictability, and grouping.
+- **Perceptual ambiguity**: multiple figure-ground organizations or visual interpretations, not unknown backstory.
+- **Incongruity/surprise**: visibly incompatible forms, unexpected placement, disrupted pattern, or violated visual expectation.
+- **Sensory intensity**: contrast, saturation, sharp transitions, crowding, and focal competition.
+- **Processing fluency**: whether structure can be grouped and resolved despite stimulation, versus unresolved overload.
 
-NEAR-MISS BOUNDARIES:
-- Low-demand natural/spatial environment -> kaplan-art-restoration.
-- Human stakes, danger, social meaning, or narrative ambiguity -> cognitive-appraisal.
-- Plain low-stimulation object -> no_specialized_skill or weak Berlyne.
+## Inference Procedure
 
-## Core Constructs
+1. Confirm that affect comes from visual organization; exclude narrative, restorative, scale, and biological mechanisms.
+2. Describe element density, feature variety, order, ambiguity, incongruity, and sensory intensity using visible anchors.
+3. Integrate complexity, novelty, ambiguity, and intensity into arousal potential; detail alone is insufficient.
+4. Estimate processing fluency from hierarchy, grouping, repetition, and resolvability; distinguish engaging complexity from chaotic overload.
+5. Judge hedonic tendency and VA from stimulation versus fluency. The inverted-U is only a population-level final relation, never an image feature; report uncertainty from expertise and familiarity.
 
-- **Collative variables**: novelty, complexity, ambiguity, incongruity, and surprise.
-- **Arousal potential**: how much active perceptual processing the image demands.
-- **Hedonic value**: pleasure follows a rough inverted-U; too little is flat, moderate is engaging, excessive can be aversive.
-- **Psychophysical intensity**: contrast, saturation, density, and scale can raise arousal but do not define the skill alone.
+## VA Judgment
 
-## Use When
+Use the shared 1-9 scale without fixed ranges. Complexity, novelty, detail, and ambiguity alone do NOT set arousal; arousal rises only with high sensory intensity (strong contrast/saturation, crowding, focal competition) or unresolved overload. An intricate but orderly, fluent, low-contrast composition can be calm. Valence depends on processability: fluent engagement can be pleasant, unresolved overload unpleasant, very low stimulation neutral or dull. Do not infer an individual's optimal stimulation point.
 
-Use this skill when perceptual stimulation explains affect better than what the image depicts narratively. A static object can qualify only if its arrangement, style, ambiguity, or design is genuinely salient.
+## Worked Example
 
-## Do-Not-Use-When Rules
+- **Image**: An abstract poster of many irregular high-contrast shapes, but repeated alignments and a clear hierarchy organize it; several figure-ground readings exist.
+- **Analysis**: high contrast raises arousal somewhat, but strong order and fluency prevent overload; pleasant rather than chaotic.
+- **VA**: valence 6.3, arousal 5.2 on 1-9; strong applicability.
+- **Calm counter-case**: a dense but soft, low-contrast, symmetric pattern -> valence ~6.0, arousal ~3.8; detail without intensity is not high arousal.
 
-- Do not use for ordinary object shots just because they are composed.
-- Do not use for threat scenes where arousal comes from danger.
-- Do not use for calm nature/spaces where attention is restored rather than stimulated.
-- Do not use when a specialized biological or social mechanism is clearer.
+## Output Contract
 
-## Applicability
-
-Strong:
-- One or more collative variables clearly dominate affect.
-
-Partial:
-- Aesthetic stimulation is present but competes with narrative, environment, or scale.
-
-Weak:
-- The image is visually simple, familiar, and low in novelty/complexity; keep VA close to direct baseline.
-
-## Reasoning Steps
-
-1. Confirm that affect is perceptual/compositional rather than narrative or restorative.
-2. Identify salient collative variables and sensory intensity.
-3. Estimate arousal potential: low, moderate, or excessive.
-4. Place the image on the inverted-U.
-5. Infer hedonic value from arousal potential and visible tone.
-6. Mark weak applicability when collative variables are trivial.
-
-## VA Mapping
-
-| Case | Valence | Arousal |
-|---|---:|---:|
-| Low stimulation, familiar/simple | 4.8-5.8 | 2.5-5.0 |
-| Moderate stimulation, engaging | 6.0-8.0 | 5.0-7.0 |
-| Excessive stimulation, chaotic/aversive | 2.5-5.0 | 7.0-9.0 |
-| Somber aesthetic stimulation | 3.0-5.5 | 5.0-7.5 |
-| Weak Berlyne fit | keep near direct VA | keep conservative |
-
-## Boundary Notes
-
-- Berlyne is not a fallback for every object image.
-- "Interesting composition" must be visibly supported by non-trivial collative variables.
-- Repetition counts only when it creates real perceptual engagement, not merely order.
-- If no specialized cue strongly fits, route to `no_specialized_skill`.
-
-## Output Format
-
-The experiment prompt converts this analysis into JSON. Include top-level `valence_score`, `arousal_score`, and `applicability`. In the rationale, report collative variables, arousal potential, inverted-U position, boundary checks, and VA mapping.
+In the shared JSON, separate observable composition, arousal potential, processing fluency, and competing mechanisms. Never invoke the inverted-U before documenting stimulation and fluency.

@@ -101,6 +101,43 @@ def build_default_skill_specs() -> list[PsychologySkillSpec]:
                 "combine the two dimensions into an overall social-affective impression",
                 "project the resulting impression into valence-arousal space and explain uncertainty",
             ],
+            routing_enabled=False,
+        ),
+        PsychologySkillSpec(
+            skill_id="cognitive-appraisal",
+            display_name="Cognitive Appraisal",
+            short_description=(
+                "A disciplined interpretive hub for context-dependent affect when visible actors, actions, "
+                "stakes, agency, control, consequences, or social meaning determine the image's VA."
+            ),
+            theory_family="cognitive-appraisal",
+            selection_hints=[
+                "visible actors, actions, consequences, or stakes determine affect",
+                "observation must be separated from interpretation and multiple hypotheses remain plausible",
+                "no more direct specialized visual mechanism adequately explains the affect",
+            ],
+            use_when=(
+                "Use as a disciplined hub/fallback for visible event meaning, not as a generic fallback for "
+                "ordinary objects, neutral portraits, or scenes without visible stakes."
+            ),
+            image_signals=[
+                "actors and action relations",
+                "visible stakes or consequences",
+                "agency and responsibility cues",
+                "control, coping, or escape cues",
+                "uncertain or competing situational interpretations",
+            ],
+            va_focus=(
+                "Infer valence from visible goal congruence and arousal from urgency, imminence, uncertainty, "
+                "and coping demand; keep judgments conservative when appraisal evidence is incomplete."
+            ),
+            analysis_steps=[
+                "record visible actors, actions, objects, and consequences without interpretation",
+                "form at least two hypotheses when the situation is ambiguous",
+                "estimate supported appraisal dimensions and reject unsupported mental-state claims",
+                "apply an evidence gate and compare direct specialized mechanisms",
+                "judge VA on the shared 1-9 scale and report uncertainty",
+            ],
         ),
         PsychologySkillSpec(
             skill_id="evolved-fear-module",

@@ -1,0 +1,1694 @@
+Loaded 9 skill(s) from SKILL.md:
+  - awe: Awe (hints=3, steps=5, ok)
+  - baby-schema: Baby Schema / Kindchenschema (hints=3, steps=5, ok)
+  - berlyne-arousal-pleasure: Berlyne Arousal-Pleasure (hints=3, steps=5, ok)
+  - cognitive-appraisal: Cognitive Appraisal (hints=3, steps=5, ok)
+  - emotional-body-language: Emotional Body Language (hints=3, steps=5, ok)
+  - evolved-fear-module: Evolved Fear Module (hints=3, steps=5, ok)
+  - kaplan-art-restoration: Kaplan Attention Restoration Theory (hints=3, steps=5, ok)
+  - pathogen-disgust: Pathogen Disgust (hints=3, steps=5, ok)
+  - todorov-face-evaluation: Todorov Face Evaluation (hints=3, steps=5, excluded from main routing)
+Images: 295
+[1/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/1026.jpg
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:01<00:03,  1.26s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:02<00:02,  1.16s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:03<00:01,  1.14s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:04<00:00,  1.07it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:04<00:00,  1.02s/it]
+`generation_config` default values have been modified to match model-specific defaults: {'do_sample': True}. If this is not desired, please set these values explicitly.
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 30.291s
+  route: evolved-fear-module conf=0.95 in 3.251s
+  candidates: evolved-fear-module
+  candidate 1/1 evolved-fear-module: Vscore=3.50 Ascore=7.00 (norm V=0.312 A=0.750) in 22.056s
+  selected: evolved-fear-module Vscore=3.50 Ascore=7.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[2/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/1050.jpg
+  direct: Vscore=3.00 Ascore=8.00 (norm V=0.250 A=0.875) in 5.707s
+  route: evolved-fear-module conf=0.99 in 3.053s
+  candidates: evolved-fear-module
+  candidate 1/1 evolved-fear-module: Vscore=2.00 Ascore=8.50 (norm V=0.125 A=0.938) in 21.347s
+  selected: evolved-fear-module Vscore=2.00 Ascore=8.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[3/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/1080.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 6.078s
+  route: evolved-fear-module conf=0.98 in 3.475s
+  candidates: evolved-fear-module
+  candidate 1/1 evolved-fear-module: Vscore=3.00 Ascore=6.50 (norm V=0.250 A=0.688) in 19.244s
+  selected: evolved-fear-module Vscore=3.00 Ascore=6.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[4/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/1111.jpg
+  direct: Vscore=3.00 Ascore=7.00 (norm V=0.250 A=0.750) in 6.069s
+  route: evolved-fear-module conf=0.99 in 3.206s
+  candidates: evolved-fear-module
+  candidate 1/1 evolved-fear-module: Vscore=3.00 Ascore=7.50 (norm V=0.250 A=0.812) in 20.535s
+  selected: evolved-fear-module Vscore=3.00 Ascore=7.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[5/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/1120.jpg
+  direct: Vscore=3.00 Ascore=8.00 (norm V=0.250 A=0.875) in 6.566s
+  route: evolved-fear-module conf=0.99 in 3.045s
+  candidates: evolved-fear-module
+  candidate 1/1 evolved-fear-module: Vscore=2.00 Ascore=8.50 (norm V=0.125 A=0.938) in 18.289s
+  selected: evolved-fear-module Vscore=2.00 Ascore=8.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[6/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/1201.jpg
+  direct: Vscore=4.50 Ascore=6.50 (norm V=0.438 A=0.688) in 6.884s
+  route: evolved-fear-module conf=0.99 in 3.120s
+  candidates: evolved-fear-module
+  candidate 1/1 evolved-fear-module: Vscore=3.00 Ascore=6.50 (norm V=0.250 A=0.688) in 21.368s
+  selected: evolved-fear-module Vscore=3.00 Ascore=6.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[7/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/1230.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 6.103s
+  route: evolved-fear-module conf=0.95 in 2.914s
+  candidates: evolved-fear-module
+  candidate 1/1 evolved-fear-module: Vscore=3.00 Ascore=6.50 (norm V=0.250 A=0.688) in 21.950s
+  selected: evolved-fear-module Vscore=3.00 Ascore=6.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[8/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/1274.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.305s
+  route: evolved-fear-module conf=0.99 in 3.334s
+  candidates: evolved-fear-module
+  candidate 1/1 evolved-fear-module: Vscore=2.00 Ascore=6.50 (norm V=0.125 A=0.688) in 21.856s
+  selected: evolved-fear-module Vscore=2.00 Ascore=6.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[9/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/1301.jpg
+  direct: Vscore=3.00 Ascore=8.00 (norm V=0.250 A=0.875) in 7.303s
+  route: evolved-fear-module conf=0.99 in 3.490s
+  candidates: evolved-fear-module
+  candidate 1/1 evolved-fear-module: Vscore=2.00 Ascore=8.50 (norm V=0.125 A=0.938) in 18.987s
+  selected: evolved-fear-module Vscore=2.00 Ascore=8.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[10/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/1310.jpg
+  direct: Vscore=3.00 Ascore=8.00 (norm V=0.250 A=0.875) in 6.208s
+  route: pathogen-disgust conf=0.99 in 3.281s
+  candidates: pathogen-disgust, evolved-fear-module
+  candidate 1/2 pathogen-disgust: Vscore=2.00 Ascore=7.50 (norm V=0.125 A=0.812) in 20.405s
+  candidate 2/2 evolved-fear-module: Vscore=2.00 Ascore=8.00 (norm V=0.125 A=0.875) in 20.498s
+  selected: pathogen-disgust Vscore=2.00 Ascore=7.50 reason=The image's primary psychological trigger is the visceral, unambiguous presence of blood and raw flesh, which directly activates the pathogen-disgust module. While the evolved-fear... [truncated]
+[11/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/1340.jpg
+  direct: Vscore=7.50 Ascore=6.00 (norm V=0.812 A=0.625) in 5.860s
+  route: cognitive-appraisal conf=0.95 in 3.320s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=7.50 Ascore=5.50 (norm V=0.812 A=0.562) in 20.837s
+  selected: cognitive-appraisal Vscore=7.50 Ascore=5.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[12/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/1419.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 6.043s
+  route: cognitive-appraisal conf=0.95 in 3.261s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=6.50 Ascore=5.50 (norm V=0.688 A=0.562) in 19.467s
+  selected: cognitive-appraisal Vscore=6.50 Ascore=5.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[13/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/1460.jpg
+  direct: Vscore=6.50 Ascore=5.50 (norm V=0.688 A=0.562) in 6.760s
+  route: baby-schema conf=0.98 in 3.001s
+  candidates: baby-schema
+  candidate 1/1 baby-schema: Vscore=6.50 Ascore=5.50 (norm V=0.688 A=0.562) in 22.237s
+  selected: baby-schema Vscore=6.50 Ascore=5.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[14/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/1510.jpg
+  direct: Vscore=7.00 Ascore=6.00 (norm V=0.750 A=0.625) in 5.858s
+  route: no_specialized_skill conf=0.99 in 3.585s
+  selected: no_specialized_skill Vscore=7.00 Ascore=6.00 using direct VA baseline
+[15/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/1590.jpg
+  direct: Vscore=6.00 Ascore=5.00 (norm V=0.625 A=0.500) in 5.273s
+  route: no_specialized_skill conf=1.00 in 3.065s
+  selected: no_specialized_skill Vscore=6.00 Ascore=5.00 using direct VA baseline
+[16/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/1602.jpg
+  direct: Vscore=7.00 Ascore=5.00 (norm V=0.750 A=0.500) in 5.902s
+  route: berlyne-arousal-pleasure conf=0.90 in 3.605s
+  candidates: berlyne-arousal-pleasure
+  candidate 1/1 berlyne-arousal-pleasure: Vscore=7.50 Ascore=6.50 (norm V=0.812 A=0.688) in 21.913s
+  selected: berlyne-arousal-pleasure Vscore=7.50 Ascore=6.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[17/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/1610.jpg
+  direct: Vscore=7.00 Ascore=5.00 (norm V=0.750 A=0.500) in 6.725s
+  route: baby-schema conf=0.95 in 3.147s
+  candidates: baby-schema
+  candidate 1/1 baby-schema: Vscore=6.50 Ascore=5.00 (norm V=0.688 A=0.500) in 23.434s
+  selected: baby-schema Vscore=6.50 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[18/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/1630.jpg
+  direct: Vscore=7.50 Ascore=5.50 (norm V=0.812 A=0.562) in 6.391s
+  route: baby-schema conf=0.98 in 3.206s
+  candidates: baby-schema
+  candidate 1/1 baby-schema: Vscore=7.50 Ascore=5.50 (norm V=0.812 A=0.562) in 24.430s
+  selected: baby-schema Vscore=7.50 Ascore=5.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[19/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/1659.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.677s
+  route: cognitive-appraisal conf=0.90 in 3.653s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 23.225s
+  selected: cognitive-appraisal Vscore=5.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[20/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/1675.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.296s
+  route: cognitive-appraisal conf=0.90 in 3.556s
+  candidates: cognitive-appraisal, evolved-fear-module
+  candidate 1/2 cognitive-appraisal: Vscore=4.00 Ascore=6.00 (norm V=0.375 A=0.625) in 21.452s
+  candidate 2/2 evolved-fear-module: Vscore=4.00 Ascore=6.50 (norm V=0.375 A=0.688) in 19.870s
+  selected: evolved-fear-module Vscore=4.00 Ascore=6.50 reason=The image depicts large, imposing musk oxen with direct orientation and close proximity, which strongly activates the evolved fear module due to perceived threat potential. The cog... [truncated]
+[21/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/1722.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.844s
+  route: baby-schema conf=0.98 in 3.311s
+  candidates: baby-schema
+  candidate 1/1 baby-schema: Vscore=6.50 Ascore=5.00 (norm V=0.688 A=0.500) in 23.098s
+  selected: baby-schema Vscore=6.50 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[22/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/1750.jpg
+  direct: Vscore=7.00 Ascore=5.00 (norm V=0.750 A=0.500) in 5.079s
+  route: baby-schema conf=0.95 in 3.213s
+  candidates: baby-schema
+  candidate 1/1 baby-schema: Vscore=7.50 Ascore=4.50 (norm V=0.812 A=0.438) in 22.700s
+  selected: baby-schema Vscore=7.50 Ascore=4.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[23/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/1820.jpg
+  direct: Vscore=3.00 Ascore=7.00 (norm V=0.250 A=0.750) in 7.855s
+  route: evolved-fear-module conf=0.99 in 3.245s
+  candidates: evolved-fear-module
+  candidate 1/1 evolved-fear-module: Vscore=2.00 Ascore=8.50 (norm V=0.125 A=0.938) in 21.033s
+  selected: evolved-fear-module Vscore=2.00 Ascore=8.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[24/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/1908.jpg
+  direct: Vscore=7.00 Ascore=5.00 (norm V=0.750 A=0.500) in 5.533s
+  route: no_specialized_skill conf=1.00 in 2.956s
+  selected: no_specialized_skill Vscore=7.00 Ascore=5.00 using direct VA baseline
+[25/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/1931.jpg
+  direct: Vscore=3.00 Ascore=7.00 (norm V=0.250 A=0.750) in 5.881s
+  route: evolved-fear-module conf=0.99 in 3.200s
+  candidates: evolved-fear-module
+  candidate 1/1 evolved-fear-module: Vscore=2.00 Ascore=8.50 (norm V=0.125 A=0.938) in 21.010s
+  selected: evolved-fear-module Vscore=2.00 Ascore=8.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[26/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/1945.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 6.128s
+  route: pathogen-disgust conf=0.90 in 3.136s
+  candidates: pathogen-disgust
+  candidate 1/1 pathogen-disgust: Vscore=2.50 Ascore=6.50 (norm V=0.188 A=0.688) in 20.384s
+  selected: pathogen-disgust Vscore=2.50 Ascore=6.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[27/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2002.jpg
+  direct: Vscore=6.00 Ascore=5.00 (norm V=0.625 A=0.500) in 5.546s
+  route: no_specialized_skill conf=0.90 in 3.304s
+  selected: no_specialized_skill Vscore=6.00 Ascore=5.00 using direct VA baseline
+[28/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2019.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.864s
+  route: cognitive-appraisal conf=0.80 in 3.250s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 23.938s
+  selected: cognitive-appraisal Vscore=5.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[29/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2030.jpg
+  direct: Vscore=8.00 Ascore=6.00 (norm V=0.875 A=0.625) in 6.105s
+  route: kaplan-art-restoration conf=0.95 in 3.526s
+  candidates: kaplan-art-restoration
+  candidate 1/1 kaplan-art-restoration: Vscore=7.50 Ascore=4.50 (norm V=0.812 A=0.438) in 22.715s
+  selected: kaplan-art-restoration Vscore=7.50 Ascore=4.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[30/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2036.jpg
+  direct: Vscore=6.50 Ascore=5.50 (norm V=0.688 A=0.562) in 5.846s
+  route: cognitive-appraisal conf=0.90 in 3.069s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=6.00 Ascore=5.00 (norm V=0.625 A=0.500) in 18.979s
+  selected: cognitive-appraisal Vscore=6.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[31/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2040.jpg
+  direct: Vscore=7.50 Ascore=5.50 (norm V=0.812 A=0.562) in 5.437s
+  route: baby-schema conf=0.98 in 3.222s
+  candidates: baby-schema
+  candidate 1/1 baby-schema: Vscore=7.50 Ascore=5.00 (norm V=0.812 A=0.500) in 22.878s
+  selected: baby-schema Vscore=7.50 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[32/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2054.jpg
+  direct: Vscore=7.00 Ascore=6.00 (norm V=0.750 A=0.625) in 5.013s
+  route: emotional-body-language conf=0.95 in 3.262s
+  candidates: emotional-body-language
+  candidate 1/1 emotional-body-language: Vscore=8.00 Ascore=7.00 (norm V=0.875 A=0.750) in 17.550s
+  selected: emotional-body-language Vscore=8.00 Ascore=7.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[33/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2058.jpg
+  direct: Vscore=7.00 Ascore=5.00 (norm V=0.750 A=0.500) in 5.348s
+  route: baby-schema conf=0.98 in 3.010s
+  candidates: baby-schema
+  candidate 1/1 baby-schema: Vscore=7.50 Ascore=5.00 (norm V=0.812 A=0.500) in 22.689s
+  selected: baby-schema Vscore=7.50 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[34/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2075.jpg
+  direct: Vscore=7.00 Ascore=4.00 (norm V=0.750 A=0.375) in 5.898s
+  route: baby-schema conf=0.98 in 3.186s
+  candidates: baby-schema
+  candidate 1/1 baby-schema: Vscore=7.50 Ascore=4.50 (norm V=0.812 A=0.438) in 21.103s
+  selected: baby-schema Vscore=7.50 Ascore=4.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[35/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2095.jpg
+  direct: Vscore=2.00 Ascore=7.00 (norm V=0.125 A=0.750) in 5.524s
+  route: pathogen-disgust conf=0.98 in 3.407s
+  candidates: pathogen-disgust
+  candidate 1/1 pathogen-disgust: Vscore=2.00 Ascore=7.50 (norm V=0.125 A=0.812) in 20.344s
+  selected: pathogen-disgust Vscore=2.00 Ascore=7.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[36/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2104.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.498s
+  route: cognitive-appraisal conf=0.80 in 3.543s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 19.693s
+  selected: cognitive-appraisal Vscore=5.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[37/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2120.jpg
+  direct: Vscore=2.00 Ascore=8.00 (norm V=0.125 A=0.875) in 5.635s
+  route: cognitive-appraisal conf=0.99 in 3.387s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=2.00 Ascore=8.50 (norm V=0.125 A=0.938) in 23.998s
+  selected: cognitive-appraisal Vscore=2.00 Ascore=8.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[38/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2150.jpg
+  direct: Vscore=8.00 Ascore=4.00 (norm V=0.875 A=0.375) in 6.145s
+  route: baby-schema conf=0.98 in 3.311s
+  candidates: baby-schema
+  candidate 1/1 baby-schema: Vscore=7.50 Ascore=4.50 (norm V=0.812 A=0.438) in 21.156s
+  selected: baby-schema Vscore=7.50 Ascore=4.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[39/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2154.jpg
+  direct: Vscore=7.50 Ascore=6.00 (norm V=0.812 A=0.625) in 6.055s
+  route: cognitive-appraisal conf=0.98 in 3.472s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=8.00 Ascore=5.00 (norm V=0.875 A=0.500) in 19.919s
+  selected: cognitive-appraisal Vscore=8.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[40/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2160.jpg
+  direct: Vscore=7.00 Ascore=5.00 (norm V=0.750 A=0.500) in 5.459s
+  route: baby-schema conf=0.98 in 2.946s
+  candidates: baby-schema
+  candidate 1/1 baby-schema: Vscore=7.00 Ascore=4.50 (norm V=0.750 A=0.438) in 20.684s
+  selected: baby-schema Vscore=7.00 Ascore=4.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[41/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2191.jpg
+  direct: Vscore=6.00 Ascore=5.00 (norm V=0.625 A=0.500) in 5.418s
+  route: cognitive-appraisal conf=0.90 in 3.360s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=6.50 Ascore=5.00 (norm V=0.688 A=0.500) in 21.049s
+  selected: cognitive-appraisal Vscore=6.50 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[42/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2208.jpg
+  direct: Vscore=6.50 Ascore=7.00 (norm V=0.688 A=0.750) in 6.957s
+  route: cognitive-appraisal conf=0.95 in 3.261s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=7.00 Ascore=7.00 (norm V=0.750 A=0.750) in 18.495s
+  selected: cognitive-appraisal Vscore=7.00 Ascore=7.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[43/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2214.jpg
+  direct: Vscore=6.00 Ascore=5.00 (norm V=0.625 A=0.500) in 5.463s
+  route: no_specialized_skill conf=1.00 in 2.477s
+  selected: no_specialized_skill Vscore=6.00 Ascore=5.00 using direct VA baseline
+[44/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2220.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.541s
+  route: cognitive-appraisal conf=0.90 in 3.472s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=3.00 Ascore=7.00 (norm V=0.250 A=0.750) in 17.815s
+  selected: cognitive-appraisal Vscore=3.00 Ascore=7.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[45/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2230.jpg
+  direct: Vscore=4.50 Ascore=6.00 (norm V=0.438 A=0.625) in 6.375s
+  route: cognitive-appraisal conf=0.90 in 3.374s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=4.00 Ascore=7.00 (norm V=0.375 A=0.750) in 20.562s
+  selected: cognitive-appraisal Vscore=4.00 Ascore=7.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[46/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2260.jpg
+  direct: Vscore=6.50 Ascore=5.50 (norm V=0.688 A=0.562) in 5.927s
+  route: baby-schema conf=0.98 in 3.065s
+  candidates: baby-schema
+  candidate 1/1 baby-schema: Vscore=6.50 Ascore=5.00 (norm V=0.688 A=0.500) in 19.299s
+  selected: baby-schema Vscore=6.50 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[47/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2273.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.969s
+  route: cognitive-appraisal conf=0.80 in 3.504s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 17.464s
+  selected: cognitive-appraisal Vscore=5.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[48/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2279.jpg
+  direct: Vscore=6.00 Ascore=5.00 (norm V=0.625 A=0.500) in 6.010s
+  route: no_specialized_skill conf=1.00 in 2.692s
+  selected: no_specialized_skill Vscore=6.00 Ascore=5.00 using direct VA baseline
+[49/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2301.jpg
+  direct: Vscore=3.00 Ascore=6.00 (norm V=0.250 A=0.625) in 5.945s
+  route: cognitive-appraisal conf=0.95 in 3.380s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=2.50 Ascore=7.50 (norm V=0.188 A=0.812) in 22.036s
+  selected: cognitive-appraisal Vscore=2.50 Ascore=7.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[50/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2305.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.524s
+  route: cognitive-appraisal conf=0.80 in 3.300s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 15.581s
+  selected: cognitive-appraisal Vscore=5.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[51/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2310.jpg
+  direct: Vscore=7.50 Ascore=4.50 (norm V=0.812 A=0.438) in 6.072s
+  route: baby-schema conf=0.98 in 3.191s
+  candidates: baby-schema
+  candidate 1/1 baby-schema: Vscore=7.50 Ascore=4.50 (norm V=0.812 A=0.438) in 19.504s
+  selected: baby-schema Vscore=7.50 Ascore=4.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[52/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2320.jpg
+  direct: Vscore=6.00 Ascore=5.00 (norm V=0.625 A=0.500) in 6.430s
+  route: cognitive-appraisal conf=0.90 in 3.507s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=6.00 Ascore=5.00 (norm V=0.625 A=0.500) in 18.823s
+  selected: cognitive-appraisal Vscore=6.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[53/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2340.jpg
+  direct: Vscore=8.00 Ascore=6.00 (norm V=0.875 A=0.625) in 6.050s
+  route: cognitive-appraisal conf=0.98 in 3.207s
+  candidates: cognitive-appraisal, baby-schema
+  candidate 1/2 cognitive-appraisal: Vscore=8.00 Ascore=5.00 (norm V=0.875 A=0.500) in 18.956s
+  candidate 2/2 baby-schema: Vscore=8.00 Ascore=6.00 (norm V=0.875 A=0.625) in 26.472s
+  selected: cognitive-appraisal Vscore=8.00 Ascore=5.00 reason=The image's affect is best explained by the cognitive-appraisal skill, which captures the clear caregiving context, agency, and goal congruence (safety, bonding) driving the high v... [truncated]
+[54/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2344.jpg
+  direct: Vscore=3.00 Ascore=5.00 (norm V=0.250 A=0.500) in 5.805s
+  route: cognitive-appraisal conf=0.95 in 3.410s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=3.00 Ascore=6.00 (norm V=0.250 A=0.625) in 18.328s
+  selected: cognitive-appraisal Vscore=3.00 Ascore=6.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[55/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2351.jpg
+  direct: Vscore=7.00 Ascore=5.00 (norm V=0.750 A=0.500) in 5.959s
+  route: baby-schema conf=0.98 in 3.209s
+  candidates: baby-schema
+  candidate 1/1 baby-schema: Vscore=7.50 Ascore=4.50 (norm V=0.812 A=0.438) in 21.679s
+  selected: baby-schema Vscore=7.50 Ascore=4.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[56/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2357.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.121s
+  route: kaplan-art-restoration conf=0.90 in 3.403s
+  candidates: kaplan-art-restoration
+  candidate 1/1 kaplan-art-restoration: Vscore=6.50 Ascore=3.50 (norm V=0.688 A=0.312) in 20.898s
+  selected: kaplan-art-restoration Vscore=6.50 Ascore=3.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[57/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2362.jpg
+  direct: Vscore=7.00 Ascore=5.00 (norm V=0.750 A=0.500) in 5.165s
+  route: no_specialized_skill conf=1.00 in 3.066s
+  selected: no_specialized_skill Vscore=7.00 Ascore=5.00 using direct VA baseline
+[58/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2374.jpg
+  direct: Vscore=7.00 Ascore=4.00 (norm V=0.750 A=0.375) in 6.184s
+  route: kaplan-art-restoration conf=0.95 in 3.412s
+  candidates: kaplan-art-restoration
+  candidate 1/1 kaplan-art-restoration: Vscore=7.00 Ascore=4.00 (norm V=0.750 A=0.375) in 21.558s
+  selected: kaplan-art-restoration Vscore=7.00 Ascore=4.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[59/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2381.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.915s
+  route: emotional-body-language conf=0.90 in 3.277s
+  candidates: emotional-body-language
+  candidate 1/1 emotional-body-language: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 18.235s
+  selected: emotional-body-language Vscore=5.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[60/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2385.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.933s
+  route: no_specialized_skill conf=1.00 in 2.647s
+  selected: no_specialized_skill Vscore=5.00 Ascore=5.00 using direct VA baseline
+[61/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2390.jpg
+  direct: Vscore=6.00 Ascore=5.00 (norm V=0.625 A=0.500) in 5.892s
+  route: cognitive-appraisal conf=0.95 in 3.377s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=5.50 Ascore=5.00 (norm V=0.562 A=0.500) in 23.838s
+  selected: cognitive-appraisal Vscore=5.50 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[62/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2394.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.008s
+  route: cognitive-appraisal conf=0.90 in 3.037s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 19.530s
+  selected: cognitive-appraisal Vscore=5.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[63/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2398.jpg
+  direct: Vscore=7.00 Ascore=6.00 (norm V=0.750 A=0.625) in 6.086s
+  route: cognitive-appraisal conf=0.90 in 3.379s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=7.50 Ascore=6.00 (norm V=0.812 A=0.625) in 19.514s
+  selected: cognitive-appraisal Vscore=7.50 Ascore=6.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[64/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2411.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.677s
+  route: no_specialized_skill conf=1.00 in 2.456s
+  selected: no_specialized_skill Vscore=5.00 Ascore=5.00 using direct VA baseline
+[65/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2442.jpg
+  direct: Vscore=6.00 Ascore=6.00 (norm V=0.625 A=0.625) in 5.572s
+  route: cognitive-appraisal conf=0.80 in 3.624s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=5.50 Ascore=5.50 (norm V=0.562 A=0.562) in 17.426s
+  selected: cognitive-appraisal Vscore=5.50 Ascore=5.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[66/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2456.jpg
+  direct: Vscore=3.00 Ascore=7.00 (norm V=0.250 A=0.750) in 6.039s
+  route: cognitive-appraisal conf=0.98 in 3.322s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=3.50 Ascore=7.50 (norm V=0.312 A=0.812) in 23.374s
+  selected: cognitive-appraisal Vscore=3.50 Ascore=7.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[67/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2484.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.126s
+  route: cognitive-appraisal conf=0.90 in 3.369s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 21.590s
+  selected: cognitive-appraisal Vscore=5.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[68/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2489.jpg
+  direct: Vscore=7.00 Ascore=7.00 (norm V=0.750 A=0.750) in 5.439s
+  route: cognitive-appraisal conf=0.90 in 3.152s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=7.00 Ascore=7.00 (norm V=0.750 A=0.750) in 20.206s
+  selected: cognitive-appraisal Vscore=7.00 Ascore=7.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[69/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2495.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 4.954s
+  route: cognitive-appraisal conf=0.80 in 3.248s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 21.833s
+  selected: cognitive-appraisal Vscore=5.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[70/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2506.jpg
+  direct: Vscore=7.00 Ascore=5.00 (norm V=0.750 A=0.500) in 6.021s
+  route: no_specialized_skill conf=1.00 in 2.749s
+  selected: no_specialized_skill Vscore=7.00 Ascore=5.00 using direct VA baseline
+[71/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2513.jpg
+  direct: Vscore=6.00 Ascore=5.00 (norm V=0.625 A=0.500) in 5.726s
+  route: no_specialized_skill conf=1.00 in 2.653s
+  selected: no_specialized_skill Vscore=6.00 Ascore=5.00 using direct VA baseline
+[72/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2518.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.553s
+  route: kaplan-art-restoration conf=0.90 in 3.346s
+  candidates: kaplan-art-restoration
+  candidate 1/1 kaplan-art-restoration: Vscore=6.50 Ascore=4.00 (norm V=0.688 A=0.375) in 24.138s
+  selected: kaplan-art-restoration Vscore=6.50 Ascore=4.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[73/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2530.jpg
+  direct: Vscore=8.00 Ascore=5.00 (norm V=0.875 A=0.500) in 5.633s
+  route: cognitive-appraisal conf=0.95 in 3.421s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=8.00 Ascore=5.00 (norm V=0.875 A=0.500) in 19.375s
+  selected: cognitive-appraisal Vscore=8.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[74/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2570.jpg
+  direct: Vscore=4.50 Ascore=5.00 (norm V=0.438 A=0.500) in 5.918s
+  route: cognitive-appraisal conf=0.90 in 3.212s
+  candidates: cognitive-appraisal, emotional-body-language
+  candidate 1/2 cognitive-appraisal: Vscore=4.00 Ascore=5.00 (norm V=0.375 A=0.500) in 22.479s
+  candidate 2/2 emotional-body-language: Vscore=4.00 Ascore=5.00 (norm V=0.375 A=0.500) in 20.095s
+  selected: emotional-body-language Vscore=4.00 Ascore=5.00 reason=The analysis correctly focuses on the visible body language cues (posture, facial expression, limb configuration) to infer affect, which is the core of this skill. The cognitive-ap... [truncated]
+[75/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2590.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 6.936s
+  route: cognitive-appraisal conf=0.90 in 3.504s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 22.366s
+  selected: cognitive-appraisal Vscore=5.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[76/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2597.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.313s
+  route: cognitive-appraisal conf=0.90 in 3.177s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 20.899s
+  selected: cognitive-appraisal Vscore=5.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[77/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2606.jpg
+  direct: Vscore=6.00 Ascore=8.00 (norm V=0.625 A=0.875) in 6.602s
+  route: emotional-body-language conf=0.95 in 3.141s
+  candidates: emotional-body-language
+  candidate 1/1 emotional-body-language: Vscore=7.00 Ascore=8.50 (norm V=0.750 A=0.938) in 18.276s
+  selected: emotional-body-language Vscore=7.00 Ascore=8.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[78/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2635.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.536s
+  route: cognitive-appraisal conf=0.90 in 3.217s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=4.50 Ascore=6.50 (norm V=0.438 A=0.688) in 20.953s
+  selected: cognitive-appraisal Vscore=4.50 Ascore=6.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[79/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2661.jpg
+  direct: Vscore=5.00 Ascore=7.00 (norm V=0.500 A=0.750) in 6.599s
+  route: baby-schema conf=0.95 in 3.284s
+  candidates: baby-schema, cognitive-appraisal
+  candidate 1/2 baby-schema: Vscore=3.50 Ascore=7.50 (norm V=0.312 A=0.812) in 17.845s
+  candidate 2/2 cognitive-appraisal: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 23.055s
+  selected: baby-schema Vscore=3.50 Ascore=7.50 reason=The infant's morphology is clearly visible and central to the image, and the baby-schema is the most directly applicable skill for analyzing affective response to infantile feature... [truncated]
+[80/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2688.jpg
+  direct: Vscore=3.00 Ascore=7.00 (norm V=0.250 A=0.750) in 5.589s
+  route: cognitive-appraisal conf=0.99 in 3.633s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=3.00 Ascore=8.00 (norm V=0.250 A=0.875) in 21.313s
+  selected: cognitive-appraisal Vscore=3.00 Ascore=8.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[81/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2694.jpg
+  direct: Vscore=3.00 Ascore=7.00 (norm V=0.250 A=0.750) in 5.836s
+  route: cognitive-appraisal conf=0.99 in 3.420s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=3.00 Ascore=7.00 (norm V=0.250 A=0.750) in 21.239s
+  selected: cognitive-appraisal Vscore=3.00 Ascore=7.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[82/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2703.jpg
+  direct: Vscore=2.00 Ascore=8.00 (norm V=0.125 A=0.875) in 5.728s
+  route: cognitive-appraisal conf=0.99 in 3.068s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=2.00 Ascore=8.50 (norm V=0.125 A=0.938) in 22.848s
+  selected: cognitive-appraisal Vscore=2.00 Ascore=8.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[83/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2716.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.353s
+  route: cognitive-appraisal conf=0.90 in 3.046s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=4.00 Ascore=6.00 (norm V=0.375 A=0.625) in 20.543s
+  selected: cognitive-appraisal Vscore=4.00 Ascore=6.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[84/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2722.jpg
+  direct: Vscore=3.00 Ascore=5.00 (norm V=0.250 A=0.500) in 6.278s
+  route: cognitive-appraisal conf=0.98 in 3.324s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=3.00 Ascore=6.50 (norm V=0.250 A=0.688) in 18.810s
+  selected: cognitive-appraisal Vscore=3.00 Ascore=6.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[85/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2749.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 6.989s
+  route: cognitive-appraisal conf=0.90 in 3.462s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=4.00 Ascore=5.00 (norm V=0.375 A=0.500) in 20.256s
+  selected: cognitive-appraisal Vscore=4.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[86/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2753.jpg
+  direct: Vscore=3.00 Ascore=5.00 (norm V=0.250 A=0.500) in 6.145s
+  route: cognitive-appraisal conf=0.90 in 3.452s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=3.00 Ascore=6.00 (norm V=0.250 A=0.625) in 19.546s
+  selected: cognitive-appraisal Vscore=3.00 Ascore=6.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[87/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2795.jpg
+  direct: Vscore=4.00 Ascore=6.00 (norm V=0.375 A=0.625) in 6.556s
+  route: cognitive-appraisal conf=0.90 in 3.374s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=4.00 Ascore=6.00 (norm V=0.375 A=0.625) in 21.122s
+  selected: cognitive-appraisal Vscore=4.00 Ascore=6.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[88/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2811.jpg
+  direct: Vscore=3.00 Ascore=8.00 (norm V=0.250 A=0.875) in 5.777s
+  route: cognitive-appraisal conf=0.98 in 3.510s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=2.00 Ascore=8.00 (norm V=0.125 A=0.875) in 15.943s
+  selected: cognitive-appraisal Vscore=2.00 Ascore=8.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[89/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2870.jpg
+  direct: Vscore=6.50 Ascore=5.50 (norm V=0.688 A=0.562) in 5.702s
+  route: cognitive-appraisal conf=0.90 in 3.335s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=6.50 Ascore=5.50 (norm V=0.688 A=0.562) in 18.976s
+  selected: cognitive-appraisal Vscore=6.50 Ascore=5.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[90/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/2901.jpg
+  direct: Vscore=3.00 Ascore=8.00 (norm V=0.250 A=0.875) in 5.729s
+  route: cognitive-appraisal conf=0.98 in 3.160s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=2.00 Ascore=8.00 (norm V=0.125 A=0.875) in 20.822s
+  selected: cognitive-appraisal Vscore=2.00 Ascore=8.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[91/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/3000.jpg
+  direct: Vscore=1.00 Ascore=9.00 (norm V=0.000 A=1.000) in 5.312s
+  route: pathogen-disgust conf=0.99 in 3.114s
+  candidates: pathogen-disgust
+  candidate 1/1 pathogen-disgust: Vscore=1.50 Ascore=8.50 (norm V=0.062 A=0.938) in 19.039s
+  selected: pathogen-disgust Vscore=1.50 Ascore=8.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[92/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/3010.jpg
+  direct: Vscore=1.00 Ascore=9.00 (norm V=0.000 A=1.000) in 5.425s
+  route: pathogen-disgust conf=0.99 in 3.080s
+  candidates: pathogen-disgust
+  candidate 1/1 pathogen-disgust: Vscore=1.50 Ascore=8.50 (norm V=0.062 A=0.938) in 20.123s
+  selected: pathogen-disgust Vscore=1.50 Ascore=8.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[93/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/3019.jpg
+  direct: Vscore=2.00 Ascore=8.00 (norm V=0.125 A=0.875) in 5.328s
+  route: pathogen-disgust conf=0.99 in 3.256s
+  candidates: pathogen-disgust
+  candidate 1/1 pathogen-disgust: Vscore=2.00 Ascore=8.00 (norm V=0.125 A=0.875) in 17.786s
+  selected: pathogen-disgust Vscore=2.00 Ascore=8.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[94/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/3053.jpg
+  direct: Vscore=1.00 Ascore=9.00 (norm V=0.000 A=1.000) in 5.256s
+  route: pathogen-disgust conf=0.99 in 3.126s
+  candidates: pathogen-disgust
+  candidate 1/1 pathogen-disgust: Vscore=1.50 Ascore=8.50 (norm V=0.062 A=0.938) in 19.889s
+  selected: pathogen-disgust Vscore=1.50 Ascore=8.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[95/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/3062.jpg
+  direct: Vscore=1.00 Ascore=9.00 (norm V=0.000 A=1.000) in 5.985s
+  route: pathogen-disgust conf=0.99 in 3.174s
+  candidates: pathogen-disgust
+  candidate 1/1 pathogen-disgust: Vscore=1.50 Ascore=8.50 (norm V=0.062 A=0.938) in 18.435s
+  selected: pathogen-disgust Vscore=1.50 Ascore=8.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[96/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/3069.jpg
+  direct: Vscore=1.00 Ascore=9.00 (norm V=0.000 A=1.000) in 5.963s
+  route: pathogen-disgust conf=0.99 in 3.104s
+  candidates: pathogen-disgust
+  candidate 1/1 pathogen-disgust: Vscore=1.50 Ascore=8.50 (norm V=0.062 A=0.938) in 21.708s
+  selected: pathogen-disgust Vscore=1.50 Ascore=8.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[97/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/3101.jpg
+  direct: Vscore=1.00 Ascore=9.00 (norm V=0.000 A=1.000) in 5.402s
+  route: pathogen-disgust conf=0.99 in 3.130s
+  candidates: pathogen-disgust
+  candidate 1/1 pathogen-disgust: Vscore=1.50 Ascore=7.50 (norm V=0.062 A=0.812) in 20.108s
+  selected: pathogen-disgust Vscore=1.50 Ascore=7.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[98/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/3120.jpg
+  direct: Vscore=1.00 Ascore=9.00 (norm V=0.000 A=1.000) in 5.609s
+  route: pathogen-disgust conf=0.99 in 3.272s
+  candidates: pathogen-disgust, cognitive-appraisal
+  candidate 1/2 pathogen-disgust: Vscore=1.50 Ascore=7.50 (norm V=0.062 A=0.812) in 21.220s
+  candidate 2/2 cognitive-appraisal: Vscore=1.50 Ascore=8.50 (norm V=0.062 A=0.938) in 24.113s
+  selected: pathogen-disgust Vscore=1.50 Ascore=7.50 reason=The image's primary psychological trigger is the visible organic degradation, bodily fluids, and wounds, which directly activate the pathogen-disgust system. While cognitive-apprai... [truncated]
+[99/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/3150.jpg
+  direct: Vscore=1.00 Ascore=9.00 (norm V=0.000 A=1.000) in 5.445s
+  route: pathogen-disgust conf=0.99 in 2.910s
+  candidates: pathogen-disgust
+  candidate 1/1 pathogen-disgust: Vscore=1.50 Ascore=8.50 (norm V=0.062 A=0.938) in 18.599s
+  selected: pathogen-disgust Vscore=1.50 Ascore=8.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[100/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/3180.jpg
+  direct: Vscore=4.50 Ascore=5.00 (norm V=0.438 A=0.500) in 5.761s
+  route: cognitive-appraisal conf=0.90 in 3.172s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=3.00 Ascore=6.00 (norm V=0.250 A=0.625) in 19.491s
+  selected: cognitive-appraisal Vscore=3.00 Ascore=6.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[101/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/3191.jpg
+  direct: Vscore=2.00 Ascore=5.00 (norm V=0.125 A=0.500) in 6.324s
+  route: pathogen-disgust conf=0.95 in 3.101s
+  candidates: pathogen-disgust
+  candidate 1/1 pathogen-disgust: Vscore=2.00 Ascore=6.50 (norm V=0.125 A=0.688) in 19.594s
+  selected: pathogen-disgust Vscore=2.00 Ascore=6.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[102/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/3212.jpg
+  direct: Vscore=2.00 Ascore=8.00 (norm V=0.125 A=0.875) in 6.123s
+  route: pathogen-disgust conf=0.99 in 3.326s
+  candidates: pathogen-disgust
+  candidate 1/1 pathogen-disgust: Vscore=2.00 Ascore=7.50 (norm V=0.125 A=0.812) in 18.544s
+  selected: pathogen-disgust Vscore=2.00 Ascore=7.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[103/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/3220.jpg
+  direct: Vscore=4.00 Ascore=6.00 (norm V=0.375 A=0.625) in 5.977s
+  route: cognitive-appraisal conf=0.95 in 3.555s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=4.00 Ascore=7.00 (norm V=0.375 A=0.750) in 21.192s
+  selected: cognitive-appraisal Vscore=4.00 Ascore=7.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[104/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/3261.jpg
+  direct: Vscore=1.00 Ascore=9.00 (norm V=0.000 A=1.000) in 5.636s
+  route: pathogen-disgust conf=0.99 in 3.173s
+  candidates: pathogen-disgust
+  candidate 1/1 pathogen-disgust: Vscore=1.50 Ascore=8.50 (norm V=0.062 A=0.938) in 22.250s
+  selected: pathogen-disgust Vscore=1.50 Ascore=8.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[105/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/3301.jpg
+  direct: Vscore=2.00 Ascore=8.00 (norm V=0.125 A=0.875) in 6.382s
+  route: pathogen-disgust conf=0.99 in 3.422s
+  candidates: pathogen-disgust
+  candidate 1/1 pathogen-disgust: Vscore=2.00 Ascore=7.50 (norm V=0.125 A=0.812) in 18.722s
+  selected: pathogen-disgust Vscore=2.00 Ascore=7.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[106/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/3360.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.554s
+  route: baby-schema conf=0.98 in 2.955s
+  candidates: baby-schema
+  candidate 1/1 baby-schema: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 22.062s
+  selected: baby-schema Vscore=5.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[107/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/3550.jpg
+  direct: Vscore=2.00 Ascore=8.00 (norm V=0.125 A=0.875) in 5.740s
+  route: pathogen-disgust conf=0.99 in 3.211s
+  candidates: pathogen-disgust
+  candidate 1/1 pathogen-disgust: Vscore=2.00 Ascore=8.50 (norm V=0.125 A=0.938) in 17.844s
+  selected: pathogen-disgust Vscore=2.00 Ascore=8.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[108/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/4001.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.804s
+  route: emotional-body-language conf=0.95 in 3.385s
+  candidates: emotional-body-language
+  candidate 1/1 emotional-body-language: Vscore=6.50 Ascore=6.50 (norm V=0.688 A=0.688) in 17.065s
+  selected: emotional-body-language Vscore=6.50 Ascore=6.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[109/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/4005.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 6.471s
+  route: cognitive-appraisal conf=0.90 in 3.244s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 19.980s
+  selected: cognitive-appraisal Vscore=5.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[110/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/4071.jpg
+  direct: Vscore=7.00 Ascore=5.00 (norm V=0.750 A=0.500) in 4.974s
+  route: no_specialized_skill conf=1.00 in 2.771s
+  selected: no_specialized_skill Vscore=7.00 Ascore=5.00 using direct VA baseline
+[111/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/4130.jpg
+  direct: Vscore=7.00 Ascore=7.00 (norm V=0.750 A=0.750) in 6.172s
+  route: berlyne-arousal-pleasure conf=0.95 in 3.659s
+  candidates: berlyne-arousal-pleasure
+  candidate 1/1 berlyne-arousal-pleasure: Vscore=7.00 Ascore=7.00 (norm V=0.750 A=0.750) in 18.057s
+  selected: berlyne-arousal-pleasure Vscore=7.00 Ascore=7.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[112/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/4180.jpg
+  direct: Vscore=6.50 Ascore=5.50 (norm V=0.688 A=0.562) in 5.732s
+  route: no_specialized_skill conf=0.90 in 3.403s
+  selected: no_specialized_skill Vscore=6.50 Ascore=5.50 using direct VA baseline
+[113/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/4230.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.836s
+  route: cognitive-appraisal conf=0.90 in 3.293s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=3.50 Ascore=7.00 (norm V=0.312 A=0.750) in 22.154s
+  selected: cognitive-appraisal Vscore=3.50 Ascore=7.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[114/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/4240.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 6.003s
+  route: cognitive-appraisal conf=0.80 in 3.431s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 22.713s
+  selected: cognitive-appraisal Vscore=5.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[115/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/4275.jpg
+  direct: Vscore=7.00 Ascore=6.00 (norm V=0.750 A=0.625) in 5.576s
+  route: cognitive-appraisal conf=0.90 in 3.399s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=7.00 Ascore=6.50 (norm V=0.750 A=0.688) in 26.250s
+  selected: cognitive-appraisal Vscore=7.00 Ascore=6.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[116/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/4302.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.769s
+  route: cognitive-appraisal conf=0.90 in 3.203s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 22.287s
+  selected: cognitive-appraisal Vscore=5.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[117/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/4325.jpg
+  direct: Vscore=6.00 Ascore=6.00 (norm V=0.625 A=0.625) in 6.202s
+  route: cognitive-appraisal conf=0.95 in 3.332s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=6.00 Ascore=6.00 (norm V=0.625 A=0.625) in 21.304s
+  selected: cognitive-appraisal Vscore=6.00 Ascore=6.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[118/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/4500.jpg
+  direct: Vscore=7.00 Ascore=6.00 (norm V=0.750 A=0.625) in 5.350s
+  route: no_specialized_skill conf=1.00 in 2.564s
+  selected: no_specialized_skill Vscore=7.00 Ascore=6.00 using direct VA baseline
+[119/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/4520.jpg
+  direct: Vscore=6.50 Ascore=5.50 (norm V=0.688 A=0.562) in 5.801s
+  route: emotional-body-language conf=0.90 in 3.449s
+  candidates: emotional-body-language
+  candidate 1/1 emotional-body-language: Vscore=6.50 Ascore=4.00 (norm V=0.688 A=0.375) in 20.937s
+  selected: emotional-body-language Vscore=6.50 Ascore=4.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[120/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/4532.jpg
+  direct: Vscore=8.00 Ascore=6.00 (norm V=0.875 A=0.625) in 6.285s
+  route: cognitive-appraisal conf=0.90 in 3.172s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=8.00 Ascore=5.00 (norm V=0.875 A=0.500) in 19.286s
+  selected: cognitive-appraisal Vscore=8.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[121/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/4536.jpg
+  direct: Vscore=7.00 Ascore=6.50 (norm V=0.750 A=0.688) in 5.982s
+  route: emotional-body-language conf=0.95 in 3.282s
+  candidates: emotional-body-language
+  candidate 1/1 emotional-body-language: Vscore=6.50 Ascore=7.00 (norm V=0.688 A=0.750) in 18.504s
+  selected: emotional-body-language Vscore=6.50 Ascore=7.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[122/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/4550.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 7.737s
+  route: no_specialized_skill conf=0.90 in 3.464s
+  selected: no_specialized_skill Vscore=5.00 Ascore=5.00 using direct VA baseline
+[123/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/4572.jpg
+  direct: Vscore=7.00 Ascore=6.00 (norm V=0.750 A=0.625) in 5.952s
+  route: cognitive-appraisal conf=0.95 in 3.510s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=7.50 Ascore=6.50 (norm V=0.812 A=0.688) in 23.344s
+  selected: cognitive-appraisal Vscore=7.50 Ascore=6.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[124/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/4597.jpg
+  direct: Vscore=7.00 Ascore=6.00 (norm V=0.750 A=0.625) in 5.253s
+  route: cognitive-appraisal conf=0.95 in 3.492s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=7.50 Ascore=6.50 (norm V=0.812 A=0.688) in 23.982s
+  selected: cognitive-appraisal Vscore=7.50 Ascore=6.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[125/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/4601.jpg
+  direct: Vscore=8.00 Ascore=5.00 (norm V=0.875 A=0.500) in 6.267s
+  route: cognitive-appraisal conf=0.95 in 3.405s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=8.00 Ascore=5.00 (norm V=0.875 A=0.500) in 22.377s
+  selected: cognitive-appraisal Vscore=8.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[126/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/4606.jpg
+  direct: Vscore=7.00 Ascore=6.00 (norm V=0.750 A=0.625) in 6.034s
+  route: cognitive-appraisal conf=0.95 in 3.120s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=7.00 Ascore=6.00 (norm V=0.750 A=0.625) in 21.631s
+  selected: cognitive-appraisal Vscore=7.00 Ascore=6.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[127/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/4610.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.648s
+  route: cognitive-appraisal conf=0.95 in 3.175s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 23.049s
+  selected: cognitive-appraisal Vscore=5.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[128/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/4614.jpg
+  direct: Vscore=7.00 Ascore=6.00 (norm V=0.750 A=0.625) in 5.956s
+  route: cognitive-appraisal conf=0.90 in 3.467s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=7.50 Ascore=5.50 (norm V=0.812 A=0.562) in 19.563s
+  selected: cognitive-appraisal Vscore=7.50 Ascore=5.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[129/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/4621.jpg
+  direct: Vscore=4.50 Ascore=5.50 (norm V=0.438 A=0.562) in 7.104s
+  route: cognitive-appraisal conf=0.95 in 3.508s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=4.00 Ascore=6.00 (norm V=0.375 A=0.625) in 22.152s
+  selected: cognitive-appraisal Vscore=4.00 Ascore=6.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[130/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/4625.jpg
+  direct: Vscore=8.00 Ascore=5.00 (norm V=0.875 A=0.500) in 5.382s
+  route: cognitive-appraisal conf=0.98 in 3.288s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=8.00 Ascore=5.00 (norm V=0.875 A=0.500) in 19.073s
+  selected: cognitive-appraisal Vscore=8.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[131/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/4635.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.943s
+  route: cognitive-appraisal conf=0.95 in 3.480s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=3.50 Ascore=7.00 (norm V=0.312 A=0.750) in 24.061s
+  selected: cognitive-appraisal Vscore=3.50 Ascore=7.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[132/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/4645.jpg
+  direct: Vscore=7.50 Ascore=4.50 (norm V=0.812 A=0.438) in 5.023s
+  route: cognitive-appraisal conf=0.90 in 3.210s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=7.50 Ascore=4.50 (norm V=0.812 A=0.438) in 17.946s
+  selected: cognitive-appraisal Vscore=7.50 Ascore=4.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[133/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/4651.jpg
+  direct: Vscore=6.50 Ascore=7.00 (norm V=0.688 A=0.750) in 5.981s
+  route: cognitive-appraisal conf=0.95 in 3.698s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=6.50 Ascore=6.50 (norm V=0.688 A=0.688) in 21.609s
+  selected: cognitive-appraisal Vscore=6.50 Ascore=6.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[134/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/4658.jpg
+  direct: Vscore=6.50 Ascore=6.50 (norm V=0.688 A=0.688) in 5.641s
+  route: cognitive-appraisal conf=0.95 in 3.782s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=6.50 Ascore=7.00 (norm V=0.688 A=0.750) in 23.880s
+  selected: cognitive-appraisal Vscore=6.50 Ascore=7.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[135/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/4663.jpg
+  direct: Vscore=2.00 Ascore=8.00 (norm V=0.125 A=0.875) in 5.673s
+  route: cognitive-appraisal conf=0.99 in 3.405s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=1.50 Ascore=8.50 (norm V=0.062 A=0.938) in 19.754s
+  selected: cognitive-appraisal Vscore=1.50 Ascore=8.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[136/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/4669.jpg
+  direct: Vscore=7.00 Ascore=8.00 (norm V=0.750 A=0.875) in 5.772s
+  route: cognitive-appraisal conf=0.95 in 3.542s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=7.00 Ascore=8.00 (norm V=0.750 A=0.875) in 18.076s
+  selected: cognitive-appraisal Vscore=7.00 Ascore=8.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[137/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/4677.jpg
+  direct: Vscore=6.50 Ascore=6.00 (norm V=0.688 A=0.625) in 5.665s
+  route: emotional-body-language conf=0.95 in 3.222s
+  candidates: emotional-body-language
+  candidate 1/1 emotional-body-language: Vscore=7.00 Ascore=5.00 (norm V=0.750 A=0.500) in 20.360s
+  selected: emotional-body-language Vscore=7.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[138/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/4687.jpg
+  direct: Vscore=7.00 Ascore=7.00 (norm V=0.750 A=0.750) in 5.470s
+  route: cognitive-appraisal conf=0.98 in 3.152s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=7.50 Ascore=7.50 (norm V=0.812 A=0.812) in 20.779s
+  selected: cognitive-appraisal Vscore=7.50 Ascore=7.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[139/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/4693.jpg
+  direct: Vscore=7.00 Ascore=6.00 (norm V=0.750 A=0.625) in 6.317s
+  route: emotional-body-language conf=0.95 in 3.400s
+  candidates: emotional-body-language
+  candidate 1/1 emotional-body-language: Vscore=7.50 Ascore=4.50 (norm V=0.812 A=0.438) in 19.203s
+  selected: emotional-body-language Vscore=7.50 Ascore=4.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[140/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/4698.jpg
+  direct: Vscore=7.00 Ascore=6.00 (norm V=0.750 A=0.625) in 5.709s
+  route: cognitive-appraisal conf=0.95 in 3.401s
+  candidates: cognitive-appraisal, emotional-body-language
+  candidate 1/2 cognitive-appraisal: Vscore=7.50 Ascore=6.50 (norm V=0.812 A=0.688) in 18.747s
+  candidate 2/2 emotional-body-language: Vscore=7.50 Ascore=6.50 (norm V=0.812 A=0.688) in 19.496s
+  selected: emotional-body-language Vscore=7.50 Ascore=6.50 reason=The analysis correctly focuses on observable body language cues (posture, orientation, tension) to infer affect, which is more directly supported by the visual evidence than cognit... [truncated]
+[141/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/4800.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 6.033s
+  route: cognitive-appraisal conf=0.95 in 3.341s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 20.814s
+  selected: cognitive-appraisal Vscore=5.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[142/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/5010.jpg
+  direct: Vscore=7.00 Ascore=5.00 (norm V=0.750 A=0.500) in 6.184s
+  route: kaplan-art-restoration conf=0.90 in 3.331s
+  candidates: kaplan-art-restoration
+  candidate 1/1 kaplan-art-restoration: Vscore=6.50 Ascore=4.50 (norm V=0.688 A=0.438) in 20.400s
+  selected: kaplan-art-restoration Vscore=6.50 Ascore=4.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[143/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/5120.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 6.484s
+  route: no_specialized_skill conf=0.99 in 3.371s
+  selected: no_specialized_skill Vscore=5.00 Ascore=5.00 using direct VA baseline
+[144/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/5201.jpg
+  direct: Vscore=7.00 Ascore=5.00 (norm V=0.750 A=0.500) in 6.268s
+  route: kaplan-art-restoration conf=0.95 in 3.413s
+  candidates: kaplan-art-restoration
+  candidate 1/1 kaplan-art-restoration: Vscore=7.00 Ascore=4.00 (norm V=0.750 A=0.375) in 22.550s
+  selected: kaplan-art-restoration Vscore=7.00 Ascore=4.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[145/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/5220.jpg
+  direct: Vscore=6.50 Ascore=4.50 (norm V=0.688 A=0.438) in 6.458s
+  route: kaplan-art-restoration conf=0.95 in 3.361s
+  candidates: kaplan-art-restoration
+  candidate 1/1 kaplan-art-restoration: Vscore=7.00 Ascore=4.00 (norm V=0.750 A=0.375) in 22.569s
+  selected: kaplan-art-restoration Vscore=7.00 Ascore=4.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[146/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/5300.jpg
+  direct: Vscore=6.50 Ascore=5.50 (norm V=0.688 A=0.562) in 7.349s
+  route: no_specialized_skill conf=1.00 in 2.884s
+  selected: no_specialized_skill Vscore=6.50 Ascore=5.50 using direct VA baseline
+[147/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/5410.jpg
+  direct: Vscore=6.00 Ascore=5.00 (norm V=0.625 A=0.500) in 5.123s
+  route: cognitive-appraisal conf=0.90 in 3.212s
+  candidates: cognitive-appraisal, emotional-body-language
+  candidate 1/2 cognitive-appraisal: Vscore=6.00 Ascore=5.00 (norm V=0.625 A=0.500) in 20.790s
+  candidate 2/2 emotional-body-language: Vscore=6.00 Ascore=6.00 (norm V=0.625 A=0.625) in 16.824s
+  selected: cognitive-appraisal Vscore=6.00 Ascore=5.00 reason=The analysis correctly frames the musician's focused performance as an instance of goal congruence with artistic expression and mastery, which justifies a positive valence. It also... [truncated]
+[148/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/5470.jpg
+  direct: Vscore=6.00 Ascore=6.00 (norm V=0.625 A=0.625) in 6.307s
+  route: awe conf=0.99 in 2.971s
+  candidates: awe
+  candidate 1/1 awe: Vscore=7.00 Ascore=7.00 (norm V=0.750 A=0.750) in 22.204s
+  selected: awe Vscore=7.00 Ascore=7.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[149/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/5510.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.675s
+  route: no_specialized_skill conf=0.99 in 3.099s
+  selected: no_specialized_skill Vscore=5.00 Ascore=5.00 using direct VA baseline
+[150/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/5532.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.486s
+  route: no_specialized_skill conf=1.00 in 3.294s
+  selected: no_specialized_skill Vscore=5.00 Ascore=5.00 using direct VA baseline
+[151/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/5551.jpg
+  direct: Vscore=6.50 Ascore=5.50 (norm V=0.688 A=0.562) in 5.508s
+  route: no_specialized_skill conf=1.00 in 2.915s
+  selected: no_specialized_skill Vscore=6.50 Ascore=5.50 using direct VA baseline
+[152/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/5611.jpg
+  direct: Vscore=6.00 Ascore=5.00 (norm V=0.625 A=0.500) in 6.174s
+  route: awe conf=0.95 in 3.215s
+  candidates: awe
+  candidate 1/1 awe: Vscore=6.50 Ascore=5.50 (norm V=0.688 A=0.562) in 23.809s
+  selected: awe Vscore=6.50 Ascore=5.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[153/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/5626.jpg
+  direct: Vscore=6.50 Ascore=5.50 (norm V=0.688 A=0.562) in 6.237s
+  route: awe conf=0.98 in 3.242s
+  candidates: awe
+  candidate 1/1 awe: Vscore=7.00 Ascore=6.00 (norm V=0.750 A=0.625) in 21.356s
+  selected: awe Vscore=7.00 Ascore=6.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[154/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/5635.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.982s
+  route: no_specialized_skill conf=1.00 in 2.719s
+  selected: no_specialized_skill Vscore=5.00 Ascore=5.00 using direct VA baseline
+[155/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/5700.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.761s
+  route: awe conf=0.98 in 3.145s
+  candidates: awe
+  candidate 1/1 awe: Vscore=6.50 Ascore=6.00 (norm V=0.688 A=0.625) in 23.065s
+  selected: awe Vscore=6.50 Ascore=6.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[156/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/5726.jpg
+  direct: Vscore=7.00 Ascore=5.00 (norm V=0.750 A=0.500) in 5.308s
+  route: kaplan-art-restoration conf=0.95 in 3.320s
+  candidates: kaplan-art-restoration
+  candidate 1/1 kaplan-art-restoration: Vscore=7.00 Ascore=4.00 (norm V=0.750 A=0.375) in 19.837s
+  selected: kaplan-art-restoration Vscore=7.00 Ascore=4.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[157/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/5760.jpg
+  direct: Vscore=8.00 Ascore=5.00 (norm V=0.875 A=0.500) in 6.397s
+  route: kaplan-art-restoration conf=0.95 in 3.241s
+  candidates: kaplan-art-restoration
+  candidate 1/1 kaplan-art-restoration: Vscore=7.50 Ascore=4.00 (norm V=0.812 A=0.375) in 22.785s
+  selected: kaplan-art-restoration Vscore=7.50 Ascore=4.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[158/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/5781.jpg
+  direct: Vscore=6.50 Ascore=3.00 (norm V=0.688 A=0.250) in 6.264s
+  route: kaplan-art-restoration conf=0.95 in 3.488s
+  candidates: kaplan-art-restoration
+  candidate 1/1 kaplan-art-restoration: Vscore=6.50 Ascore=3.50 (norm V=0.688 A=0.312) in 20.958s
+  selected: kaplan-art-restoration Vscore=6.50 Ascore=3.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[159/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/5820.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.836s
+  route: kaplan-art-restoration conf=0.90 in 3.230s
+  candidates: kaplan-art-restoration
+  candidate 1/1 kaplan-art-restoration: Vscore=6.00 Ascore=4.00 (norm V=0.625 A=0.375) in 21.685s
+  selected: kaplan-art-restoration Vscore=6.00 Ascore=4.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[160/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/5831.jpg
+  direct: Vscore=7.00 Ascore=6.00 (norm V=0.750 A=0.625) in 5.804s
+  route: cognitive-appraisal conf=0.90 in 3.295s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=7.00 Ascore=5.00 (norm V=0.750 A=0.500) in 18.949s
+  selected: cognitive-appraisal Vscore=7.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[161/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/5870.jpg
+  direct: Vscore=6.00 Ascore=5.00 (norm V=0.625 A=0.500) in 5.987s
+  route: no_specialized_skill conf=1.00 in 2.630s
+  selected: no_specialized_skill Vscore=6.00 Ascore=5.00 using direct VA baseline
+[162/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/5900.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 6.085s
+  route: no_specialized_skill conf=1.00 in 3.065s
+  selected: no_specialized_skill Vscore=5.00 Ascore=5.00 using direct VA baseline
+[163/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/5950.jpg
+  direct: Vscore=5.00 Ascore=8.00 (norm V=0.500 A=0.875) in 6.207s
+  route: awe conf=0.98 in 3.025s
+  candidates: awe
+  candidate 1/1 awe: Vscore=5.00 Ascore=7.00 (norm V=0.500 A=0.750) in 22.708s
+  selected: awe Vscore=5.00 Ascore=7.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[164/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/5972.jpg
+  direct: Vscore=3.00 Ascore=8.00 (norm V=0.250 A=0.875) in 5.594s
+  route: cognitive-appraisal conf=0.98 in 3.273s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=2.00 Ascore=8.50 (norm V=0.125 A=0.938) in 20.604s
+  selected: cognitive-appraisal Vscore=2.00 Ascore=8.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[165/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/5991.jpg
+  direct: Vscore=6.50 Ascore=4.50 (norm V=0.688 A=0.438) in 5.677s
+  route: no_specialized_skill conf=0.99 in 3.016s
+  selected: no_specialized_skill Vscore=6.50 Ascore=4.50 using direct VA baseline
+[166/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/6020.jpg
+  direct: Vscore=3.00 Ascore=5.00 (norm V=0.250 A=0.500) in 5.416s
+  route: cognitive-appraisal conf=0.95 in 3.424s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=2.00 Ascore=8.00 (norm V=0.125 A=0.875) in 24.413s
+  selected: cognitive-appraisal Vscore=2.00 Ascore=8.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[167/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/6190.jpg
+  direct: Vscore=3.00 Ascore=7.00 (norm V=0.250 A=0.750) in 5.081s
+  route: cognitive-appraisal conf=0.98 in 3.081s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=3.00 Ascore=7.50 (norm V=0.250 A=0.812) in 18.502s
+  selected: cognitive-appraisal Vscore=3.00 Ascore=7.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[168/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/6212.jpg
+  direct: Vscore=3.00 Ascore=8.00 (norm V=0.250 A=0.875) in 5.598s
+  route: cognitive-appraisal conf=0.99 in 3.180s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=2.50 Ascore=8.50 (norm V=0.188 A=0.938) in 24.717s
+  selected: cognitive-appraisal Vscore=2.50 Ascore=8.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[169/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/6231.jpg
+  direct: Vscore=3.00 Ascore=8.00 (norm V=0.250 A=0.875) in 6.016s
+  route: cognitive-appraisal conf=0.98 in 3.368s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=2.50 Ascore=8.50 (norm V=0.188 A=0.938) in 20.646s
+  selected: cognitive-appraisal Vscore=2.50 Ascore=8.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[170/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/6243.jpg
+  direct: Vscore=3.00 Ascore=8.00 (norm V=0.250 A=0.875) in 5.725s
+  route: cognitive-appraisal conf=0.98 in 3.321s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=2.00 Ascore=8.50 (norm V=0.125 A=0.938) in 22.981s
+  selected: cognitive-appraisal Vscore=2.00 Ascore=8.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[171/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/6252.jpg
+  direct: Vscore=7.00 Ascore=6.00 (norm V=0.750 A=0.625) in 6.338s
+  route: cognitive-appraisal conf=0.95 in 3.467s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=7.00 Ascore=5.00 (norm V=0.750 A=0.500) in 21.583s
+  selected: cognitive-appraisal Vscore=7.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[172/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/6311.jpg
+  direct: Vscore=3.00 Ascore=6.00 (norm V=0.250 A=0.625) in 6.130s
+  route: cognitive-appraisal conf=0.95 in 3.561s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=3.00 Ascore=7.00 (norm V=0.250 A=0.750) in 22.767s
+  selected: cognitive-appraisal Vscore=3.00 Ascore=7.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[173/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/6315.jpg
+  direct: Vscore=1.00 Ascore=9.00 (norm V=0.000 A=1.000) in 6.020s
+  route: cognitive-appraisal conf=0.99 in 3.251s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=2.00 Ascore=8.50 (norm V=0.125 A=0.938) in 24.803s
+  selected: cognitive-appraisal Vscore=2.00 Ascore=8.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[174/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/6410.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 7.872s
+  route: cognitive-appraisal conf=0.90 in 3.331s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=3.50 Ascore=6.50 (norm V=0.312 A=0.688) in 22.096s
+  selected: cognitive-appraisal Vscore=3.50 Ascore=6.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[175/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/6530.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 6.368s
+  route: cognitive-appraisal conf=0.80 in 3.453s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 19.901s
+  selected: cognitive-appraisal Vscore=5.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[176/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/6560.jpg
+  direct: Vscore=1.00 Ascore=9.00 (norm V=0.000 A=1.000) in 6.264s
+  route: cognitive-appraisal conf=0.99 in 3.420s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=2.00 Ascore=8.50 (norm V=0.125 A=0.938) in 22.652s
+  selected: cognitive-appraisal Vscore=2.00 Ascore=8.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[177/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/6570.jpg
+  direct: Vscore=1.00 Ascore=9.00 (norm V=0.000 A=1.000) in 5.900s
+  route: cognitive-appraisal conf=0.99 in 3.330s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=2.00 Ascore=8.50 (norm V=0.125 A=0.938) in 21.022s
+  selected: cognitive-appraisal Vscore=2.00 Ascore=8.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[178/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/6610.jpg
+  direct: Vscore=3.00 Ascore=5.00 (norm V=0.250 A=0.500) in 6.639s
+  route: cognitive-appraisal conf=0.90 in 3.133s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=3.00 Ascore=6.50 (norm V=0.250 A=0.688) in 18.454s
+  selected: cognitive-appraisal Vscore=3.00 Ascore=6.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[179/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/6830.jpg
+  direct: Vscore=4.00 Ascore=5.00 (norm V=0.375 A=0.500) in 5.949s
+  route: cognitive-appraisal conf=0.95 in 3.519s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=3.00 Ascore=7.00 (norm V=0.250 A=0.750) in 23.484s
+  selected: cognitive-appraisal Vscore=3.00 Ascore=7.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[180/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/6836.jpg
+  direct: Vscore=2.00 Ascore=8.00 (norm V=0.125 A=0.875) in 5.680s
+  route: cognitive-appraisal conf=0.99 in 3.517s
+  candidates: cognitive-appraisal, emotional-body-language
+  candidate 1/2 cognitive-appraisal: Vscore=2.00 Ascore=8.50 (norm V=0.125 A=0.938) in 21.732s
+  candidate 2/2 emotional-body-language: Vscore=2.00 Ascore=8.50 (norm V=0.125 A=0.938) in 17.411s
+  selected: emotional-body-language Vscore=2.00 Ascore=8.50 reason=The image's affect is best captured by direct observation of the restrained person's body language: contorted face, tensed body, and active resistance clearly indicate high arousal... [truncated]
+[181/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/6900.jpg
+  direct: Vscore=5.00 Ascore=7.00 (norm V=0.500 A=0.750) in 5.949s
+  route: cognitive-appraisal conf=0.90 in 3.474s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=4.50 Ascore=7.50 (norm V=0.438 A=0.812) in 22.464s
+  selected: cognitive-appraisal Vscore=4.50 Ascore=7.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[182/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7000.jpg
+  direct: Vscore=6.00 Ascore=4.00 (norm V=0.625 A=0.375) in 6.109s
+  route: no_specialized_skill conf=1.00 in 2.981s
+  selected: no_specialized_skill Vscore=6.00 Ascore=4.00 using direct VA baseline
+[183/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7004.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.116s
+  route: no_specialized_skill conf=1.00 in 3.003s
+  selected: no_specialized_skill Vscore=5.00 Ascore=5.00 using direct VA baseline
+[184/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7011.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.864s
+  route: no_specialized_skill conf=1.00 in 2.693s
+  selected: no_specialized_skill Vscore=5.00 Ascore=5.00 using direct VA baseline
+[185/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7016.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.105s
+  route: no_specialized_skill conf=1.00 in 2.794s
+  selected: no_specialized_skill Vscore=5.00 Ascore=5.00 using direct VA baseline
+[186/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7020.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 6.340s
+  route: no_specialized_skill conf=1.00 in 2.965s
+  selected: no_specialized_skill Vscore=5.00 Ascore=5.00 using direct VA baseline
+[187/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7026.jpg
+  direct: Vscore=7.00 Ascore=4.00 (norm V=0.750 A=0.375) in 5.205s
+  route: kaplan-art-restoration conf=0.95 in 3.224s
+  candidates: kaplan-art-restoration
+  candidate 1/1 kaplan-art-restoration: Vscore=6.50 Ascore=4.00 (norm V=0.688 A=0.375) in 21.232s
+  selected: kaplan-art-restoration Vscore=6.50 Ascore=4.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[188/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7033.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 6.139s
+  route: no_specialized_skill conf=1.00 in 3.075s
+  selected: no_specialized_skill Vscore=5.00 Ascore=5.00 using direct VA baseline
+[189/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7037.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 6.741s
+  route: no_specialized_skill conf=1.00 in 3.022s
+  selected: no_specialized_skill Vscore=5.00 Ascore=5.00 using direct VA baseline
+[190/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7041.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.415s
+  route: no_specialized_skill conf=1.00 in 2.725s
+  selected: no_specialized_skill Vscore=5.00 Ascore=5.00 using direct VA baseline
+[191/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7045.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.013s
+  route: no_specialized_skill conf=1.00 in 2.497s
+  selected: no_specialized_skill Vscore=5.00 Ascore=5.00 using direct VA baseline
+[192/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7053.jpg
+  direct: Vscore=6.50 Ascore=5.00 (norm V=0.688 A=0.500) in 5.475s
+  route: no_specialized_skill conf=1.00 in 2.474s
+  selected: no_specialized_skill Vscore=6.50 Ascore=5.00 using direct VA baseline
+[193/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7057.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.507s
+  route: cognitive-appraisal conf=0.90 in 3.359s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 22.493s
+  selected: cognitive-appraisal Vscore=5.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[194/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7061.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.608s
+  route: berlyne-arousal-pleasure conf=0.95 in 3.441s
+  candidates: berlyne-arousal-pleasure
+  candidate 1/1 berlyne-arousal-pleasure: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 19.132s
+  selected: berlyne-arousal-pleasure Vscore=5.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[195/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7079.jpg
+  direct: Vscore=3.00 Ascore=6.00 (norm V=0.250 A=0.625) in 5.960s
+  route: cognitive-appraisal conf=0.95 in 3.396s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=2.00 Ascore=7.00 (norm V=0.125 A=0.750) in 18.521s
+  selected: cognitive-appraisal Vscore=2.00 Ascore=7.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[196/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7092.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 4.887s
+  route: cognitive-appraisal conf=0.90 in 3.357s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 23.727s
+  selected: cognitive-appraisal Vscore=5.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[197/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7110.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 4.866s
+  route: no_specialized_skill conf=1.00 in 3.150s
+  selected: no_specialized_skill Vscore=5.00 Ascore=5.00 using direct VA baseline
+[198/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7137.jpg
+  direct: Vscore=3.00 Ascore=7.00 (norm V=0.250 A=0.750) in 8.041s
+  route: berlyne-arousal-pleasure conf=0.95 in 3.595s
+  candidates: berlyne-arousal-pleasure
+  candidate 1/1 berlyne-arousal-pleasure: Vscore=5.00 Ascore=7.00 (norm V=0.500 A=0.750) in 24.137s
+  selected: berlyne-arousal-pleasure Vscore=5.00 Ascore=7.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[199/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7161.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 6.828s
+  route: no_specialized_skill conf=1.00 in 2.793s
+  selected: no_specialized_skill Vscore=5.00 Ascore=5.00 using direct VA baseline
+[200/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7179.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.713s
+  route: berlyne-arousal-pleasure conf=0.90 in 3.420s
+  candidates: berlyne-arousal-pleasure
+  candidate 1/1 berlyne-arousal-pleasure: Vscore=6.00 Ascore=6.00 (norm V=0.625 A=0.625) in 20.335s
+  selected: berlyne-arousal-pleasure Vscore=6.00 Ascore=6.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[201/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7184.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 6.503s
+  route: no_specialized_skill conf=1.00 in 2.753s
+  selected: no_specialized_skill Vscore=5.00 Ascore=5.00 using direct VA baseline
+[202/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7188.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 6.312s
+  route: berlyne-arousal-pleasure conf=0.95 in 3.432s
+  candidates: berlyne-arousal-pleasure
+  candidate 1/1 berlyne-arousal-pleasure: Vscore=6.00 Ascore=7.00 (norm V=0.625 A=0.750) in 20.596s
+  selected: berlyne-arousal-pleasure Vscore=6.00 Ascore=7.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[203/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7200.jpg
+  direct: Vscore=7.00 Ascore=5.00 (norm V=0.750 A=0.500) in 5.438s
+  route: no_specialized_skill conf=1.00 in 2.713s
+  selected: no_specialized_skill Vscore=7.00 Ascore=5.00 using direct VA baseline
+[204/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7217.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 4.864s
+  route: no_specialized_skill conf=1.00 in 3.018s
+  selected: no_specialized_skill Vscore=5.00 Ascore=5.00 using direct VA baseline
+[205/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7233.jpg
+  direct: Vscore=7.00 Ascore=4.00 (norm V=0.750 A=0.375) in 5.778s
+  route: no_specialized_skill conf=1.00 in 2.805s
+  selected: no_specialized_skill Vscore=7.00 Ascore=4.00 using direct VA baseline
+[206/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7237.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 6.196s
+  route: berlyne-arousal-pleasure conf=0.98 in 3.577s
+  candidates: berlyne-arousal-pleasure
+  candidate 1/1 berlyne-arousal-pleasure: Vscore=5.50 Ascore=7.00 (norm V=0.562 A=0.750) in 18.796s
+  selected: berlyne-arousal-pleasure Vscore=5.50 Ascore=7.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[207/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7247.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.555s
+  route: berlyne-arousal-pleasure conf=0.90 in 3.397s
+  candidates: berlyne-arousal-pleasure
+  candidate 1/1 berlyne-arousal-pleasure: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 23.741s
+  selected: berlyne-arousal-pleasure Vscore=5.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[208/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7255.jpg
+  direct: Vscore=6.00 Ascore=4.00 (norm V=0.625 A=0.375) in 6.737s
+  route: no_specialized_skill conf=1.00 in 2.703s
+  selected: no_specialized_skill Vscore=6.00 Ascore=4.00 using direct VA baseline
+[209/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7280.jpg
+  direct: Vscore=7.00 Ascore=5.00 (norm V=0.750 A=0.500) in 5.798s
+  route: no_specialized_skill conf=1.00 in 3.176s
+  selected: no_specialized_skill Vscore=7.00 Ascore=5.00 using direct VA baseline
+[210/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7284.jpg
+  direct: Vscore=7.00 Ascore=5.00 (norm V=0.750 A=0.500) in 5.759s
+  route: no_specialized_skill conf=1.00 in 2.826s
+  selected: no_specialized_skill Vscore=7.00 Ascore=5.00 using direct VA baseline
+[211/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7289.jpg
+  direct: Vscore=7.50 Ascore=5.50 (norm V=0.812 A=0.562) in 5.996s
+  route: no_specialized_skill conf=1.00 in 2.875s
+  selected: no_specialized_skill Vscore=7.50 Ascore=5.50 using direct VA baseline
+[212/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7320.jpg
+  direct: Vscore=7.00 Ascore=5.00 (norm V=0.750 A=0.500) in 6.005s
+  route: no_specialized_skill conf=1.00 in 2.739s
+  selected: no_specialized_skill Vscore=7.00 Ascore=5.00 using direct VA baseline
+[213/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7350.jpg
+  direct: Vscore=7.50 Ascore=6.00 (norm V=0.812 A=0.625) in 5.430s
+  route: no_specialized_skill conf=1.00 in 2.941s
+  selected: no_specialized_skill Vscore=7.50 Ascore=6.00 using direct VA baseline
+[214/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7359.jpg
+  direct: Vscore=3.00 Ascore=5.00 (norm V=0.250 A=0.500) in 5.481s
+  route: pathogen-disgust conf=0.95 in 3.115s
+  candidates: pathogen-disgust
+  candidate 1/1 pathogen-disgust: Vscore=2.00 Ascore=6.50 (norm V=0.125 A=0.688) in 20.032s
+  selected: pathogen-disgust Vscore=2.00 Ascore=6.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[215/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7380.jpg
+  direct: Vscore=1.50 Ascore=8.50 (norm V=0.062 A=0.938) in 6.039s
+  route: pathogen-disgust conf=0.99 in 3.132s
+  candidates: pathogen-disgust
+  candidate 1/1 pathogen-disgust: Vscore=1.50 Ascore=7.50 (norm V=0.062 A=0.812) in 19.142s
+  selected: pathogen-disgust Vscore=1.50 Ascore=7.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[216/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7405.jpg
+  direct: Vscore=8.00 Ascore=5.00 (norm V=0.875 A=0.500) in 6.076s
+  route: no_specialized_skill conf=1.00 in 2.722s
+  selected: no_specialized_skill Vscore=8.00 Ascore=5.00 using direct VA baseline
+[217/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7450.jpg
+  direct: Vscore=7.00 Ascore=6.00 (norm V=0.750 A=0.625) in 6.715s
+  route: no_specialized_skill conf=1.00 in 3.295s
+  selected: no_specialized_skill Vscore=7.00 Ascore=6.00 using direct VA baseline
+[218/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7470.jpg
+  direct: Vscore=8.00 Ascore=6.00 (norm V=0.875 A=0.625) in 6.049s
+  route: berlyne-arousal-pleasure conf=0.95 in 3.553s
+  candidates: berlyne-arousal-pleasure
+  candidate 1/1 berlyne-arousal-pleasure: Vscore=8.00 Ascore=7.00 (norm V=0.875 A=0.750) in 20.825s
+  selected: berlyne-arousal-pleasure Vscore=8.00 Ascore=7.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[219/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7477.jpg
+  direct: Vscore=8.00 Ascore=6.00 (norm V=0.875 A=0.625) in 6.657s
+  route: berlyne-arousal-pleasure conf=0.95 in 3.633s
+  candidates: berlyne-arousal-pleasure
+  candidate 1/1 berlyne-arousal-pleasure: Vscore=7.50 Ascore=6.50 (norm V=0.812 A=0.688) in 22.294s
+  selected: berlyne-arousal-pleasure Vscore=7.50 Ascore=6.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[220/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7484.jpg
+  direct: Vscore=7.00 Ascore=6.00 (norm V=0.750 A=0.625) in 5.253s
+  route: no_specialized_skill conf=1.00 in 2.834s
+  selected: no_specialized_skill Vscore=7.00 Ascore=6.00 using direct VA baseline
+[221/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7490.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.330s
+  route: no_specialized_skill conf=1.00 in 2.902s
+  selected: no_specialized_skill Vscore=5.00 Ascore=5.00 using direct VA baseline
+[222/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7495.jpg
+  direct: Vscore=6.00 Ascore=5.00 (norm V=0.625 A=0.500) in 6.004s
+  route: kaplan-art-restoration conf=0.90 in 3.226s
+  candidates: kaplan-art-restoration
+  candidate 1/1 kaplan-art-restoration: Vscore=6.00 Ascore=5.00 (norm V=0.625 A=0.500) in 19.938s
+  selected: kaplan-art-restoration Vscore=6.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[223/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7500.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 6.573s
+  route: no_specialized_skill conf=1.00 in 2.599s
+  selected: no_specialized_skill Vscore=5.00 Ascore=5.00 using direct VA baseline
+[224/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7504.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.621s
+  route: berlyne-arousal-pleasure conf=0.90 in 3.557s
+  candidates: berlyne-arousal-pleasure
+  candidate 1/1 berlyne-arousal-pleasure: Vscore=6.00 Ascore=7.00 (norm V=0.625 A=0.750) in 20.103s
+  selected: berlyne-arousal-pleasure Vscore=6.00 Ascore=7.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[225/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7508.jpg
+  direct: Vscore=7.00 Ascore=7.00 (norm V=0.750 A=0.750) in 5.595s
+  route: berlyne-arousal-pleasure conf=0.95 in 3.444s
+  candidates: berlyne-arousal-pleasure
+  candidate 1/1 berlyne-arousal-pleasure: Vscore=7.00 Ascore=7.00 (norm V=0.750 A=0.750) in 17.606s
+  selected: berlyne-arousal-pleasure Vscore=7.00 Ascore=7.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[226/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7513.jpg
+  direct: Vscore=6.50 Ascore=4.50 (norm V=0.688 A=0.438) in 5.395s
+  route: no_specialized_skill conf=1.00 in 3.030s
+  selected: no_specialized_skill Vscore=6.50 Ascore=4.50 using direct VA baseline
+[227/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7530.jpg
+  direct: Vscore=7.00 Ascore=5.00 (norm V=0.750 A=0.500) in 5.669s
+  route: kaplan-art-restoration conf=0.95 in 3.331s
+  candidates: kaplan-art-restoration
+  candidate 1/1 kaplan-art-restoration: Vscore=7.00 Ascore=4.00 (norm V=0.750 A=0.375) in 22.301s
+  selected: kaplan-art-restoration Vscore=7.00 Ascore=4.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[228/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7550.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.371s
+  route: cognitive-appraisal conf=0.90 in 3.298s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 19.111s
+  selected: cognitive-appraisal Vscore=5.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[229/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7590.jpg
+  direct: Vscore=4.50 Ascore=6.50 (norm V=0.438 A=0.688) in 6.427s
+  route: cognitive-appraisal conf=0.90 in 3.373s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=3.50 Ascore=7.00 (norm V=0.312 A=0.750) in 20.558s
+  selected: cognitive-appraisal Vscore=3.50 Ascore=7.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[230/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7632.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 6.293s
+  route: cognitive-appraisal conf=0.90 in 3.213s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 18.736s
+  selected: cognitive-appraisal Vscore=5.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[231/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7700.jpg
+  direct: Vscore=4.00 Ascore=5.00 (norm V=0.375 A=0.500) in 6.832s
+  route: cognitive-appraisal conf=0.90 in 3.469s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=3.50 Ascore=6.50 (norm V=0.312 A=0.688) in 23.444s
+  selected: cognitive-appraisal Vscore=3.50 Ascore=6.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[232/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/7830.jpg
+  direct: Vscore=6.00 Ascore=5.00 (norm V=0.625 A=0.500) in 5.728s
+  route: berlyne-arousal-pleasure conf=0.95 in 3.496s
+  candidates: berlyne-arousal-pleasure
+  candidate 1/1 berlyne-arousal-pleasure: Vscore=6.00 Ascore=6.00 (norm V=0.625 A=0.625) in 16.922s
+  selected: berlyne-arousal-pleasure Vscore=6.00 Ascore=6.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[233/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/8001.jpg
+  direct: Vscore=6.00 Ascore=8.00 (norm V=0.625 A=0.875) in 6.172s
+  route: cognitive-appraisal conf=0.95 in 3.340s
+  candidates: cognitive-appraisal, emotional-body-language
+  candidate 1/2 cognitive-appraisal: Vscore=5.00 Ascore=7.00 (norm V=0.500 A=0.750) in 25.334s
+  candidate 2/2 emotional-body-language: Vscore=5.00 Ascore=7.50 (norm V=0.500 A=0.812) in 23.798s
+  selected: cognitive-appraisal Vscore=5.00 Ascore=7.00 reason=The scene involves clear goal conflict and agency, which are core to cognitive-appraisal. The emotional-body-language analysis, while plausible, misrepresents the valence as 'neutr... [truncated]
+[234/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/8031.jpg
+  direct: Vscore=6.00 Ascore=8.00 (norm V=0.625 A=0.875) in 6.928s
+  route: cognitive-appraisal conf=0.95 in 3.241s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=6.00 Ascore=8.00 (norm V=0.625 A=0.875) in 20.955s
+  selected: cognitive-appraisal Vscore=6.00 Ascore=8.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[235/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/8040.jpg
+  direct: Vscore=5.00 Ascore=7.00 (norm V=0.500 A=0.750) in 7.302s
+  route: cognitive-appraisal conf=0.95 in 3.541s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 20.948s
+  selected: cognitive-appraisal Vscore=5.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[236/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/8065.jpg
+  direct: Vscore=5.00 Ascore=8.00 (norm V=0.500 A=0.875) in 6.424s
+  route: cognitive-appraisal conf=0.99 in 3.239s
+  candidates: cognitive-appraisal, emotional-body-language
+  candidate 1/2 cognitive-appraisal: Vscore=5.00 Ascore=8.00 (norm V=0.500 A=0.875) in 22.414s
+  candidate 2/2 emotional-body-language: Vscore=5.00 Ascore=8.00 (norm V=0.500 A=0.875) in 19.534s
+  selected: emotional-body-language Vscore=5.00 Ascore=8.00 reason=The body language of the fighters—rigid posture, explosive motion, and defensive stance—directly and unambiguously conveys high arousal without requiring inference about the cognit... [truncated]
+[237/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/8117.jpg
+  direct: Vscore=5.00 Ascore=8.00 (norm V=0.500 A=0.875) in 8.428s
+  route: cognitive-appraisal conf=0.99 in 3.320s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=5.00 Ascore=8.00 (norm V=0.500 A=0.875) in 23.486s
+  selected: cognitive-appraisal Vscore=5.00 Ascore=8.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[238/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/8130.jpg
+  direct: Vscore=6.50 Ascore=8.50 (norm V=0.688 A=0.938) in 7.737s
+  route: cognitive-appraisal conf=0.95 in 3.535s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=7.00 Ascore=8.00 (norm V=0.750 A=0.875) in 20.697s
+  selected: cognitive-appraisal Vscore=7.00 Ascore=8.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[239/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/8162.jpg
+  direct: Vscore=7.00 Ascore=6.00 (norm V=0.750 A=0.625) in 5.583s
+  route: berlyne-arousal-pleasure conf=0.95 in 3.536s
+  candidates: berlyne-arousal-pleasure
+  candidate 1/1 berlyne-arousal-pleasure: Vscore=7.50 Ascore=7.00 (norm V=0.812 A=0.750) in 21.422s
+  selected: berlyne-arousal-pleasure Vscore=7.50 Ascore=7.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[240/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/8179.jpg
+  direct: Vscore=5.00 Ascore=8.00 (norm V=0.500 A=0.875) in 8.345s
+  route: cognitive-appraisal conf=0.95 in 3.427s
+  candidates: cognitive-appraisal, emotional-body-language
+  candidate 1/2 cognitive-appraisal: Vscore=3.50 Ascore=8.00 (norm V=0.312 A=0.875) in 26.161s
+  candidate 2/2 emotional-body-language: Vscore=3.50 Ascore=8.00 (norm V=0.312 A=0.875) in 20.992s
+  selected: emotional-body-language Vscore=3.50 Ascore=8.00 reason=The image provides clear, unambiguous visual evidence of the person's body posture and physical state, which directly informs emotional state. The arms outstretched and legs extend... [truncated]
+[241/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/8190.jpg
+  direct: Vscore=6.00 Ascore=6.00 (norm V=0.625 A=0.625) in 6.693s
+  route: awe conf=0.95 in 3.053s
+  candidates: awe
+  candidate 1/1 awe: Vscore=6.50 Ascore=6.50 (norm V=0.688 A=0.688) in 21.457s
+  selected: awe Vscore=6.50 Ascore=6.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[242/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/8200.jpg
+  direct: Vscore=7.00 Ascore=8.00 (norm V=0.750 A=0.875) in 6.531s
+  route: emotional-body-language conf=0.95 in 3.532s
+  candidates: emotional-body-language
+  candidate 1/1 emotional-body-language: Vscore=7.00 Ascore=8.50 (norm V=0.750 A=0.938) in 18.132s
+  selected: emotional-body-language Vscore=7.00 Ascore=8.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[243/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/8210.jpg
+  direct: Vscore=7.00 Ascore=8.00 (norm V=0.750 A=0.875) in 5.962s
+  route: cognitive-appraisal conf=0.95 in 3.361s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=6.50 Ascore=7.50 (norm V=0.688 A=0.812) in 23.588s
+  selected: cognitive-appraisal Vscore=6.50 Ascore=7.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[244/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/8231.jpg
+  direct: Vscore=3.00 Ascore=8.00 (norm V=0.250 A=0.875) in 7.049s
+  route: pathogen-disgust conf=0.98 in 3.474s
+  candidates: pathogen-disgust, cognitive-appraisal
+  candidate 1/2 pathogen-disgust: Vscore=2.00 Ascore=7.50 (norm V=0.125 A=0.812) in 18.958s
+  candidate 2/2 cognitive-appraisal: Vscore=2.00 Ascore=8.00 (norm V=0.125 A=0.875) in 19.316s
+  selected: pathogen-disgust Vscore=2.00 Ascore=7.50 reason=The image's primary psychological driver is the visceral contamination from visible blood and wounds, which directly activates the pathogen-disgust system. While cognitive-appraisa... [truncated]
+[245/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/8251.jpg
+  direct: Vscore=6.00 Ascore=7.00 (norm V=0.625 A=0.750) in 6.901s
+  route: emotional-body-language conf=0.90 in 3.403s
+  candidates: emotional-body-language
+  candidate 1/1 emotional-body-language: Vscore=6.50 Ascore=7.50 (norm V=0.688 A=0.812) in 18.034s
+  selected: emotional-body-language Vscore=6.50 Ascore=7.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[246/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/8311.jpg
+  direct: Vscore=6.50 Ascore=7.00 (norm V=0.688 A=0.750) in 5.796s
+  route: cognitive-appraisal conf=0.90 in 3.325s
+  candidates: cognitive-appraisal, emotional-body-language
+  candidate 1/2 cognitive-appraisal: Vscore=6.00 Ascore=7.00 (norm V=0.625 A=0.750) in 24.534s
+  candidate 2/2 emotional-body-language: Vscore=6.00 Ascore=7.50 (norm V=0.625 A=0.812) in 18.627s
+  selected: emotional-body-language Vscore=6.00 Ascore=7.50 reason=The golfer's body posture and the dynamic action of the swing are clearly visible and directly convey high arousal and positive valence through muscular tension, explosive force, a... [truncated]
+[247/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/8330.jpg
+  direct: Vscore=8.00 Ascore=6.00 (norm V=0.875 A=0.625) in 5.770s
+  route: cognitive-appraisal conf=0.99 in 3.325s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=8.00 Ascore=6.00 (norm V=0.875 A=0.625) in 22.225s
+  selected: cognitive-appraisal Vscore=8.00 Ascore=6.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[248/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/8370.jpg
+  direct: Vscore=5.00 Ascore=8.00 (norm V=0.500 A=0.875) in 7.591s
+  route: cognitive-appraisal conf=0.99 in 3.387s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=5.00 Ascore=8.00 (norm V=0.500 A=0.875) in 25.779s
+  selected: cognitive-appraisal Vscore=5.00 Ascore=8.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[249/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/8420.jpg
+  direct: Vscore=7.00 Ascore=6.00 (norm V=0.750 A=0.625) in 5.370s
+  route: kaplan-art-restoration conf=0.90 in 3.262s
+  candidates: kaplan-art-restoration
+  candidate 1/1 kaplan-art-restoration: Vscore=6.50 Ascore=5.50 (norm V=0.688 A=0.562) in 22.875s
+  selected: kaplan-art-restoration Vscore=6.50 Ascore=5.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[250/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/8466.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.936s
+  route: cognitive-appraisal conf=0.90 in 3.220s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 23.901s
+  selected: cognitive-appraisal Vscore=5.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[251/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/8480.jpg
+  direct: Vscore=3.00 Ascore=8.50 (norm V=0.250 A=0.938) in 6.526s
+  route: cognitive-appraisal conf=0.99 in 3.280s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=2.00 Ascore=8.50 (norm V=0.125 A=0.938) in 24.074s
+  selected: cognitive-appraisal Vscore=2.00 Ascore=8.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[252/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/8496.jpg
+  direct: Vscore=8.00 Ascore=8.00 (norm V=0.875 A=0.875) in 5.852s
+  route: cognitive-appraisal conf=0.99 in 3.406s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=8.00 Ascore=8.00 (norm V=0.875 A=0.875) in 21.345s
+  selected: cognitive-appraisal Vscore=8.00 Ascore=8.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[253/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/8501.jpg
+  direct: Vscore=6.50 Ascore=6.00 (norm V=0.688 A=0.625) in 5.941s
+  route: berlyne-arousal-pleasure conf=0.95 in 3.550s
+  candidates: berlyne-arousal-pleasure
+  candidate 1/1 berlyne-arousal-pleasure: Vscore=6.00 Ascore=7.00 (norm V=0.625 A=0.750) in 19.022s
+  selected: berlyne-arousal-pleasure Vscore=6.00 Ascore=7.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[254/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/8531.jpg
+  direct: Vscore=7.50 Ascore=6.50 (norm V=0.812 A=0.688) in 5.972s
+  route: berlyne-arousal-pleasure conf=0.95 in 3.697s
+  candidates: berlyne-arousal-pleasure
+  candidate 1/1 berlyne-arousal-pleasure: Vscore=7.50 Ascore=6.50 (norm V=0.812 A=0.688) in 19.108s
+  selected: berlyne-arousal-pleasure Vscore=7.50 Ascore=6.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[255/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9000.jpg
+  direct: Vscore=3.00 Ascore=4.00 (norm V=0.250 A=0.375) in 6.299s
+  route: cognitive-appraisal conf=0.90 in 3.228s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=2.50 Ascore=6.50 (norm V=0.188 A=0.688) in 22.709s
+  selected: cognitive-appraisal Vscore=2.50 Ascore=6.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[256/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9006.jpg
+  direct: Vscore=2.00 Ascore=6.00 (norm V=0.125 A=0.625) in 7.370s
+  route: cognitive-appraisal conf=0.99 in 3.264s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=2.00 Ascore=7.00 (norm V=0.125 A=0.750) in 26.775s
+  selected: cognitive-appraisal Vscore=2.00 Ascore=7.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[257/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9031.jpg
+  direct: Vscore=3.00 Ascore=6.00 (norm V=0.250 A=0.625) in 6.674s
+  route: pathogen-disgust conf=0.98 in 3.486s
+  candidates: pathogen-disgust
+  candidate 1/1 pathogen-disgust: Vscore=2.50 Ascore=6.50 (norm V=0.188 A=0.688) in 20.834s
+  selected: pathogen-disgust Vscore=2.50 Ascore=6.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[258/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9043.jpg
+  direct: Vscore=3.00 Ascore=5.00 (norm V=0.250 A=0.500) in 7.675s
+  route: pathogen-disgust conf=0.95 in 3.078s
+  candidates: pathogen-disgust
+  candidate 1/1 pathogen-disgust: Vscore=2.00 Ascore=6.50 (norm V=0.125 A=0.688) in 19.145s
+  selected: pathogen-disgust Vscore=2.00 Ascore=6.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[259/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9070.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 4.844s
+  route: cognitive-appraisal conf=0.80 in 3.247s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 17.875s
+  selected: cognitive-appraisal Vscore=5.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[260/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9101.jpg
+  direct: Vscore=2.00 Ascore=6.00 (norm V=0.125 A=0.625) in 5.243s
+  route: cognitive-appraisal conf=0.99 in 3.291s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=2.00 Ascore=8.00 (norm V=0.125 A=0.875) in 20.648s
+  selected: cognitive-appraisal Vscore=2.00 Ascore=8.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[261/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9140.jpg
+  direct: Vscore=1.00 Ascore=5.00 (norm V=0.000 A=0.500) in 5.349s
+  route: pathogen-disgust conf=0.99 in 3.057s
+  candidates: pathogen-disgust
+  candidate 1/1 pathogen-disgust: Vscore=1.50 Ascore=7.00 (norm V=0.062 A=0.750) in 21.353s
+  selected: pathogen-disgust Vscore=1.50 Ascore=7.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[262/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9160.jpg
+  direct: Vscore=4.50 Ascore=6.00 (norm V=0.438 A=0.625) in 6.109s
+  route: cognitive-appraisal conf=0.95 in 3.176s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=3.50 Ascore=7.00 (norm V=0.312 A=0.750) in 22.470s
+  selected: cognitive-appraisal Vscore=3.50 Ascore=7.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[263/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9181.jpg
+  direct: Vscore=1.00 Ascore=5.00 (norm V=0.000 A=0.500) in 6.484s
+  route: pathogen-disgust conf=0.99 in 3.268s
+  candidates: pathogen-disgust
+  candidate 1/1 pathogen-disgust: Vscore=1.50 Ascore=7.50 (norm V=0.062 A=0.812) in 21.167s
+  selected: pathogen-disgust Vscore=1.50 Ascore=7.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[264/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9185.jpg
+  direct: Vscore=1.00 Ascore=3.00 (norm V=0.000 A=0.250) in 5.430s
+  route: pathogen-disgust conf=0.98 in 3.292s
+  candidates: pathogen-disgust
+  candidate 1/1 pathogen-disgust: Vscore=2.00 Ascore=5.50 (norm V=0.125 A=0.562) in 19.477s
+  selected: pathogen-disgust Vscore=2.00 Ascore=5.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[265/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9210.jpg
+  direct: Vscore=4.50 Ascore=4.50 (norm V=0.438 A=0.438) in 5.382s
+  route: cognitive-appraisal conf=0.80 in 3.687s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=4.00 Ascore=5.00 (norm V=0.375 A=0.500) in 23.877s
+  selected: cognitive-appraisal Vscore=4.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[266/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9252.jpg
+  direct: Vscore=1.00 Ascore=9.00 (norm V=0.000 A=1.000) in 5.656s
+  route: cognitive-appraisal conf=0.99 in 3.349s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=1.50 Ascore=8.50 (norm V=0.062 A=0.938) in 25.835s
+  selected: cognitive-appraisal Vscore=1.50 Ascore=8.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[267/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9265.jpg
+  direct: Vscore=2.00 Ascore=6.00 (norm V=0.125 A=0.625) in 5.733s
+  route: cognitive-appraisal conf=0.95 in 3.401s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=2.00 Ascore=7.00 (norm V=0.125 A=0.750) in 24.439s
+  selected: cognitive-appraisal Vscore=2.00 Ascore=7.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[268/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9291.jpg
+  direct: Vscore=2.00 Ascore=4.00 (norm V=0.125 A=0.375) in 5.935s
+  route: pathogen-disgust conf=0.99 in 3.170s
+  candidates: pathogen-disgust
+  candidate 1/1 pathogen-disgust: Vscore=2.00 Ascore=6.00 (norm V=0.125 A=0.625) in 22.271s
+  selected: pathogen-disgust Vscore=2.00 Ascore=6.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[269/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9302.jpg
+  direct: Vscore=2.00 Ascore=5.00 (norm V=0.125 A=0.500) in 4.812s
+  route: pathogen-disgust conf=0.99 in 3.156s
+  candidates: pathogen-disgust
+  candidate 1/1 pathogen-disgust: Vscore=2.00 Ascore=6.00 (norm V=0.125 A=0.625) in 16.630s
+  selected: pathogen-disgust Vscore=2.00 Ascore=6.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[270/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9325.jpg
+  direct: Vscore=1.00 Ascore=9.00 (norm V=0.000 A=1.000) in 5.730s
+  route: pathogen-disgust conf=0.99 in 3.236s
+  candidates: pathogen-disgust
+  candidate 1/1 pathogen-disgust: Vscore=1.50 Ascore=7.50 (norm V=0.062 A=0.812) in 20.445s
+  selected: pathogen-disgust Vscore=1.50 Ascore=7.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[271/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9332.jpg
+  direct: Vscore=3.00 Ascore=6.00 (norm V=0.250 A=0.625) in 6.507s
+  route: cognitive-appraisal conf=0.98 in 3.325s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=2.50 Ascore=7.00 (norm V=0.188 A=0.750) in 17.786s
+  selected: cognitive-appraisal Vscore=2.50 Ascore=7.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[272/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9360.jpg
+  direct: Vscore=3.00 Ascore=4.00 (norm V=0.250 A=0.375) in 6.252s
+  route: no_specialized_skill conf=0.99 in 3.106s
+  selected: no_specialized_skill Vscore=3.00 Ascore=4.00 using direct VA baseline
+[273/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9400.jpg
+  direct: Vscore=2.00 Ascore=8.00 (norm V=0.125 A=0.875) in 5.727s
+  route: cognitive-appraisal conf=0.98 in 3.281s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=2.00 Ascore=8.00 (norm V=0.125 A=0.875) in 24.720s
+  selected: cognitive-appraisal Vscore=2.00 Ascore=8.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[274/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9404.jpg
+  direct: Vscore=3.00 Ascore=7.00 (norm V=0.250 A=0.750) in 6.310s
+  route: cognitive-appraisal conf=0.98 in 3.089s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=3.00 Ascore=7.50 (norm V=0.250 A=0.812) in 21.079s
+  selected: cognitive-appraisal Vscore=3.00 Ascore=7.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[275/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9411.jpg
+  direct: Vscore=4.00 Ascore=7.00 (norm V=0.375 A=0.750) in 6.245s
+  route: cognitive-appraisal conf=0.98 in 3.145s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=3.50 Ascore=7.50 (norm V=0.312 A=0.812) in 25.381s
+  selected: cognitive-appraisal Vscore=3.50 Ascore=7.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[276/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9415.jpg
+  direct: Vscore=3.00 Ascore=6.00 (norm V=0.250 A=0.625) in 5.801s
+  route: cognitive-appraisal conf=0.98 in 3.438s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=3.00 Ascore=7.00 (norm V=0.250 A=0.750) in 22.077s
+  selected: cognitive-appraisal Vscore=3.00 Ascore=7.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[277/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9421.jpg
+  direct: Vscore=2.00 Ascore=8.00 (norm V=0.125 A=0.875) in 5.882s
+  route: cognitive-appraisal conf=0.99 in 3.428s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=2.00 Ascore=8.00 (norm V=0.125 A=0.875) in 21.936s
+  selected: cognitive-appraisal Vscore=2.00 Ascore=8.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[278/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9425.jpg
+  direct: Vscore=3.00 Ascore=8.00 (norm V=0.250 A=0.875) in 5.277s
+  route: cognitive-appraisal conf=0.99 in 3.384s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=3.00 Ascore=8.00 (norm V=0.250 A=0.875) in 21.657s
+  selected: cognitive-appraisal Vscore=3.00 Ascore=8.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[279/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9429.jpg
+  direct: Vscore=2.00 Ascore=8.00 (norm V=0.125 A=0.875) in 5.953s
+  route: cognitive-appraisal conf=0.99 in 3.322s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=2.00 Ascore=8.50 (norm V=0.125 A=0.938) in 24.107s
+  selected: cognitive-appraisal Vscore=2.00 Ascore=8.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[280/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9435.jpg
+  direct: Vscore=2.00 Ascore=8.00 (norm V=0.125 A=0.875) in 6.162s
+  route: cognitive-appraisal conf=0.99 in 3.291s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=2.00 Ascore=8.50 (norm V=0.125 A=0.938) in 23.469s
+  selected: cognitive-appraisal Vscore=2.00 Ascore=8.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[281/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9468.jpg
+  direct: Vscore=3.00 Ascore=7.00 (norm V=0.250 A=0.750) in 6.614s
+  route: cognitive-appraisal conf=0.90 in 3.632s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=3.00 Ascore=7.00 (norm V=0.250 A=0.750) in 20.166s
+  selected: cognitive-appraisal Vscore=3.00 Ascore=7.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[282/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9472.jpg
+  direct: Vscore=3.00 Ascore=6.00 (norm V=0.250 A=0.625) in 5.989s
+  route: cognitive-appraisal conf=0.95 in 3.315s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=3.00 Ascore=7.00 (norm V=0.250 A=0.750) in 20.141s
+  selected: cognitive-appraisal Vscore=3.00 Ascore=7.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[283/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9495.jpg
+  direct: Vscore=2.00 Ascore=8.00 (norm V=0.125 A=0.875) in 5.729s
+  route: cognitive-appraisal conf=0.98 in 3.511s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=1.50 Ascore=8.50 (norm V=0.062 A=0.938) in 25.389s
+  selected: cognitive-appraisal Vscore=1.50 Ascore=8.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[284/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9560.jpg
+  direct: Vscore=2.00 Ascore=6.00 (norm V=0.125 A=0.625) in 6.466s
+  route: pathogen-disgust conf=0.99 in 3.353s
+  candidates: pathogen-disgust
+  candidate 1/1 pathogen-disgust: Vscore=2.00 Ascore=6.50 (norm V=0.125 A=0.688) in 20.444s
+  selected: pathogen-disgust Vscore=2.00 Ascore=6.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[285/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9582.jpg
+  direct: Vscore=4.00 Ascore=6.00 (norm V=0.375 A=0.625) in 5.980s
+  route: cognitive-appraisal conf=0.90 in 3.454s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=4.50 Ascore=6.50 (norm V=0.438 A=0.688) in 20.602s
+  selected: cognitive-appraisal Vscore=4.50 Ascore=6.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[286/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9594.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.442s
+  route: cognitive-appraisal conf=0.99 in 3.143s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 19.381s
+  selected: cognitive-appraisal Vscore=5.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[287/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9610.jpg
+  direct: Vscore=2.00 Ascore=7.00 (norm V=0.125 A=0.750) in 5.382s
+  route: pathogen-disgust conf=0.95 in 3.360s
+  candidates: pathogen-disgust
+  candidate 1/1 pathogen-disgust: Vscore=2.00 Ascore=6.50 (norm V=0.125 A=0.688) in 20.406s
+  selected: pathogen-disgust Vscore=2.00 Ascore=6.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[288/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9622.jpg
+  direct: Vscore=3.00 Ascore=8.00 (norm V=0.250 A=0.875) in 5.863s
+  route: cognitive-appraisal conf=0.99 in 3.375s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=2.00 Ascore=9.00 (norm V=0.125 A=1.000) in 21.985s
+  selected: cognitive-appraisal Vscore=2.00 Ascore=9.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[289/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9636.jpg
+  direct: Vscore=3.00 Ascore=8.00 (norm V=0.250 A=0.875) in 6.389s
+  route: cognitive-appraisal conf=0.90 in 3.098s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=4.00 Ascore=7.50 (norm V=0.375 A=0.812) in 27.384s
+  selected: cognitive-appraisal Vscore=4.00 Ascore=7.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[290/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9830.jpg
+  direct: Vscore=2.00 Ascore=4.00 (norm V=0.125 A=0.375) in 6.080s
+  route: pathogen-disgust conf=0.98 in 3.317s
+  candidates: pathogen-disgust
+  candidate 1/1 pathogen-disgust: Vscore=2.00 Ascore=6.00 (norm V=0.125 A=0.625) in 19.129s
+  selected: pathogen-disgust Vscore=2.00 Ascore=6.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[291/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9901.jpg
+  direct: Vscore=2.00 Ascore=7.00 (norm V=0.125 A=0.750) in 5.513s
+  route: cognitive-appraisal conf=0.98 in 3.298s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=2.50 Ascore=8.00 (norm V=0.188 A=0.875) in 20.949s
+  selected: cognitive-appraisal Vscore=2.50 Ascore=8.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[292/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9905.jpg
+  direct: Vscore=3.00 Ascore=7.00 (norm V=0.250 A=0.750) in 6.616s
+  route: cognitive-appraisal conf=0.99 in 3.361s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=3.50 Ascore=7.50 (norm V=0.312 A=0.812) in 22.145s
+  selected: cognitive-appraisal Vscore=3.50 Ascore=7.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[293/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9911.jpg
+  direct: Vscore=2.00 Ascore=7.00 (norm V=0.125 A=0.750) in 5.480s
+  route: cognitive-appraisal conf=0.99 in 3.282s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=2.50 Ascore=8.00 (norm V=0.188 A=0.875) in 25.206s
+  selected: cognitive-appraisal Vscore=2.50 Ascore=8.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[294/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9921.jpg
+  direct: Vscore=3.00 Ascore=8.00 (norm V=0.250 A=0.875) in 6.883s
+  route: cognitive-appraisal conf=0.99 in 3.363s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=3.00 Ascore=8.00 (norm V=0.250 A=0.875) in 20.875s
+  selected: cognitive-appraisal Vscore=3.00 Ascore=8.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[295/295] /home/u1120250383/dcs/datasets/IAPS/Dataset/9927.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.145s
+  route: cognitive-appraisal conf=0.90 in 3.225s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 23.239s
+  selected: cognitive-appraisal Vscore=5.00 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+OK images=295/295; elapsed=8262.345s; skills=9
+Saved: /home/u1120250383/dcs/Emoskill/script_output/skill_v2_batch/runs/20260712_015816_skill_experiment_iaps_n1182_g4/workers/worker_2_gpu_2/qwen3_skill_experiment_20260712_041558.json
+Latest: /home/u1120250383/dcs/Emoskill/script_output/skill_v2_batch/runs/20260712_015816_skill_experiment_iaps_n1182_g4/workers/worker_2_gpu_2/qwen3_skill_experiment_latest.json

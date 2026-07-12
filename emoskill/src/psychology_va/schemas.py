@@ -5,6 +5,7 @@ from typing import Any
 
 
 NO_SPECIALIZED_SKILL_ID = "no_specialized_skill"
+MAIN_ROUTING_EXCLUDED_SKILL_IDS = frozenset({"todorov-face-evaluation"})
 
 
 @dataclass(frozen=True)
@@ -24,6 +25,8 @@ class PsychologySkillSpec:
     aggregation_rule: str = ""
     source_path: str = ""
     raw_skill_markdown: str = ""
+    worked_example: str = ""
+    routing_enabled: bool = True
 
 
 @dataclass(frozen=True)
@@ -75,6 +78,11 @@ class VAAnalysisResult:
     positive_affect: list[str] = field(default_factory=list)
     negative_affect: list[str] = field(default_factory=list)
     uncertainty: str = ""
+    applicability: str = ""
+    visual_evidence: list[dict[str, Any]] = field(default_factory=list)
+    construct_estimates: list[dict[str, Any]] = field(default_factory=list)
+    context_modifiers: list[str] = field(default_factory=list)
+    inference_summary: str = ""
     raw_model_output: dict[str, Any] = field(default_factory=dict)
     valence_score: float | None = None
     arousal_score: float | None = None

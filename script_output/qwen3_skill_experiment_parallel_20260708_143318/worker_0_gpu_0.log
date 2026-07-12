@@ -1,52 +1,0 @@
-Loaded 9 skill(s) from SKILL.md:
-  - awe: Awe (hints=4, steps=6, ok)
-  - baby-schema: Baby Schema / Kindchenschema (hints=4, steps=6, ok)
-  - berlyne-arousal-pleasure: Berlyne Arousal-Aesthetic Pleasure (hints=4, steps=6, ok)
-  - cognitive-appraisal: Cognitive Appraisal (hints=4, steps=6, ok)
-  - emotional-body-language: Emotional Body Language (hints=4, steps=7, ok)
-  - evolved-fear-module: Evolved Fear Module (hints=4, steps=6, ok)
-  - kaplan-art-restoration: Kaplan Attention Restoration Theory (hints=4, steps=6, ok)
-  - pathogen-disgust: Pathogen Disgust (hints=4, steps=6, ok)
-  - todorov-face-evaluation: Todorov Face Evaluation (hints=2, steps=7, ok)
-Images: 4
-[1/4] /home/u1120250383/dcs/datasets/IAPS/Dataset/7080.jpg
-Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:02,  1.16it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:01<00:01,  1.01it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:02<00:01,  1.00s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.18it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.12it/s]
-`generation_config` default values have been modified to match model-specific defaults: {'do_sample': True}. If this is not desired, please set these values explicitly.
-  direct: Vscore=5.50 Ascore=5.50 (norm V=0.500 A=0.500) in 113.329s
-  route: berlyne-arousal-pleasure conf=0.85 in 27.970s
-  candidates: berlyne-arousal-pleasure, kaplan-art-restoration, cognitive-appraisal
-  candidate 1/3 berlyne-arousal-pleasure: Vscore=5.50 Ascore=5.50 (norm V=0.500 A=0.500) in 44.239s
-  candidate 2/3 kaplan-art-restoration: Vscore=5.50 Ascore=5.50 (norm V=0.500 A=0.500) in 43.842s
-  candidate 3/3 cognitive-appraisal: Vscore=5.50 Ascore=5.50 (norm V=0.500 A=0.500) in 40.478s
-  selected: berlyne-arousal-pleasure Vscore=5.50 Ascore=5.50 reason=The image's affect is driven by its minimalist composition and the interplay of light and texture, which creates aesthetic stimulation and visual interest. Berlyne's model is best ... [truncated]
-[2/4] /home/u1120250383/dcs/datasets/IAPS/Dataset/5870.jpg
-  direct: Vscore=6.50 Ascore=6.50 (norm V=0.611 A=0.611) in 13.598s
-  route: awe conf=0.95 in 28.610s
-  candidates: awe, kaplan-art-restoration, berlyne-arousal-pleasure
-  candidate 1/3 awe: Vscore=7.00 Ascore=8.50 (norm V=0.667 A=0.833) in 44.743s
-  candidate 2/3 kaplan-art-restoration: Vscore=6.50 Ascore=7.00 (norm V=0.611 A=0.667) in 40.965s
-  candidate 3/3 berlyne-arousal-pleasure: Vscore=6.50 Ascore=7.00 (norm V=0.611 A=0.667) in 36.975s
-  selected: awe Vscore=7.00 Ascore=8.50 reason=The image's dominant cues — massive, vertically immensity clouds against a deep blue sky — most strongly align with the awe framework, evoking perceived vastness and self-diminishm... [truncated]
-[3/4] /home/u1120250383/dcs/datasets/IAPS/Dataset/4645.jpg
-  direct: Vscore=8.50 Ascore=4.50 (norm V=0.833 A=0.389) in 14.997s
-  route: todorov-face-evaluation conf=0.95 in 27.215s
-  candidates: todorov-face-evaluation, cognitive-appraisal, emotional-body-language
-  candidate 1/3 todorov-face-evaluation: Vscore=7.50 Ascore=5.50 (norm V=0.722 A=0.500) in 41.486s
-  candidate 2/3 cognitive-appraisal: Vscore=5.50 Ascore=5.50 (norm V=0.500 A=0.500) in 36.172s
-  candidate 3/3 emotional-body-language: Vscore=5.50 Ascore=5.50 (norm V=0.500 A=0.500) in 31.044s
-  selected: todorov-face-evaluation Vscore=7.50 Ascore=5.50 reason=The image's dominant affective content is a close-up of a human face in a neutral, resting state, where the emotional impression arises from facial structure rather than an express... [truncated]
-[4/4] /home/u1120250383/dcs/datasets/IAPS/Dataset/2357.jpg
-  direct: Vscore=6.50 Ascore=3.50 (norm V=0.611 A=0.278) in 18.747s
-  route: cognitive-appraisal conf=0.95 in 34.406s
-  candidates: cognitive-appraisal, emotional-body-language, kaplan-art-restoration
-  candidate 1/3 cognitive-appraisal: Vscore=6.50 Ascore=3.50 (norm V=0.611 A=0.278) in 52.941s
-  candidate 2/3 emotional-body-language: Vscore=5.50 Ascore=5.50 (norm V=0.500 A=0.500) in 43.424s
-  candidate 3/3 kaplan-art-restoration: Vscore=5.50 Ascore=5.50 (norm V=0.500 A=0.500) in 50.325s
-  selected: emotional-body-language Vscore=5.50 Ascore=5.50 reason=The analysis best matches the visible evidence by focusing on the person's posture and body language as the primary indicators of affect, without over-interpreting context or envir... [truncated]
-Trace latest: /home/u1120250383/dcs/Emoskill/script_output/qwen3_skill_experiment_parallel_20260708_143318/worker_0_gpu_0/qwen3_iaps_case_trace_latest.json
-Full-skill latest: /home/u1120250383/dcs/Emoskill/script_output/qwen3_skill_experiment_parallel_20260708_143318/worker_0_gpu_0/qwen3_iaps_full_skill_inference_latest.json
-Inference Markdown: /home/u1120250383/dcs/Emoskill/script_output/qwen3_skill_experiment_parallel_20260708_143318/worker_0_gpu_0/qwen3_iaps_full_skill_inference_20260708_144713.md
-Inference Markdown latest: /home/u1120250383/dcs/Emoskill/script_output/qwen3_skill_experiment_parallel_20260708_143318/worker_0_gpu_0/qwen3_iaps_full_skill_inference_latest.md
-OK images=4/4; elapsed=833.724s; skills=9
-Saved: /home/u1120250383/dcs/Emoskill/script_output/qwen3_skill_experiment_parallel_20260708_143318/worker_0_gpu_0/qwen3_skill_experiment_20260708_144712.json
-Latest: /home/u1120250383/dcs/Emoskill/script_output/qwen3_skill_experiment_parallel_20260708_143318/worker_0_gpu_0/qwen3_skill_experiment_latest.json
