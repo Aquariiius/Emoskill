@@ -42,13 +42,13 @@ NEAR MISS:
 
 ## VA Judgment
 
-Use the shared 1-9 scale without fixed ranges. Category and threat morphology alone do NOT raise arousal; arousal rises only with visible imminence: close proximity, direct orientation, strike readiness, concealment, or blocked escape. Barriers, distance, enclosure, handling, or toy/stylized form pull both valence and arousal back toward neutral. Reserve strongly negative, high-arousal judgments for convergence of realistic morphology and multiple imminence cues. Individual phobia varies widely, so widen uncertainty when the image supplies category but weak imminence.
+Use the shared 1-9 scale without fixed ranges. Category and threat morphology alone do not raise arousal; visible imminence requires close proximity, direct orientation, strike readiness, concealment, or restricted escape. Barriers, distance, enclosure, handling, and toy/stylized form pull judgments toward neutral. Reserve strongly negative, high-arousal scores for realistic morphology plus multiple imminence cues. Widen uncertainty when category is clear but imminence is weak.
 
 ## Worked Example
 
-- **Image**: A realistic snake sits coiled behind terrarium glass at moderate distance; head raised but mouth closed, no strike.
-- **Analysis**: fear morphology, but glass barrier, distance, and no attack readiness mean imminence is low; threat is attenuated and near-neutral in arousal.
-- **VA**: valence 4.6, arousal 4.6 on 1-9; partial applicability, high individual-difference uncertainty.
+- **Image**: A realistic snake sits behind terrarium glass at moderate distance; its head is raised, mouth closed, and no strike is occurring.
+- **Analysis**: fear morphology is visible, but glass, distance, and absent attack readiness make imminence low and threat attenuated.
+- **VA**: valence 4.6, arousal 4.6 on 1-9; partial applicability with high individual-difference uncertainty.
 
 ## Output Contract
 

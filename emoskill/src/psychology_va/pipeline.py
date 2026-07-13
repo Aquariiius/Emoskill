@@ -24,6 +24,7 @@ from .schemas import (
 
 
 DEFAULT_FALLBACK_SKILL_PRIORITY = (
+    "facial-expression-affect",
     "cognitive-appraisal",
     "emotional-body-language",
     "todorov-face-evaluation",
@@ -164,7 +165,7 @@ class PsychologyVAPipeline:
     ) -> VAAnalysisResult:
         payload = _normalize_analysis_payload(payload)
         if skill_spec.skill_id != "direct-va-baseline":
-            _validate_skill_inference_payload(payload)
+            _validate_skill_inference_payload(payload, skill_id=skill_spec.skill_id)
         valence_score = _required_float_in_range(payload, "valence_score", low=1.0, high=9.0)
         arousal_score = _required_float_in_range(payload, "arousal_score", low=1.0, high=9.0)
         valence = _score_to_unit_interval(valence_score)
@@ -224,15 +225,17 @@ class PsychologyVAPipeline:
             or "design" in hint
         ):
             return self._first_available(["berlyne-arousal-pleasure", "awe"])
+        if "todorov" in hint or "trustworthiness" in hint or "facial dominance" in hint:
+            return self._first_available(["todorov-face-evaluation"])
         if (
-            "todorov" in hint
-            or "face" in hint
+            "face" in hint
             or "facial" in hint
             or "portrait" in hint
-            or "trustworthiness" in hint
-            or "dominance" in hint
+            or "smile" in hint
+            or "frown" in hint
+            or "expression" in hint
         ):
-            return self._first_available(["todorov-face-evaluation", "cognitive-appraisal"])
+            return self._first_available(["facial-expression-affect", "cognitive-appraisal"])
         if (
             "snake" in hint
             or "spider" in hint
@@ -381,7 +384,7 @@ def _normalize_analysis_payload(payload: dict[str, Any]) -> dict[str, Any]:
     return normalized
 
 
-def _validate_skill_inference_payload(payload: dict[str, Any]) -> None:
+def _validate_skill_inference_payload(payload: dict[str, Any], *, skill_id: str = "") -> None:
     applicability = str(payload.get("applicability") or "").strip().lower()
     if applicability not in {"strong", "partial", "weak"}:
         raise ValueError("Skill output must include applicability: strong, partial, or weak")
@@ -397,6 +400,33 @@ def _validate_skill_inference_payload(payload: dict[str, Any]) -> None:
     inference_summary = payload.get("inference_summary")
     if not isinstance(inference_summary, str) or not inference_summary.strip():
         raise ValueError("Skill output must include a non-empty inference_summary")
+
+    if skill_id == "facial-expression-affect":
+        reliability = payload.get("face_reliability")
+        if not isinstance(reliability, dict):
+            raise ValueError("Facial expression output must include face_reliability")
+        for key in (
+            "face_clear",
+            "brow_eye_visible",
+            "mouth_jaw_visible",
+            "external_distortion",
+        ):
+            if not isinstance(reliability.get(key), bool):
+                raise ValueError(f"face_reliability.{key} must be boolean")
+
+        viewer_transfer = payload.get("viewer_transfer")
+        if not isinstance(viewer_transfer, dict):
+            raise ValueError("Facial expression output must include viewer_transfer")
+        if str(viewer_transfer.get("level") or "").strip().lower() not in {
+            "low",
+            "medium",
+            "high",
+        }:
+            raise ValueError("viewer_transfer.level must be low, medium, or high")
+
+        gate_decision = str(payload.get("gate_decision") or "").strip().lower()
+        if gate_decision not in {"use_skill", "use_direct"}:
+            raise ValueError("Facial expression output must include gate_decision: use_skill or use_direct")
 
 
 def _find_score_value(payload: dict[str, Any], score_key: str) -> float | None:

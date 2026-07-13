@@ -104,21 +104,57 @@ def build_default_skill_specs() -> list[PsychologySkillSpec]:
             routing_enabled=False,
         ),
         PsychologySkillSpec(
+            skill_id="facial-expression-affect",
+            display_name="Facial Expression Affect",
+            short_description=(
+                "Analyzes viewer affect from a clear transient human facial expression using multiple visible "
+                "facial regions, expression coherence, intensity, and body/context congruence."
+            ),
+            theory_family="facial-expression-affect",
+            selection_hints=[
+                "a clear human face is dominant and visibly expressive rather than neutral",
+                "at least two facial regions support a coherent transient expression",
+                "facial configuration carries affect more directly than body action or event meaning",
+            ],
+            use_when=(
+                "Use for clear transient facial expression and viewer affect. Do not use for neutral portraits, "
+                "personality impressions, unreadable faces, or event-driven scenes."
+            ),
+            image_signals=[
+                "reliable brow and eye-region configuration",
+                "mouth and jaw configuration",
+                "cheek or mid-face tension",
+                "expression coherence across independent regions",
+                "visible expression intensity and context congruence",
+            ],
+            va_focus=(
+                "Estimate valence from coherent perceived expression direction and arousal from visible regional "
+                "intensity and tension; report typical viewer response, not the person's true state."
+            ),
+            analysis_steps=[
+                "verify face reliability and reject neutral or unreadable faces",
+                "record independent facial-region observations without emotion or trait labels",
+                "infer a primary and alternative affective interpretation",
+                "estimate expression direction, intensity, and context congruence",
+                "judge viewer VA conservatively and report uncertainty",
+            ],
+        ),
+        PsychologySkillSpec(
             skill_id="cognitive-appraisal",
             display_name="Cognitive Appraisal",
             short_description=(
-                "A disciplined interpretive hub for context-dependent affect when visible actors, actions, "
-                "stakes, agency, control, consequences, or social meaning determine the image's VA."
+                "A conditional event-appraisal model for viewer affect when a visible event, consequences, "
+                "stakes, and at least two evidence-supported appraisal dimensions determine VA."
             ),
             theory_family="cognitive-appraisal",
             selection_hints=[
-                "visible actors, actions, consequences, or stakes determine affect",
+                "a visible event and consequence or stake determine affect",
                 "observation must be separated from interpretation and multiple hypotheses remain plausible",
-                "no more direct specialized visual mechanism adequately explains the affect",
+                "at least two appraisal dimensions have independent visible evidence",
             ],
             use_when=(
-                "Use as a disciplined hub/fallback for visible event meaning, not as a generic fallback for "
-                "ordinary objects, neutral portraits, or scenes without visible stakes."
+                "Use only for visible consequential events. It is not a fallback for ordinary objects, face-only "
+                "portraits, routine activity, static symbols, or scenes without visible stakes."
             ),
             image_signals=[
                 "actors and action relations",
@@ -229,7 +265,8 @@ def build_default_skill_specs() -> list[PsychologySkillSpec]:
             ],
             use_when=(
                 "Use when the image's dominant subject displays baby schema features: human infants, animal "
-                "babies, or deliberately neotenic characters/products. Do not use for adult faces (Todorov)."
+                "babies, or deliberately neotenic characters/products. Adult expressive faces belong to "
+                "facial-expression-affect; neutral adult faces need no specialized affect skill."
             ),
             image_signals=[
                 "large head-to-body ratio",
@@ -266,7 +303,8 @@ def build_default_skill_specs() -> list[PsychologySkillSpec]:
             ],
             use_when=(
                 "Use when body posture is the dominant emotional channel and the face is absent, obscured, "
-                "or secondary. Do not use when a clear face dominates (Todorov or Cognitive Appraisal)."
+                "or secondary. Use facial-expression-affect when a clear expression dominates and Cognitive "
+                "Appraisal only when a visible consequential event determines affect."
             ),
             image_signals=[
                 "expanded or contracted body configuration",
@@ -276,9 +314,8 @@ def build_default_skill_specs() -> list[PsychologySkillSpec]:
                 "spatial orientation and body direction relative to viewer",
             ],
             va_focus=(
-                "Map body posture to emotion category (fear, anger, sadness, joy, dominance, submission), "
-                "then derive VA from the category and postural energy. Gaze direction is a modifier layer: "
-                "direct gaze adds A +0.2-0.4."
+                "Estimate perceived approach/avoidance from body configuration and arousal from reliable "
+                "postural energy. Motion blur or an emotion category alone cannot determine arousal."
             ),
             analysis_steps=[
                 "confirm body posture is the primary emotional signal, not a readable face",
@@ -314,9 +351,8 @@ def build_default_skill_specs() -> list[PsychologySkillSpec]:
                 "threat-vastness cues: natural disaster, extreme height, uncontrollable force",
             ],
             va_focus=(
-                "Dual-branch mapping: safe vastness → V positive, A high (wonder/self-transcendence); "
-                "threatening vastness → V negative, A very high (overwhelm/terror-tinged sublimity). "
-                "Awe is always high arousal; low arousal scenes are Kaplan ART territory."
+                "Safe vastness can support positive valence with moderate activation; threatening vastness "
+                "lowers valence. Strong arousal requires exposure, proximity, violent force, or loss of control."
             ),
             analysis_steps=[
                 "apply three-way routing test: is this Awe (vastness), ART (calm/restorative), or Berlyne (novelty/complexity)?",

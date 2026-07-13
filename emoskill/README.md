@@ -1,23 +1,27 @@
 # Psychology VA Skeleton
 
-This repository now contains a starter skeleton for psychology-guided visual affect analysis.
-The current code path is designed for server-side deployment with `Qwen2.5-VL` instead of remote LLM APIs.
+This repository contains a psychology-guided visual affect analysis pipeline for local Qwen-VL models.
 
 It is designed for the workflow:
 
 1. summarize psychology models as reusable skills
-2. send an image to a local `Qwen2.5-VL` model
+2. send an image to a local `Qwen3-VL` model
 3. let the LLM choose the best psychology model
 4. run valence-arousal analysis with the selected model
 
 ## Included Skills
 
-- `panas-discrete-va`
 - `kaplan-art-restoration`
 - `berlyne-arousal-pleasure`
-- `todorov-face-evaluation`
+- `awe`
+- `cognitive-appraisal`
+- `facial-expression-affect`
+- `emotional-body-language`
+- `evolved-fear-module`
+- `pathogen-disgust`
+- `baby-schema`
 
-The skill files are stored in `.trae/skills/`.
+The active skill files are stored in `.trae/skills/`. `facial-expression-affect` handles clear transient expressions and viewer VA. `todorov-face-evaluation` remains available only for explicit non-VA social-impression analysis and is excluded from the main affect router.
 
 ## Code Layout
 
@@ -25,8 +29,6 @@ The skill files are stored in `.trae/skills/`.
   data structures for image input, routing, and final VA output
 - `src/psychology_va/model_catalog.py`
   built-in psychology model registry
-- `src/psychology_va/mapping_tables.py`
-  PANAS discrete emotion to VA mapping table
 - `src/psychology_va/prompts.py`
   routing and analysis prompts for the multimodal LLM
 - `src/psychology_va/llm_client.py`
@@ -38,12 +40,13 @@ The skill files are stored in `.trae/skills/`.
 
 ## Design Notes
 
-- The default deployment target is `Qwen/Qwen2.5-VL-7B-Instruct`.
-- `Qwen25VLClient` loads the model through `transformers` and runs inference locally or on your own server.
+- `Qwen3VLClient` loads the model through `transformers` and runs inference locally or on your own server.
 - Image input supports `image_path`, `image_url`, and `image_b64`.
 - The model is prompted to return JSON, and the client extracts the JSON object from the generation result.
 - `StubMultimodalLLMClient` is kept only as a compatibility placeholder.
-- The default psychology model set is now centered on `PANAS`, `Kaplan ART`, `Berlyne`, and `Todorov face evaluation`.
+- Every active Skill v2 contains one applicability gate, observable visual variables, a numbered inference procedure, qualitative VA judgment, a worked example, and a compact output contract.
+- All VA outputs use a shared 1-9 scale: valence 1/5/9 = negative/neutral/positive and arousal 1/5/9 = low/moderate/high activation.
+- Per-skill hard VA lookup tables have been removed; scores must follow the visual inference procedure and shared scale.
 
 ## Server Dependencies
 
@@ -52,6 +55,7 @@ The skill files are stored in `.trae/skills/`.
 - `Pillow`
 - `requests`
 - `accelerate` for easier multi-device loading
+- `tqdm` for the optional four-GPU progress bar; a built-in text fallback is used when unavailable
 
 ## Next Recommended Step
 

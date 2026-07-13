@@ -1,0 +1,4 @@
+/home/u1120250383/dcs/datasets/IAPS/Dataset/9435.jpg
+/home/u1120250383/dcs/datasets/IAPS/Dataset/2220.jpg
+/home/u1120250383/dcs/datasets/IAPS/Dataset/5950.jpg
+/home/u1120250383/dcs/datasets/IAPS/Dataset/3181.jpg

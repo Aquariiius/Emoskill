@@ -41,13 +41,13 @@ NEAR MISS:
 
 ## VA Judgment
 
-Use the shared 1-9 scale without fixed ranges. Scale and vastness alone produce only modest arousal; strong arousal requires engulfing proximity, cliff-edge exposure, violent force, or loss of control. Distant, stable, serene vastness stays near or just above neutral in arousal. Safe beauty supports positive valence; threat and helpless exposure lower it. Reserve extreme scores for convergence of strong scale and danger cues.
+Use the shared 1-9 scale without fixed ranges. Scale and vastness alone produce only modest arousal; strong arousal requires engulfing proximity, cliff-edge exposure, violent force, or loss of control. Distant, stable, serene vastness stays near or just above moderate activation. Safe beauty supports positive valence; threat and helpless exposure lower it. Reserve extreme scores for converging scale and danger cues.
 
 ## Worked Example
 
 - **Image**: Two tiny hikers stand on a stable overlook facing an immense glacier and deep mountain valley under clear light; no storm, collapse, or cliff-edge exposure is visible.
 - **Analysis**: human-scale disparity, vertical mass, layered depth, broad extension, stable viewpoint, and low threat imply high vastness and safe self-diminishing awe; overwhelm exceeds simple restoration.
-- **VA**: valence 7.4, arousal 5.0 on 1-9; strong applicability, with arousal only modestly above neutral because force and exposure are absent.
+- **VA**: valence 7.4, arousal 5.0 on 1-9; strong applicability, with only moderate activation because force and exposure are absent.
 
 ## Output Contract
 

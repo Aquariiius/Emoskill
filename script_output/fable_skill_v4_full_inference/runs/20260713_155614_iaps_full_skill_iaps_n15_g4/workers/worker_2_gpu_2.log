@@ -1,0 +1,45 @@
+Loaded 10 skill(s) from SKILL.md:
+  - awe: Awe (hints=3, steps=5, ok)
+  - baby-schema: Baby Schema / Kindchenschema (hints=3, steps=5, ok)
+  - berlyne-arousal-pleasure: Berlyne Arousal-Pleasure (hints=3, steps=5, ok)
+  - cognitive-appraisal: Cognitive Appraisal (hints=3, steps=5, ok)
+  - emotional-body-language: Emotional Body Language (hints=3, steps=5, ok)
+  - evolved-fear-module: Evolved Fear Module (hints=3, steps=5, ok)
+  - facial-expression-affect: Facial Expression Affect (hints=3, steps=5, ok)
+  - kaplan-art-restoration: Kaplan Attention Restoration Theory (hints=3, steps=5, ok)
+  - pathogen-disgust: Pathogen Disgust (hints=3, steps=5, ok)
+  - todorov-face-evaluation: Todorov Face Evaluation (hints=3, steps=5, excluded from main routing)
+Images: 4
+[1/4] /home/u1120250383/dcs/datasets/IAPS/Dataset/9435.jpg
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:01<00:03,  1.10s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:02<00:02,  1.03s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:03<00:01,  1.01s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.21it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.11it/s]
+`generation_config` default values have been modified to match model-specific defaults: {'do_sample': True}. If this is not desired, please set these values explicitly.
+  direct: Vscore=3.00 Ascore=7.50 (norm V=0.250 A=0.812) in 48.544s
+  route: cognitive-appraisal conf=0.98 in 17.504s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=2.50 Ascore=4.50 (norm V=0.188 A=0.438) in 37.178s
+  selected: cognitive-appraisal Vscore=2.50 Ascore=4.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[2/4] /home/u1120250383/dcs/datasets/IAPS/Dataset/2220.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 15.658s
+  route: facial-expression-affect conf=0.95 in 13.194s
+  candidates: facial-expression-affect
+  candidate 1/1 facial-expression-affect: Vscore=3.50 Ascore=4.50 (norm V=0.312 A=0.438) in 36.807s
+  selected: direct-va-baseline Vscore=5.00 Ascore=5.00 reason=All specialized candidates failed their evidence gate; retaining Direct VA.
+[3/4] /home/u1120250383/dcs/datasets/IAPS/Dataset/5950.jpg
+  direct: Vscore=5.00 Ascore=6.80 (norm V=0.500 A=0.725) in 17.370s
+  route: awe conf=0.95 in 15.798s
+  candidates: awe
+  candidate 1/1 awe: Vscore=3.50 Ascore=7.00 (norm V=0.312 A=0.750) in 30.819s
+  selected: awe Vscore=3.50 Ascore=7.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[4/4] /home/u1120250383/dcs/datasets/IAPS/Dataset/3181.jpg
+  direct: Vscore=3.50 Ascore=7.50 (norm V=0.312 A=0.812) in 14.463s
+  route: cognitive-appraisal conf=0.95 in 18.822s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=2.50 Ascore=6.80 (norm V=0.188 A=0.725) in 34.721s
+  selected: cognitive-appraisal Vscore=2.50 Ascore=6.80 reason=Only one candidate skill analysis succeeded; using it as the final score.
+Trace latest: /home/u1120250383/dcs/Emoskill/script_output/fable_skill_v4_full_inference/runs/20260713_155614_iaps_full_skill_iaps_n15_g4/workers/worker_2_gpu_2/qwen3_iaps_case_trace_latest.json
+Full-skill latest: /home/u1120250383/dcs/Emoskill/script_output/fable_skill_v4_full_inference/runs/20260713_155614_iaps_full_skill_iaps_n15_g4/workers/worker_2_gpu_2/qwen3_iaps_full_skill_inference_latest.json
+Inference Markdown: /home/u1120250383/dcs/Emoskill/script_output/fable_skill_v4_full_inference/runs/20260713_155614_iaps_full_skill_iaps_n15_g4/workers/worker_2_gpu_2/qwen3_iaps_full_skill_inference_20260713_160116.md
+Inference Markdown latest: /home/u1120250383/dcs/Emoskill/script_output/fable_skill_v4_full_inference/runs/20260713_155614_iaps_full_skill_iaps_n15_g4/workers/worker_2_gpu_2/qwen3_iaps_full_skill_inference_latest.md
+OK images=4/4; elapsed=301.008s; skills=10
+Saved: /home/u1120250383/dcs/Emoskill/script_output/fable_skill_v4_full_inference/runs/20260713_155614_iaps_full_skill_iaps_n15_g4/workers/worker_2_gpu_2/qwen3_skill_experiment_20260713_160116.json
+Latest: /home/u1120250383/dcs/Emoskill/script_output/fable_skill_v4_full_inference/runs/20260713_155614_iaps_full_skill_iaps_n15_g4/workers/worker_2_gpu_2/qwen3_skill_experiment_latest.json

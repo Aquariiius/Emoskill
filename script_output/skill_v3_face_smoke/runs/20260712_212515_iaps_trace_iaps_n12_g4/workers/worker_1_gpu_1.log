@@ -1,0 +1,36 @@
+Loaded 10 skill(s) from SKILL.md:
+  - awe: Awe (hints=3, steps=5, ok)
+  - baby-schema: Baby Schema / Kindchenschema (hints=3, steps=5, ok)
+  - berlyne-arousal-pleasure: Berlyne Arousal-Pleasure (hints=3, steps=5, ok)
+  - cognitive-appraisal: Cognitive Appraisal (hints=3, steps=5, ok)
+  - emotional-body-language: Emotional Body Language (hints=3, steps=5, ok)
+  - evolved-fear-module: Evolved Fear Module (hints=3, steps=5, ok)
+  - facial-expression-affect: Facial Expression Affect (hints=3, steps=5, missing size 5275B exceeds 5120B)
+  - kaplan-art-restoration: Kaplan Attention Restoration Theory (hints=3, steps=5, ok)
+  - pathogen-disgust: Pathogen Disgust (hints=3, steps=5, ok)
+  - todorov-face-evaluation: Todorov Face Evaluation (hints=3, steps=5, excluded from main routing)
+Images: 3
+[1/3] /home/u1120250383/dcs/datasets/IAPS/Dataset/2010.jpg
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:01<00:03,  1.03s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:02<00:02,  1.01s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:02<00:00,  1.01it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.22it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.12it/s]
+`generation_config` default values have been modified to match model-specific defaults: {'do_sample': True}. If this is not desired, please set these values explicitly.
+  direct: Vscore=7.00 Ascore=5.00 (norm V=0.750 A=0.500) in 26.476s
+  route: facial-expression-affect conf=0.95 in 3.526s
+  candidates: facial-expression-affect
+  candidate 1/1 facial-expression-affect: Vscore=7.50 Ascore=5.00 (norm V=0.812 A=0.500) in 17.014s
+  selected: facial-expression-affect Vscore=7.50 Ascore=5.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[2/3] /home/u1120250383/dcs/datasets/IAPS/Dataset/2130.jpg
+  direct: Vscore=2.00 Ascore=8.00 (norm V=0.125 A=0.875) in 5.245s
+  route: facial-expression-affect conf=0.98 in 3.472s
+  candidates: facial-expression-affect
+  candidate 1/1 facial-expression-affect: Vscore=2.00 Ascore=8.00 (norm V=0.125 A=0.875) in 15.725s
+  selected: facial-expression-affect Vscore=2.00 Ascore=8.00 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[3/3] /home/u1120250383/dcs/datasets/IAPS/Dataset/7080.jpg
+  direct: Vscore=5.00 Ascore=5.00 (norm V=0.500 A=0.500) in 5.054s
+  route: no_specialized_skill conf=1.00 in 2.953s
+  selected: no_specialized_skill Vscore=5.00 Ascore=5.00 using direct VA baseline
+Trace latest: /home/u1120250383/dcs/Emoskill/script_output/skill_v3_face_smoke/runs/20260712_212515_iaps_trace_iaps_n12_g4/workers/worker_1_gpu_1/qwen3_iaps_case_trace_latest.json
+Inference Markdown: /home/u1120250383/dcs/Emoskill/script_output/skill_v3_face_smoke/runs/20260712_212515_iaps_trace_iaps_n12_g4/workers/worker_1_gpu_1/qwen3_iaps_case_inference_20260712_212635.md
+Inference Markdown latest: /home/u1120250383/dcs/Emoskill/script_output/skill_v3_face_smoke/runs/20260712_212515_iaps_trace_iaps_n12_g4/workers/worker_1_gpu_1/qwen3_iaps_case_inference_latest.md
+OK images=3/3; elapsed=79.576s; skills=10
+Saved: /home/u1120250383/dcs/Emoskill/script_output/skill_v3_face_smoke/runs/20260712_212515_iaps_trace_iaps_n12_g4/workers/worker_1_gpu_1/qwen3_skill_experiment_20260712_212635.json
+Latest: /home/u1120250383/dcs/Emoskill/script_output/skill_v3_face_smoke/runs/20260712_212515_iaps_trace_iaps_n12_g4/workers/worker_1_gpu_1/qwen3_skill_experiment_latest.json

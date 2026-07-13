@@ -68,16 +68,17 @@ def _catalog_as_text(skill_specs: list[PsychologySkillSpec]) -> str:
 
 def _routing_preference_rules() -> str:
     return (
-        "- Test directly visible specialized mechanisms before using the cognitive-appraisal fallback.\n"
+        "- Test directly visible specialized mechanisms before considering cognitive-appraisal.\n"
         "- Prefer kaplan-art-restoration for enterable, low-demand restorative environments.\n"
         "- Prefer berlyne-arousal-pleasure only when measurable perceptual novelty, complexity, ambiguity, or incongruity drives affect.\n"
         "- Prefer evolved-fear-module when evolutionarily threatening animals (snakes, spiders, predators) are the dominant content.\n"
         "- Prefer pathogen-disgust for visible contamination, rot, bodily waste, wounds, or pest infestation.\n"
         "- Prefer baby-schema when an infant, baby animal, or neotenic character is the dominant subject.\n"
+        "- Prefer facial-expression-affect only when a clear expressive human face is dominant and independent mouth/jaw plus eye/brow evidence supports a transient expression; partial, hand-distorted, neutral, or ambiguous faces are not enough.\n"
         "- Prefer emotional-body-language when human body posture or gesture carries the primary emotional signal and the face is obscured or secondary.\n"
         "- Prefer awe only when physically overwhelming scale and self-diminishment cues dominate.\n"
-        "- Use cognitive-appraisal as a disciplined hub/fallback only when visible actors, actions, stakes, agency, consequences, or context determine affect and no more direct specialized mechanism explains it.\n"
-        "- Cognitive appraisal is not the fallback for ordinary objects, neutral portraits, or scenes without visible stakes; use no_specialized_skill for those.\n"
+        "- Use cognitive-appraisal only when a visible event has consequential change (gain/loss, obstruction, threat, success/failure) and at least two evidence-supported appraisal dimensions; it is not a fallback.\n"
+        "- Buying, eating, waiting, receiving service, gathering, or socializing are not stakes without a visible consequential change. Do not infer goals, control, consent, urgency, or danger from missing context. Use no_specialized_skill for ordinary objects, neutral portraits, routine activity, static symbols, and ambiguous face/pose cues.\n"
     )
 
 
@@ -192,7 +193,29 @@ def build_skill_selection_user_prompt(
     )
 
 
+def _skill_specific_analysis_contract(skill_id: str) -> tuple[str, str]:
+    if skill_id != "facial-expression-affect":
+        return "", ""
+    instructions = (
+        "Facial-expression-specific mandatory contract:\n"
+        "- Report face_reliability as observable booleans. Do not guess a hidden mouth/jaw region.\n"
+        "- external_distortion is true when a hand/object presses, covers, or visibly deforms a diagnostic region.\n"
+        "- Report viewer_transfer separately from depicted expression intensity. Missing body/event/context is an attenuator, not confirmation.\n"
+        "- Set gate_decision=use_direct unless applicability is strong, brow/eye and mouth/jaw are both reliable, external_distortion is false, and viewer transfer is supported.\n"
+    )
+    schema_fields = (
+        '  "face_reliability": {"face_clear": true, "brow_eye_visible": true, '
+        '"mouth_jaw_visible": true, "external_distortion": false},\n'
+        '  "viewer_transfer": {"level":"low|medium|high", "amplifiers":[], "attenuators":[]},\n'
+        '  "gate_decision": "use_skill|use_direct",\n'
+    )
+    return instructions, schema_fields
+
+
 def build_analysis_system_prompt(skill_spec: PsychologySkillSpec) -> str:
+    skill_specific_instructions, skill_specific_schema = _skill_specific_analysis_contract(
+        skill_spec.skill_id
+    )
     compact_skill_definition = {
         "skill_id": skill_spec.skill_id,
         "display_name": skill_spec.display_name,
@@ -214,6 +237,7 @@ def build_analysis_system_prompt(skill_spec: PsychologySkillSpec) -> str:
         "Do not copy the skill's narrative output template. Convert the analysis into the JSON schema below.\n"
         "The first two top-level keys of the object must be valence_score and arousal_score.\n"
         f"{VA_SCORE_INSTRUCTIONS}"
+        f"{skill_specific_instructions}"
         f"Skill definition:\n{json.dumps(compact_skill_definition, ensure_ascii=True, indent=2)}\n\n"
         "Required JSON schema:\n"
         "{\n"
@@ -222,6 +246,7 @@ def build_analysis_system_prompt(skill_spec: PsychologySkillSpec) -> str:
         '  "skill_id": "skill-id",\n'
         '  "quadrant": "short label",\n'
         '  "applicability": "strong|partial|weak",\n'
+        f"{skill_specific_schema}"
         '  "summary": "concise explanation",\n'
         '  "visual_evidence": [{"variable":"skill variable","observation":"visible fact","level":"low|medium|high"}],\n'
         '  "construct_estimates": [{"construct":"theory construct","level":"low|medium|high","basis":"visible evidence"}],\n'
@@ -234,6 +259,9 @@ def build_analysis_system_prompt(skill_spec: PsychologySkillSpec) -> str:
 
 
 def build_full_skill_analysis_system_prompt(skill_spec: PsychologySkillSpec) -> str:
+    skill_specific_instructions, skill_specific_schema = _skill_specific_analysis_contract(
+        skill_spec.skill_id
+    )
     compact_skill_definition = {
         "skill_id": skill_spec.skill_id,
         "display_name": skill_spec.display_name,
@@ -257,6 +285,7 @@ def build_full_skill_analysis_system_prompt(skill_spec: PsychologySkillSpec) -> 
         "Do not copy the skill's narrative output template. Convert the analysis into the JSON schema below.\n"
         "The first two top-level keys of the object must be valence_score and arousal_score.\n"
         f"{FULL_INFERENCE_VA_SCORE_INSTRUCTIONS}"
+        f"{skill_specific_instructions}"
         f"Compact skill metadata:\n{json.dumps(compact_skill_definition, ensure_ascii=True, indent=2)}\n\n"
         f"Full SKILL.md:\n{raw_skill_markdown}\n\n"
         "Required JSON schema:\n"
@@ -266,6 +295,7 @@ def build_full_skill_analysis_system_prompt(skill_spec: PsychologySkillSpec) -> 
         '  "skill_id": "skill-id",\n'
         '  "quadrant": "short label",\n'
         '  "applicability": "strong|partial|weak",\n'
+        f"{skill_specific_schema}"
         '  "summary": "concise final affect summary",\n'
         '  "visual_evidence": [{"variable":"skill variable","observation":"visible fact","level":"low|medium|high"}],\n'
         '  "evidence": ["visible cue used for scoring"],\n'

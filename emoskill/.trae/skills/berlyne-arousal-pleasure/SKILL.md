@@ -42,14 +42,14 @@ NEAR MISS:
 
 ## VA Judgment
 
-Use the shared 1-9 scale without fixed ranges. Complexity, novelty, detail, and ambiguity alone do NOT set arousal; arousal rises only with high sensory intensity (strong contrast/saturation, crowding, focal competition) or unresolved overload. An intricate but orderly, fluent, low-contrast composition can be calm. Valence depends on processability: fluent engagement can be pleasant, unresolved overload unpleasant, very low stimulation neutral or dull. Do not infer an individual's optimal stimulation point.
+Use the shared 1-9 scale without fixed ranges. Complexity, novelty, detail, and ambiguity alone do not set arousal; arousal rises with strong sensory intensity, focal competition, or unresolved overload. An intricate but orderly, fluent, low-contrast composition can remain calm. Valence depends on processability: fluent engagement can be pleasant, unresolved overload unpleasant, and very low stimulation neutral or dull. Do not infer an individual's optimal point.
 
 ## Worked Example
 
-- **Image**: An abstract poster of many irregular high-contrast shapes, but repeated alignments and a clear hierarchy organize it; several figure-ground readings exist.
-- **Analysis**: high contrast raises arousal somewhat, but strong order and fluency prevent overload; pleasant rather than chaotic.
+- **Image**: An abstract poster has many irregular high-contrast shapes, repeated alignments, and a clear hierarchy; several figure-ground readings remain possible.
+- **Analysis**: high contrast raises activation somewhat, but order and fluency prevent overload; the composition is engaging rather than chaotic.
 - **VA**: valence 6.3, arousal 5.2 on 1-9; strong applicability.
-- **Calm counter-case**: a dense but soft, low-contrast, symmetric pattern -> valence ~6.0, arousal ~3.8; detail without intensity is not high arousal.
+- **Counter-case**: a dense, soft, low-contrast symmetric pattern may be positive but low-arousal; detail is not sensory intensity.
 
 ## Output Contract
 

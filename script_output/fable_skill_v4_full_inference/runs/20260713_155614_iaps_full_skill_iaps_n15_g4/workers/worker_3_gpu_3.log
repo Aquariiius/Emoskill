@@ -1,0 +1,39 @@
+Loaded 10 skill(s) from SKILL.md:
+  - awe: Awe (hints=3, steps=5, ok)
+  - baby-schema: Baby Schema / Kindchenschema (hints=3, steps=5, ok)
+  - berlyne-arousal-pleasure: Berlyne Arousal-Pleasure (hints=3, steps=5, ok)
+  - cognitive-appraisal: Cognitive Appraisal (hints=3, steps=5, ok)
+  - emotional-body-language: Emotional Body Language (hints=3, steps=5, ok)
+  - evolved-fear-module: Evolved Fear Module (hints=3, steps=5, ok)
+  - facial-expression-affect: Facial Expression Affect (hints=3, steps=5, ok)
+  - kaplan-art-restoration: Kaplan Attention Restoration Theory (hints=3, steps=5, ok)
+  - pathogen-disgust: Pathogen Disgust (hints=3, steps=5, ok)
+  - todorov-face-evaluation: Todorov Face Evaluation (hints=3, steps=5, excluded from main routing)
+Images: 3
+[1/3] /home/u1120250383/dcs/datasets/IAPS/Dataset/6831.jpg
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:02,  1.02it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:01<00:01,  1.03it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:02<00:00,  1.03it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.24it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.15it/s]
+`generation_config` default values have been modified to match model-specific defaults: {'do_sample': True}. If this is not desired, please set these values explicitly.
+  direct: Vscore=3.00 Ascore=7.50 (norm V=0.250 A=0.812) in 45.513s
+  route: cognitive-appraisal conf=0.98 in 16.047s
+  candidates: cognitive-appraisal
+  candidate 1/1 cognitive-appraisal: Vscore=2.50 Ascore=4.50 (norm V=0.188 A=0.438) in 41.858s
+  selected: cognitive-appraisal Vscore=2.50 Ascore=4.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[2/3] /home/u1120250383/dcs/datasets/IAPS/Dataset/3360.jpg
+  direct: Vscore=5.00 Ascore=4.50 (norm V=0.500 A=0.438) in 17.226s
+  route: baby-schema conf=0.98 in 12.463s
+  candidates: baby-schema
+  candidate 1/1 baby-schema: Vscore=5.00 Ascore=4.50 (norm V=0.500 A=0.438) in 38.559s
+  selected: baby-schema Vscore=5.00 Ascore=4.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+[3/3] /home/u1120250383/dcs/datasets/IAPS/Dataset/5480.jpg
+  direct: Vscore=7.50 Ascore=6.80 (norm V=0.812 A=0.725) in 15.437s
+  route: berlyne-arousal-pleasure conf=0.95 in 16.751s
+  candidates: berlyne-arousal-pleasure
+  candidate 1/1 berlyne-arousal-pleasure: Vscore=7.50 Ascore=4.50 (norm V=0.812 A=0.438) in 30.836s
+  selected: berlyne-arousal-pleasure Vscore=7.50 Ascore=4.50 reason=Only one candidate skill analysis succeeded; using it as the final score.
+Trace latest: /home/u1120250383/dcs/Emoskill/script_output/fable_skill_v4_full_inference/runs/20260713_155614_iaps_full_skill_iaps_n15_g4/workers/worker_3_gpu_3/qwen3_iaps_case_trace_latest.json
+Full-skill latest: /home/u1120250383/dcs/Emoskill/script_output/fable_skill_v4_full_inference/runs/20260713_155614_iaps_full_skill_iaps_n15_g4/workers/worker_3_gpu_3/qwen3_iaps_full_skill_inference_latest.json
+Inference Markdown: /home/u1120250383/dcs/Emoskill/script_output/fable_skill_v4_full_inference/runs/20260713_155614_iaps_full_skill_iaps_n15_g4/workers/worker_3_gpu_3/qwen3_iaps_full_skill_inference_20260713_160009.md
+Inference Markdown latest: /home/u1120250383/dcs/Emoskill/script_output/fable_skill_v4_full_inference/runs/20260713_155614_iaps_full_skill_iaps_n15_g4/workers/worker_3_gpu_3/qwen3_iaps_full_skill_inference_latest.md
+OK images=3/3; elapsed=234.778s; skills=10
+Saved: /home/u1120250383/dcs/Emoskill/script_output/fable_skill_v4_full_inference/runs/20260713_155614_iaps_full_skill_iaps_n15_g4/workers/worker_3_gpu_3/qwen3_skill_experiment_20260713_160009.json
+Latest: /home/u1120250383/dcs/Emoskill/script_output/fable_skill_v4_full_inference/runs/20260713_155614_iaps_full_skill_iaps_n15_g4/workers/worker_3_gpu_3/qwen3_skill_experiment_latest.json

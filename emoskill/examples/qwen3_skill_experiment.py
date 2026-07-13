@@ -58,6 +58,7 @@ REQUIRED_SKILL_SECTIONS = (
     "Worked Example",
     "Output Contract",
 )
+MAX_ACTIVE_SKILL_BYTES = 6 * 1024
 DEFAULT_DIAGNOSTIC_SKILLS = ("berlyne-arousal-pleasure", "cognitive-appraisal")
 DEFAULT_IAPS_TRACE_CASE_IDS = (
     "7080",
@@ -508,8 +509,10 @@ def validate_skill_markdown(skill_specs: list[Any]) -> list[dict[str, Any]]:
         ]
         if spec.routing_enabled:
             size_bytes = len(markdown.encode("utf-8"))
-            if size_bytes > 4096:
-                missing_sections.append(f"size {size_bytes}B exceeds 4096B")
+            if size_bytes > MAX_ACTIVE_SKILL_BYTES:
+                missing_sections.append(
+                    f"size {size_bytes}B exceeds {MAX_ACTIVE_SKILL_BYTES}B"
+                )
             if len(spec.analysis_steps) < 4:
                 missing_sections.append("Inference Procedure needs at least 4 numbered steps")
             if not spec.routing_card.get("use_when"):
@@ -936,6 +939,128 @@ def write_image_list(path: Path, images: list[Path]) -> None:
     path.write_text("\n".join(str(image_path) for image_path in images) + "\n", encoding="utf-8")
 
 
+def format_duration(seconds: float) -> str:
+    total_seconds = max(0, int(round(seconds)))
+    hours, remainder = divmod(total_seconds, 3600)
+    minutes, secs = divmod(remainder, 60)
+    return f"{hours:02d}:{minutes:02d}:{secs:02d}"
+
+
+def format_progress_line(
+    *,
+    completed: int,
+    total: int,
+    elapsed_seconds: float,
+    active_workers: int | None = None,
+    width: int = 28,
+) -> str:
+    fraction = (completed / total) if total else 1.0
+    filled = min(width, max(0, int(round(width * fraction))))
+    bar = "#" * filled + "-" * (width - filled)
+    elapsed = max(0.0, elapsed_seconds)
+    if completed > 0 and elapsed > 0:
+        rate = completed / elapsed
+        eta = (total - completed) / rate if rate > 0 else 0.0
+        rate_text = f"{rate:.3f} img/s"
+        eta_text = format_duration(eta)
+    else:
+        rate_text = "waiting for first image"
+        eta_text = "--:--:--"
+    worker_text = f" | workers {active_workers}" if active_workers is not None else ""
+    return (
+        f"Progress [{bar}] {completed}/{total} ({fraction * 100:5.1f}%)"
+        f" | elapsed {format_duration(elapsed)} | {rate_text} | ETA {eta_text}{worker_text}"
+    )
+
+
+def write_worker_progress(
+    output_dir: Path,
+    *,
+    completed: int,
+    total: int,
+    last_image: str = "",
+    last_ok: bool | None = None,
+) -> None:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    progress_path = output_dir / "progress.json"
+    temp_path = output_dir / "progress.json.tmp"
+    payload = {
+        "completed": completed,
+        "total": total,
+        "last_image": last_image,
+        "last_ok": last_ok,
+        "updated_at": datetime.now().isoformat(timespec="seconds"),
+    }
+    temp_path.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
+    temp_path.replace(progress_path)
+
+
+def read_worker_progress(output_dir: str | Path) -> dict[str, Any]:
+    progress_path = Path(output_dir) / "progress.json"
+    try:
+        payload = json.loads(progress_path.read_text(encoding="utf-8"))
+    except (FileNotFoundError, json.JSONDecodeError, OSError):
+        return {}
+    return payload if isinstance(payload, dict) else {}
+
+
+def monitor_parallel_progress(
+    workers: list[dict[str, Any]],
+    *,
+    total_images: int,
+    started: float,
+    poll_seconds: float = 2.0,
+) -> None:
+    try:
+        from tqdm.auto import tqdm
+    except ImportError:
+        tqdm = None
+
+    if tqdm is not None:
+        last_completed = 0
+        with tqdm(total=total_images, desc="Images", unit="img", dynamic_ncols=True) as progress_bar:
+            while True:
+                completed = sum(
+                    min(int(progress.get("completed") or 0), int(worker["image_count"]))
+                    for worker in workers
+                    for progress in [read_worker_progress(worker["output_dir"])]
+                )
+                active_workers = sum(1 for worker in workers if worker["process"].poll() is None)
+                if completed > last_completed:
+                    progress_bar.update(completed - last_completed)
+                    last_completed = completed
+                progress_bar.set_postfix(
+                    workers=active_workers,
+                    elapsed=format_duration(time.perf_counter() - started),
+                    refresh=True,
+                )
+                if active_workers == 0:
+                    return
+                time.sleep(poll_seconds)
+
+    previous_width = 0
+    while True:
+        completed = sum(
+            min(int(progress.get("completed") or 0), int(worker["image_count"]))
+            for worker in workers
+            for progress in [read_worker_progress(worker["output_dir"])]
+        )
+        active_workers = sum(1 for worker in workers if worker["process"].poll() is None)
+        line = format_progress_line(
+            completed=completed,
+            total=total_images,
+            elapsed_seconds=time.perf_counter() - started,
+            active_workers=active_workers,
+        )
+        padding = " " * max(0, previous_width - len(line))
+        print(f"\r{line}{padding}", end="", flush=True)
+        previous_width = len(line)
+        if active_workers == 0:
+            print()
+            return
+        time.sleep(poll_seconds)
+
+
 def image_order_keys(image_path: Path) -> list[str]:
     raw = str(image_path)
     return [raw, raw.replace("\\", "/"), image_path.as_posix()]
@@ -1020,6 +1145,16 @@ def run_parallel(args: argparse.Namespace) -> int:
             }
         )
         print(f"  worker {worker_id}: gpu={gpu_id}, images={len(shard)}, log={log_path}")
+
+    if args.diagnose_skill_output:
+        for worker in processes:
+            worker["process"].wait()
+    else:
+        monitor_parallel_progress(
+            processes,
+            total_images=len(images),
+            started=started,
+        )
 
     for worker in processes:
         return_code = worker["process"].wait()
@@ -1716,6 +1851,105 @@ def no_specialized_skill_selection(
     }
 
 
+def direct_gate_fallback_selection(
+    direct_result: Any,
+    candidate_analyses: list[dict[str, Any]],
+) -> dict[str, Any]:
+    rejected = []
+    for candidate in candidate_analyses:
+        reasons = candidate.get("selection_gate_reasons") or []
+        rejected.append(
+            {
+                "skill_id": candidate.get("skill_id"),
+                "why_not": "; ".join(str(reason) for reason in reasons)
+                or str(candidate.get("error") or "candidate analysis was not eligible"),
+            }
+        )
+    return {
+        "selected_skill_id": "direct-va-baseline",
+        "reason": "All specialized candidates failed their evidence gate; retaining Direct VA.",
+        "confidence": 1.0,
+        "selected_valence_score": getattr(direct_result, "valence_score", None),
+        "selected_arousal_score": getattr(direct_result, "arousal_score", None),
+        "rejected_candidates": rejected,
+        "fallback": True,
+        "used_direct_va": True,
+    }
+
+
+def _score_extremity(score: Any) -> float | None:
+    try:
+        return abs(float(score) - 5.0)
+    except (TypeError, ValueError):
+        return None
+
+
+def candidate_selection_gate_reasons(
+    candidate: dict[str, Any],
+    direct_result: Any | None,
+) -> list[str]:
+    if candidate.get("skill_id") != "facial-expression-affect":
+        return []
+
+    skill_va = candidate.get("skill_va") or {}
+    raw = skill_va.get("raw_model_output") or {}
+    reasons: list[str] = []
+    if str(raw.get("applicability") or "").strip().lower() != "strong":
+        reasons.append("facial-expression applicability is not strong")
+
+    reliability = raw.get("face_reliability") or {}
+    if reliability.get("face_clear") is not True:
+        reasons.append("face is not reliably clear")
+    if reliability.get("brow_eye_visible") is not True:
+        reasons.append("brow/eye evidence is not reliable")
+    if reliability.get("mouth_jaw_visible") is not True:
+        reasons.append("mouth/jaw evidence is not reliable")
+    if reliability.get("external_distortion") is not False:
+        reasons.append("a hand/object distorts or occludes the face")
+
+    if str(raw.get("gate_decision") or "").strip().lower() != "use_skill":
+        reasons.append("model gate_decision did not approve skill use")
+    viewer_transfer = raw.get("viewer_transfer") or {}
+    if str(viewer_transfer.get("level") or "").strip().lower() not in {
+        "low",
+        "medium",
+        "high",
+    }:
+        reasons.append("viewer-transfer estimate is missing")
+
+    if direct_result is not None:
+        for dimension in ("valence", "arousal"):
+            skill_extremity = _score_extremity(skill_va.get(f"{dimension}_score"))
+            direct_extremity = _score_extremity(getattr(direct_result, f"{dimension}_score", None))
+            if (
+                skill_extremity is not None
+                and direct_extremity is not None
+                and skill_extremity > direct_extremity + 1e-9
+            ):
+                reasons.append(
+                    f"face-only analysis amplifies {dimension} beyond Direct instead of attenuating it"
+                )
+    return reasons
+
+
+def eligible_candidate_analyses(
+    candidate_analyses: list[dict[str, Any]],
+    direct_result: Any | None,
+) -> list[dict[str, Any]]:
+    eligible: list[dict[str, Any]] = []
+    for candidate in candidate_analyses:
+        if not candidate.get("ok") or not candidate.get("skill_va"):
+            candidate["selection_eligible"] = False
+            candidate.setdefault("selection_gate_reasons", ["candidate analysis failed"])
+            continue
+        reasons = candidate_selection_gate_reasons(candidate, direct_result)
+        candidate["selection_eligible"] = not reasons
+        candidate["selection_gate_reasons"] = reasons
+        if not reasons:
+            eligible.append(candidate)
+    return eligible
+
+
 def analysis_prompts_for_skill(
     *,
     args: argparse.Namespace,
@@ -2081,22 +2315,38 @@ def process_image_with_trace(
                     print(f"  candidate {candidate_skill_id}: ERROR {type(exc).__name__}: {exc}")
                 item["candidate_skill_analyses"].append(candidate_item)
 
-            selection = select_final_skill_analysis(
-                args=args,
-                client=client,
-                image_input=image_input,
-                route=route,
-                candidate_analyses=item["candidate_skill_analyses"],
-                trace=item["inference_trace"],
-            )
-            item["skill_selection"] = selection
-            selected_candidate = selected_candidate_for_selection(item["candidate_skill_analyses"], selection)
-            item["skill_seconds"] = selected_candidate.get("seconds")
             item["total_candidate_skill_seconds"] = round(
                 sum(float(candidate.get("seconds") or 0) for candidate in item["candidate_skill_analyses"]),
                 3,
             )
-            item["skill_va"] = selected_candidate["skill_va"]
+            eligible_candidates = eligible_candidate_analyses(
+                item["candidate_skill_analyses"], direct_result
+            )
+            if not eligible_candidates and direct_result is not None:
+                selection = direct_gate_fallback_selection(
+                    direct_result, item["candidate_skill_analyses"]
+                )
+                item["skill_selection"] = selection
+                item["skill_seconds"] = 0.0
+                item["skill_va"] = direct_result.to_dict()
+            else:
+                selection_pool = eligible_candidates or successful_candidate_analyses(
+                    item["candidate_skill_analyses"]
+                )
+                selection = select_final_skill_analysis(
+                    args=args,
+                    client=client,
+                    image_input=image_input,
+                    route=route,
+                    candidate_analyses=selection_pool,
+                    trace=item["inference_trace"],
+                )
+                item["skill_selection"] = selection
+                selected_candidate = selected_candidate_for_selection(
+                    item["candidate_skill_analyses"], selection
+                )
+                item["skill_seconds"] = selected_candidate.get("seconds")
+                item["skill_va"] = selected_candidate["skill_va"]
             if true_va:
                 item["skill_error"] = va_error(item["skill_va"], true_va)
             raw_output = item["skill_va"].get("raw_model_output") or {}
@@ -2150,6 +2400,8 @@ def run_single(args: argparse.Namespace) -> int:
     )
     annotations_path = resolve_annotations_path(args, upload_dir)
     annotations = load_annotations(annotations_path)
+    if args.parallel_worker:
+        write_worker_progress(output_dir, completed=0, total=len(images))
 
     skill_specs = load_skill_specs_from_directory(
         skills_dir,
@@ -2232,18 +2484,33 @@ def run_single(args: argparse.Namespace) -> int:
 
     for index, image_path in enumerate(images, start=1):
         if args.trace_inference:
-            payload["results"].append(
-                process_image_with_trace(
-                    args=args,
-                    client=client,
-                    pipeline=pipeline,
-                    skill_specs=skill_specs,
-                    image_path=image_path,
-                    index=index,
-                    total=len(images),
-                    annotations=annotations,
-                )
+            item = process_image_with_trace(
+                args=args,
+                client=client,
+                pipeline=pipeline,
+                skill_specs=skill_specs,
+                image_path=image_path,
+                index=index,
+                total=len(images),
+                annotations=annotations,
             )
+            payload["results"].append(item)
+            if args.parallel_worker:
+                write_worker_progress(
+                    output_dir,
+                    completed=index,
+                    total=len(images),
+                    last_image=str(image_path),
+                    last_ok=bool(item.get("ok")),
+                )
+            else:
+                print(
+                    format_progress_line(
+                        completed=index,
+                        total=len(images),
+                        elapsed_seconds=time.perf_counter() - started,
+                    )
+                )
             continue
 
         print(f"[{index}/{len(images)}] {image_path}")
@@ -2313,6 +2580,22 @@ def run_single(args: argparse.Namespace) -> int:
                     )
                     item["ok"] = True
                     payload["results"].append(item)
+                    if args.parallel_worker:
+                        write_worker_progress(
+                            output_dir,
+                            completed=index,
+                            total=len(images),
+                            last_image=str(image_path),
+                            last_ok=True,
+                        )
+                    else:
+                        print(
+                            format_progress_line(
+                                completed=index,
+                                total=len(images),
+                                elapsed_seconds=time.perf_counter() - started,
+                            )
+                        )
                     continue
 
                 candidate_skill_ids = candidate_skill_ids_for_route(route, args)
@@ -2368,21 +2651,37 @@ def run_single(args: argparse.Namespace) -> int:
                         print(f"  candidate {candidate_skill_id}: ERROR {type(exc).__name__}: {exc}")
                     item["candidate_skill_analyses"].append(candidate_item)
 
-                selection = select_final_skill_analysis(
-                    args=args,
-                    client=client,
-                    image_input=image_input,
-                    route=route,
-                    candidate_analyses=item["candidate_skill_analyses"],
-                )
-                item["skill_selection"] = selection
-                selected_candidate = selected_candidate_for_selection(item["candidate_skill_analyses"], selection)
-                item["skill_seconds"] = selected_candidate.get("seconds")
                 item["total_candidate_skill_seconds"] = round(
                     sum(float(candidate.get("seconds") or 0) for candidate in item["candidate_skill_analyses"]),
                     3,
                 )
-                item["skill_va"] = selected_candidate["skill_va"]
+                eligible_candidates = eligible_candidate_analyses(
+                    item["candidate_skill_analyses"], direct_result
+                )
+                if not eligible_candidates and direct_result is not None:
+                    selection = direct_gate_fallback_selection(
+                        direct_result, item["candidate_skill_analyses"]
+                    )
+                    item["skill_selection"] = selection
+                    item["skill_seconds"] = 0.0
+                    item["skill_va"] = direct_result.to_dict()
+                else:
+                    selection_pool = eligible_candidates or successful_candidate_analyses(
+                        item["candidate_skill_analyses"]
+                    )
+                    selection = select_final_skill_analysis(
+                        args=args,
+                        client=client,
+                        image_input=image_input,
+                        route=route,
+                        candidate_analyses=selection_pool,
+                    )
+                    item["skill_selection"] = selection
+                    selected_candidate = selected_candidate_for_selection(
+                        item["candidate_skill_analyses"], selection
+                    )
+                    item["skill_seconds"] = selected_candidate.get("seconds")
+                    item["skill_va"] = selected_candidate["skill_va"]
                 if true_va:
                     item["skill_error"] = va_error(item["skill_va"], true_va)
                 raw_output = item["skill_va"].get("raw_model_output") or {}
@@ -2412,6 +2711,22 @@ def run_single(args: argparse.Namespace) -> int:
             print(f"  ERROR: {type(exc).__name__}: {exc}")
 
         payload["results"].append(item)
+        if args.parallel_worker:
+            write_worker_progress(
+                output_dir,
+                completed=index,
+                total=len(images),
+                last_image=str(image_path),
+                last_ok=bool(item.get("ok")),
+            )
+        else:
+            print(
+                format_progress_line(
+                    completed=index,
+                    total=len(images),
+                    elapsed_seconds=time.perf_counter() - started,
+                )
+            )
 
     payload["elapsed_seconds"] = round(time.perf_counter() - started, 3)
     payload["ok_count"] = sum(1 for item in payload["results"] if item.get("ok"))

@@ -1,0 +1,1948 @@
+{
+  "time": "2026-07-12T21:41:12",
+  "python": "/home/u1120250383/miniconda3/envs/emoskill/bin/python",
+  "model_path": "/home/u1120250383/dyp/models/qwen",
+  "skills_dir": "/home/u1120250383/dcs/Emoskill/emoskill/.trae/skills",
+  "upload_dir": "/home/u1120250383/dcs/datasets/IAPS/Dataset",
+  "annotations_path": null,
+  "annotations_count": 0,
+  "score_scale": {
+    "raw_score_min": 1,
+    "raw_score_neutral": 5,
+    "raw_score_max": 9,
+    "normalization": "normalized = (score - 1) / 8",
+    "valence_score": "1=very negative, 5=neutral, 9=very positive",
+    "arousal_score": "1=very calm/deactivated, 5=moderate activation, 9=highly activated"
+  },
+  "args": {
+    "model_path": "/home/u1120250383/dyp/models/qwen",
+    "project_root": "/home/u1120250383/dcs/Emoskill_test",
+    "skills_dir": "/home/u1120250383/dcs/Emoskill/emoskill/.trae/skills",
+    "upload_dir": "/home/u1120250383/dcs/datasets/IAPS/Dataset",
+    "album_path": null,
+    "output_dir": "/home/u1120250383/dcs/Emoskill/script_output/skill_v3_face_smoke/runs/20260712_214112_iaps_trace_iaps_n12_g4/workers/worker_1_gpu_1",
+    "annotations_json": null,
+    "image": [],
+    "image_list": [
+      "/home/u1120250383/dcs/Emoskill/script_output/skill_v3_face_smoke/runs/20260712_214112_iaps_trace_iaps_n12_g4/workers/worker_1_images.txt"
+    ],
+    "iaps_case_id": [],
+    "iaps_trace_cases": false,
+    "user_context": "Analyze the image's valence-arousal state and choose the most suitable psychology skill.",
+    "max_new_tokens": 2048,
+    "full_skill_token_budget": 8192,
+    "max_pixels": 1003520,
+    "min_pixels": null,
+    "device_map": "auto",
+    "include_duplicate_skills": false,
+    "direct_only": false,
+    "routed_only": false,
+    "multi_skill_candidates": true,
+    "max_candidate_skills": 2,
+    "parallel_gpus": null,
+    "images_per_gpu": null,
+    "four_gpu": false,
+    "parallel_worker": true,
+    "worker_id": 1,
+    "worker_count": 4,
+    "diagnose_skill_output": false,
+    "diagnostic_skill": [],
+    "trace_inference": true,
+    "full_skill_analysis": false,
+    "full_skill_inference": false,
+    "write_inference_markdown": true,
+    "dry_run": false,
+    "list_skills": false
+  },
+  "skill_registry": [
+    {
+      "skill_id": "awe",
+      "display_name": "Awe",
+      "short_description": "Analyze awe-like affect when overwhelming vastness, verticality, depth, or uncontrollable force dominates. Infer vastness, self-diminishment, and safe versus threatening awe from multiple scale cues. Do not use for ordinary scenic beauty, restorative space, symbolic solemnity, or complexity without human-scale overwhelm.",
+      "selection_hints": [
+        "Physical vastness or force is the primary affective mechanism, not merely beauty or spaciousness.",
+        "At least two independent scale cues are visible: tiny reference figures, extreme verticality, unbounded extension, deep atmospheric perspective, or massive uncontrollable force.",
+        "The scene plausibly produces self-diminishment, wonder, overwhelm, or sublime threat because of scale."
+      ],
+      "analysis_steps": [
+        "Verify that physical scale rather than symbolism, beauty, or complexity is the dominant mechanism.",
+        "List independent scale cues and estimate their reliability; reject lens drama without reference objects.",
+        "Estimate self-diminishment from the disparity between human-scale references and the environment.",
+        "Classify the scene as safe awe, threat-based awe, or mixed using exposure, force, control, and shelter cues.",
+        "Check competing mechanisms, then judge VA: vastness tends to raise arousal; safety/beauty versus threat determines valence, and quiet awe need not be extreme."
+      ],
+      "source_path": "/home/u1120250383/dcs/Emoskill/emoskill/.trae/skills/awe/SKILL.md"
+    },
+    {
+      "skill_id": "baby-schema",
+      "display_name": "Baby Schema / Kindchenschema",
+      "short_description": "Analyze caregiving affect from infantile morphology: large head ratio, high forehead, round face, large low-set eyes, small nose/mouth, short limbs, and soft proportions. Infer schema load, then check realism, safety, distress, danger, and uncanny overrides. Do not equate young age or the word baby with positive affect.",
+      "selection_hints": [
+        "The dominant subject is a human infant, young animal, or deliberately neotenic character/object.",
+        "Multiple infantile proportions are visible and plausibly drive tenderness, approach, or caregiving attention.",
+        "Morphology remains affectively important after considering the surrounding situation."
+      ],
+      "analysis_steps": [
+        "Qualify the subject and list only visible infantile proportions.",
+        "Integrate the visible features into low, medium, or high baby-schema load; category membership alone is insufficient.",
+        "Estimate whether the morphology plausibly supports approach/caregiving rather than threat or avoidance.",
+        "Check realism and context for safety, distress, danger, exploitation, and uncanny overrides.",
+        "Decide whether schema remains primary or becomes an appraisal modifier, then judge VA: safe schema supports positive valence and low-to-moderate arousal; distress or uncanny context can reverse the pattern."
+      ],
+      "source_path": "/home/u1120250383/dcs/Emoskill/emoskill/.trae/skills/baby-schema/SKILL.md"
+    },
+    {
+      "skill_id": "berlyne-arousal-pleasure",
+      "display_name": "Berlyne Arousal-Pleasure",
+      "short_description": "Analyze perceptual affect using Berlyne's collative variables: complexity, novelty, ambiguity, incongruity, order, and processing fluency. Progress from visible composition to arousal potential and hedonic judgment. Do not route ordinary objects, narrative emotion, restorative space, vastness, or biological cues merely because an image is artistic or detailed.",
+      "selection_hints": [
+        "Perceptual or compositional stimulation, rather than depicted story or object category, is the primary affective mechanism.",
+        "At least two collative variables have visible support, or one is exceptionally dominant.",
+        "The image demands active visual organization, comparison, or resolution."
+      ],
+      "analysis_steps": [
+        "Confirm that affect comes from visual organization; exclude narrative, restorative, scale, and biological mechanisms.",
+        "Describe element density, feature variety, order, ambiguity, incongruity, and sensory intensity using visible anchors.",
+        "Integrate complexity, novelty, ambiguity, and intensity into arousal potential; detail alone is insufficient.",
+        "Estimate processing fluency from hierarchy, grouping, repetition, and resolvability; distinguish engaging complexity from chaotic overload.",
+        "Judge hedonic tendency and VA from stimulation versus fluency. The inverted-U is only a population-level final relation, never an image feature; report uncertainty from expertise and familiarity."
+      ],
+      "source_path": "/home/u1120250383/dcs/Emoskill/emoskill/.trae/skills/berlyne-arousal-pleasure/SKILL.md"
+    },
+    {
+      "skill_id": "cognitive-appraisal",
+      "display_name": "Cognitive Appraisal",
+      "short_description": "Analyze viewer affect from a visible event only when consequences or stakes and at least two appraisal dimensions have direct evidence. Separate observation from interpretation, compare hypotheses, and pass an evidence gate. This is not a default fallback; reject face-only, routine, and purely symbolic scenes.",
+      "selection_hints": [
+        "A visible event, interaction, consequential object, or outcome determines affect rather than mere scene meaning.",
+        "A visible gain/loss, obstruction, threat, success/failure, or consequential change makes the event relevant to a typical viewer; merely obtaining food/service or participating socially is not a stake.",
+        "At least two appraisal dimensions have independent visible support."
+      ],
+      "analysis_steps": [
+        "Build the observation ledger using only visible facts; remove emotion labels and unobserved intentions.",
+        "Represent actor-action-object/consequence relations, identify visible stakes, and state viewer relevance.",
+        "Generate two plausible situational hypotheses when ambiguity is real; state what evidence would distinguish them.",
+        "Estimate only supported appraisal dimensions and attach one observation to every estimate.",
+        "Apply the gate, then judge valence from visible congruence and arousal from urgency, imminence, and coping demand. Strong requires an event, a stake, and two supported dimensions; otherwise reject or widen uncertainty."
+      ],
+      "source_path": "/home/u1120250383/dcs/Emoskill/emoskill/.trae/skills/cognitive-appraisal/SKILL.md"
+    },
+    {
+      "skill_id": "emotional-body-language",
+      "display_name": "Emotional Body Language",
+      "short_description": "Analyze perceived affect from human whole/upper-body configuration when posture, tension, orientation, and action readiness are primary and the face is unreadable or secondary. Progress from body visibility through configuration, energy, and action tendency before VA. Do not use when object meaning, facial expression, or situational stakes carry affect.",
+      "selection_hints": [
+        "A human whole body or sufficiently visible upper body carries the main emotional signal.",
+        "Face information is absent, obscured, too small, masked, or secondary.",
+        "Posture supports a recognizable action tendency such as approach, recoil, freeze, attack, collapse, celebration, assertion, or submission."
+      ],
+      "analysis_steps": [
+        "Verify body visibility and apply the removal test; lower applicability when face or object meaning is necessary.",
+        "Describe expansion, contraction, tension, orientation, and limb configuration without naming an emotion.",
+        "Infer one primary and, if needed, one competing action tendency from the configuration.",
+        "Estimate postural energy from tension, motion, loading, and collapse; do not use emotional category alone to set arousal.",
+        "Apply gaze, crowd, sport/dance, and transition modifiers, then judge VA from action tendency and energy; report ambiguity between similar poses."
+      ],
+      "source_path": "/home/u1120250383/dcs/Emoskill/emoskill/.trae/skills/emotional-body-language/SKILL.md"
+    },
+    {
+      "skill_id": "evolved-fear-module",
+      "display_name": "Evolved Fear Module",
+      "short_description": "Analyze prepared fear responses to realistic fear-relevant animals when threat morphology and imminence drive affect. Infer realism, proximity, orientation, attack readiness, concealment, control, and safety attenuation before VA. Do not use for generic danger, contamination-dominant pests, cute animals, pets, toys, or symbolic imagery without credible threat.",
+      "selection_hints": [
+        "A snake, spider, scorpion, large predator, or closely related threat morphology is visually central.",
+        "The animal form itself, not a story or contamination association, plausibly drives rapid threat perception.",
+        "At least one imminence cue beyond category membership is visible."
+      ],
+      "analysis_steps": [
+        "Qualify the animal and identify visible threat morphology without claiming objective species danger.",
+        "Estimate realism and perceptual credibility; symbolic or toy-like forms sharply reduce applicability.",
+        "Estimate imminence from proximity, orientation, posture, concealment, and escape/control cues.",
+        "Check safety attenuation and competing baby-schema, disgust, or appraisal mechanisms.",
+        "Integrate morphology, realism, imminence, and attenuation into perceived threat and VA. Category alone cannot produce high threat; safety cues pull judgments away from extremes."
+      ],
+      "source_path": "/home/u1120250383/dcs/Emoskill/emoskill/.trae/skills/evolved-fear-module/SKILL.md"
+    },
+    {
+      "skill_id": "facial-expression-affect",
+      "display_name": "Facial Expression Affect",
+      "short_description": "Analyze viewer affect from a clear human face when a transient expression, not identity or situation meaning, is the primary signal. Infer expression direction and activation from multiple visible facial regions, then check body/context congruence and ambiguity. Do not infer personality, trustworthiness, intent, diagnosis, or emotion from a neutral face.",
+      "selection_hints": [
+        "A human face is large and clear enough to inspect the brow/eye and mouth/jaw regions reliably.",
+        "A transient facial configuration is the dominant affective signal; removing the face would substantially weaken the image's affect.",
+        "At least two independent diagnostic regions support one direction, normally including mouth/jaw plus eye/brow evidence; external hand pressure is not an expression region."
+      ],
+      "analysis_steps": [
+        "Verify face reliability, independent region visibility, and the removal test; reject neutral faces or configurations without reliable mouth/jaw evidence.",
+        "Record brow/forehead, eyes/eyelids, cheeks/nose, and mouth/jaw observations without emotion or personality labels.",
+        "Infer one primary and one plausible alternative affective interpretation from converging regions; mark mixed or posed configurations as uncertain.",
+        "Estimate depicted expression direction and activation, then assess viewer transfer from visible body/event/context; missing context increases uncertainty and never confirms the expression's cause or intensity.",
+        "Apply the evidence gate and judge viewer VA conservatively. Treat expression as one-step-removed evidence: do not copy the depicted person's apparent intensity directly into viewer valence or arousal."
+      ],
+      "source_path": "/home/u1120250383/dcs/Emoskill/emoskill/.trae/skills/facial-expression-affect/SKILL.md"
+    },
+    {
+      "skill_id": "kaplan-art-restoration",
+      "display_name": "Kaplan Attention Restoration Theory",
+      "short_description": "Analyze restorative affect in enterable, low-demand environments using Kaplan's Attention Restoration Theory. Infer being-away, soft fascination, extent, compatibility, and demand from visible openness, depth, coherence, affordance, refuge, clutter, and threat. Do not use for isolated objects, overwhelming scale, hard stimulation, or person-centered events.",
+      "selection_hints": [
+        "An enterable or inhabitable environment is the dominant affective source.",
+        "Visible spatial organization supports low-demand viewing, gentle exploration, rest, or attentional recovery.",
+        "At least three restorative variables are observable, including one spatial variable."
+      ],
+      "analysis_steps": [
+        "Confirm that an environment, not an object or person, carries the affect and assess enterability.",
+        "Estimate apparent openness and depth from named monocular cues; do not invent physical dimensions.",
+        "Evaluate coherence/extent and compatibility from layout and visible affordances.",
+        "Separate soft fascination from Berlyne-style hard fascination, and record clutter, threat, or spectacle that consumes attention.",
+        "Integrate evidence into restorative potential and judge VA: restoration supports positive valence and low-to-moderate arousal; stimulation, exposure, or threat weakens the pattern."
+      ],
+      "source_path": "/home/u1120250383/dcs/Emoskill/emoskill/.trae/skills/kaplan-art-restoration/SKILL.md"
+    },
+    {
+      "skill_id": "pathogen-disgust",
+      "display_name": "Pathogen Disgust",
+      "short_description": "Analyze pathogen avoidance from visible contamination, decay, waste, spoiled organic matter, wounds, fluids, parasites, or infestation. Infer extent, contact potential, realism, and medical/culinary/scientific/fictional attenuation before VA. Do not use for moral disgust, predator attack, abstract ugliness, or clean clinical content without pathogen cues.",
+      "selection_hints": [
+        "Visible organic contamination, decay, disease, waste, bodily fluid, wound, spoiled food, parasite, or infestation is affectively central.",
+        "Avoidance/rejection is better explained by pathogen cues than by attack threat, sadness, or composition.",
+        "Cue identity is visually supported rather than inferred from a label or backstory."
+      ],
+      "analysis_steps": [
+        "Identify the visible pathogen cue and distinguish observation from uncertain material identification.",
+        "Estimate extent, contact potential, and organic degradation from visible surface and spatial evidence.",
+        "Estimate realism and whether the cue signals contamination, attack, fresh injury, or merely unfamiliar appearance.",
+        "Apply medical, scientific, culinary, fictional, and containment modifiers without erasing clearly visible visceral cues.",
+        "Integrate severity and attenuation into pathogen-avoidance strength and VA. Avoidance lowers valence; arousal depends on contact, vividness, and urgency and must not automatically equal fear."
+      ],
+      "source_path": "/home/u1120250383/dcs/Emoskill/emoskill/.trae/skills/pathogen-disgust/SKILL.md"
+    },
+    {
+      "skill_id": "todorov-face-evaluation",
+      "display_name": "Todorov Face Evaluation",
+      "short_description": "Optional non-VA feature module for explicit social-impression analysis of a clear neutral or mildly expressive face using Oosterhof and Todorov's perceived trustworthiness and dominance dimensions. It is excluded from the main affect router. Do not infer personality, intent, morality, competence, or final viewer valence-arousal.",
+      "selection_hints": [
+        "A clear human face is the dominant subject and surrounding event context is minimal.",
+        "Expression is neutral, resting, or mild enough that structural first impression remains relevant.",
+        "The user explicitly requests social-impression features rather than viewer VA or emotion recognition."
+      ],
+      "analysis_steps": [
+        "Confirm explicit use, face dominance, visibility, low context, and neutral/mild expression.",
+        "Record structural observations before using social-evaluation terms.",
+        "Estimate perceived trustworthiness/valence resemblance and cite the visible basis.",
+        "Estimate perceived dominance resemblance separately; do not convert either dimension into personality or intent.",
+        "Report uncertainty and bias limitations. Stop without producing final viewer VA."
+      ],
+      "source_path": "/home/u1120250383/dcs/Emoskill/emoskill/.trae/skills/todorov-face-evaluation/SKILL.md"
+    }
+  ],
+  "skill_format_check": [
+    {
+      "skill_id": "awe",
+      "display_name": "Awe",
+      "frontmatter_name": "awe",
+      "has_description": true,
+      "selection_hint_count": 3,
+      "analysis_step_count": 5,
+      "size_bytes": 3858,
+      "routing_enabled": true,
+      "missing_sections": [],
+      "source_path": "/home/u1120250383/dcs/Emoskill/emoskill/.trae/skills/awe/SKILL.md"
+    },
+    {
+      "skill_id": "baby-schema",
+      "display_name": "Baby Schema / Kindchenschema",
+      "frontmatter_name": "baby-schema",
+      "has_description": true,
+      "selection_hint_count": 3,
+      "analysis_step_count": 5,
+      "size_bytes": 3893,
+      "routing_enabled": true,
+      "missing_sections": [],
+      "source_path": "/home/u1120250383/dcs/Emoskill/emoskill/.trae/skills/baby-schema/SKILL.md"
+    },
+    {
+      "skill_id": "berlyne-arousal-pleasure",
+      "display_name": "Berlyne Arousal-Pleasure",
+      "frontmatter_name": "berlyne-arousal-pleasure",
+      "has_description": true,
+      "selection_hint_count": 3,
+      "analysis_step_count": 5,
+      "size_bytes": 4050,
+      "routing_enabled": true,
+      "missing_sections": [],
+      "source_path": "/home/u1120250383/dcs/Emoskill/emoskill/.trae/skills/berlyne-arousal-pleasure/SKILL.md"
+    },
+    {
+      "skill_id": "cognitive-appraisal",
+      "display_name": "Cognitive Appraisal",
+      "frontmatter_name": "cognitive-appraisal",
+      "has_description": true,
+      "selection_hint_count": 3,
+      "analysis_step_count": 5,
+      "size_bytes": 4434,
+      "routing_enabled": true,
+      "missing_sections": [],
+      "source_path": "/home/u1120250383/dcs/Emoskill/emoskill/.trae/skills/cognitive-appraisal/SKILL.md"
+    },
+    {
+      "skill_id": "emotional-body-language",
+      "display_name": "Emotional Body Language",
+      "frontmatter_name": "emotional-body-language",
+      "has_description": true,
+      "selection_hint_count": 3,
+      "analysis_step_count": 5,
+      "size_bytes": 4114,
+      "routing_enabled": true,
+      "missing_sections": [],
+      "source_path": "/home/u1120250383/dcs/Emoskill/emoskill/.trae/skills/emotional-body-language/SKILL.md"
+    },
+    {
+      "skill_id": "evolved-fear-module",
+      "display_name": "Evolved Fear Module",
+      "frontmatter_name": "evolved-fear-module",
+      "has_description": true,
+      "selection_hint_count": 3,
+      "analysis_step_count": 5,
+      "size_bytes": 3803,
+      "routing_enabled": true,
+      "missing_sections": [],
+      "source_path": "/home/u1120250383/dcs/Emoskill/emoskill/.trae/skills/evolved-fear-module/SKILL.md"
+    },
+    {
+      "skill_id": "facial-expression-affect",
+      "display_name": "Facial Expression Affect",
+      "frontmatter_name": "facial-expression-affect",
+      "has_description": true,
+      "selection_hint_count": 3,
+      "analysis_step_count": 5,
+      "size_bytes": 5275,
+      "routing_enabled": true,
+      "missing_sections": [],
+      "source_path": "/home/u1120250383/dcs/Emoskill/emoskill/.trae/skills/facial-expression-affect/SKILL.md"
+    },
+    {
+      "skill_id": "kaplan-art-restoration",
+      "display_name": "Kaplan Attention Restoration Theory",
+      "frontmatter_name": "kaplan-art-restoration",
+      "has_description": true,
+      "selection_hint_count": 3,
+      "analysis_step_count": 5,
+      "size_bytes": 3930,
+      "routing_enabled": true,
+      "missing_sections": [],
+      "source_path": "/home/u1120250383/dcs/Emoskill/emoskill/.trae/skills/kaplan-art-restoration/SKILL.md"
+    },
+    {
+      "skill_id": "pathogen-disgust",
+      "display_name": "Pathogen Disgust",
+      "frontmatter_name": "pathogen-disgust",
+      "has_description": true,
+      "selection_hint_count": 3,
+      "analysis_step_count": 5,
+      "size_bytes": 3942,
+      "routing_enabled": true,
+      "missing_sections": [],
+      "source_path": "/home/u1120250383/dcs/Emoskill/emoskill/.trae/skills/pathogen-disgust/SKILL.md"
+    },
+    {
+      "skill_id": "todorov-face-evaluation",
+      "display_name": "Todorov Face Evaluation",
+      "frontmatter_name": "todorov-face-evaluation",
+      "has_description": true,
+      "selection_hint_count": 3,
+      "analysis_step_count": 5,
+      "size_bytes": 3549,
+      "routing_enabled": false,
+      "missing_sections": [],
+      "source_path": "/home/u1120250383/dcs/Emoskill/emoskill/.trae/skills/todorov-face-evaluation/SKILL.md"
+    }
+  ],
+  "trace_inference": true,
+  "full_skill_analysis": false,
+  "write_inference_markdown": true,
+  "iaps_trace_case_ids": [],
+  "images": [
+    "/home/u1120250383/dcs/datasets/IAPS/Dataset/2010.jpg",
+    "/home/u1120250383/dcs/datasets/IAPS/Dataset/2130.jpg",
+    "/home/u1120250383/dcs/datasets/IAPS/Dataset/7080.jpg"
+  ],
+  "results": [
+    {
+      "image": "/home/u1120250383/dcs/datasets/IAPS/Dataset/2010.jpg",
+      "ok": true,
+      "trace_inference": true,
+      "inference_trace": [
+        {
+          "step": "direct_va_baseline",
+          "system_prompt": "You are a visual affect analyst. Analyze the image directly in valence-arousal space without using any named psychology skill.\nBasic affective VA definition:\n- Valence measures affective pleasantness: negative/unpleasant -> neutral -> positive/pleasant.\n- Arousal measures activation, energy, and intensity independently from valence: calm/deactivated -> moderate activation -> highly activated.\n- Do not collapse arousal into positivity: excitement and fear can both be high-arousal; peace and boredom can both be low-arousal.\n- Arousal is not the same as visual complexity or salience: a highly detailed but calm scene (e.g. an intricate but peaceful garden) is not automatically high-arousal.\n- Base the estimate on visible image evidence, and state uncertainty when the evidence is weak or ambiguous.\nReturn exactly one valid JSON object and no Markdown, no code fences, no headings, no prose before or after the JSON.\nThe first two top-level keys of the object must be valence_score and arousal_score.\nUse one shared 1-9 scoring scale for every skill and direct baseline:\nScore valence on 1-9: 1 = very negative/unpleasant, 5 = neutral, 9 = very positive/pleasant.\nScore arousal on 1-9: 1 = very calm/deactivated, 5 = moderate activation, 9 = highly activated. Arousal 5 means moderate activation, not neutral affect.\nJudge VA only after completing the skill's observable inference procedure. Do not convert a semantic label directly into a score.\nReserve scores near 1 or 9 for multiple converging, unambiguous visible cues; keep weak or conflicting evidence closer to the center.\nThe top-level JSON keys valence_score and arousal_score are mandatory in every analysis response. Never omit them; if evidence is weak or ambiguous, still provide your best estimate and explain uncertainty.\nReturn only valence_score and arousal_score for the numeric VA values. Do not return normalized 0-1 valence/arousal; the script will normalize later.\nDo not put VA scores only inside nested objects such as scores, va, final_va, or analysis. Do not use alternate names such as final_valence, final_arousal, valence, arousal, or VA TENDENCY as the only score fields.\nKeep the JSON compact: at most 5 visual_evidence items, 4 construct_estimates, and 3 context_modifiers.\nRequired JSON schema:\n{\n  \"valence_score\": 5.0,\n  \"arousal_score\": 5.0,\n  \"quadrant\": \"short label\",\n  \"summary\": \"concise explanation\",\n  \"evidence\": [\"visible cue\"],\n  \"matched_emotions\": [\"likely emotion or affect term\"],\n  \"uncertainty\": \"brief uncertainty note\"\n}\n",
+          "user_prompt": "Analyze this image directly as a VA baseline.\nUser context: Analyze the image's valence-arousal state and choose the most suitable psychology skill.",
+          "image_payload": {
+            "image_path": "/home/u1120250383/dcs/datasets/IAPS/Dataset/2010.jpg"
+          },
+          "system_prompt_chars": 2532,
+          "user_prompt_chars": 148,
+          "max_new_tokens": 2048,
+          "seconds": 28.641,
+          "ok": true,
+          "raw_model_text": "{\n  \"valence_score\": 7.0,\n  \"arousal_score\": 5.0,\n  \"quadrant\": \"positive-moderate\",\n  \"summary\": \"The subject's warm smile and direct gaze convey positive affect, while the calm, softly lit setting suggests moderate activation without intensity.\",\n  \"evidence\": [\"smiling mouth with visible teeth\", \"direct eye contact\", \"soft lighting and blurred background\"],\n  \"matched_emotions\": [\"contentment\", \"approachability\"],\n  \"uncertainty\": \"Ambiguity in arousal due to lack of dynamic motion cues; valence is confidently positive from facial expression.\"\n}",
+          "raw_model_payload": {
+            "valence_score": 7.0,
+            "arousal_score": 5.0,
+            "quadrant": "positive-moderate",
+            "summary": "The subject's warm smile and direct gaze convey positive affect, while the calm, softly lit setting suggests moderate activation without intensity.",
+            "evidence": [
+              "smiling mouth with visible teeth",
+              "direct eye contact",
+              "soft lighting and blurred background"
+            ],
+            "matched_emotions": [
+              "contentment",
+              "approachability"
+            ],
+            "uncertainty": "Ambiguity in arousal due to lack of dynamic motion cues; valence is confidently positive from facial expression."
+          },
+          "payload_keys": [
+            "valence_score",
+            "arousal_score",
+            "quadrant",
+            "summary",
+            "evidence",
+            "matched_emotions",
+            "uncertainty"
+          ],
+          "prompt_chars": 2774,
+          "input_tokens": 1390,
+          "generated_tokens": 136,
+          "generation_hit_limit": false,
+          "normalized_result": {
+            "skill_id": "direct-va-baseline",
+            "skill_name": "Direct VA Baseline",
+            "valence": 0.75,
+            "arousal": 0.5,
+            "quadrant": "positive-moderate",
+            "summary": "The subject's warm smile and direct gaze convey positive affect, while the calm, softly lit setting suggests moderate activation without intensity.",
+            "evidence": [
+              "smiling mouth with visible teeth",
+              "direct eye contact",
+              "soft lighting and blurred background"
+            ],
+            "matched_emotions": [
+              "contentment",
+              "approachability"
+            ],
+            "emotion_weights": {},
+            "mapping_trace": [],
+            "appraisal_notes": [],
+            "positive_affect": [],
+            "negative_affect": [],
+            "uncertainty": "Ambiguity in arousal due to lack of dynamic motion cues; valence is confidently positive from facial expression.",
+            "applicability": "",
+            "visual_evidence": [],
+            "construct_estimates": [],
+            "context_modifiers": [],
+            "inference_summary": "",
+            "raw_model_output": {
+              "valence_score": 7.0,
+              "arousal_score": 5.0,
+              "quadrant": "positive-moderate",
+              "summary": "The subject's warm smile and direct gaze convey positive affect, while the calm, softly lit setting suggests moderate activation without intensity.",
+              "evidence": [
+                "smiling mouth with visible teeth",
+                "direct eye contact",
+                "soft lighting and blurred background"
+              ],
+              "matched_emotions": [
+                "contentment",
+                "approachability"
+              ],
+              "uncertainty": "Ambiguity in arousal due to lack of dynamic motion cues; valence is confidently positive from facial expression."
+            },
+            "valence_score": 7.0,
+            "arousal_score": 5.0
+          }
+        },
+        {
+          "step": "route_skill",
+          "system_prompt": "You are a psychology-model router for visual affect analysis.\nBasic affective VA definition:\n- Valence measures affective pleasantness: negative/unpleasant -> neutral -> positive/pleasant.\n- Arousal measures activation, energy, and intensity independently from valence: calm/deactivated -> moderate activation -> highly activated.\n- Do not collapse arousal into positivity: excitement and fear can both be high-arousal; peace and boredom can both be low-arousal.\n- Arousal is not the same as visual complexity or salience: a highly detailed but calm scene (e.g. an intricate but peaceful garden) is not automatically high-arousal.\n- Base the estimate on visible image evidence, and state uncertainty when the evidence is weak or ambiguous.\n\nChoose one specialized psychology skill only when its applicability gate strongly matches the image.\nIf no specialized skill strongly matches, return skill_id=no_specialized_skill and candidate_skill_ids=[].\nReturn exactly one valid JSON object and no Markdown, no code fences, no headings, no prose before or after the JSON.\nEach skill includes one compact applicability gate. Match visible mechanisms, not emotion words or scene labels.\nAvailable skills:\n[\n  {\n    \"skill_id\": \"awe\",\n    \"display_name\": \"Awe\",\n    \"applicability_gate\": {\n      \"use_when\": [\n        \"Physical vastness or force is the primary affective mechanism, not merely beauty or spaciousness.\",\n        \"At least two independent scale cues are visible: tiny reference figures, extreme verticality, unbounded extension, deep atmospheric perspective, or massive uncontrollable force.\",\n        \"The scene plausibly produces self-diminishment, wonder, overwhelm, or sublime threat because of scale.\"\n      ],\n      \"do_not_use_when\": [\n        \"Calm shoreline, forest, garden, room, or horizon that is restorative but not overwhelming.\",\n        \"Monument, memorial, burial, repetition, or historical symbolism whose meaning rather than physical scale drives affect.\",\n        \"Dramatic color, novelty, complexity, or wide-angle style without reliable scale references.\"\n      ],\n      \"near_miss_boundaries\": [\n        \"Low-demand enterable scenery -> kaplan-art-restoration.\",\n        \"Perceptual novelty or complex composition -> berlyne-arousal-pleasure.\",\n        \"Disaster consequences, mortality, or human stakes -> cognitive-appraisal when situation meaning dominates.\"\n      ]\n    }\n  },\n  {\n    \"skill_id\": \"baby-schema\",\n    \"display_name\": \"Baby Schema / Kindchenschema\",\n    \"applicability_gate\": {\n      \"use_when\": [\n        \"The dominant subject is a human infant, young animal, or deliberately neotenic character/object.\",\n        \"Multiple infantile proportions are visible and plausibly drive tenderness, approach, or caregiving attention.\",\n        \"Morphology remains affectively important after considering the surrounding situation.\"\n      ],\n      \"do_not_use_when\": [\n        \"Adult face, ordinary small object, or culturally labeled \\\"cute\\\" subject without visible neotenic structure.\",\n        \"Predatory morphology, contamination, body action, or social event is the primary mechanism.\",\n        \"Severe distress, danger, exploitation, illness, or uncanny wrongness fully determines affect; use appraisal/direct analysis while retaining baby schema only as a modifier.\"\n      ],\n      \"near_miss_boundaries\": [\n        \"Adult neutral portrait -> no specialized skill or optional face module.\",\n        \"Young animal with credible attack threat -> evolved-fear-module.\",\n        \"Infant visibly endangered or suffering -> cognitive-appraisal may become primary because context overrides morphology.\"\n      ]\n    }\n  },\n  {\n    \"skill_id\": \"berlyne-arousal-pleasure\",\n    \"display_name\": \"Berlyne Arousal-Pleasure\",\n    \"applicability_gate\": {\n      \"use_when\": [\n        \"Perceptual or compositional stimulation, rather than depicted story or object category, is the primary affective mechanism.\",\n        \"At least two collative variables have visible support, or one is exceptionally dominant.\",\n        \"The image demands active visual organization, comparison, or resolution.\"\n      ],\n      \"do_not_use_when\": [\n        \"Ordinary product, object, still life, or familiar scene with trivial visual organization.\",\n        \"Arousal is better explained by danger, bodily action, contamination, infantile morphology, or social stakes.\",\n        \"Calm enterable space or physically overwhelming scale better fits Kaplan or Awe.\"\n      ],\n      \"near_miss_boundaries\": [\n        \"Low-demand coherent environment -> kaplan-art-restoration.\",\n        \"Vastness and self-diminishment -> awe.\",\n        \"Narrative ambiguity about actors and consequences -> cognitive-appraisal; perceptual ambiguity remains Berlyne.\"\n      ]\n    }\n  },\n  {\n    \"skill_id\": \"cognitive-appraisal\",\n    \"display_name\": \"Cognitive Appraisal\",\n    \"applicability_gate\": {\n      \"use_when\": [\n        \"A visible event, interaction, consequential object, or outcome determines affect rather than mere scene meaning.\",\n        \"A visible gain/loss, obstruction, threat, success/failure, or consequential change makes the event relevant to a typical viewer; merely obtaining food/service or participating socially is not a stake.\",\n        \"At least two appraisal dimensions have independent visible support.\"\n      ],\n      \"do_not_use_when\": [\n        \"A direct mechanism dominates: restoration, perceptual stimulation, vastness, threat animal, contamination, baby schema, facial expression, or readable body action.\",\n        \"The image is an ordinary object, face-only portrait, routine commerce/food service/social gathering, static symbol/memorial, or low-context scene without an unfolding event and consequential change.\",\n        \"The interpretation requires invented history, dialogue, intention, consent, guilt, or personality.\"\n      ],\n      \"near_miss_boundaries\": [\n        \"Clear facial expression -> facial-expression-affect; clear posture with an unreadable face -> emotional-body-language.\",\n        \"Safe infantile morphology -> baby-schema; visible danger may activate appraisal.\",\n        \"Static solemn or symbolic meaning without a visible event -> no_specialized_skill.\"\n      ],\n      \"routing_priority\": [\n        \"Test direct mechanisms first. Appraisal is never the catch-all: ordinary goals such as buying, eating, waiting, or socializing do not count as stakes; with no consequential change or fewer than two supported dimensions, return `no_specialized_skill`.\"\n      ]\n    }\n  },\n  {\n    \"skill_id\": \"emotional-body-language\",\n    \"display_name\": \"Emotional Body Language\",\n    \"applicability_gate\": {\n      \"use_when\": [\n        \"A human whole body or sufficiently visible upper body carries the main emotional signal.\",\n        \"Face information is absent, obscured, too small, masked, or secondary.\",\n        \"Posture supports a recognizable action tendency such as approach, recoil, freeze, attack, collapse, celebration, assertion, or submission.\"\n      ],\n      \"do_not_use_when\": [\n        \"A readable facial expression dominates -> facial-expression-affect.\",\n        \"A weapon, risky object, interaction, or consequence determines affect more than body configuration.\",\n        \"Only an isolated hand, ambiguous resting pose, or small body fragment is visible.\"\n      ],\n      \"near_miss_boundaries\": [\n        \"Clear expressive face -> facial-expression-affect; a neutral face-centered portrait -> no_specialized_skill.\",\n        \"Visible agency, stakes, conflict, or consequential object use -> cognitive-appraisal.\",\n        \"Predatory animal posture -> evolved-fear-module.\"\n      ]\n    }\n  },\n  {\n    \"skill_id\": \"evolved-fear-module\",\n    \"display_name\": \"Evolved Fear Module\",\n    \"applicability_gate\": {\n      \"use_when\": [\n        \"A snake, spider, scorpion, large predator, or closely related threat morphology is visually central.\",\n        \"The animal form itself, not a story or contamination association, plausibly drives rapid threat perception.\",\n        \"At least one imminence cue beyond category membership is visible.\"\n      ],\n      \"do_not_use_when\": [\n        \"Human, mechanical, environmental, or social danger without a fear-relevant animal.\",\n        \"Infestation, decay, disease-vector context, or bodily contamination dominates the response.\",\n        \"Toy, cartoon, decoration, distant documentary subject, cared-for pet, or neotenic animal lacks credible threat morphology.\"\n      ],\n      \"near_miss_boundaries\": [\n        \"Pest associated with filth or disease -> pathogen-disgust.\",\n        \"Young/cute animal morphology -> baby-schema.\",\n        \"Human stakes, handling, accident, or conflict determines affect -> cognitive-appraisal.\"\n      ]\n    }\n  },\n  {\n    \"skill_id\": \"facial-expression-affect\",\n    \"display_name\": \"Facial Expression Affect\",\n    \"applicability_gate\": {\n      \"use_when\": [\n        \"A human face is large and clear enough to inspect the brow/eye and mouth/jaw regions reliably.\",\n        \"A transient facial configuration is the dominant affective signal; removing the face would substantially weaken the image's affect.\",\n        \"At least two independent diagnostic regions support one direction, normally including mouth/jaw plus eye/brow evidence; external hand pressure is not an expression region.\"\n      ],\n      \"do_not_use_when\": [\n        \"The face is neutral/resting, too small, blurred, stylized, ambiguous, or lacks a reliable mouth/jaw region; a hand/object distorting or hiding the face lowers applicability rather than proving tension.\",\n        \"Body posture, infantile morphology, contamination, injury, an unfolding interaction, or visible consequences determine affect more than the face.\",\n        \"The analysis would infer personality, trustworthiness, dominance, intent, consent, mental illness, pain cause, or moral character.\"\n      ],\n      \"near_miss_boundaries\": [\n        \"Clear whole-body action with an unreadable face -> emotional-body-language.\",\n        \"Visible event, interaction, stakes, or consequence overrides expression -> cognitive-appraisal.\",\n        \"Neutral or mildly posed portrait -> no_specialized_skill; explicit social-impression research may use the optional non-VA Todorov module.\"\n      ],\n      \"routing_priority\": [\n        \"Prefer this skill only for clear expressive human faces. The presence of a face, direct gaze, attractiveness, identity, or portrait framing alone is insufficient.\"\n      ]\n    }\n  },\n  {\n    \"skill_id\": \"kaplan-art-restoration\",\n    \"display_name\": \"Kaplan Attention Restoration Theory\",\n    \"applicability_gate\": {\n      \"use_when\": [\n        \"An enterable or inhabitable environment is the dominant affective source.\",\n        \"Visible spatial organization supports low-demand viewing, gentle exploration, rest, or attentional recovery.\",\n        \"At least three restorative variables are observable, including one spatial variable.\"\n      ],\n      \"do_not_use_when\": [\n        \"Isolated object, product, texture, tabletop arrangement, or decorative still life.\",\n        \"Overwhelming scale, vertigo, violent force, dense novelty, threat, or person-centered action dominates.\",\n        \"Calmness comes mainly from blankness or lack of content rather than environmental structure.\"\n      ],\n      \"near_miss_boundaries\": [\n        \"Immense scale and self-diminishment -> awe.\",\n        \"Novelty, ambiguity, dense pattern, or hard fascination -> berlyne-arousal-pleasure.\",\n        \"Human stakes or visible danger -> cognitive-appraisal.\"\n      ]\n    }\n  },\n  {\n    \"skill_id\": \"pathogen-disgust\",\n    \"display_name\": \"Pathogen Disgust\",\n    \"applicability_gate\": {\n      \"use_when\": [\n        \"Visible organic contamination, decay, disease, waste, bodily fluid, wound, spoiled food, parasite, or infestation is affectively central.\",\n        \"Avoidance/rejection is better explained by pathogen cues than by attack threat, sadness, or composition.\",\n        \"Cue identity is visually supported rather than inferred from a label or backstory.\"\n      ],\n      \"do_not_use_when\": [\n        \"Moral or social violation without visible pathogen cues.\",\n        \"Snake, predator, or attack morphology dominates.\",\n        \"Fresh appetitive food, clean medical equipment, abstract ugliness, or harmless insects without contamination evidence.\"\n      ],\n      \"near_miss_boundaries\": [\n        \"Predation or attack -> evolved-fear-module.\",\n        \"Injury or accident where human stakes dominate -> cognitive-appraisal; use disgust only if contamination remains visually central.\",\n        \"Chaotic/aversive abstraction without organic contamination -> berlyne-arousal-pleasure or no specialized skill.\"\n      ]\n    }\n  }\n]\n\nRules:\n- Base your decision on visible evidence first.\n- Use user context only as a secondary hint.\n- Test directly visible specialized mechanisms before considering cognitive-appraisal.\n- Prefer kaplan-art-restoration for enterable, low-demand restorative environments.\n- Prefer berlyne-arousal-pleasure only when measurable perceptual novelty, complexity, ambiguity, or incongruity drives affect.\n- Prefer evolved-fear-module when evolutionarily threatening animals (snakes, spiders, predators) are the dominant content.\n- Prefer pathogen-disgust for visible contamination, rot, bodily waste, wounds, or pest infestation.\n- Prefer baby-schema when an infant, baby animal, or neotenic character is the dominant subject.\n- Prefer facial-expression-affect only when a clear expressive human face is dominant and independent mouth/jaw plus eye/brow evidence supports a transient expression; partial, hand-distorted, neutral, or ambiguous faces are not enough.\n- Prefer emotional-body-language when human body posture or gesture carries the primary emotional signal and the face is obscured or secondary.\n- Prefer awe only when physically overwhelming scale and self-diminishment cues dominate.\n- Use cognitive-appraisal only when a visible event has consequential change (gain/loss, obstruction, threat, success/failure) and at least two evidence-supported appraisal dimensions; it is not a fallback.\n- Buying, eating, waiting, receiving service, gathering, or socializing are not stakes without a visible consequential change. Do not infer goals, control, consent, urgency, or danger from missing context. Use no_specialized_skill for ordinary objects, neutral portraits, routine activity, static symbols, and ambiguous face/pose cues.\n- If the image is ambiguous but no specialized skill is clearly activated, choose no_specialized_skill rather than forcing a weak match.\n- candidate_skill_ids is an at-most list, not a quota. Do not pad it.\n- Usually include exactly 1 candidate. Include 2 only for a real boundary case. Use [] when no specialized skill fits.\n- A candidate is strongly plausible only if its core constructs are directly visible, not merely loosely related.\n- Confidence must be in [0, 1].\n- Keep reason under 25 words, observed_cues to at most 3 items, and alternative_skill_ids to at most 2 items.\nRequired JSON schema: {\"skill_id\":\"skill-id-or-no_specialized_skill\",\"reason\":\"brief reason\",\"confidence\":0.0,\"observed_cues\":[\"cue\"],\"candidate_skill_ids\":[\"skill-id\",\"other-skill-id\"],\"alternative_skill_ids\":[\"other-skill-id\"]}\n",
+          "user_prompt": "Select one specialized psychology skill for this image only if it strongly fits; otherwise select no_specialized_skill.\nUser context: Analyze the image's valence-arousal state and choose the most suitable psychology skill.",
+          "image_payload": {
+            "image_path": "/home/u1120250383/dcs/datasets/IAPS/Dataset/2010.jpg"
+          },
+          "system_prompt_chars": 15258,
+          "user_prompt_chars": 222,
+          "max_new_tokens": 2048,
+          "seconds": 3.551,
+          "ok": true,
+          "raw_model_text": "{\"skill_id\":\"facial-expression-affect\",\"reason\":\"Clear smiling face with visible mouth and eye regions conveying positive affect.\",\"confidence\":0.95,\"observed_cues\":[\"smiling mouth\",\"eye contact\",\"facial expression\"],\"candidate_skill_ids\":[\"facial-expression-affect\"],\"alternative_skill_ids\":[]}",
+          "raw_model_payload": {
+            "skill_id": "facial-expression-affect",
+            "reason": "Clear smiling face with visible mouth and eye regions conveying positive affect.",
+            "confidence": 0.95,
+            "observed_cues": [
+              "smiling mouth",
+              "eye contact",
+              "facial expression"
+            ],
+            "candidate_skill_ids": [
+              "facial-expression-affect"
+            ],
+            "alternative_skill_ids": []
+          },
+          "payload_keys": [
+            "skill_id",
+            "reason",
+            "confidence",
+            "observed_cues",
+            "candidate_skill_ids",
+            "alternative_skill_ids"
+          ],
+          "prompt_chars": 15574,
+          "input_tokens": 3969,
+          "generated_tokens": 64,
+          "generation_hit_limit": false,
+          "normalized_result": {
+            "skill_id": "facial-expression-affect",
+            "reason": "Clear smiling face with visible mouth and eye regions conveying positive affect.",
+            "confidence": 0.95,
+            "observed_cues": [
+              "smiling mouth",
+              "eye contact",
+              "facial expression"
+            ],
+            "alternative_skill_ids": [],
+            "candidate_skill_ids": [
+              "facial-expression-affect"
+            ]
+          }
+        },
+        {
+          "step": "skill_analysis",
+          "system_prompt": "You are a psychology-guided visual affect analyst.\nBasic affective VA definition:\n- Valence measures affective pleasantness: negative/unpleasant -> neutral -> positive/pleasant.\n- Arousal measures activation, energy, and intensity independently from valence: calm/deactivated -> moderate activation -> highly activated.\n- Do not collapse arousal into positivity: excitement and fear can both be high-arousal; peace and boredom can both be low-arousal.\n- Arousal is not the same as visual complexity or salience: a highly detailed but calm scene (e.g. an intricate but peaceful garden) is not automatically high-arousal.\n- Base the estimate on visible image evidence, and state uncertainty when the evidence is weak or ambiguous.\nUse the provided skill definition to analyze the image.\nFollow every numbered inference step in order. Each construct estimate must cite visible evidence.\nAlways include applicability: strong, partial, or weak. If weak, keep scores conservative and explain the mismatch.\nReturn exactly one valid JSON object and no Markdown, no code fences, no headings, no prose before or after the JSON.\nDo not copy the skill's narrative output template. Convert the analysis into the JSON schema below.\nThe first two top-level keys of the object must be valence_score and arousal_score.\nUse one shared 1-9 scoring scale for every skill and direct baseline:\nScore valence on 1-9: 1 = very negative/unpleasant, 5 = neutral, 9 = very positive/pleasant.\nScore arousal on 1-9: 1 = very calm/deactivated, 5 = moderate activation, 9 = highly activated. Arousal 5 means moderate activation, not neutral affect.\nJudge VA only after completing the skill's observable inference procedure. Do not convert a semantic label directly into a score.\nReserve scores near 1 or 9 for multiple converging, unambiguous visible cues; keep weak or conflicting evidence closer to the center.\nThe top-level JSON keys valence_score and arousal_score are mandatory in every analysis response. Never omit them; if evidence is weak or ambiguous, still provide your best estimate and explain uncertainty.\nReturn only valence_score and arousal_score for the numeric VA values. Do not return normalized 0-1 valence/arousal; the script will normalize later.\nDo not put VA scores only inside nested objects such as scores, va, final_va, or analysis. Do not use alternate names such as final_valence, final_arousal, valence, arousal, or VA TENDENCY as the only score fields.\nKeep the JSON compact: at most 5 visual_evidence items, 4 construct_estimates, and 3 context_modifiers.\nFacial-expression-specific mandatory contract:\n- Report face_reliability as observable booleans. Do not guess a hidden mouth/jaw region.\n- external_distortion is true when a hand/object presses, covers, or visibly deforms a diagnostic region.\n- Report viewer_transfer separately from depicted expression intensity. Missing body/event/context is an attenuator, not confirmation.\n- Set gate_decision=use_direct unless applicability is strong, brow/eye and mouth/jaw are both reliable, external_distortion is false, and viewer transfer is supported.\nSkill definition:\n{\n  \"skill_id\": \"facial-expression-affect\",\n  \"display_name\": \"Facial Expression Affect\",\n  \"short_description\": \"Analyze viewer affect from a clear human face when a transient expression, not identity or situation meaning, is the primary signal. Infer expression direction and activation from multiple visible facial regions, then check body/context congruence and ambiguity. Do not infer personality, trustworthiness, intent, diagnosis, or emotion from a neutral face.\",\n  \"theory_family\": \"facial-expression-affect\",\n  \"applicability_gate\": {\n    \"use_when\": [\n      \"A human face is large and clear enough to inspect the brow/eye and mouth/jaw regions reliably.\",\n      \"A transient facial configuration is the dominant affective signal; removing the face would substantially weaken the image's affect.\",\n      \"At least two independent diagnostic regions support one direction, normally including mouth/jaw plus eye/brow evidence; external hand pressure is not an expression region.\"\n    ],\n    \"do_not_use_when\": [\n      \"The face is neutral/resting, too small, blurred, stylized, ambiguous, or lacks a reliable mouth/jaw region; a hand/object distorting or hiding the face lowers applicability rather than proving tension.\",\n      \"Body posture, infantile morphology, contamination, injury, an unfolding interaction, or visible consequences determine affect more than the face.\",\n      \"The analysis would infer personality, trustworthiness, dominance, intent, consent, mental illness, pain cause, or moral character.\"\n    ],\n    \"near_miss_boundaries\": [\n      \"Clear whole-body action with an unreadable face -> emotional-body-language.\",\n      \"Visible event, interaction, stakes, or consequence overrides expression -> cognitive-appraisal.\",\n      \"Neutral or mildly posed portrait -> no_specialized_skill; explicit social-impression research may use the optional non-VA Todorov module.\"\n    ],\n    \"routing_priority\": [\n      \"Prefer this skill only for clear expressive human faces. The presence of a face, direct gaze, attractiveness, identity, or portrait framing alone is insufficient.\"\n    ]\n  },\n  \"image_signals\": [\n    \"**Face reliability**: size, resolution, lighting, angle, occlusion, blur, and visibility of independent facial regions.\",\n    \"**Brow/forehead configuration**: raised, lowered, drawn together, relaxed, or asymmetric; describe shape without assigning emotion.\",\n    \"**Eyes/eyelids**: openness, narrowing, lid tension, eye-region contraction, and visible tears; gaze direction is not an emotion.\",\n    \"**Cheeks/nose region**: cheek raising, nose wrinkling, and mid-face tension when genuinely visible.\",\n    \"**Mouth/jaw configuration**: corner direction, lip press/stretch, teeth exposure, mouth opening, jaw drop, or relaxed closure.\",\n    \"**Expression intensity/coherence**: number of converging regions, muscular tension, symmetry, and agreement versus mixed signals.\",\n    \"**Viewer-transfer modifier**: body, event, interaction, and setting evidence that amplifies or attenuates how strongly the depicted expression should affect a typical viewer.\"\n  ],\n  \"va_focus\": \"Use the shared 1-9 scale without fixed emotion-to-VA ranges. A coherent expression provides directional evidence, not a direct transfer of the depicted person's state. Without a visible interaction, consequence, or congruent body signal, keep viewer valence and arousal closer to moderate even when the isolated face appears intense. Arousal requires convergence across regions plus viewer-relevant amplification; direct gaze, teeth, open mouth, eye narrowing, or a single tense region alone is insufficient. Missing context and possible posing increase uncertainty. Reserve extreme viewer scores for expressions embedded in an equally intense, consequential scene.\",\n  \"analysis_steps\": [\n    \"Verify face reliability, independent region visibility, and the removal test; reject neutral faces or configurations without reliable mouth/jaw evidence.\",\n    \"Record brow/forehead, eyes/eyelids, cheeks/nose, and mouth/jaw observations without emotion or personality labels.\",\n    \"Infer one primary and one plausible alternative affective interpretation from converging regions; mark mixed or posed configurations as uncertain.\",\n    \"Estimate depicted expression direction and activation, then assess viewer transfer from visible body/event/context; missing context increases uncertainty and never confirms the expression's cause or intensity.\",\n    \"Apply the evidence gate and judge viewer VA conservatively. Treat expression as one-step-removed evidence: do not copy the depicted person's apparent intensity directly into viewer valence or arousal.\"\n  ],\n  \"worked_example\": \"- **Image**: A well-lit close face shows symmetric upward mouth corners, raised cheeks, visible eye-region contraction, and a relaxed jaw; the body and background add no conflicting event. - **Analysis**: reliable face visibility and three converging regions support a positive expression with moderate intensity; no event evidence justifies extreme activation or a claim about personality. - **VA**: valence 6.4, arousal 4.8 on 1-9; strong expression applicability but conservative viewer impact because the face is isolated and posing remains possible.\"\n}\n\nRequired JSON schema:\n{\n  \"valence_score\": 5.0,\n  \"arousal_score\": 5.0,\n  \"skill_id\": \"skill-id\",\n  \"quadrant\": \"short label\",\n  \"applicability\": \"strong|partial|weak\",\n  \"face_reliability\": {\"face_clear\": true, \"brow_eye_visible\": true, \"mouth_jaw_visible\": true, \"external_distortion\": false},\n  \"viewer_transfer\": {\"level\":\"low|medium|high\", \"amplifiers\":[], \"attenuators\":[]},\n  \"gate_decision\": \"use_skill|use_direct\",\n  \"summary\": \"concise explanation\",\n  \"visual_evidence\": [{\"variable\":\"skill variable\",\"observation\":\"visible fact\",\"level\":\"low|medium|high\"}],\n  \"construct_estimates\": [{\"construct\":\"theory construct\",\"level\":\"low|medium|high\",\"basis\":\"visible evidence\"}],\n  \"context_modifiers\": [\"visible modifier or competing mechanism\"],\n  \"evidence\": [\"most score-relevant visible cue\"],\n  \"uncertainty\": \"brief uncertainty note\",\n  \"inference_summary\": \"concise progression from evidence to constructs to VA\"\n}\n",
+          "user_prompt": "Analyze this image with the selected psychology model.\nSelected skill_id: facial-expression-affect\nRouting reason: Clear smiling face with visible mouth and eye regions conveying positive affect.\nUser context: Analyze the image's valence-arousal state and choose the most suitable psychology skill.",
+          "image_payload": {
+            "image_path": "/home/u1120250383/dcs/datasets/IAPS/Dataset/2010.jpg"
+          },
+          "system_prompt_chars": 9301,
+          "user_prompt_chars": 298,
+          "max_new_tokens": 2048,
+          "skill_id": "facial-expression-affect",
+          "candidate_index": 1,
+          "route_reason": "Clear smiling face with visible mouth and eye regions conveying positive affect.",
+          "seconds": 16.796,
+          "ok": true,
+          "raw_model_text": "{\n  \"valence_score\": 7.5,\n  \"arousal_score\": 5.5,\n  \"skill_id\": \"facial-expression-affect\",\n  \"quadrant\": \"positive-moderate\",\n  \"applicability\": \"strong\",\n  \"face_reliability\": {\"face_clear\": true, \"brow_eye_visible\": true, \"mouth_jaw_visible\": true, \"external_distortion\": false},\n  \"viewer_transfer\": {\"level\":\"medium\", \"amplifiers\":[], \"attenuators\":[]},\n  \"gate_decision\": \"use_skill\",\n  \"summary\": \"A clear, smiling face with visible positive expression cues suggests moderate positive valence and moderate arousal.\",\n  \"visual_evidence\": [\n    {\"variable\":\"mouth_jaw_visible\",\"observation\":\"mouth corners are upturned, teeth are visible in a smile, jaw is relaxed\",\"level\":\"high\"},\n    {\"variable\":\"brow_eye_visible\",\"observation\":\"eyebrows are relaxed, eyes are open and engaged, no tension\",\"level\":\"high\"},\n    {\"variable\":\"cheeks_nose_visible\",\"observation\":\"cheeks are raised, indicating a genuine smile\",\"level\":\"high\"}\n  ],\n  \"construct_estimates\": [\n    {\"construct\":\"valence\",\"level\":\"high\",\"basis\":\"upturned mouth corners, visible teeth, raised cheeks, relaxed eyes indicate a clear positive expression\"},\n    {\"construct\":\"arousal\",\"level\":\"medium\",\"basis\":\"expression is positive but not intense; no signs of high activation like wide eyes or tense jaw\"}\n  ],\n  \"context_modifiers\": [],\n  \"evidence\": \"The mouth and eye regions converge on a positive, relaxed expression with no signs of high activation.\",\n  \"uncertainty\": \"No body or event context is visible to amplify or attenuate the expression's impact.\",\n  \"inference_summary\": \"Reliable face with converging positive cues (mouth, eyes, cheeks) indicates high valence. Absence of high-activation markers (e.g., wide eyes, tense jaw) suggests moderate arousal. No context modifiers apply.\"\n}",
+          "raw_model_payload": {
+            "valence_score": 7.5,
+            "arousal_score": 5.5,
+            "skill_id": "facial-expression-affect",
+            "quadrant": "positive-moderate",
+            "applicability": "strong",
+            "face_reliability": {
+              "face_clear": true,
+              "brow_eye_visible": true,
+              "mouth_jaw_visible": true,
+              "external_distortion": false
+            },
+            "viewer_transfer": {
+              "level": "medium",
+              "amplifiers": [],
+              "attenuators": []
+            },
+            "gate_decision": "use_skill",
+            "summary": "A clear, smiling face with visible positive expression cues suggests moderate positive valence and moderate arousal.",
+            "visual_evidence": [
+              {
+                "variable": "mouth_jaw_visible",
+                "observation": "mouth corners are upturned, teeth are visible in a smile, jaw is relaxed",
+                "level": "high"
+              },
+              {
+                "variable": "brow_eye_visible",
+                "observation": "eyebrows are relaxed, eyes are open and engaged, no tension",
+                "level": "high"
+              },
+              {
+                "variable": "cheeks_nose_visible",
+                "observation": "cheeks are raised, indicating a genuine smile",
+                "level": "high"
+              }
+            ],
+            "construct_estimates": [
+              {
+                "construct": "valence",
+                "level": "high",
+                "basis": "upturned mouth corners, visible teeth, raised cheeks, relaxed eyes indicate a clear positive expression"
+              },
+              {
+                "construct": "arousal",
+                "level": "medium",
+                "basis": "expression is positive but not intense; no signs of high activation like wide eyes or tense jaw"
+              }
+            ],
+            "context_modifiers": [],
+            "evidence": "The mouth and eye regions converge on a positive, relaxed expression with no signs of high activation.",
+            "uncertainty": "No body or event context is visible to amplify or attenuate the expression's impact.",
+            "inference_summary": "Reliable face with converging positive cues (mouth, eyes, cheeks) indicates high valence. Absence of high-activation markers (e.g., wide eyes, tense jaw) suggests moderate arousal. No context modifiers apply."
+          },
+          "payload_keys": [
+            "valence_score",
+            "arousal_score",
+            "skill_id",
+            "quadrant",
+            "applicability",
+            "face_reliability",
+            "viewer_transfer",
+            "gate_decision",
+            "summary",
+            "visual_evidence",
+            "construct_estimates",
+            "context_modifiers",
+            "evidence",
+            "uncertainty",
+            "inference_summary"
+          ],
+          "prompt_chars": 9693,
+          "input_tokens": 2785,
+          "generated_tokens": 430,
+          "generation_hit_limit": false,
+          "normalized_result": {
+            "skill_id": "facial-expression-affect",
+            "skill_name": "Facial Expression Affect",
+            "valence": 0.8125,
+            "arousal": 0.5625,
+            "quadrant": "positive-moderate",
+            "summary": "A clear, smiling face with visible positive expression cues suggests moderate positive valence and moderate arousal.",
+            "evidence": [
+              "The mouth and eye regions converge on a positive, relaxed expression with no signs of high activation."
+            ],
+            "matched_emotions": [],
+            "emotion_weights": {},
+            "mapping_trace": [],
+            "appraisal_notes": [],
+            "positive_affect": [],
+            "negative_affect": [],
+            "uncertainty": "No body or event context is visible to amplify or attenuate the expression's impact.",
+            "applicability": "strong",
+            "visual_evidence": [
+              {
+                "variable": "mouth_jaw_visible",
+                "observation": "mouth corners are upturned, teeth are visible in a smile, jaw is relaxed",
+                "level": "high"
+              },
+              {
+                "variable": "brow_eye_visible",
+                "observation": "eyebrows are relaxed, eyes are open and engaged, no tension",
+                "level": "high"
+              },
+              {
+                "variable": "cheeks_nose_visible",
+                "observation": "cheeks are raised, indicating a genuine smile",
+                "level": "high"
+              }
+            ],
+            "construct_estimates": [
+              {
+                "construct": "valence",
+                "level": "high",
+                "basis": "upturned mouth corners, visible teeth, raised cheeks, relaxed eyes indicate a clear positive expression"
+              },
+              {
+                "construct": "arousal",
+                "level": "medium",
+                "basis": "expression is positive but not intense; no signs of high activation like wide eyes or tense jaw"
+              }
+            ],
+            "context_modifiers": [],
+            "inference_summary": "Reliable face with converging positive cues (mouth, eyes, cheeks) indicates high valence. Absence of high-activation markers (e.g., wide eyes, tense jaw) suggests moderate arousal. No context modifiers apply.",
+            "raw_model_output": {
+              "valence_score": 7.5,
+              "arousal_score": 5.5,
+              "skill_id": "facial-expression-affect",
+              "quadrant": "positive-moderate",
+              "applicability": "strong",
+              "face_reliability": {
+                "face_clear": true,
+                "brow_eye_visible": true,
+                "mouth_jaw_visible": true,
+                "external_distortion": false
+              },
+              "viewer_transfer": {
+                "level": "medium",
+                "amplifiers": [],
+                "attenuators": []
+              },
+              "gate_decision": "use_skill",
+              "summary": "A clear, smiling face with visible positive expression cues suggests moderate positive valence and moderate arousal.",
+              "visual_evidence": [
+                {
+                  "variable": "mouth_jaw_visible",
+                  "observation": "mouth corners are upturned, teeth are visible in a smile, jaw is relaxed",
+                  "level": "high"
+                },
+                {
+                  "variable": "brow_eye_visible",
+                  "observation": "eyebrows are relaxed, eyes are open and engaged, no tension",
+                  "level": "high"
+                },
+                {
+                  "variable": "cheeks_nose_visible",
+                  "observation": "cheeks are raised, indicating a genuine smile",
+                  "level": "high"
+                }
+              ],
+              "construct_estimates": [
+                {
+                  "construct": "valence",
+                  "level": "high",
+                  "basis": "upturned mouth corners, visible teeth, raised cheeks, relaxed eyes indicate a clear positive expression"
+                },
+                {
+                  "construct": "arousal",
+                  "level": "medium",
+                  "basis": "expression is positive but not intense; no signs of high activation like wide eyes or tense jaw"
+                }
+              ],
+              "context_modifiers": [],
+              "evidence": "The mouth and eye regions converge on a positive, relaxed expression with no signs of high activation.",
+              "uncertainty": "No body or event context is visible to amplify or attenuate the expression's impact.",
+              "inference_summary": "Reliable face with converging positive cues (mouth, eyes, cheeks) indicates high valence. Absence of high-activation markers (e.g., wide eyes, tense jaw) suggests moderate arousal. No context modifiers apply."
+            },
+            "valence_score": 7.5,
+            "arousal_score": 5.5
+          }
+        }
+      ],
+      "worker_id": 1,
+      "direct_seconds": 28.641,
+      "direct_va": {
+        "skill_id": "direct-va-baseline",
+        "skill_name": "Direct VA Baseline",
+        "valence": 0.75,
+        "arousal": 0.5,
+        "quadrant": "positive-moderate",
+        "summary": "The subject's warm smile and direct gaze convey positive affect, while the calm, softly lit setting suggests moderate activation without intensity.",
+        "evidence": [
+          "smiling mouth with visible teeth",
+          "direct eye contact",
+          "soft lighting and blurred background"
+        ],
+        "matched_emotions": [
+          "contentment",
+          "approachability"
+        ],
+        "emotion_weights": {},
+        "mapping_trace": [],
+        "appraisal_notes": [],
+        "positive_affect": [],
+        "negative_affect": [],
+        "uncertainty": "Ambiguity in arousal due to lack of dynamic motion cues; valence is confidently positive from facial expression.",
+        "applicability": "",
+        "visual_evidence": [],
+        "construct_estimates": [],
+        "context_modifiers": [],
+        "inference_summary": "",
+        "raw_model_output": {
+          "valence_score": 7.0,
+          "arousal_score": 5.0,
+          "quadrant": "positive-moderate",
+          "summary": "The subject's warm smile and direct gaze convey positive affect, while the calm, softly lit setting suggests moderate activation without intensity.",
+          "evidence": [
+            "smiling mouth with visible teeth",
+            "direct eye contact",
+            "soft lighting and blurred background"
+          ],
+          "matched_emotions": [
+            "contentment",
+            "approachability"
+          ],
+          "uncertainty": "Ambiguity in arousal due to lack of dynamic motion cues; valence is confidently positive from facial expression."
+        },
+        "valence_score": 7.0,
+        "arousal_score": 5.0
+      },
+      "route_seconds": 3.551,
+      "route": {
+        "skill_id": "facial-expression-affect",
+        "reason": "Clear smiling face with visible mouth and eye regions conveying positive affect.",
+        "confidence": 0.95,
+        "observed_cues": [
+          "smiling mouth",
+          "eye contact",
+          "facial expression"
+        ],
+        "alternative_skill_ids": [],
+        "candidate_skill_ids": [
+          "facial-expression-affect"
+        ]
+      },
+      "candidate_skill_ids": [
+        "facial-expression-affect"
+      ],
+      "candidate_skill_analyses": [
+        {
+          "skill_id": "facial-expression-affect",
+          "candidate_index": 1,
+          "ok": true,
+          "seconds": 16.796,
+          "skill_va": {
+            "skill_id": "facial-expression-affect",
+            "skill_name": "Facial Expression Affect",
+            "valence": 0.8125,
+            "arousal": 0.5625,
+            "quadrant": "positive-moderate",
+            "summary": "A clear, smiling face with visible positive expression cues suggests moderate positive valence and moderate arousal.",
+            "evidence": [
+              "The mouth and eye regions converge on a positive, relaxed expression with no signs of high activation."
+            ],
+            "matched_emotions": [],
+            "emotion_weights": {},
+            "mapping_trace": [],
+            "appraisal_notes": [],
+            "positive_affect": [],
+            "negative_affect": [],
+            "uncertainty": "No body or event context is visible to amplify or attenuate the expression's impact.",
+            "applicability": "strong",
+            "visual_evidence": [
+              {
+                "variable": "mouth_jaw_visible",
+                "observation": "mouth corners are upturned, teeth are visible in a smile, jaw is relaxed",
+                "level": "high"
+              },
+              {
+                "variable": "brow_eye_visible",
+                "observation": "eyebrows are relaxed, eyes are open and engaged, no tension",
+                "level": "high"
+              },
+              {
+                "variable": "cheeks_nose_visible",
+                "observation": "cheeks are raised, indicating a genuine smile",
+                "level": "high"
+              }
+            ],
+            "construct_estimates": [
+              {
+                "construct": "valence",
+                "level": "high",
+                "basis": "upturned mouth corners, visible teeth, raised cheeks, relaxed eyes indicate a clear positive expression"
+              },
+              {
+                "construct": "arousal",
+                "level": "medium",
+                "basis": "expression is positive but not intense; no signs of high activation like wide eyes or tense jaw"
+              }
+            ],
+            "context_modifiers": [],
+            "inference_summary": "Reliable face with converging positive cues (mouth, eyes, cheeks) indicates high valence. Absence of high-activation markers (e.g., wide eyes, tense jaw) suggests moderate arousal. No context modifiers apply.",
+            "raw_model_output": {
+              "valence_score": 7.5,
+              "arousal_score": 5.5,
+              "skill_id": "facial-expression-affect",
+              "quadrant": "positive-moderate",
+              "applicability": "strong",
+              "face_reliability": {
+                "face_clear": true,
+                "brow_eye_visible": true,
+                "mouth_jaw_visible": true,
+                "external_distortion": false
+              },
+              "viewer_transfer": {
+                "level": "medium",
+                "amplifiers": [],
+                "attenuators": []
+              },
+              "gate_decision": "use_skill",
+              "summary": "A clear, smiling face with visible positive expression cues suggests moderate positive valence and moderate arousal.",
+              "visual_evidence": [
+                {
+                  "variable": "mouth_jaw_visible",
+                  "observation": "mouth corners are upturned, teeth are visible in a smile, jaw is relaxed",
+                  "level": "high"
+                },
+                {
+                  "variable": "brow_eye_visible",
+                  "observation": "eyebrows are relaxed, eyes are open and engaged, no tension",
+                  "level": "high"
+                },
+                {
+                  "variable": "cheeks_nose_visible",
+                  "observation": "cheeks are raised, indicating a genuine smile",
+                  "level": "high"
+                }
+              ],
+              "construct_estimates": [
+                {
+                  "construct": "valence",
+                  "level": "high",
+                  "basis": "upturned mouth corners, visible teeth, raised cheeks, relaxed eyes indicate a clear positive expression"
+                },
+                {
+                  "construct": "arousal",
+                  "level": "medium",
+                  "basis": "expression is positive but not intense; no signs of high activation like wide eyes or tense jaw"
+                }
+              ],
+              "context_modifiers": [],
+              "evidence": "The mouth and eye regions converge on a positive, relaxed expression with no signs of high activation.",
+              "uncertainty": "No body or event context is visible to amplify or attenuate the expression's impact.",
+              "inference_summary": "Reliable face with converging positive cues (mouth, eyes, cheeks) indicates high valence. Absence of high-activation markers (e.g., wide eyes, tense jaw) suggests moderate arousal. No context modifiers apply."
+            },
+            "valence_score": 7.5,
+            "arousal_score": 5.5
+          },
+          "trace_step": "skill_analysis",
+          "selection_eligible": false,
+          "selection_gate_reasons": [
+            "face-only analysis amplifies valence beyond Direct instead of attenuating it",
+            "face-only analysis amplifies arousal beyond Direct instead of attenuating it"
+          ]
+        }
+      ],
+      "total_candidate_skill_seconds": 16.796,
+      "skill_selection": {
+        "selected_skill_id": "direct-va-baseline",
+        "reason": "All specialized candidates failed their evidence gate; retaining Direct VA.",
+        "confidence": 1.0,
+        "selected_valence_score": 7.0,
+        "selected_arousal_score": 5.0,
+        "rejected_candidates": [
+          {
+            "skill_id": "facial-expression-affect",
+            "why_not": "face-only analysis amplifies valence beyond Direct instead of attenuating it; face-only analysis amplifies arousal beyond Direct instead of attenuating it"
+          }
+        ],
+        "fallback": true,
+        "used_direct_va": true
+      },
+      "skill_seconds": 0.0,
+      "skill_va": {
+        "skill_id": "direct-va-baseline",
+        "skill_name": "Direct VA Baseline",
+        "valence": 0.75,
+        "arousal": 0.5,
+        "quadrant": "positive-moderate",
+        "summary": "The subject's warm smile and direct gaze convey positive affect, while the calm, softly lit setting suggests moderate activation without intensity.",
+        "evidence": [
+          "smiling mouth with visible teeth",
+          "direct eye contact",
+          "soft lighting and blurred background"
+        ],
+        "matched_emotions": [
+          "contentment",
+          "approachability"
+        ],
+        "emotion_weights": {},
+        "mapping_trace": [],
+        "appraisal_notes": [],
+        "positive_affect": [],
+        "negative_affect": [],
+        "uncertainty": "Ambiguity in arousal due to lack of dynamic motion cues; valence is confidently positive from facial expression.",
+        "applicability": "",
+        "visual_evidence": [],
+        "construct_estimates": [],
+        "context_modifiers": [],
+        "inference_summary": "",
+        "raw_model_output": {
+          "valence_score": 7.0,
+          "arousal_score": 5.0,
+          "quadrant": "positive-moderate",
+          "summary": "The subject's warm smile and direct gaze convey positive affect, while the calm, softly lit setting suggests moderate activation without intensity.",
+          "evidence": [
+            "smiling mouth with visible teeth",
+            "direct eye contact",
+            "soft lighting and blurred background"
+          ],
+          "matched_emotions": [
+            "contentment",
+            "approachability"
+          ],
+          "uncertainty": "Ambiguity in arousal due to lack of dynamic motion cues; valence is confidently positive from facial expression."
+        },
+        "valence_score": 7.0,
+        "arousal_score": 5.0
+      },
+      "delta": {
+        "valence_delta": 0.0,
+        "arousal_delta": 0.0
+      }
+    },
+    {
+      "image": "/home/u1120250383/dcs/datasets/IAPS/Dataset/2130.jpg",
+      "ok": true,
+      "trace_inference": true,
+      "inference_trace": [
+        {
+          "step": "direct_va_baseline",
+          "system_prompt": "You are a visual affect analyst. Analyze the image directly in valence-arousal space without using any named psychology skill.\nBasic affective VA definition:\n- Valence measures affective pleasantness: negative/unpleasant -> neutral -> positive/pleasant.\n- Arousal measures activation, energy, and intensity independently from valence: calm/deactivated -> moderate activation -> highly activated.\n- Do not collapse arousal into positivity: excitement and fear can both be high-arousal; peace and boredom can both be low-arousal.\n- Arousal is not the same as visual complexity or salience: a highly detailed but calm scene (e.g. an intricate but peaceful garden) is not automatically high-arousal.\n- Base the estimate on visible image evidence, and state uncertainty when the evidence is weak or ambiguous.\nReturn exactly one valid JSON object and no Markdown, no code fences, no headings, no prose before or after the JSON.\nThe first two top-level keys of the object must be valence_score and arousal_score.\nUse one shared 1-9 scoring scale for every skill and direct baseline:\nScore valence on 1-9: 1 = very negative/unpleasant, 5 = neutral, 9 = very positive/pleasant.\nScore arousal on 1-9: 1 = very calm/deactivated, 5 = moderate activation, 9 = highly activated. Arousal 5 means moderate activation, not neutral affect.\nJudge VA only after completing the skill's observable inference procedure. Do not convert a semantic label directly into a score.\nReserve scores near 1 or 9 for multiple converging, unambiguous visible cues; keep weak or conflicting evidence closer to the center.\nThe top-level JSON keys valence_score and arousal_score are mandatory in every analysis response. Never omit them; if evidence is weak or ambiguous, still provide your best estimate and explain uncertainty.\nReturn only valence_score and arousal_score for the numeric VA values. Do not return normalized 0-1 valence/arousal; the script will normalize later.\nDo not put VA scores only inside nested objects such as scores, va, final_va, or analysis. Do not use alternate names such as final_valence, final_arousal, valence, arousal, or VA TENDENCY as the only score fields.\nKeep the JSON compact: at most 5 visual_evidence items, 4 construct_estimates, and 3 context_modifiers.\nRequired JSON schema:\n{\n  \"valence_score\": 5.0,\n  \"arousal_score\": 5.0,\n  \"quadrant\": \"short label\",\n  \"summary\": \"concise explanation\",\n  \"evidence\": [\"visible cue\"],\n  \"matched_emotions\": [\"likely emotion or affect term\"],\n  \"uncertainty\": \"brief uncertainty note\"\n}\n",
+          "user_prompt": "Analyze this image directly as a VA baseline.\nUser context: Analyze the image's valence-arousal state and choose the most suitable psychology skill.",
+          "image_payload": {
+            "image_path": "/home/u1120250383/dcs/datasets/IAPS/Dataset/2130.jpg"
+          },
+          "system_prompt_chars": 2532,
+          "user_prompt_chars": 148,
+          "max_new_tokens": 2048,
+          "seconds": 5.216,
+          "ok": true,
+          "raw_model_text": "{\n  \"valence_score\": 2.0,\n  \"arousal_score\": 8.0,\n  \"quadrant\": \"negative-high arousal\",\n  \"summary\": \"The subject displays an intense, angry expression with bared teeth and furrowed brows, indicating strong negative emotion and high activation.\",\n  \"evidence\": [\"bared teeth\", \"furrowed brows\", \"tense facial muscles\", \"open mouth\", \"intense gaze\"],\n  \"matched_emotions\": [\"anger\", \"fury\", \"rage\"],\n  \"uncertainty\": \"No contextual cues to suggest underlying motivation or external triggers.\"\n}",
+          "raw_model_payload": {
+            "valence_score": 2.0,
+            "arousal_score": 8.0,
+            "quadrant": "negative-high arousal",
+            "summary": "The subject displays an intense, angry expression with bared teeth and furrowed brows, indicating strong negative emotion and high activation.",
+            "evidence": [
+              "bared teeth",
+              "furrowed brows",
+              "tense facial muscles",
+              "open mouth",
+              "intense gaze"
+            ],
+            "matched_emotions": [
+              "anger",
+              "fury",
+              "rage"
+            ],
+            "uncertainty": "No contextual cues to suggest underlying motivation or external triggers."
+          },
+          "payload_keys": [
+            "valence_score",
+            "arousal_score",
+            "quadrant",
+            "summary",
+            "evidence",
+            "matched_emotions",
+            "uncertainty"
+          ],
+          "prompt_chars": 2774,
+          "input_tokens": 1390,
+          "generated_tokens": 132,
+          "generation_hit_limit": false,
+          "normalized_result": {
+            "skill_id": "direct-va-baseline",
+            "skill_name": "Direct VA Baseline",
+            "valence": 0.125,
+            "arousal": 0.875,
+            "quadrant": "negative-high arousal",
+            "summary": "The subject displays an intense, angry expression with bared teeth and furrowed brows, indicating strong negative emotion and high activation.",
+            "evidence": [
+              "bared teeth",
+              "furrowed brows",
+              "tense facial muscles",
+              "open mouth",
+              "intense gaze"
+            ],
+            "matched_emotions": [
+              "anger",
+              "fury",
+              "rage"
+            ],
+            "emotion_weights": {},
+            "mapping_trace": [],
+            "appraisal_notes": [],
+            "positive_affect": [],
+            "negative_affect": [],
+            "uncertainty": "No contextual cues to suggest underlying motivation or external triggers.",
+            "applicability": "",
+            "visual_evidence": [],
+            "construct_estimates": [],
+            "context_modifiers": [],
+            "inference_summary": "",
+            "raw_model_output": {
+              "valence_score": 2.0,
+              "arousal_score": 8.0,
+              "quadrant": "negative-high arousal",
+              "summary": "The subject displays an intense, angry expression with bared teeth and furrowed brows, indicating strong negative emotion and high activation.",
+              "evidence": [
+                "bared teeth",
+                "furrowed brows",
+                "tense facial muscles",
+                "open mouth",
+                "intense gaze"
+              ],
+              "matched_emotions": [
+                "anger",
+                "fury",
+                "rage"
+              ],
+              "uncertainty": "No contextual cues to suggest underlying motivation or external triggers."
+            },
+            "valence_score": 2.0,
+            "arousal_score": 8.0
+          }
+        },
+        {
+          "step": "route_skill",
+          "system_prompt": "You are a psychology-model router for visual affect analysis.\nBasic affective VA definition:\n- Valence measures affective pleasantness: negative/unpleasant -> neutral -> positive/pleasant.\n- Arousal measures activation, energy, and intensity independently from valence: calm/deactivated -> moderate activation -> highly activated.\n- Do not collapse arousal into positivity: excitement and fear can both be high-arousal; peace and boredom can both be low-arousal.\n- Arousal is not the same as visual complexity or salience: a highly detailed but calm scene (e.g. an intricate but peaceful garden) is not automatically high-arousal.\n- Base the estimate on visible image evidence, and state uncertainty when the evidence is weak or ambiguous.\n\nChoose one specialized psychology skill only when its applicability gate strongly matches the image.\nIf no specialized skill strongly matches, return skill_id=no_specialized_skill and candidate_skill_ids=[].\nReturn exactly one valid JSON object and no Markdown, no code fences, no headings, no prose before or after the JSON.\nEach skill includes one compact applicability gate. Match visible mechanisms, not emotion words or scene labels.\nAvailable skills:\n[\n  {\n    \"skill_id\": \"awe\",\n    \"display_name\": \"Awe\",\n    \"applicability_gate\": {\n      \"use_when\": [\n        \"Physical vastness or force is the primary affective mechanism, not merely beauty or spaciousness.\",\n        \"At least two independent scale cues are visible: tiny reference figures, extreme verticality, unbounded extension, deep atmospheric perspective, or massive uncontrollable force.\",\n        \"The scene plausibly produces self-diminishment, wonder, overwhelm, or sublime threat because of scale.\"\n      ],\n      \"do_not_use_when\": [\n        \"Calm shoreline, forest, garden, room, or horizon that is restorative but not overwhelming.\",\n        \"Monument, memorial, burial, repetition, or historical symbolism whose meaning rather than physical scale drives affect.\",\n        \"Dramatic color, novelty, complexity, or wide-angle style without reliable scale references.\"\n      ],\n      \"near_miss_boundaries\": [\n        \"Low-demand enterable scenery -> kaplan-art-restoration.\",\n        \"Perceptual novelty or complex composition -> berlyne-arousal-pleasure.\",\n        \"Disaster consequences, mortality, or human stakes -> cognitive-appraisal when situation meaning dominates.\"\n      ]\n    }\n  },\n  {\n    \"skill_id\": \"baby-schema\",\n    \"display_name\": \"Baby Schema / Kindchenschema\",\n    \"applicability_gate\": {\n      \"use_when\": [\n        \"The dominant subject is a human infant, young animal, or deliberately neotenic character/object.\",\n        \"Multiple infantile proportions are visible and plausibly drive tenderness, approach, or caregiving attention.\",\n        \"Morphology remains affectively important after considering the surrounding situation.\"\n      ],\n      \"do_not_use_when\": [\n        \"Adult face, ordinary small object, or culturally labeled \\\"cute\\\" subject without visible neotenic structure.\",\n        \"Predatory morphology, contamination, body action, or social event is the primary mechanism.\",\n        \"Severe distress, danger, exploitation, illness, or uncanny wrongness fully determines affect; use appraisal/direct analysis while retaining baby schema only as a modifier.\"\n      ],\n      \"near_miss_boundaries\": [\n        \"Adult neutral portrait -> no specialized skill or optional face module.\",\n        \"Young animal with credible attack threat -> evolved-fear-module.\",\n        \"Infant visibly endangered or suffering -> cognitive-appraisal may become primary because context overrides morphology.\"\n      ]\n    }\n  },\n  {\n    \"skill_id\": \"berlyne-arousal-pleasure\",\n    \"display_name\": \"Berlyne Arousal-Pleasure\",\n    \"applicability_gate\": {\n      \"use_when\": [\n        \"Perceptual or compositional stimulation, rather than depicted story or object category, is the primary affective mechanism.\",\n        \"At least two collative variables have visible support, or one is exceptionally dominant.\",\n        \"The image demands active visual organization, comparison, or resolution.\"\n      ],\n      \"do_not_use_when\": [\n        \"Ordinary product, object, still life, or familiar scene with trivial visual organization.\",\n        \"Arousal is better explained by danger, bodily action, contamination, infantile morphology, or social stakes.\",\n        \"Calm enterable space or physically overwhelming scale better fits Kaplan or Awe.\"\n      ],\n      \"near_miss_boundaries\": [\n        \"Low-demand coherent environment -> kaplan-art-restoration.\",\n        \"Vastness and self-diminishment -> awe.\",\n        \"Narrative ambiguity about actors and consequences -> cognitive-appraisal; perceptual ambiguity remains Berlyne.\"\n      ]\n    }\n  },\n  {\n    \"skill_id\": \"cognitive-appraisal\",\n    \"display_name\": \"Cognitive Appraisal\",\n    \"applicability_gate\": {\n      \"use_when\": [\n        \"A visible event, interaction, consequential object, or outcome determines affect rather than mere scene meaning.\",\n        \"A visible gain/loss, obstruction, threat, success/failure, or consequential change makes the event relevant to a typical viewer; merely obtaining food/service or participating socially is not a stake.\",\n        \"At least two appraisal dimensions have independent visible support.\"\n      ],\n      \"do_not_use_when\": [\n        \"A direct mechanism dominates: restoration, perceptual stimulation, vastness, threat animal, contamination, baby schema, facial expression, or readable body action.\",\n        \"The image is an ordinary object, face-only portrait, routine commerce/food service/social gathering, static symbol/memorial, or low-context scene without an unfolding event and consequential change.\",\n        \"The interpretation requires invented history, dialogue, intention, consent, guilt, or personality.\"\n      ],\n      \"near_miss_boundaries\": [\n        \"Clear facial expression -> facial-expression-affect; clear posture with an unreadable face -> emotional-body-language.\",\n        \"Safe infantile morphology -> baby-schema; visible danger may activate appraisal.\",\n        \"Static solemn or symbolic meaning without a visible event -> no_specialized_skill.\"\n      ],\n      \"routing_priority\": [\n        \"Test direct mechanisms first. Appraisal is never the catch-all: ordinary goals such as buying, eating, waiting, or socializing do not count as stakes; with no consequential change or fewer than two supported dimensions, return `no_specialized_skill`.\"\n      ]\n    }\n  },\n  {\n    \"skill_id\": \"emotional-body-language\",\n    \"display_name\": \"Emotional Body Language\",\n    \"applicability_gate\": {\n      \"use_when\": [\n        \"A human whole body or sufficiently visible upper body carries the main emotional signal.\",\n        \"Face information is absent, obscured, too small, masked, or secondary.\",\n        \"Posture supports a recognizable action tendency such as approach, recoil, freeze, attack, collapse, celebration, assertion, or submission.\"\n      ],\n      \"do_not_use_when\": [\n        \"A readable facial expression dominates -> facial-expression-affect.\",\n        \"A weapon, risky object, interaction, or consequence determines affect more than body configuration.\",\n        \"Only an isolated hand, ambiguous resting pose, or small body fragment is visible.\"\n      ],\n      \"near_miss_boundaries\": [\n        \"Clear expressive face -> facial-expression-affect; a neutral face-centered portrait -> no_specialized_skill.\",\n        \"Visible agency, stakes, conflict, or consequential object use -> cognitive-appraisal.\",\n        \"Predatory animal posture -> evolved-fear-module.\"\n      ]\n    }\n  },\n  {\n    \"skill_id\": \"evolved-fear-module\",\n    \"display_name\": \"Evolved Fear Module\",\n    \"applicability_gate\": {\n      \"use_when\": [\n        \"A snake, spider, scorpion, large predator, or closely related threat morphology is visually central.\",\n        \"The animal form itself, not a story or contamination association, plausibly drives rapid threat perception.\",\n        \"At least one imminence cue beyond category membership is visible.\"\n      ],\n      \"do_not_use_when\": [\n        \"Human, mechanical, environmental, or social danger without a fear-relevant animal.\",\n        \"Infestation, decay, disease-vector context, or bodily contamination dominates the response.\",\n        \"Toy, cartoon, decoration, distant documentary subject, cared-for pet, or neotenic animal lacks credible threat morphology.\"\n      ],\n      \"near_miss_boundaries\": [\n        \"Pest associated with filth or disease -> pathogen-disgust.\",\n        \"Young/cute animal morphology -> baby-schema.\",\n        \"Human stakes, handling, accident, or conflict determines affect -> cognitive-appraisal.\"\n      ]\n    }\n  },\n  {\n    \"skill_id\": \"facial-expression-affect\",\n    \"display_name\": \"Facial Expression Affect\",\n    \"applicability_gate\": {\n      \"use_when\": [\n        \"A human face is large and clear enough to inspect the brow/eye and mouth/jaw regions reliably.\",\n        \"A transient facial configuration is the dominant affective signal; removing the face would substantially weaken the image's affect.\",\n        \"At least two independent diagnostic regions support one direction, normally including mouth/jaw plus eye/brow evidence; external hand pressure is not an expression region.\"\n      ],\n      \"do_not_use_when\": [\n        \"The face is neutral/resting, too small, blurred, stylized, ambiguous, or lacks a reliable mouth/jaw region; a hand/object distorting or hiding the face lowers applicability rather than proving tension.\",\n        \"Body posture, infantile morphology, contamination, injury, an unfolding interaction, or visible consequences determine affect more than the face.\",\n        \"The analysis would infer personality, trustworthiness, dominance, intent, consent, mental illness, pain cause, or moral character.\"\n      ],\n      \"near_miss_boundaries\": [\n        \"Clear whole-body action with an unreadable face -> emotional-body-language.\",\n        \"Visible event, interaction, stakes, or consequence overrides expression -> cognitive-appraisal.\",\n        \"Neutral or mildly posed portrait -> no_specialized_skill; explicit social-impression research may use the optional non-VA Todorov module.\"\n      ],\n      \"routing_priority\": [\n        \"Prefer this skill only for clear expressive human faces. The presence of a face, direct gaze, attractiveness, identity, or portrait framing alone is insufficient.\"\n      ]\n    }\n  },\n  {\n    \"skill_id\": \"kaplan-art-restoration\",\n    \"display_name\": \"Kaplan Attention Restoration Theory\",\n    \"applicability_gate\": {\n      \"use_when\": [\n        \"An enterable or inhabitable environment is the dominant affective source.\",\n        \"Visible spatial organization supports low-demand viewing, gentle exploration, rest, or attentional recovery.\",\n        \"At least three restorative variables are observable, including one spatial variable.\"\n      ],\n      \"do_not_use_when\": [\n        \"Isolated object, product, texture, tabletop arrangement, or decorative still life.\",\n        \"Overwhelming scale, vertigo, violent force, dense novelty, threat, or person-centered action dominates.\",\n        \"Calmness comes mainly from blankness or lack of content rather than environmental structure.\"\n      ],\n      \"near_miss_boundaries\": [\n        \"Immense scale and self-diminishment -> awe.\",\n        \"Novelty, ambiguity, dense pattern, or hard fascination -> berlyne-arousal-pleasure.\",\n        \"Human stakes or visible danger -> cognitive-appraisal.\"\n      ]\n    }\n  },\n  {\n    \"skill_id\": \"pathogen-disgust\",\n    \"display_name\": \"Pathogen Disgust\",\n    \"applicability_gate\": {\n      \"use_when\": [\n        \"Visible organic contamination, decay, disease, waste, bodily fluid, wound, spoiled food, parasite, or infestation is affectively central.\",\n        \"Avoidance/rejection is better explained by pathogen cues than by attack threat, sadness, or composition.\",\n        \"Cue identity is visually supported rather than inferred from a label or backstory.\"\n      ],\n      \"do_not_use_when\": [\n        \"Moral or social violation without visible pathogen cues.\",\n        \"Snake, predator, or attack morphology dominates.\",\n        \"Fresh appetitive food, clean medical equipment, abstract ugliness, or harmless insects without contamination evidence.\"\n      ],\n      \"near_miss_boundaries\": [\n        \"Predation or attack -> evolved-fear-module.\",\n        \"Injury or accident where human stakes dominate -> cognitive-appraisal; use disgust only if contamination remains visually central.\",\n        \"Chaotic/aversive abstraction without organic contamination -> berlyne-arousal-pleasure or no specialized skill.\"\n      ]\n    }\n  }\n]\n\nRules:\n- Base your decision on visible evidence first.\n- Use user context only as a secondary hint.\n- Test directly visible specialized mechanisms before considering cognitive-appraisal.\n- Prefer kaplan-art-restoration for enterable, low-demand restorative environments.\n- Prefer berlyne-arousal-pleasure only when measurable perceptual novelty, complexity, ambiguity, or incongruity drives affect.\n- Prefer evolved-fear-module when evolutionarily threatening animals (snakes, spiders, predators) are the dominant content.\n- Prefer pathogen-disgust for visible contamination, rot, bodily waste, wounds, or pest infestation.\n- Prefer baby-schema when an infant, baby animal, or neotenic character is the dominant subject.\n- Prefer facial-expression-affect only when a clear expressive human face is dominant and independent mouth/jaw plus eye/brow evidence supports a transient expression; partial, hand-distorted, neutral, or ambiguous faces are not enough.\n- Prefer emotional-body-language when human body posture or gesture carries the primary emotional signal and the face is obscured or secondary.\n- Prefer awe only when physically overwhelming scale and self-diminishment cues dominate.\n- Use cognitive-appraisal only when a visible event has consequential change (gain/loss, obstruction, threat, success/failure) and at least two evidence-supported appraisal dimensions; it is not a fallback.\n- Buying, eating, waiting, receiving service, gathering, or socializing are not stakes without a visible consequential change. Do not infer goals, control, consent, urgency, or danger from missing context. Use no_specialized_skill for ordinary objects, neutral portraits, routine activity, static symbols, and ambiguous face/pose cues.\n- If the image is ambiguous but no specialized skill is clearly activated, choose no_specialized_skill rather than forcing a weak match.\n- candidate_skill_ids is an at-most list, not a quota. Do not pad it.\n- Usually include exactly 1 candidate. Include 2 only for a real boundary case. Use [] when no specialized skill fits.\n- A candidate is strongly plausible only if its core constructs are directly visible, not merely loosely related.\n- Confidence must be in [0, 1].\n- Keep reason under 25 words, observed_cues to at most 3 items, and alternative_skill_ids to at most 2 items.\nRequired JSON schema: {\"skill_id\":\"skill-id-or-no_specialized_skill\",\"reason\":\"brief reason\",\"confidence\":0.0,\"observed_cues\":[\"cue\"],\"candidate_skill_ids\":[\"skill-id\",\"other-skill-id\"],\"alternative_skill_ids\":[\"other-skill-id\"]}\n",
+          "user_prompt": "Select one specialized psychology skill for this image only if it strongly fits; otherwise select no_specialized_skill.\nUser context: Analyze the image's valence-arousal state and choose the most suitable psychology skill.",
+          "image_payload": {
+            "image_path": "/home/u1120250383/dcs/datasets/IAPS/Dataset/2130.jpg"
+          },
+          "system_prompt_chars": 15258,
+          "user_prompt_chars": 222,
+          "max_new_tokens": 2048,
+          "seconds": 3.59,
+          "ok": true,
+          "raw_model_text": "{\"skill_id\":\"facial-expression-affect\",\"reason\":\"Clear angry facial expression with furrowed brow and bared teeth.\",\"confidence\":0.98,\"observed_cues\":[\"furrowed brow\",\"bared teeth\",\"tense jaw\"],\"candidate_skill_ids\":[\"facial-expression-affect\"],\"alternative_skill_ids\":[]}",
+          "raw_model_payload": {
+            "skill_id": "facial-expression-affect",
+            "reason": "Clear angry facial expression with furrowed brow and bared teeth.",
+            "confidence": 0.98,
+            "observed_cues": [
+              "furrowed brow",
+              "bared teeth",
+              "tense jaw"
+            ],
+            "candidate_skill_ids": [
+              "facial-expression-affect"
+            ],
+            "alternative_skill_ids": []
+          },
+          "payload_keys": [
+            "skill_id",
+            "reason",
+            "confidence",
+            "observed_cues",
+            "candidate_skill_ids",
+            "alternative_skill_ids"
+          ],
+          "prompt_chars": 15574,
+          "input_tokens": 3969,
+          "generated_tokens": 67,
+          "generation_hit_limit": false,
+          "normalized_result": {
+            "skill_id": "facial-expression-affect",
+            "reason": "Clear angry facial expression with furrowed brow and bared teeth.",
+            "confidence": 0.98,
+            "observed_cues": [
+              "furrowed brow",
+              "bared teeth",
+              "tense jaw"
+            ],
+            "alternative_skill_ids": [],
+            "candidate_skill_ids": [
+              "facial-expression-affect"
+            ]
+          }
+        },
+        {
+          "step": "skill_analysis",
+          "system_prompt": "You are a psychology-guided visual affect analyst.\nBasic affective VA definition:\n- Valence measures affective pleasantness: negative/unpleasant -> neutral -> positive/pleasant.\n- Arousal measures activation, energy, and intensity independently from valence: calm/deactivated -> moderate activation -> highly activated.\n- Do not collapse arousal into positivity: excitement and fear can both be high-arousal; peace and boredom can both be low-arousal.\n- Arousal is not the same as visual complexity or salience: a highly detailed but calm scene (e.g. an intricate but peaceful garden) is not automatically high-arousal.\n- Base the estimate on visible image evidence, and state uncertainty when the evidence is weak or ambiguous.\nUse the provided skill definition to analyze the image.\nFollow every numbered inference step in order. Each construct estimate must cite visible evidence.\nAlways include applicability: strong, partial, or weak. If weak, keep scores conservative and explain the mismatch.\nReturn exactly one valid JSON object and no Markdown, no code fences, no headings, no prose before or after the JSON.\nDo not copy the skill's narrative output template. Convert the analysis into the JSON schema below.\nThe first two top-level keys of the object must be valence_score and arousal_score.\nUse one shared 1-9 scoring scale for every skill and direct baseline:\nScore valence on 1-9: 1 = very negative/unpleasant, 5 = neutral, 9 = very positive/pleasant.\nScore arousal on 1-9: 1 = very calm/deactivated, 5 = moderate activation, 9 = highly activated. Arousal 5 means moderate activation, not neutral affect.\nJudge VA only after completing the skill's observable inference procedure. Do not convert a semantic label directly into a score.\nReserve scores near 1 or 9 for multiple converging, unambiguous visible cues; keep weak or conflicting evidence closer to the center.\nThe top-level JSON keys valence_score and arousal_score are mandatory in every analysis response. Never omit them; if evidence is weak or ambiguous, still provide your best estimate and explain uncertainty.\nReturn only valence_score and arousal_score for the numeric VA values. Do not return normalized 0-1 valence/arousal; the script will normalize later.\nDo not put VA scores only inside nested objects such as scores, va, final_va, or analysis. Do not use alternate names such as final_valence, final_arousal, valence, arousal, or VA TENDENCY as the only score fields.\nKeep the JSON compact: at most 5 visual_evidence items, 4 construct_estimates, and 3 context_modifiers.\nFacial-expression-specific mandatory contract:\n- Report face_reliability as observable booleans. Do not guess a hidden mouth/jaw region.\n- external_distortion is true when a hand/object presses, covers, or visibly deforms a diagnostic region.\n- Report viewer_transfer separately from depicted expression intensity. Missing body/event/context is an attenuator, not confirmation.\n- Set gate_decision=use_direct unless applicability is strong, brow/eye and mouth/jaw are both reliable, external_distortion is false, and viewer transfer is supported.\nSkill definition:\n{\n  \"skill_id\": \"facial-expression-affect\",\n  \"display_name\": \"Facial Expression Affect\",\n  \"short_description\": \"Analyze viewer affect from a clear human face when a transient expression, not identity or situation meaning, is the primary signal. Infer expression direction and activation from multiple visible facial regions, then check body/context congruence and ambiguity. Do not infer personality, trustworthiness, intent, diagnosis, or emotion from a neutral face.\",\n  \"theory_family\": \"facial-expression-affect\",\n  \"applicability_gate\": {\n    \"use_when\": [\n      \"A human face is large and clear enough to inspect the brow/eye and mouth/jaw regions reliably.\",\n      \"A transient facial configuration is the dominant affective signal; removing the face would substantially weaken the image's affect.\",\n      \"At least two independent diagnostic regions support one direction, normally including mouth/jaw plus eye/brow evidence; external hand pressure is not an expression region.\"\n    ],\n    \"do_not_use_when\": [\n      \"The face is neutral/resting, too small, blurred, stylized, ambiguous, or lacks a reliable mouth/jaw region; a hand/object distorting or hiding the face lowers applicability rather than proving tension.\",\n      \"Body posture, infantile morphology, contamination, injury, an unfolding interaction, or visible consequences determine affect more than the face.\",\n      \"The analysis would infer personality, trustworthiness, dominance, intent, consent, mental illness, pain cause, or moral character.\"\n    ],\n    \"near_miss_boundaries\": [\n      \"Clear whole-body action with an unreadable face -> emotional-body-language.\",\n      \"Visible event, interaction, stakes, or consequence overrides expression -> cognitive-appraisal.\",\n      \"Neutral or mildly posed portrait -> no_specialized_skill; explicit social-impression research may use the optional non-VA Todorov module.\"\n    ],\n    \"routing_priority\": [\n      \"Prefer this skill only for clear expressive human faces. The presence of a face, direct gaze, attractiveness, identity, or portrait framing alone is insufficient.\"\n    ]\n  },\n  \"image_signals\": [\n    \"**Face reliability**: size, resolution, lighting, angle, occlusion, blur, and visibility of independent facial regions.\",\n    \"**Brow/forehead configuration**: raised, lowered, drawn together, relaxed, or asymmetric; describe shape without assigning emotion.\",\n    \"**Eyes/eyelids**: openness, narrowing, lid tension, eye-region contraction, and visible tears; gaze direction is not an emotion.\",\n    \"**Cheeks/nose region**: cheek raising, nose wrinkling, and mid-face tension when genuinely visible.\",\n    \"**Mouth/jaw configuration**: corner direction, lip press/stretch, teeth exposure, mouth opening, jaw drop, or relaxed closure.\",\n    \"**Expression intensity/coherence**: number of converging regions, muscular tension, symmetry, and agreement versus mixed signals.\",\n    \"**Viewer-transfer modifier**: body, event, interaction, and setting evidence that amplifies or attenuates how strongly the depicted expression should affect a typical viewer.\"\n  ],\n  \"va_focus\": \"Use the shared 1-9 scale without fixed emotion-to-VA ranges. A coherent expression provides directional evidence, not a direct transfer of the depicted person's state. Without a visible interaction, consequence, or congruent body signal, keep viewer valence and arousal closer to moderate even when the isolated face appears intense. Arousal requires convergence across regions plus viewer-relevant amplification; direct gaze, teeth, open mouth, eye narrowing, or a single tense region alone is insufficient. Missing context and possible posing increase uncertainty. Reserve extreme viewer scores for expressions embedded in an equally intense, consequential scene.\",\n  \"analysis_steps\": [\n    \"Verify face reliability, independent region visibility, and the removal test; reject neutral faces or configurations without reliable mouth/jaw evidence.\",\n    \"Record brow/forehead, eyes/eyelids, cheeks/nose, and mouth/jaw observations without emotion or personality labels.\",\n    \"Infer one primary and one plausible alternative affective interpretation from converging regions; mark mixed or posed configurations as uncertain.\",\n    \"Estimate depicted expression direction and activation, then assess viewer transfer from visible body/event/context; missing context increases uncertainty and never confirms the expression's cause or intensity.\",\n    \"Apply the evidence gate and judge viewer VA conservatively. Treat expression as one-step-removed evidence: do not copy the depicted person's apparent intensity directly into viewer valence or arousal.\"\n  ],\n  \"worked_example\": \"- **Image**: A well-lit close face shows symmetric upward mouth corners, raised cheeks, visible eye-region contraction, and a relaxed jaw; the body and background add no conflicting event. - **Analysis**: reliable face visibility and three converging regions support a positive expression with moderate intensity; no event evidence justifies extreme activation or a claim about personality. - **VA**: valence 6.4, arousal 4.8 on 1-9; strong expression applicability but conservative viewer impact because the face is isolated and posing remains possible.\"\n}\n\nRequired JSON schema:\n{\n  \"valence_score\": 5.0,\n  \"arousal_score\": 5.0,\n  \"skill_id\": \"skill-id\",\n  \"quadrant\": \"short label\",\n  \"applicability\": \"strong|partial|weak\",\n  \"face_reliability\": {\"face_clear\": true, \"brow_eye_visible\": true, \"mouth_jaw_visible\": true, \"external_distortion\": false},\n  \"viewer_transfer\": {\"level\":\"low|medium|high\", \"amplifiers\":[], \"attenuators\":[]},\n  \"gate_decision\": \"use_skill|use_direct\",\n  \"summary\": \"concise explanation\",\n  \"visual_evidence\": [{\"variable\":\"skill variable\",\"observation\":\"visible fact\",\"level\":\"low|medium|high\"}],\n  \"construct_estimates\": [{\"construct\":\"theory construct\",\"level\":\"low|medium|high\",\"basis\":\"visible evidence\"}],\n  \"context_modifiers\": [\"visible modifier or competing mechanism\"],\n  \"evidence\": [\"most score-relevant visible cue\"],\n  \"uncertainty\": \"brief uncertainty note\",\n  \"inference_summary\": \"concise progression from evidence to constructs to VA\"\n}\n",
+          "user_prompt": "Analyze this image with the selected psychology model.\nSelected skill_id: facial-expression-affect\nRouting reason: Clear angry facial expression with furrowed brow and bared teeth.\nUser context: Analyze the image's valence-arousal state and choose the most suitable psychology skill.",
+          "image_payload": {
+            "image_path": "/home/u1120250383/dcs/datasets/IAPS/Dataset/2130.jpg"
+          },
+          "system_prompt_chars": 9301,
+          "user_prompt_chars": 283,
+          "max_new_tokens": 2048,
+          "skill_id": "facial-expression-affect",
+          "candidate_index": 1,
+          "route_reason": "Clear angry facial expression with furrowed brow and bared teeth.",
+          "seconds": 17.03,
+          "ok": true,
+          "raw_model_text": "{\n  \"valence_score\": 2.0,\n  \"arousal_score\": 8.0,\n  \"skill_id\": \"facial-expression-affect\",\n  \"quadrant\": \"negative/high-arousal\",\n  \"applicability\": \"strong\",\n  \"face_reliability\": {\"face_clear\": true, \"brow_eye_visible\": true, \"mouth_jaw_visible\": true, \"external_distortion\": false},\n  \"viewer_transfer\": {\"level\":\"high\", \"amplifiers\":[], \"attenuators\":[]},\n  \"gate_decision\": \"use_skill\",\n  \"summary\": \"The face displays a clear, intense angry expression with high activation, supported by multiple converging facial regions and no external distortion.\",\n  \"visual_evidence\": [\n    {\"variable\":\"brow/forehead\",\"observation\":\"brows are furrowed and drawn together\",\"level\":\"high\"},\n    {\"variable\":\"eyes/eyelids\",\"observation\":\"eyes are narrowed with visible tension\",\"level\":\"high\"},\n    {\"variable\":\"mouth/jaw\",\"observation\":\"mouth is open with teeth bared and jaw tensed\",\"level\":\"high\"},\n    {\"variable\":\"expression_intensity\",\"observation\":\"multiple facial regions converge on anger with high muscular tension\",\"level\":\"high\"}\n  ],\n  \"construct_estimates\": [\n    {\"construct\":\"valence\",\"level\":\"low\",\"basis\":\"furrowed brow, narrowed eyes, bared teeth indicate negative affect\"},\n    {\"construct\":\"arousal\",\"level\":\"high\",\"basis\":\"open mouth, bared teeth, tense jaw and brow indicate high activation\"}\n  ],\n  \"context_modifiers\": [],\n  \"evidence\": \"bared teeth, furrowed brow, narrowed eyes, tense jaw\",\n  \"uncertainty\": \"None; expression is unambiguous and fully visible.\",\n  \"inference_summary\": \"Visible evidence of furrowed brow, narrowed eyes, and bared teeth converges on a negative valence. High muscular tension and open mouth indicate high arousal. No context or distortion reduces reliability. Viewer transfer is high due to the direct, unambiguous expression.\"\n}",
+          "raw_model_payload": {
+            "valence_score": 2.0,
+            "arousal_score": 8.0,
+            "skill_id": "facial-expression-affect",
+            "quadrant": "negative/high-arousal",
+            "applicability": "strong",
+            "face_reliability": {
+              "face_clear": true,
+              "brow_eye_visible": true,
+              "mouth_jaw_visible": true,
+              "external_distortion": false
+            },
+            "viewer_transfer": {
+              "level": "high",
+              "amplifiers": [],
+              "attenuators": []
+            },
+            "gate_decision": "use_skill",
+            "summary": "The face displays a clear, intense angry expression with high activation, supported by multiple converging facial regions and no external distortion.",
+            "visual_evidence": [
+              {
+                "variable": "brow/forehead",
+                "observation": "brows are furrowed and drawn together",
+                "level": "high"
+              },
+              {
+                "variable": "eyes/eyelids",
+                "observation": "eyes are narrowed with visible tension",
+                "level": "high"
+              },
+              {
+                "variable": "mouth/jaw",
+                "observation": "mouth is open with teeth bared and jaw tensed",
+                "level": "high"
+              },
+              {
+                "variable": "expression_intensity",
+                "observation": "multiple facial regions converge on anger with high muscular tension",
+                "level": "high"
+              }
+            ],
+            "construct_estimates": [
+              {
+                "construct": "valence",
+                "level": "low",
+                "basis": "furrowed brow, narrowed eyes, bared teeth indicate negative affect"
+              },
+              {
+                "construct": "arousal",
+                "level": "high",
+                "basis": "open mouth, bared teeth, tense jaw and brow indicate high activation"
+              }
+            ],
+            "context_modifiers": [],
+            "evidence": "bared teeth, furrowed brow, narrowed eyes, tense jaw",
+            "uncertainty": "None; expression is unambiguous and fully visible.",
+            "inference_summary": "Visible evidence of furrowed brow, narrowed eyes, and bared teeth converges on a negative valence. High muscular tension and open mouth indicate high arousal. No context or distortion reduces reliability. Viewer transfer is high due to the direct, unambiguous expression."
+          },
+          "payload_keys": [
+            "valence_score",
+            "arousal_score",
+            "skill_id",
+            "quadrant",
+            "applicability",
+            "face_reliability",
+            "viewer_transfer",
+            "gate_decision",
+            "summary",
+            "visual_evidence",
+            "construct_estimates",
+            "context_modifiers",
+            "evidence",
+            "uncertainty",
+            "inference_summary"
+          ],
+          "prompt_chars": 9678,
+          "input_tokens": 2786,
+          "generated_tokens": 436,
+          "generation_hit_limit": false,
+          "normalized_result": {
+            "skill_id": "facial-expression-affect",
+            "skill_name": "Facial Expression Affect",
+            "valence": 0.125,
+            "arousal": 0.875,
+            "quadrant": "negative/high-arousal",
+            "summary": "The face displays a clear, intense angry expression with high activation, supported by multiple converging facial regions and no external distortion.",
+            "evidence": [
+              "bared teeth, furrowed brow, narrowed eyes, tense jaw"
+            ],
+            "matched_emotions": [],
+            "emotion_weights": {},
+            "mapping_trace": [],
+            "appraisal_notes": [],
+            "positive_affect": [],
+            "negative_affect": [],
+            "uncertainty": "None; expression is unambiguous and fully visible.",
+            "applicability": "strong",
+            "visual_evidence": [
+              {
+                "variable": "brow/forehead",
+                "observation": "brows are furrowed and drawn together",
+                "level": "high"
+              },
+              {
+                "variable": "eyes/eyelids",
+                "observation": "eyes are narrowed with visible tension",
+                "level": "high"
+              },
+              {
+                "variable": "mouth/jaw",
+                "observation": "mouth is open with teeth bared and jaw tensed",
+                "level": "high"
+              },
+              {
+                "variable": "expression_intensity",
+                "observation": "multiple facial regions converge on anger with high muscular tension",
+                "level": "high"
+              }
+            ],
+            "construct_estimates": [
+              {
+                "construct": "valence",
+                "level": "low",
+                "basis": "furrowed brow, narrowed eyes, bared teeth indicate negative affect"
+              },
+              {
+                "construct": "arousal",
+                "level": "high",
+                "basis": "open mouth, bared teeth, tense jaw and brow indicate high activation"
+              }
+            ],
+            "context_modifiers": [],
+            "inference_summary": "Visible evidence of furrowed brow, narrowed eyes, and bared teeth converges on a negative valence. High muscular tension and open mouth indicate high arousal. No context or distortion reduces reliability. Viewer transfer is high due to the direct, unambiguous expression.",
+            "raw_model_output": {
+              "valence_score": 2.0,
+              "arousal_score": 8.0,
+              "skill_id": "facial-expression-affect",
+              "quadrant": "negative/high-arousal",
+              "applicability": "strong",
+              "face_reliability": {
+                "face_clear": true,
+                "brow_eye_visible": true,
+                "mouth_jaw_visible": true,
+                "external_distortion": false
+              },
+              "viewer_transfer": {
+                "level": "high",
+                "amplifiers": [],
+                "attenuators": []
+              },
+              "gate_decision": "use_skill",
+              "summary": "The face displays a clear, intense angry expression with high activation, supported by multiple converging facial regions and no external distortion.",
+              "visual_evidence": [
+                {
+                  "variable": "brow/forehead",
+                  "observation": "brows are furrowed and drawn together",
+                  "level": "high"
+                },
+                {
+                  "variable": "eyes/eyelids",
+                  "observation": "eyes are narrowed with visible tension",
+                  "level": "high"
+                },
+                {
+                  "variable": "mouth/jaw",
+                  "observation": "mouth is open with teeth bared and jaw tensed",
+                  "level": "high"
+                },
+                {
+                  "variable": "expression_intensity",
+                  "observation": "multiple facial regions converge on anger with high muscular tension",
+                  "level": "high"
+                }
+              ],
+              "construct_estimates": [
+                {
+                  "construct": "valence",
+                  "level": "low",
+                  "basis": "furrowed brow, narrowed eyes, bared teeth indicate negative affect"
+                },
+                {
+                  "construct": "arousal",
+                  "level": "high",
+                  "basis": "open mouth, bared teeth, tense jaw and brow indicate high activation"
+                }
+              ],
+              "context_modifiers": [],
+              "evidence": "bared teeth, furrowed brow, narrowed eyes, tense jaw",
+              "uncertainty": "None; expression is unambiguous and fully visible.",
+              "inference_summary": "Visible evidence of furrowed brow, narrowed eyes, and bared teeth converges on a negative valence. High muscular tension and open mouth indicate high arousal. No context or distortion reduces reliability. Viewer transfer is high due to the direct, unambiguous expression."
+            },
+            "valence_score": 2.0,
+            "arousal_score": 8.0
+          }
+        }
+      ],
+      "worker_id": 1,
+      "direct_seconds": 5.216,
+      "direct_va": {
+        "skill_id": "direct-va-baseline",
+        "skill_name": "Direct VA Baseline",
+        "valence": 0.125,
+        "arousal": 0.875,
+        "quadrant": "negative-high arousal",
+        "summary": "The subject displays an intense, angry expression with bared teeth and furrowed brows, indicating strong negative emotion and high activation.",
+        "evidence": [
+          "bared teeth",
+          "furrowed brows",
+          "tense facial muscles",
+          "open mouth",
+          "intense gaze"
+        ],
+        "matched_emotions": [
+          "anger",
+          "fury",
+          "rage"
+        ],
+        "emotion_weights": {},
+        "mapping_trace": [],
+        "appraisal_notes": [],
+        "positive_affect": [],
+        "negative_affect": [],
+        "uncertainty": "No contextual cues to suggest underlying motivation or external triggers.",
+        "applicability": "",
+        "visual_evidence": [],
+        "construct_estimates": [],
+        "context_modifiers": [],
+        "inference_summary": "",
+        "raw_model_output": {
+          "valence_score": 2.0,
+          "arousal_score": 8.0,
+          "quadrant": "negative-high arousal",
+          "summary": "The subject displays an intense, angry expression with bared teeth and furrowed brows, indicating strong negative emotion and high activation.",
+          "evidence": [
+            "bared teeth",
+            "furrowed brows",
+            "tense facial muscles",
+            "open mouth",
+            "intense gaze"
+          ],
+          "matched_emotions": [
+            "anger",
+            "fury",
+            "rage"
+          ],
+          "uncertainty": "No contextual cues to suggest underlying motivation or external triggers."
+        },
+        "valence_score": 2.0,
+        "arousal_score": 8.0
+      },
+      "route_seconds": 3.59,
+      "route": {
+        "skill_id": "facial-expression-affect",
+        "reason": "Clear angry facial expression with furrowed brow and bared teeth.",
+        "confidence": 0.98,
+        "observed_cues": [
+          "furrowed brow",
+          "bared teeth",
+          "tense jaw"
+        ],
+        "alternative_skill_ids": [],
+        "candidate_skill_ids": [
+          "facial-expression-affect"
+        ]
+      },
+      "candidate_skill_ids": [
+        "facial-expression-affect"
+      ],
+      "candidate_skill_analyses": [
+        {
+          "skill_id": "facial-expression-affect",
+          "candidate_index": 1,
+          "ok": true,
+          "seconds": 17.03,
+          "skill_va": {
+            "skill_id": "facial-expression-affect",
+            "skill_name": "Facial Expression Affect",
+            "valence": 0.125,
+            "arousal": 0.875,
+            "quadrant": "negative/high-arousal",
+            "summary": "The face displays a clear, intense angry expression with high activation, supported by multiple converging facial regions and no external distortion.",
+            "evidence": [
+              "bared teeth, furrowed brow, narrowed eyes, tense jaw"
+            ],
+            "matched_emotions": [],
+            "emotion_weights": {},
+            "mapping_trace": [],
+            "appraisal_notes": [],
+            "positive_affect": [],
+            "negative_affect": [],
+            "uncertainty": "None; expression is unambiguous and fully visible.",
+            "applicability": "strong",
+            "visual_evidence": [
+              {
+                "variable": "brow/forehead",
+                "observation": "brows are furrowed and drawn together",
+                "level": "high"
+              },
+              {
+                "variable": "eyes/eyelids",
+                "observation": "eyes are narrowed with visible tension",
+                "level": "high"
+              },
+              {
+                "variable": "mouth/jaw",
+                "observation": "mouth is open with teeth bared and jaw tensed",
+                "level": "high"
+              },
+              {
+                "variable": "expression_intensity",
+                "observation": "multiple facial regions converge on anger with high muscular tension",
+                "level": "high"
+              }
+            ],
+            "construct_estimates": [
+              {
+                "construct": "valence",
+                "level": "low",
+                "basis": "furrowed brow, narrowed eyes, bared teeth indicate negative affect"
+              },
+              {
+                "construct": "arousal",
+                "level": "high",
+                "basis": "open mouth, bared teeth, tense jaw and brow indicate high activation"
+              }
+            ],
+            "context_modifiers": [],
+            "inference_summary": "Visible evidence of furrowed brow, narrowed eyes, and bared teeth converges on a negative valence. High muscular tension and open mouth indicate high arousal. No context or distortion reduces reliability. Viewer transfer is high due to the direct, unambiguous expression.",
+            "raw_model_output": {
+              "valence_score": 2.0,
+              "arousal_score": 8.0,
+              "skill_id": "facial-expression-affect",
+              "quadrant": "negative/high-arousal",
+              "applicability": "strong",
+              "face_reliability": {
+                "face_clear": true,
+                "brow_eye_visible": true,
+                "mouth_jaw_visible": true,
+                "external_distortion": false
+              },
+              "viewer_transfer": {
+                "level": "high",
+                "amplifiers": [],
+                "attenuators": []
+              },
+              "gate_decision": "use_skill",
+              "summary": "The face displays a clear, intense angry expression with high activation, supported by multiple converging facial regions and no external distortion.",
+              "visual_evidence": [
+                {
+                  "variable": "brow/forehead",
+                  "observation": "brows are furrowed and drawn together",
+                  "level": "high"
+                },
+                {
+                  "variable": "eyes/eyelids",
+                  "observation": "eyes are narrowed with visible tension",
+                  "level": "high"
+                },
+                {
+                  "variable": "mouth/jaw",
+                  "observation": "mouth is open with teeth bared and jaw tensed",
+                  "level": "high"
+                },
+                {
+                  "variable": "expression_intensity",
+                  "observation": "multiple facial regions converge on anger with high muscular tension",
+                  "level": "high"
+                }
+              ],
+              "construct_estimates": [
+                {
+                  "construct": "valence",
+                  "level": "low",
+                  "basis": "furrowed brow, narrowed eyes, bared teeth indicate negative affect"
+                },
+                {
+                  "construct": "arousal",
+                  "level": "high",
+                  "basis": "open mouth, bared teeth, tense jaw and brow indicate high activation"
+                }
+              ],
+              "context_modifiers": [],
+              "evidence": "bared teeth, furrowed brow, narrowed eyes, tense jaw",
+              "uncertainty": "None; expression is unambiguous and fully visible.",
+              "inference_summary": "Visible evidence of furrowed brow, narrowed eyes, and bared teeth converges on a negative valence. High muscular tension and open mouth indicate high arousal. No context or distortion reduces reliability. Viewer transfer is high due to the direct, unambiguous expression."
+            },
+            "valence_score": 2.0,
+            "arousal_score": 8.0
+          },
+          "trace_step": "skill_analysis",
+          "selection_eligible": true,
+          "selection_gate_reasons": []
+        }
+      ],
+      "total_candidate_skill_seconds": 17.03,
+      "skill_selection": {
+        "selected_skill_id": "facial-expression-affect",
+        "reason": "Only one candidate skill analysis succeeded; using it as the final score.",
+        "confidence": 0.0,
+        "selected_valence_score": 2.0,
+        "selected_arousal_score": 8.0,
+        "rejected_candidates": [],
+        "fallback": true
+      },
+      "skill_seconds": 17.03,
+      "skill_va": {
+        "skill_id": "facial-expression-affect",
+        "skill_name": "Facial Expression Affect",
+        "valence": 0.125,
+        "arousal": 0.875,
+        "quadrant": "negative/high-arousal",
+        "summary": "The face displays a clear, intense angry expression with high activation, supported by multiple converging facial regions and no external distortion.",
+        "evidence": [
+          "bared teeth, furrowed brow, narrowed eyes, tense jaw"
+        ],
+        "matched_emotions": [],
+        "emotion_weights": {},
+        "mapping_trace": [],
+        "appraisal_notes": [],
+        "positive_affect": [],
+        "negative_affect": [],
+        "uncertainty": "None; expression is unambiguous and fully visible.",
+        "applicability": "strong",
+        "visual_evidence": [
+          {
+            "variable": "brow/forehead",
+            "observation": "brows are furrowed and drawn together",
+            "level": "high"
+          },
+          {
+            "variable": "eyes/eyelids",
+            "observation": "eyes are narrowed with visible tension",
+            "level": "high"
+          },
+          {
+            "variable": "mouth/jaw",
+            "observation": "mouth is open with teeth bared and jaw tensed",
+            "level": "high"
+          },
+          {
+            "variable": "expression_intensity",
+            "observation": "multiple facial regions converge on anger with high muscular tension",
+            "level": "high"
+          }
+        ],
+        "construct_estimates": [
+          {
+            "construct": "valence",
+            "level": "low",
+            "basis": "furrowed brow, narrowed eyes, bared teeth indicate negative affect"
+          },
+          {
+            "construct": "arousal",
+            "level": "high",
+            "basis": "open mouth, bared teeth, tense jaw and brow indicate high activation"
+          }
+        ],
+        "context_modifiers": [],
+        "inference_summary": "Visible evidence of furrowed brow, narrowed eyes, and bared teeth converges on a negative valence. High muscular tension and open mouth indicate high arousal. No context or distortion reduces reliability. Viewer transfer is high due to the direct, unambiguous expression.",
+        "raw_model_output": {
+          "valence_score": 2.0,
+          "arousal_score": 8.0,
+          "skill_id": "facial-expression-affect",
+          "quadrant": "negative/high-arousal",
+          "applicability": "strong",
+          "face_reliability": {
+            "face_clear": true,
+            "brow_eye_visible": true,
+            "mouth_jaw_visible": true,
+            "external_distortion": false
+          },
+          "viewer_transfer": {
+            "level": "high",
+            "amplifiers": [],
+            "attenuators": []
+          },
+          "gate_decision": "use_skill",
+          "summary": "The face displays a clear, intense angry expression with high activation, supported by multiple converging facial regions and no external distortion.",
+          "visual_evidence": [
+            {
+              "variable": "brow/forehead",
+              "observation": "brows are furrowed and drawn together",
+              "level": "high"
+            },
+            {
+              "variable": "eyes/eyelids",
+              "observation": "eyes are narrowed with visible tension",
+              "level": "high"
+            },
+            {
+              "variable": "mouth/jaw",
+              "observation": "mouth is open with teeth bared and jaw tensed",
+              "level": "high"
+            },
+            {
+              "variable": "expression_intensity",
+              "observation": "multiple facial regions converge on anger with high muscular tension",
+              "level": "high"
+            }
+          ],
+          "construct_estimates": [
+            {
+              "construct": "valence",
+              "level": "low",
+              "basis": "furrowed brow, narrowed eyes, bared teeth indicate negative affect"
+            },
+            {
+              "construct": "arousal",
+              "level": "high",
+              "basis": "open mouth, bared teeth, tense jaw and brow indicate high activation"
+            }
+          ],
+          "context_modifiers": [],
+          "evidence": "bared teeth, furrowed brow, narrowed eyes, tense jaw",
+          "uncertainty": "None; expression is unambiguous and fully visible.",
+          "inference_summary": "Visible evidence of furrowed brow, narrowed eyes, and bared teeth converges on a negative valence. High muscular tension and open mouth indicate high arousal. No context or distortion reduces reliability. Viewer transfer is high due to the direct, unambiguous expression."
+        },
+        "valence_score": 2.0,
+        "arousal_score": 8.0
+      },
+      "delta": {
+        "valence_delta": 0.0,
+        "arousal_delta": 0.0
+      }
+    },
+    {
+      "image": "/home/u1120250383/dcs/datasets/IAPS/Dataset/7080.jpg",
+      "ok": true,
+      "trace_inference": true,
+      "inference_trace": [
+        {
+          "step": "direct_va_baseline",
+          "system_prompt": "You are a visual affect analyst. Analyze the image directly in valence-arousal space without using any named psychology skill.\nBasic affective VA definition:\n- Valence measures affective pleasantness: negative/unpleasant -> neutral -> positive/pleasant.\n- Arousal measures activation, energy, and intensity independently from valence: calm/deactivated -> moderate activation -> highly activated.\n- Do not collapse arousal into positivity: excitement and fear can both be high-arousal; peace and boredom can both be low-arousal.\n- Arousal is not the same as visual complexity or salience: a highly detailed but calm scene (e.g. an intricate but peaceful garden) is not automatically high-arousal.\n- Base the estimate on visible image evidence, and state uncertainty when the evidence is weak or ambiguous.\nReturn exactly one valid JSON object and no Markdown, no code fences, no headings, no prose before or after the JSON.\nThe first two top-level keys of the object must be valence_score and arousal_score.\nUse one shared 1-9 scoring scale for every skill and direct baseline:\nScore valence on 1-9: 1 = very negative/unpleasant, 5 = neutral, 9 = very positive/pleasant.\nScore arousal on 1-9: 1 = very calm/deactivated, 5 = moderate activation, 9 = highly activated. Arousal 5 means moderate activation, not neutral affect.\nJudge VA only after completing the skill's observable inference procedure. Do not convert a semantic label directly into a score.\nReserve scores near 1 or 9 for multiple converging, unambiguous visible cues; keep weak or conflicting evidence closer to the center.\nThe top-level JSON keys valence_score and arousal_score are mandatory in every analysis response. Never omit them; if evidence is weak or ambiguous, still provide your best estimate and explain uncertainty.\nReturn only valence_score and arousal_score for the numeric VA values. Do not return normalized 0-1 valence/arousal; the script will normalize later.\nDo not put VA scores only inside nested objects such as scores, va, final_va, or analysis. Do not use alternate names such as final_valence, final_arousal, valence, arousal, or VA TENDENCY as the only score fields.\nKeep the JSON compact: at most 5 visual_evidence items, 4 construct_estimates, and 3 context_modifiers.\nRequired JSON schema:\n{\n  \"valence_score\": 5.0,\n  \"arousal_score\": 5.0,\n  \"quadrant\": \"short label\",\n  \"summary\": \"concise explanation\",\n  \"evidence\": [\"visible cue\"],\n  \"matched_emotions\": [\"likely emotion or affect term\"],\n  \"uncertainty\": \"brief uncertainty note\"\n}\n",
+          "user_prompt": "Analyze this image directly as a VA baseline.\nUser context: Analyze the image's valence-arousal state and choose the most suitable psychology skill.",
+          "image_payload": {
+            "image_path": "/home/u1120250383/dcs/datasets/IAPS/Dataset/7080.jpg"
+          },
+          "system_prompt_chars": 2532,
+          "user_prompt_chars": 148,
+          "max_new_tokens": 2048,
+          "seconds": 5.056,
+          "ok": true,
+          "raw_model_text": "{\n  \"valence_score\": 5.0,\n  \"arousal_score\": 5.0,\n  \"quadrant\": \"neutral-moderate\",\n  \"summary\": \"The image presents a simple, static object on a textured surface, evoking neither strong positive nor negative affect, with moderate visual engagement.\",\n  \"evidence\": [\"plain fork on uniform background\", \"neutral color palette\", \"lack of dynamic elements\"],\n  \"matched_emotions\": [\"indifference\", \"calm observation\"],\n  \"uncertainty\": \"Ambiguous emotional context due to minimal visual cues beyond object placement.\"\n}",
+          "raw_model_payload": {
+            "valence_score": 5.0,
+            "arousal_score": 5.0,
+            "quadrant": "neutral-moderate",
+            "summary": "The image presents a simple, static object on a textured surface, evoking neither strong positive nor negative affect, with moderate visual engagement.",
+            "evidence": [
+              "plain fork on uniform background",
+              "neutral color palette",
+              "lack of dynamic elements"
+            ],
+            "matched_emotions": [
+              "indifference",
+              "calm observation"
+            ],
+            "uncertainty": "Ambiguous emotional context due to minimal visual cues beyond object placement."
+          },
+          "payload_keys": [
+            "valence_score",
+            "arousal_score",
+            "quadrant",
+            "summary",
+            "evidence",
+            "matched_emotions",
+            "uncertainty"
+          ],
+          "prompt_chars": 2774,
+          "input_tokens": 1390,
+          "generated_tokens": 128,
+          "generation_hit_limit": false,
+          "normalized_result": {
+            "skill_id": "direct-va-baseline",
+            "skill_name": "Direct VA Baseline",
+            "valence": 0.5,
+            "arousal": 0.5,
+            "quadrant": "neutral-moderate",
+            "summary": "The image presents a simple, static object on a textured surface, evoking neither strong positive nor negative affect, with moderate visual engagement.",
+            "evidence": [
+              "plain fork on uniform background",
+              "neutral color palette",
+              "lack of dynamic elements"
+            ],
+            "matched_emotions": [
+              "indifference",
+              "calm observation"
+            ],
+            "emotion_weights": {},
+            "mapping_trace": [],
+            "appraisal_notes": [],
+            "positive_affect": [],
+            "negative_affect": [],
+            "uncertainty": "Ambiguous emotional context due to minimal visual cues beyond object placement.",
+            "applicability": "",
+            "visual_evidence": [],
+            "construct_estimates": [],
+            "context_modifiers": [],
+            "inference_summary": "",
+            "raw_model_output": {
+              "valence_score": 5.0,
+              "arousal_score": 5.0,
+              "quadrant": "neutral-moderate",
+              "summary": "The image presents a simple, static object on a textured surface, evoking neither strong positive nor negative affect, with moderate visual engagement.",
+              "evidence": [
+                "plain fork on uniform background",
+                "neutral color palette",
+                "lack of dynamic elements"
+              ],
+              "matched_emotions": [
+                "indifference",
+                "calm observation"
+              ],
+              "uncertainty": "Ambiguous emotional context due to minimal visual cues beyond object placement."
+            },
+            "valence_score": 5.0,
+            "arousal_score": 5.0
+          }
+        },
+        {
+          "step": "route_skill",
+          "system_prompt": "You are a psychology-model router for visual affect analysis.\nBasic affective VA definition:\n- Valence measures affective pleasantness: negative/unpleasant -> neutral -> positive/pleasant.\n- Arousal measures activation, energy, and intensity independently from valence: calm/deactivated -> moderate activation -> highly activated.\n- Do not collapse arousal into positivity: excitement and fear can both be high-arousal; peace and boredom can both be low-arousal.\n- Arousal is not the same as visual complexity or salience: a highly detailed but calm scene (e.g. an intricate but peaceful garden) is not automatically high-arousal.\n- Base the estimate on visible image evidence, and state uncertainty when the evidence is weak or ambiguous.\n\nChoose one specialized psychology skill only when its applicability gate strongly matches the image.\nIf no specialized skill strongly matches, return skill_id=no_specialized_skill and candidate_skill_ids=[].\nReturn exactly one valid JSON object and no Markdown, no code fences, no headings, no prose before or after the JSON.\nEach skill includes one compact applicability gate. Match visible mechanisms, not emotion words or scene labels.\nAvailable skills:\n[\n  {\n    \"skill_id\": \"awe\",\n    \"display_name\": \"Awe\",\n    \"applicability_gate\": {\n      \"use_when\": [\n        \"Physical vastness or force is the primary affective mechanism, not merely beauty or spaciousness.\",\n        \"At least two independent scale cues are visible: tiny reference figures, extreme verticality, unbounded extension, deep atmospheric perspective, or massive uncontrollable force.\",\n        \"The scene plausibly produces self-diminishment, wonder, overwhelm, or sublime threat because of scale.\"\n      ],\n      \"do_not_use_when\": [\n        \"Calm shoreline, forest, garden, room, or horizon that is restorative but not overwhelming.\",\n        \"Monument, memorial, burial, repetition, or historical symbolism whose meaning rather than physical scale drives affect.\",\n        \"Dramatic color, novelty, complexity, or wide-angle style without reliable scale references.\"\n      ],\n      \"near_miss_boundaries\": [\n        \"Low-demand enterable scenery -> kaplan-art-restoration.\",\n        \"Perceptual novelty or complex composition -> berlyne-arousal-pleasure.\",\n        \"Disaster consequences, mortality, or human stakes -> cognitive-appraisal when situation meaning dominates.\"\n      ]\n    }\n  },\n  {\n    \"skill_id\": \"baby-schema\",\n    \"display_name\": \"Baby Schema / Kindchenschema\",\n    \"applicability_gate\": {\n      \"use_when\": [\n        \"The dominant subject is a human infant, young animal, or deliberately neotenic character/object.\",\n        \"Multiple infantile proportions are visible and plausibly drive tenderness, approach, or caregiving attention.\",\n        \"Morphology remains affectively important after considering the surrounding situation.\"\n      ],\n      \"do_not_use_when\": [\n        \"Adult face, ordinary small object, or culturally labeled \\\"cute\\\" subject without visible neotenic structure.\",\n        \"Predatory morphology, contamination, body action, or social event is the primary mechanism.\",\n        \"Severe distress, danger, exploitation, illness, or uncanny wrongness fully determines affect; use appraisal/direct analysis while retaining baby schema only as a modifier.\"\n      ],\n      \"near_miss_boundaries\": [\n        \"Adult neutral portrait -> no specialized skill or optional face module.\",\n        \"Young animal with credible attack threat -> evolved-fear-module.\",\n        \"Infant visibly endangered or suffering -> cognitive-appraisal may become primary because context overrides morphology.\"\n      ]\n    }\n  },\n  {\n    \"skill_id\": \"berlyne-arousal-pleasure\",\n    \"display_name\": \"Berlyne Arousal-Pleasure\",\n    \"applicability_gate\": {\n      \"use_when\": [\n        \"Perceptual or compositional stimulation, rather than depicted story or object category, is the primary affective mechanism.\",\n        \"At least two collative variables have visible support, or one is exceptionally dominant.\",\n        \"The image demands active visual organization, comparison, or resolution.\"\n      ],\n      \"do_not_use_when\": [\n        \"Ordinary product, object, still life, or familiar scene with trivial visual organization.\",\n        \"Arousal is better explained by danger, bodily action, contamination, infantile morphology, or social stakes.\",\n        \"Calm enterable space or physically overwhelming scale better fits Kaplan or Awe.\"\n      ],\n      \"near_miss_boundaries\": [\n        \"Low-demand coherent environment -> kaplan-art-restoration.\",\n        \"Vastness and self-diminishment -> awe.\",\n        \"Narrative ambiguity about actors and consequences -> cognitive-appraisal; perceptual ambiguity remains Berlyne.\"\n      ]\n    }\n  },\n  {\n    \"skill_id\": \"cognitive-appraisal\",\n    \"display_name\": \"Cognitive Appraisal\",\n    \"applicability_gate\": {\n      \"use_when\": [\n        \"A visible event, interaction, consequential object, or outcome determines affect rather than mere scene meaning.\",\n        \"A visible gain/loss, obstruction, threat, success/failure, or consequential change makes the event relevant to a typical viewer; merely obtaining food/service or participating socially is not a stake.\",\n        \"At least two appraisal dimensions have independent visible support.\"\n      ],\n      \"do_not_use_when\": [\n        \"A direct mechanism dominates: restoration, perceptual stimulation, vastness, threat animal, contamination, baby schema, facial expression, or readable body action.\",\n        \"The image is an ordinary object, face-only portrait, routine commerce/food service/social gathering, static symbol/memorial, or low-context scene without an unfolding event and consequential change.\",\n        \"The interpretation requires invented history, dialogue, intention, consent, guilt, or personality.\"\n      ],\n      \"near_miss_boundaries\": [\n        \"Clear facial expression -> facial-expression-affect; clear posture with an unreadable face -> emotional-body-language.\",\n        \"Safe infantile morphology -> baby-schema; visible danger may activate appraisal.\",\n        \"Static solemn or symbolic meaning without a visible event -> no_specialized_skill.\"\n      ],\n      \"routing_priority\": [\n        \"Test direct mechanisms first. Appraisal is never the catch-all: ordinary goals such as buying, eating, waiting, or socializing do not count as stakes; with no consequential change or fewer than two supported dimensions, return `no_specialized_skill`.\"\n      ]\n    }\n  },\n  {\n    \"skill_id\": \"emotional-body-language\",\n    \"display_name\": \"Emotional Body Language\",\n    \"applicability_gate\": {\n      \"use_when\": [\n        \"A human whole body or sufficiently visible upper body carries the main emotional signal.\",\n        \"Face information is absent, obscured, too small, masked, or secondary.\",\n        \"Posture supports a recognizable action tendency such as approach, recoil, freeze, attack, collapse, celebration, assertion, or submission.\"\n      ],\n      \"do_not_use_when\": [\n        \"A readable facial expression dominates -> facial-expression-affect.\",\n        \"A weapon, risky object, interaction, or consequence determines affect more than body configuration.\",\n        \"Only an isolated hand, ambiguous resting pose, or small body fragment is visible.\"\n      ],\n      \"near_miss_boundaries\": [\n        \"Clear expressive face -> facial-expression-affect; a neutral face-centered portrait -> no_specialized_skill.\",\n        \"Visible agency, stakes, conflict, or consequential object use -> cognitive-appraisal.\",\n        \"Predatory animal posture -> evolved-fear-module.\"\n      ]\n    }\n  },\n  {\n    \"skill_id\": \"evolved-fear-module\",\n    \"display_name\": \"Evolved Fear Module\",\n    \"applicability_gate\": {\n      \"use_when\": [\n        \"A snake, spider, scorpion, large predator, or closely related threat morphology is visually central.\",\n        \"The animal form itself, not a story or contamination association, plausibly drives rapid threat perception.\",\n        \"At least one imminence cue beyond category membership is visible.\"\n      ],\n      \"do_not_use_when\": [\n        \"Human, mechanical, environmental, or social danger without a fear-relevant animal.\",\n        \"Infestation, decay, disease-vector context, or bodily contamination dominates the response.\",\n        \"Toy, cartoon, decoration, distant documentary subject, cared-for pet, or neotenic animal lacks credible threat morphology.\"\n      ],\n      \"near_miss_boundaries\": [\n        \"Pest associated with filth or disease -> pathogen-disgust.\",\n        \"Young/cute animal morphology -> baby-schema.\",\n        \"Human stakes, handling, accident, or conflict determines affect -> cognitive-appraisal.\"\n      ]\n    }\n  },\n  {\n    \"skill_id\": \"facial-expression-affect\",\n    \"display_name\": \"Facial Expression Affect\",\n    \"applicability_gate\": {\n      \"use_when\": [\n        \"A human face is large and clear enough to inspect the brow/eye and mouth/jaw regions reliably.\",\n        \"A transient facial configuration is the dominant affective signal; removing the face would substantially weaken the image's affect.\",\n        \"At least two independent diagnostic regions support one direction, normally including mouth/jaw plus eye/brow evidence; external hand pressure is not an expression region.\"\n      ],\n      \"do_not_use_when\": [\n        \"The face is neutral/resting, too small, blurred, stylized, ambiguous, or lacks a reliable mouth/jaw region; a hand/object distorting or hiding the face lowers applicability rather than proving tension.\",\n        \"Body posture, infantile morphology, contamination, injury, an unfolding interaction, or visible consequences determine affect more than the face.\",\n        \"The analysis would infer personality, trustworthiness, dominance, intent, consent, mental illness, pain cause, or moral character.\"\n      ],\n      \"near_miss_boundaries\": [\n        \"Clear whole-body action with an unreadable face -> emotional-body-language.\",\n        \"Visible event, interaction, stakes, or consequence overrides expression -> cognitive-appraisal.\",\n        \"Neutral or mildly posed portrait -> no_specialized_skill; explicit social-impression research may use the optional non-VA Todorov module.\"\n      ],\n      \"routing_priority\": [\n        \"Prefer this skill only for clear expressive human faces. The presence of a face, direct gaze, attractiveness, identity, or portrait framing alone is insufficient.\"\n      ]\n    }\n  },\n  {\n    \"skill_id\": \"kaplan-art-restoration\",\n    \"display_name\": \"Kaplan Attention Restoration Theory\",\n    \"applicability_gate\": {\n      \"use_when\": [\n        \"An enterable or inhabitable environment is the dominant affective source.\",\n        \"Visible spatial organization supports low-demand viewing, gentle exploration, rest, or attentional recovery.\",\n        \"At least three restorative variables are observable, including one spatial variable.\"\n      ],\n      \"do_not_use_when\": [\n        \"Isolated object, product, texture, tabletop arrangement, or decorative still life.\",\n        \"Overwhelming scale, vertigo, violent force, dense novelty, threat, or person-centered action dominates.\",\n        \"Calmness comes mainly from blankness or lack of content rather than environmental structure.\"\n      ],\n      \"near_miss_boundaries\": [\n        \"Immense scale and self-diminishment -> awe.\",\n        \"Novelty, ambiguity, dense pattern, or hard fascination -> berlyne-arousal-pleasure.\",\n        \"Human stakes or visible danger -> cognitive-appraisal.\"\n      ]\n    }\n  },\n  {\n    \"skill_id\": \"pathogen-disgust\",\n    \"display_name\": \"Pathogen Disgust\",\n    \"applicability_gate\": {\n      \"use_when\": [\n        \"Visible organic contamination, decay, disease, waste, bodily fluid, wound, spoiled food, parasite, or infestation is affectively central.\",\n        \"Avoidance/rejection is better explained by pathogen cues than by attack threat, sadness, or composition.\",\n        \"Cue identity is visually supported rather than inferred from a label or backstory.\"\n      ],\n      \"do_not_use_when\": [\n        \"Moral or social violation without visible pathogen cues.\",\n        \"Snake, predator, or attack morphology dominates.\",\n        \"Fresh appetitive food, clean medical equipment, abstract ugliness, or harmless insects without contamination evidence.\"\n      ],\n      \"near_miss_boundaries\": [\n        \"Predation or attack -> evolved-fear-module.\",\n        \"Injury or accident where human stakes dominate -> cognitive-appraisal; use disgust only if contamination remains visually central.\",\n        \"Chaotic/aversive abstraction without organic contamination -> berlyne-arousal-pleasure or no specialized skill.\"\n      ]\n    }\n  }\n]\n\nRules:\n- Base your decision on visible evidence first.\n- Use user context only as a secondary hint.\n- Test directly visible specialized mechanisms before considering cognitive-appraisal.\n- Prefer kaplan-art-restoration for enterable, low-demand restorative environments.\n- Prefer berlyne-arousal-pleasure only when measurable perceptual novelty, complexity, ambiguity, or incongruity drives affect.\n- Prefer evolved-fear-module when evolutionarily threatening animals (snakes, spiders, predators) are the dominant content.\n- Prefer pathogen-disgust for visible contamination, rot, bodily waste, wounds, or pest infestation.\n- Prefer baby-schema when an infant, baby animal, or neotenic character is the dominant subject.\n- Prefer facial-expression-affect only when a clear expressive human face is dominant and independent mouth/jaw plus eye/brow evidence supports a transient expression; partial, hand-distorted, neutral, or ambiguous faces are not enough.\n- Prefer emotional-body-language when human body posture or gesture carries the primary emotional signal and the face is obscured or secondary.\n- Prefer awe only when physically overwhelming scale and self-diminishment cues dominate.\n- Use cognitive-appraisal only when a visible event has consequential change (gain/loss, obstruction, threat, success/failure) and at least two evidence-supported appraisal dimensions; it is not a fallback.\n- Buying, eating, waiting, receiving service, gathering, or socializing are not stakes without a visible consequential change. Do not infer goals, control, consent, urgency, or danger from missing context. Use no_specialized_skill for ordinary objects, neutral portraits, routine activity, static symbols, and ambiguous face/pose cues.\n- If the image is ambiguous but no specialized skill is clearly activated, choose no_specialized_skill rather than forcing a weak match.\n- candidate_skill_ids is an at-most list, not a quota. Do not pad it.\n- Usually include exactly 1 candidate. Include 2 only for a real boundary case. Use [] when no specialized skill fits.\n- A candidate is strongly plausible only if its core constructs are directly visible, not merely loosely related.\n- Confidence must be in [0, 1].\n- Keep reason under 25 words, observed_cues to at most 3 items, and alternative_skill_ids to at most 2 items.\nRequired JSON schema: {\"skill_id\":\"skill-id-or-no_specialized_skill\",\"reason\":\"brief reason\",\"confidence\":0.0,\"observed_cues\":[\"cue\"],\"candidate_skill_ids\":[\"skill-id\",\"other-skill-id\"],\"alternative_skill_ids\":[\"other-skill-id\"]}\n",
+          "user_prompt": "Select one specialized psychology skill for this image only if it strongly fits; otherwise select no_specialized_skill.\nUser context: Analyze the image's valence-arousal state and choose the most suitable psychology skill.",
+          "image_payload": {
+            "image_path": "/home/u1120250383/dcs/datasets/IAPS/Dataset/7080.jpg"
+          },
+          "system_prompt_chars": 15258,
+          "user_prompt_chars": 222,
+          "max_new_tokens": 2048,
+          "seconds": 2.743,
+          "ok": true,
+          "raw_model_text": "{\"skill_id\":\"no_specialized_skill\",\"reason\":\"Plain object on neutral background; no affective mechanism visible.\",\"confidence\":1.0,\"observed_cues\":[],\"candidate_skill_ids\":[],\"alternative_skill_ids\":[]}",
+          "raw_model_payload": {
+            "skill_id": "no_specialized_skill",
+            "reason": "Plain object on neutral background; no affective mechanism visible.",
+            "confidence": 1.0,
+            "observed_cues": [],
+            "candidate_skill_ids": [],
+            "alternative_skill_ids": []
+          },
+          "payload_keys": [
+            "skill_id",
+            "reason",
+            "confidence",
+            "observed_cues",
+            "candidate_skill_ids",
+            "alternative_skill_ids"
+          ],
+          "prompt_chars": 15574,
+          "input_tokens": 3969,
+          "generated_tokens": 46,
+          "generation_hit_limit": false,
+          "normalized_result": {
+            "skill_id": "no_specialized_skill",
+            "reason": "Plain object on neutral background; no affective mechanism visible.",
+            "confidence": 1.0,
+            "observed_cues": [],
+            "alternative_skill_ids": [],
+            "candidate_skill_ids": []
+          }
+        }
+      ],
+      "worker_id": 1,
+      "direct_seconds": 5.056,
+      "direct_va": {
+        "skill_id": "direct-va-baseline",
+        "skill_name": "Direct VA Baseline",
+        "valence": 0.5,
+        "arousal": 0.5,
+        "quadrant": "neutral-moderate",
+        "summary": "The image presents a simple, static object on a textured surface, evoking neither strong positive nor negative affect, with moderate visual engagement.",
+        "evidence": [
+          "plain fork on uniform background",
+          "neutral color palette",
+          "lack of dynamic elements"
+        ],
+        "matched_emotions": [
+          "indifference",
+          "calm observation"
+        ],
+        "emotion_weights": {},
+        "mapping_trace": [],
+        "appraisal_notes": [],
+        "positive_affect": [],
+        "negative_affect": [],
+        "uncertainty": "Ambiguous emotional context due to minimal visual cues beyond object placement.",
+        "applicability": "",
+        "visual_evidence": [],
+        "construct_estimates": [],
+        "context_modifiers": [],
+        "inference_summary": "",
+        "raw_model_output": {
+          "valence_score": 5.0,
+          "arousal_score": 5.0,
+          "quadrant": "neutral-moderate",
+          "summary": "The image presents a simple, static object on a textured surface, evoking neither strong positive nor negative affect, with moderate visual engagement.",
+          "evidence": [
+            "plain fork on uniform background",
+            "neutral color palette",
+            "lack of dynamic elements"
+          ],
+          "matched_emotions": [
+            "indifference",
+            "calm observation"
+          ],
+          "uncertainty": "Ambiguous emotional context due to minimal visual cues beyond object placement."
+        },
+        "valence_score": 5.0,
+        "arousal_score": 5.0
+      },
+      "route_seconds": 2.743,
+      "route": {
+        "skill_id": "no_specialized_skill",
+        "reason": "Plain object on neutral background; no affective mechanism visible.",
+        "confidence": 1.0,
+        "observed_cues": [],
+        "alternative_skill_ids": [],
+        "candidate_skill_ids": []
+      },
+      "candidate_skill_ids": [],
+      "candidate_skill_analyses": [],
+      "skill_selection": {
+        "selected_skill_id": "no_specialized_skill",
+        "reason": "Plain object on neutral background; no affective mechanism visible.",
+        "confidence": 1.0,
+        "selected_valence_score": 5.0,
+        "selected_arousal_score": 5.0,
+        "rejected_candidates": [],
+        "fallback": false,
+        "used_direct_va": true
+      },
+      "skill_seconds": 0.0,
+      "total_candidate_skill_seconds": 0.0,
+      "skill_va": {
+        "skill_id": "direct-va-baseline",
+        "skill_name": "Direct VA Baseline",
+        "valence": 0.5,
+        "arousal": 0.5,
+        "quadrant": "neutral-moderate",
+        "summary": "The image presents a simple, static object on a textured surface, evoking neither strong positive nor negative affect, with moderate visual engagement.",
+        "evidence": [
+          "plain fork on uniform background",
+          "neutral color palette",
+          "lack of dynamic elements"
+        ],
+        "matched_emotions": [
+          "indifference",
+          "calm observation"
+        ],
+        "emotion_weights": {},
+        "mapping_trace": [],
+        "appraisal_notes": [],
+        "positive_affect": [],
+        "negative_affect": [],
+        "uncertainty": "Ambiguous emotional context due to minimal visual cues beyond object placement.",
+        "applicability": "",
+        "visual_evidence": [],
+        "construct_estimates": [],
+        "context_modifiers": [],
+        "inference_summary": "",
+        "raw_model_output": {
+          "valence_score": 5.0,
+          "arousal_score": 5.0,
+          "quadrant": "neutral-moderate",
+          "summary": "The image presents a simple, static object on a textured surface, evoking neither strong positive nor negative affect, with moderate visual engagement.",
+          "evidence": [
+            "plain fork on uniform background",
+            "neutral color palette",
+            "lack of dynamic elements"
+          ],
+          "matched_emotions": [
+            "indifference",
+            "calm observation"
+          ],
+          "uncertainty": "Ambiguous emotional context due to minimal visual cues beyond object placement."
+        },
+        "valence_score": 5.0,
+        "arousal_score": 5.0
+      },
+      "delta": {
+        "valence_delta": 0.0,
+        "arousal_delta": 0.0
+      }
+    }
+  ],
+  "elapsed_seconds": 82.719,
+  "ok_count": 3,
+  "error_summary": {
+    "direct": {
+      "count": 0,
+      "mean_valence_delta": null,
+      "mean_arousal_delta": null,
+      "mae_valence": null,
+      "mae_arousal": null,
+      "mean_euclidean_distance": null
+    },
+    "skill": {
+      "count": 0,
+      "mean_valence_delta": null,
+      "mean_arousal_delta": null,
+      "mae_valence": null,
+      "mae_arousal": null,
+      "mean_euclidean_distance": null
+    }
+  },
+  "summary": "OK images=3/3; elapsed=82.719s; skills=10"
+}

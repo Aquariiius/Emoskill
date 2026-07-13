@@ -1,0 +1,3 @@
+/home/u1120250383/dcs/datasets/IAPS/Dataset/2020.jpg
+/home/u1120250383/dcs/datasets/IAPS/Dataset/2220.jpg
+/home/u1120250383/dcs/datasets/IAPS/Dataset/5870.jpg
